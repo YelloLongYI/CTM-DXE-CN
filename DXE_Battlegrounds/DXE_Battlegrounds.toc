@@ -1,0 +1,11 @@
+## Interface: 40300
+## Title: DXE |cff99ff33Battlegrounds|r
+## Notes: Deus Vox Encounters |cff99ff33Battlegrounds|r
+## Author: Greghouse
+## LoadOnDemand: 1
+## Dependencies: DXE
+## X-DXE-Category: |cd035c8ffP ]|r Battlegrounds
+## X-DXE-Zone: Arathi Basin, Alterac Valley, Warsong Gulch, Warsong Lumber Mill, Silverwing Hold, Twin Peaks, Wildhammer Stronghold, Dragonmaw Stronghold, The Battle for Gilneas, Eye of the Storm, Isle of Conquest,Strand of the Ancients
+
+Locales.lua
+Battlegrounds.lua

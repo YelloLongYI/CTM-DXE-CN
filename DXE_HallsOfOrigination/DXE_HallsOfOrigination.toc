@@ -1,0 +1,15 @@
+## Interface: 40300
+## Title: DXE |cff99ff33Halls of Origination|r
+## Notes: Deus Vox Encounters |cff99ff33Halls of Origination|r
+## Author: Greghouse
+## LoadOnDemand: 1
+## Dependencies: DXE
+## X-DXE-Category: |ceaedff09D ]|r Halls of Origination
+## X-DXE-Zone: Halls of Origination
+## X-Curse-Packaged-Version: v635
+## X-Curse-Project-Name: Deus Vox Encounters
+## X-Curse-Project-ID: deus-vox-encounters
+## X-Curse-Repository-ID: wow/deus-vox-encounters/mainline
+
+Locales.lua
+Encounters.lua

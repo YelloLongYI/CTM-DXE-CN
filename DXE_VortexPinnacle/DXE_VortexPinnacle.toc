@@ -1,0 +1,17 @@
+## Interface: 40300
+## Title: DXE |cff99ff33The Vortex Pinnacle|r
+## Notes: Deus Vox Encounters |cff99ff33The Vortex Pinnacle|r
+## Author: Greghouse
+## LoadOnDemand: 1
+## Dependencies: DXE
+## X-DXE-Category: |ceaedff09D ]|r The Vortex Pinnacle
+## X-DXE-Zone: The Vortex Pinnacle 
+## Title-zhTW: DXE |cff99ff33四風王座|r
+## Notes-zhTW: Deus Vox 首領警報 |cff99ff33四風王座|r
+## X-Curse-Packaged-Version: v635
+## X-Curse-Project-Name: Deus Vox Encounters
+## X-Curse-Project-ID: deus-vox-encounters
+## X-Curse-Repository-ID: wow/deus-vox-encounters/mainline
+
+Locales.lua
+Encounters.lua

@@ -1,0 +1,27 @@
+tag v635
+053650da40cfd38874fa40d610ff4844fe451511
+Harleschorsch <Harleschorsch@gmail.com>
+2011-12-08 02:00:29 +0100
+
+Tagging as v635
+
+
+--------------------
+
+Harleschorsch:
+	- Bump version number
+	- Baradin: Clean up so validator doesn't whine.
+	- Zonozz: heroic tuning, remove some alerts
+	- Morchok: heroic tuning, add some cooldowns
+	- Firelands: fix encounters so validator doesn't whine and fix wrath cd for Raggi
+	- Core: improve engage trigger
+	- Invoker: add debug statement for quash
+	- Validator: small update
+	- Core: add a debug statement and pull some localizations
+	- Dragon Soul: first update round for all encounters
+	- Core: improve engage trigger
+	- Map size update, thanks to DBM
+	- Validator: more updates
+	- Dragon Soul: Update .toc
+	- Validator: Update for recent 4.3 changes
+	- Docs: Update template

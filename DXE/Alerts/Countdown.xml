@@ -1,0 +1,119 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="Countdown.lua"/>
+	
+	<Frame name="DXE_PullTimerBar" virtual="true" hidden="true" frameStrata="FULLSCREEN">
+		<Animations>
+			<AnimationGroup parentKey="fadeBarIn">
+				<Alpha target="$parentStatusBar" fromAlpha="0" toAlpha="1" duration="1.9" order="1"/>
+				<Scripts>
+					
+				</Scripts>
+			</AnimationGroup>
+			<AnimationGroup parentKey="fadeBarOut">
+				<Alpha target="$parentStatusBar" fromAlpha="1" toAlpha="0" duration="0.9" order="1"/>
+				<Scripts>
+					<OnFinished>
+						local frame = self:GetParent();
+						-- Subtract this animations time
+						--frame.time = frame.time - 0.9
+						frame.time = frame.time
+						frame.startNumbers:Play();
+					</OnFinished>
+				</Scripts>
+			</AnimationGroup>
+			
+			<AnimationGroup parentKey="startNumbers">
+				<Scale target="$parentDigit1" scaleX="0.25" scaleY="0.25" duration="0.0" order="1"/>
+				<Scale target="$parentDigit2" scaleX="0.25" scaleY="0.25" duration="0.0" order="1"/>
+				<Scale target="$parentGlow1" scaleX="0.25" scaleY="0.25" duration="0.0" order="1"/>
+				<Scale target="$parentGlow2" scaleX="0.25" scaleY="0.25" duration="0.0" order="1"/>
+				<Alpha target="$parentDigit1" fromAlpha="0" toAlpha="1" 				duration="0.0" order="1"/>
+				<Alpha target="$parentDigit2" fromAlpha="0" toAlpha="1" 				duration="0.0" order="1"/>
+				<Alpha target="$parentGlow1" fromAlpha="0" toAlpha="1" 				duration="0.0" order="1"/>
+				<Alpha target="$parentGlow2" fromAlpha="0" toAlpha="1" 				duration="0.0" order="1"/>
+				
+				
+				<Scale target="$parentDigit1" scaleX="4" scaleY="4" duration="0.3" smoothing="OUT" order="2"/>
+				<Scale target="$parentDigit2" scaleX="4" scaleY="4" duration="0.3" smoothing="OUT" order="2"/>
+				<Scale target="$parentGlow1" scaleX="4" scaleY="4" duration="0.3" smoothing="OUT" order="2"/>
+				<Scale target="$parentGlow2" scaleX="4" scaleY="4" duration="0.3" smoothing="OUT" order="2"/>
+				<Alpha target="$parentGlow1" fromAlpha="1" toAlpha="0" 			duration="0.3" smoothing="IN" order="2"/>
+				<Alpha target="$parentGlow2" fromAlpha="1" toAlpha="0" 			duration="0.3" smoothing="IN" order="2"/>
+				
+				
+				<Scale target="$parentDigit1" startDelay="0.6" scaleX="1.2" scaleY="1.2"	duration="0.1" order="3"/>
+				<Scale target="$parentDigit2" startDelay="0.6" scaleX="1.2" scaleY="1.2" 	duration="0.1" order="3"/>
+				<Alpha target="$parentDigit1" startDelay="0.6" fromAlpha="1" toAlpha="0" 			duration="0.1" order="3"/>
+				<Alpha target="$parentDigit2" startDelay="0.6" fromAlpha="1" toAlpha="0" 			duration="0.1" order="3"/>
+				<Scripts>
+					<OnPlay>
+						local frame = self:GetParent();
+						DXE_PullTimerBar_SetTexNumbers(frame, frame.digit1, frame.digit2)
+						frame.digit1:SetAlpha(1)
+						frame.glow1:SetAlpha(1)
+						frame.digit2:SetAlpha(1)
+						frame.glow2:SetAlpha(1)
+					</OnPlay>
+					<OnFinished>
+						local frame = self:GetParent();
+						DXE_PullTimerBar_NumberAnimOnFinished(frame)
+					</OnFinished>
+				</Scripts>
+			</AnimationGroup>
+			
+			<AnimationGroup parentKey="GoTextureAnim">
+				<Scale target="$parentGoTexture" 		scaleX="0.25" scaleY="0.25" duration="0.0" order="1"/>
+				<Scale target="$parentGoTextureGlow" 	scaleX="0.25" scaleY="0.25" duration="0.0" order="1"/>
+				
+				<Alpha target="$parentGoTexture" 		fromAlpha="0" toAlpha="1" 					duration="0.0" order="2"/>
+				<Alpha target="$parentGoTextureGlow" 	fromAlpha="0" toAlpha="1" 					duration="0.0" order="2"/>
+				
+				
+				<Scale target="$parentGoTexture" 		scaleX="4" scaleY="4" 	duration="0.4" smoothing="OUT" order="3"/>
+				<Scale target="$parentGoTextureGlow" 	scaleX="4" scaleY="4" 	duration="0.4" smoothing="OUT" order="3"/>
+				<Alpha target="$parentGoTextureGlow" 	fromAlpha="1" toAlpha="0" 			duration="0.4" smoothing="IN" order="3"/>
+				
+				
+				<Scale target="$parentGoTexture" startDelay="0.6" scaleX="1.4" scaleY="1.4"	duration="0.2" smoothing="OUT" order="4"/>
+				<Alpha target="$parentGoTexture" startDelay="0.6" fromAlpha="1" toAlpha="0" 				duration="0.2" smoothing="OUT" order="4"/>
+			</AnimationGroup>
+		</Animations>
+		<Size x="206" y="26"/>
+		<Layers>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<Texture name="$parentDigit1" parentKey="digit1" alpha="0"/>
+				<Texture name="$parentDigit2" parentKey="digit2" alpha="0"/>
+				<Texture name="$parentGoTexture" parentKey="GoTexture" alpha="0">
+					<Size x="256" y="256"/>
+					<Anchors>
+						<Anchor point="CENTER" relativeTo="UIParent" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture name="$parentGlow1" parentKey="glow1" alpha="0">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentDigit1" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentDigit1" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentGlow2" parentKey="glow2" alpha="0">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentDigit2" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentDigit2" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentGoTextureGlow" parentKey="GoTextureGlow" alpha="0">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentGoTexture" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentGoTexture" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow function="DXE_PullTimerBar_OnShow"/>
+		</Scripts>
+	</Frame>
+</Ui>

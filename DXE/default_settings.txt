@@ -1,0 +1,34 @@
+$$ Globals $$
+Main Font = Friz Quadrata TT
+Timer Font = Friz Quadrata TT
+
+$$ Alerts $$
+== Text ==
+  @@@ Top Bar Text @@@
+    TopHorizonatalOffset = 10
+    TopVerticalOffset = 0
+    TopFontSize = 14
+    TopAlpha = 1
+  @@@ Center Bar Text @@@
+    CenterHrizontalOffset = -10
+    CenterVerticalOffset = 0
+    CenterFontSize = 14
+    CenterAlpha = 1
+== Icon
+  Show left icon = off
+  Show Right icon = on
+  Show Icon border = on 
+== Top Anchored Bars ==
+TopBarScale = 0.8
+TopBarAlpha = 1
+TopBarWidth = 303
+TopTextWidth = 220
+
+== Center Anchored Bars ==
+CenterBarScale = 1.05
+CenterBarAlpha = 1
+CenterBarWidth = 298
+CenterTextWidth = 263
+
+== Warning Bars ==
+disabled
