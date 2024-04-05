@@ -183,7 +183,8 @@ do
             enragecd = {
                 varname = L.alert["Berserk CD"],
                 type = "dropdown",
-                text = L.alert["Berserk"],
+                -- text = L.alert["Berserk"],
+                text = format(L.alert["%s"], SN[12317]),
                 time = 600,
                 flashtime = 30,
                 color1 = "RED",
@@ -3692,7 +3693,8 @@ do
             enragecd = {
                 varname = L.alert["Berserk CD"],
                 type = "dropdown",
-                text = L.alert["Berserk"],
+                -- text = L.alert["Berserk"],
+                text = format(L.alert["%s"], SN[12317]),
                 time = 1080,
                 flashtime = 30,
                 color1 = "RED",

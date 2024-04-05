@@ -2543,9 +2543,9 @@ options["Unknown"] = "未知"
 options["Up"] = "上"
 options["Use Constant Color"] = "使用稳定颜色"
 options["Uses |cffffd200Icon %s|r"] = "使用|cffffd200图标 %s|r"
-options["Uses |cffffd200Icon %s|r to |cffffd200Icon %s|r"] = "使用|cffffd200图标 %s|r �?� |cffffd200图标 %s|r"
+options["Uses |cffffd200Icon %s|r to |cffffd200Icon %s|r"] = "使用|cffffd200图标 %s|r 到 |cffffd200图标 %s|r"
 options["Version"] = "版本"
-options["Vertical Offset"] = "垂直�?�移量"
+options["Vertical Offset"] = "垂直偏移量"
 options["Vertical position of the icon"] = "图标垂直位置"
 options["Warning Anchor"] = "警报锚点"
 options["Warning Bars"] = "警报计时条"
@@ -2561,6 +2561,12 @@ options["You can output warning messages many different ways and they will only 
 options["You can remove custom sounds labels. Select a sound label from the dropdown and then click remove"] = "可以移除自定义音效。从下拉列表选择一个音�?标签并点击移除。"
 options["You can send encounters to the entire raid or to a player. You can check versions by typing |cffffd200/dxe %s|r or by opening the version checker from the pane"] = "可以发出战斗警报给全团或指定玩家。可以输入 |cffffd200/dxe %s|r 或打开面板内的版本检查器来检查版本。"
 options["version"] = "版本"
+
+options["Role Check Assistant"] = "角色检查助手"
+-- Not sure why not take effect
+options["Chat & Whispers"] = "聊天和密语"
+options["Special Alerts"] = "特殊警报"
+options["Features"] = "特色"
 
 AL:GetLocale("DXE").options = AL:GetLocale("DXE Options")
 

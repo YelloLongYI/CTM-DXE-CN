@@ -118,18 +118,18 @@ if L then
 
 -- Chat triggers
 local chat_throne = AL:NewLocale("DXE Chat Throne", "koKR")
-chat_throne["^Enough! I will no longer be contained!"] = "^그만! 더는 �?제�?지 않겠다!"
-chat_throne["^Storms! I summon you to my side!"] = "^폭풍이여! �?를 소�?�?노라!"
-chat_throne["^Your futile persistance angers me!"] = "^이젠 화가 �?는구�?!"
-chat_throne["honor of slaying the interlopers"] = "침입�?를 �?�?�?는 명�??는"
-chat_throne["shall be I that earns"] = "얻는 이는 내가 �??겠군"
+chat_throne["^Enough! I will no longer be contained!"] = "^그만! 더는 �?제�?지 않겠다!"
+chat_throne["^Storms! I summon you to my side!"] = "^폭풍이여! �?를 소�?�?노라!"
+chat_throne["^Your futile persistance angers me!"] = "^이젠 화가 �?는구�?!"
+chat_throne["honor of slaying the interlopers"] = "침입�?를 �?�?�?는 명�??는"
+chat_throne["shall be I that earns"] = "얻는 이는 내가 �??겠군"
 -- chat_throne["strongest wind"] = ""
 
 AL:GetLocale("DXE").chat_throne = AL:GetLocale("DXE Chat Throne")
 -- NPC names
 local npc_throne = AL:NewLocale("DXE NPC Throne", "koKR")
 npc_throne["Al'Akir"] = "알아키르"
-npc_throne["Conclave of Wind"] = "바람�? 비밀�?회"
+npc_throne["Conclave of Wind"] = "바람�? 비밀�?회"
 
 AL:GetLocale("DXE").npc_throne = AL:GetLocale("DXE NPC Throne")
 return
@@ -140,17 +140,17 @@ if L then
 
 -- Chat triggers
 local chat_throne = AL:NewLocale("DXE Chat Throne", "ruRU")
-chat_throne["^Enough! I will no longer be contained!"] = "^Довольно! Меня ничто не в �?илах �?держивать!"
-chat_throne["^Storms! I summon you to my side!"] = "^Ветра! Повин�?йте�?ь моей воле!"
-chat_throne["^Your futile persistance angers me!"] = "^Ва�?и жалкие попытки �?опротивления приводят меня в яро�?ть!" -- Needs review
-chat_throne["honor of slaying the interlopers"] = "предо�?тавьте мне че�?ть разделать�?я" -- Needs review
-chat_throne["shall be I that earns"] = "именно я завоюю ра�?положение" -- Needs review
-chat_throne["strongest wind"] = "�?раган, который разорвет" -- Needs review
+chat_throne["^Enough! I will no longer be contained!"] = "^Довольно! Меня ничто не в �?илах �?держивать!"
+chat_throne["^Storms! I summon you to my side!"] = "^Ветра! Повин�?йте�?ь моей воле!"
+chat_throne["^Your futile persistance angers me!"] = "^Ва�?и жалкие попытки �?опротивления приводят меня в яро�?ть!" -- Needs review
+chat_throne["honor of slaying the interlopers"] = "предо�?тавьте мне че�?ть разделать�?я" -- Needs review
+chat_throne["shall be I that earns"] = "именно я завоюю ра�?положение" -- Needs review
+chat_throne["strongest wind"] = "�?раган, который разорвет" -- Needs review
 
 AL:GetLocale("DXE").chat_throne = AL:GetLocale("DXE Chat Throne")
 -- NPC names
 local npc_throne = AL:NewLocale("DXE NPC Throne", "ruRU")
-npc_throne["Al'Akir"] = "�?л'акир"
+npc_throne["Al'Akir"] = "�?л'акир"
 npc_throne["Conclave of Wind"] = "Конклав Ветра"
 
 AL:GetLocale("DXE").npc_throne = AL:GetLocale("DXE NPC Throne")
@@ -162,20 +162,28 @@ if L then
 
 -- Chat triggers
 local chat_throne = AL:NewLocale("DXE Chat Throne", "zhCN")
-chat_throne["^Enough! I will no longer be contained!"] = "^够了�?�?�不会再容忍下去了�?"
-chat_throne["^Storms! I summon you to my side!"] = "^暴风啊�?�?��?�的身边来�?"
-chat_throne["^Your futile persistance angers me!"] = "^你们无谓的顽固激怒了�?��?"
-chat_throne["honor of slaying the interlopers"] = "�?�?�入侵者的荣誉属于�?�"
+chat_throne["^Enough! I will no longer be contained!"] = "^够了�?�?�不会再容忍下去了�?"
+chat_throne["^Storms! I summon you to my side!"] = "^暴风啊�?�?��?�的身边来�?"
+chat_throne["^Your futile persistance angers me!"] = "^你们无谓的顽固激怒了�?��?"
+chat_throne["honor of slaying the interlopers"] = "�?�?�入侵者的荣誉属于�?�"
 chat_throne["shall be I that earns"] = "shall be I that earns" -- Needs review
-chat_throne["strongest wind"] = "�?��?�最猛�??的风暴"
+chat_throne["strongest wind"] = "�?��?�最猛�??的风暴"
 
 AL:GetLocale("DXE").chat_throne = AL:GetLocale("DXE Chat Throne")
 -- NPC names
 local npc_throne = AL:NewLocale("DXE NPC Throne", "zhCN")
 npc_throne["Al'Akir"] = "奥拉基尔"
-npc_throne["Conclave of Wind"] = "风之议会"
+npc_throne["The Conclave of Wind"] = "风之议会"
 
 AL:GetLocale("DXE").npc_throne = AL:GetLocale("DXE NPC Throne")
+
+-- Spell names
+local spell_throne = AL:NewLocale("DXE Spell Throne", "zhCN")
+spell_throne["Next Ultimate Ability"] = "下一次特殊技能"
+spell_throne["Ultimate Ability"] = "特殊技能"
+
+AL:GetLocale("DXE").spell_throne = AL:GetLocale("DXE Spell Throne")
+
 return
 end
 
@@ -184,8 +192,8 @@ if L then
 
 -- Chat triggers
 local chat_throne = AL:NewLocale("DXE Chat Throne", "zhTW")
-chat_throne["^Enough! I will no longer be contained!"] = "^夠了!�?�不�?再被束縛住了!"
-chat_throne["^Storms! I summon you to my side!"] = "^風暴啊!�?�召喚你們來�?�身邊!"
+chat_throne["^Enough! I will no longer be contained!"] = "^夠了!�?�不�?再被束縛住了!"
+chat_throne["^Storms! I summon you to my side!"] = "^風暴啊!�?�召喚你們來�?�身邊!"
 -- chat_throne["^Your futile persistance angers me!"] = ""
 -- chat_throne["honor of slaying the interlopers"] = ""
 -- chat_throne["shall be I that earns"] = ""
@@ -194,8 +202,8 @@ chat_throne["^Storms! I summon you to my side!"] = "^風暴啊!�?�召喚你們�
 AL:GetLocale("DXE").chat_throne = AL:GetLocale("DXE Chat Throne")
 -- NPC names
 local npc_throne = AL:NewLocale("DXE NPC Throne", "zhTW")
-npc_throne["Al'Akir"] = "奧拉基�?�"
-npc_throne["Conclave of Wind"] = "風之議�?"
+npc_throne["Al'Akir"] = "奧拉基�?�"
+npc_throne["Conclave of Wind"] = "風之議�?"
 
 AL:GetLocale("DXE").npc_throne = AL:GetLocale("DXE NPC Throne")
 return

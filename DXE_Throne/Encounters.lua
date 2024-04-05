@@ -107,7 +107,8 @@ do
             enragecd = {
                 varname = format(L.alert["Berserk CD"]),
                 type = "dropdown",
-                text = format(L.alert["Berserk"]),
+                -- text = format(L.alert["Berserk"]),
+                text = format(L.alert["%s"], SN[26662]),
                 time = 480,
                 flashtime = 15,
                 color1 = "RED",
@@ -117,7 +118,8 @@ do
             powercd = {
                 varname = format(L.alert["Ultimate Ability CD"]),
                 type = "dropdown",
-                text = format(L.alert["Next Ultimate Ability"]),
+                text = format(L.alert[L.spell_throne["Next Ultimate Ability"]]),
+                -- text = format(L.alert["%s"], SN[84644]),
                 time = 90,
                 flashtime = 15,
                 color1 = "YELLOW",
@@ -127,7 +129,7 @@ do
             powerwarn = {
                 varname = format(L.alert["Ultimate Ability Duration"]),
                 type = "centerpopup",
-                text = format(L.alert["Ultimate Ability"]),
+                text = format(L.alert[L.spell_throne["Ultimate Ability"]]),
                 time = 15,
                 flashtime = 15,
                 color1 = "YELLOW",
@@ -214,7 +216,7 @@ do
             tornadoscd = {
                 varname = format(L.alert["%s CD"],SN[86192]),
                 type = "dropdown",
-                text = format(L.alert["New %s"],"Tornados"),
+                text = format(L.alert["New %s"],SN[86192]),
                 time = "<tornadoscd>",
                 flashtime = 5,
                 color1 = "TAN",
@@ -224,7 +226,7 @@ do
             tornadoswarn = {
                 varname = format(L.alert["%s Warning"],SN[86192]),
                 type = "centerpopup",
-                text = format(L.alert["New: %s"],"Tornados"),
+                text = format(L.alert["New: %s"],SN[86192]),
                 time = 2,
                 color1 = "TAN",
                 sound = "MINORWARNING",
