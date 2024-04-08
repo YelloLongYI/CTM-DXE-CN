@@ -198,7 +198,7 @@ if L then
 
 -- Chat triggers
 local chat_firelands = AL:NewLocale("DXE Chat Firelands", "koKR")
-chat_firelands["Aha! The interlopers"] = "아�?! 침임�?들이군!"
+chat_firelands["Aha! The interlopers"] = "아�?! 침임�?들이군!"
 -- chat_firelands["^Enough"] = ""
 -- chat_firelands["^Fall to your knees"] = ""
 -- chat_firelands["^Fire..."] = ""
@@ -217,19 +217,19 @@ AL:GetLocale("DXE").chat_firelands = AL:GetLocale("DXE Chat Firelands")
 -- NPC names
 local npc_firelands = AL:NewLocale("DXE NPC Firelands", "koKR")
 npc_firelands["Alysrazor"] = "알리스라조르"
-npc_firelands["Baleroc"] = "문지기 발�?록"
+npc_firelands["Baleroc"] = "문지기 발�?록"
 npc_firelands["Beth'tilac"] = "베스틸락"
-npc_firelands["Cinderweb Drone"] = "잿그물 �??거미"
-npc_firelands["Cinderweb Spiderling"] = "잿그물 �??�?�거미"
+npc_firelands["Cinderweb Drone"] = "잿그물 �??거미"
+npc_firelands["Cinderweb Spiderling"] = "잿그물 �??�?�거미"
 npc_firelands["Cinderweb Spinner"] = "잿그물 실거미"
-npc_firelands["Crystal Prison"] = "�??정 �?�?�"
-npc_firelands["Crystal Prison Trap"] = "�??정 �?�?� 덫"
-npc_firelands["Immolation Trap"] = "제물�? 덫"
-npc_firelands["Lord Rhyolith"] = "군주 라이�?�리스"
-npc_firelands["Majordomo Fandral Staghelm"] = "청지기 스�?�그헬름"
-npc_firelands["Ragnaros"] = "라그�?로스"
+npc_firelands["Crystal Prison"] = "�??정 �?�?�"
+npc_firelands["Crystal Prison Trap"] = "�??정 �?�?� 덫"
+npc_firelands["Immolation Trap"] = "제물�? 덫"
+npc_firelands["Lord Rhyolith"] = "군주 라이�?�리스"
+npc_firelands["Majordomo Fandral Staghelm"] = "청지기 스�?�그헬름"
+npc_firelands["Ragnaros"] = "라그�?로스"
 npc_firelands["Riplimb"] = "칼로베"
-npc_firelands["Shannox"] = "�?�녹스"
+npc_firelands["Shannox"] = "�?�녹스"
 
 AL:GetLocale("DXE").npc_firelands = AL:GetLocale("DXE NPC Firelands")
 return
@@ -240,38 +240,38 @@ if L then
 
 -- Chat triggers
 local chat_firelands = AL:NewLocale("DXE Chat Firelands", "ruRU")
-chat_firelands["Aha! The interlopers"] = "�?-ха-ха-ха! Незваные го�?ти!"
+chat_firelands["Aha! The interlopers"] = "�?-ха-ха-ха! Незваные го�?ти!"
 chat_firelands["^Enough"] = "^Довольно!"
-chat_firelands["^Fall to your knees"] = "^На колени, �?мертные!"
+chat_firelands["^Fall to your knees"] = "^На колени, �?мертные!"
 chat_firelands["^Fire..."] = "^Огонь..."
 -- chat_firelands["^Hah? Hruumph?"] = ""
-chat_firelands["^I serve a new master now"] = "^Теперь я �?л�?ж�? новом�? го�?подин�?, �?мертные!"
+chat_firelands["^I serve a new master now"] = "^Теперь я �?л�?ж�? новом�? го�?подин�?, �?мертные!"
 -- chat_firelands["^No, fiend"] = ""
-chat_firelands["^Reborn in flame"] = "^Я переродила�?ь в огне!"
-chat_firelands["^Spiderlings have been roused from their nest"] = "^�?з гнезд появляют�?я па�?чата!"
-chat_firelands["^Sulfuras will be your end"] = "^С�?льф�?ра�? �?ничтожит ва�?!"
-chat_firelands["^The Molten Eggs begin to hatch"] = "^Ра�?каленные яйца начинают тре�?кать�?я!"
+chat_firelands["^Reborn in flame"] = "^Я переродила�?ь в огне!"
+chat_firelands["^Spiderlings have been roused from their nest"] = "^�?з гнезд появляют�?я па�?чата!"
+chat_firelands["^Sulfuras will be your end"] = "^С�?льф�?ра�? �?ничтожит ва�?!"
+chat_firelands["^The Molten Eggs begin to hatch"] = "^Ра�?каленные яйца начинают тре�?кать�?я!"
 chat_firelands["^These skies are MINE!"] = "^Небо над вами принадлежит МНЕ!"
 -- chat_firelands["^Too soon!"] = ""
-chat_firelands["stumbles as his armor is shattered"] = "�?потыкает�?я, и его броня ра�?калывает�?я!"
+chat_firelands["stumbles as his armor is shattered"] = "�?потыкает�?я, и его броня ра�?калывает�?я!"
 
 AL:GetLocale("DXE").chat_firelands = AL:GetLocale("DXE Chat Firelands")
 -- NPC names
 local npc_firelands = AL:NewLocale("DXE NPC Firelands", "ruRU")
-npc_firelands["Alysrazor"] = "�?ли�?разор"
+npc_firelands["Alysrazor"] = "�?ли�?разор"
 npc_firelands["Baleroc"] = "Бейлрок"
 npc_firelands["Beth'tilac"] = "Бет'тилак"
-npc_firelands["Cinderweb Drone"] = "Пеплопряд-тр�?тень"
-npc_firelands["Cinderweb Spiderling"] = "Па�?чонок-пеплопряд"
+npc_firelands["Cinderweb Drone"] = "Пеплопряд-тр�?тень"
+npc_firelands["Cinderweb Spiderling"] = "Па�?чонок-пеплопряд"
 npc_firelands["Cinderweb Spinner"] = "Пеплопряд-ткач"
-npc_firelands["Crystal Prison"] = "Кри�?талличе�?кая тюрьма"
-npc_firelands["Crystal Prison Trap"] = "Лов�?�?ка кри�?талличе�?кой тюрьмы"
-npc_firelands["Immolation Trap"] = "Обжигающая лов�?�?ка"
+npc_firelands["Crystal Prison"] = "Кри�?талличе�?кая тюрьма"
+npc_firelands["Crystal Prison Trap"] = "Лов�?�?ка кри�?талличе�?кой тюрьмы"
+npc_firelands["Immolation Trap"] = "Обжигающая лов�?�?ка"
 npc_firelands["Lord Rhyolith"] = "Повелитель Риолит"
 npc_firelands["Majordomo Fandral Staghelm"] = "Мажордом Фэндрал Олений Шлем"
-npc_firelands["Ragnaros"] = "Рагнаро�?"
+npc_firelands["Ragnaros"] = "Рагнаро�?"
 npc_firelands["Riplimb"] = "Лютогрыз"
-npc_firelands["Shannox"] = "Шэннок�?"
+npc_firelands["Shannox"] = "Шэннок�?"
 
 AL:GetLocale("DXE").npc_firelands = AL:GetLocale("DXE NPC Firelands")
 return
@@ -282,40 +282,62 @@ if L then
 
 -- Chat triggers
 local chat_firelands = AL:NewLocale("DXE Chat Firelands", "zhCN")
-chat_firelands["Aha! The interlopers"] = "啊�?�?闯入者�?杀掉他们。�??掉他们�?"
-chat_firelands["^Enough"] = "^够了�?�?�会亲自解决。"
-chat_firelands["^Fall to your knees"] = "^跪下�?�，凡人们�?一�?��?�结束了。"
-chat_firelands["^Fire..."] = "^�?�焰……�?�焰……"
-chat_firelands["^Hah? Hruumph?"] = "^�?？软骨头的血肉凡人？在这里？麻�?�，真麻�?��?"
-chat_firelands["^I serve a new master now"] = "^凡人们，�?�现在侍奉新的主人�?"
+chat_firelands["Aha! The interlopers"] = "啊�?�?闯入者�?杀掉他们。�??掉他们�?"
+-- chat_firelands["^Enough"] = "^够了�?�?�会亲自解决。"
+chat_firelands["^Enough"] = "^够了！我会亲自解决。"
+chat_firelands["^Fall to your knees"] = "^跪下吧，凡人们！一切都结束了。"
+chat_firelands["^Fire..."] = "^�?�焰……�?�焰……"
+chat_firelands["^Hah? Hruumph?"] = "^�?？软骨头的血肉凡人？在这里？麻�?�，真麻�?��?"
+chat_firelands["^I serve a new master now"] = "^凡人们，�?�现在侍奉新的主人�?"
 chat_firelands["^No, fiend"] = "^No, fiend" -- Needs review
-chat_firelands["^Reborn in flame"] = "^浴�?�重生�?"
-chat_firelands["^Spiderlings have been roused from their nest"] = "^幼蛛从巢穴里�?�出来了�?"
-chat_firelands["^Sulfuras will be your end"] = "^�?�弗拉斯将会�?�你的末日。"
+chat_firelands["^Reborn in flame"] = "^浴�?�重生�?"
+chat_firelands["^Spiderlings have been roused from their nest"] = "^幼蛛从巢穴里�?�出来了�?"
+-- chat_firelands["^Sulfuras will be your end"] = "^�?�弗拉斯将会�?�你的末日。"
+chat_firelands["^Sulfuras will be your end"] = "^萨弗拉斯将会是你的末日。"
 chat_firelands["^The Molten Eggs begin to hatch"] = "^The Molten Eggs begin to hatch" -- Needs review
-chat_firelands["^These skies are MINE!"] = "^天空，归�?�统治�?"
-chat_firelands["^Too soon!"] = "^太早了�?……你们来得太早了……"
-chat_firelands["stumbles as his armor is shattered"] = "因护甲碎裂而开始蹒跚�? "
+chat_firelands["^These skies are MINE!"] = "^天空，归�?�统治�?"
+chat_firelands["^Too soon!"] = "^太早了�?……你们来得太早了……"
+chat_firelands["stumbles as his armor is shattered"] = "因护甲碎裂而开始蹒跚�? "
 
 AL:GetLocale("DXE").chat_firelands = AL:GetLocale("DXE Chat Firelands")
 -- NPC names
 local npc_firelands = AL:NewLocale("DXE NPC Firelands", "zhCN")
-npc_firelands["Alysrazor"] = "奥�?�瑟拉�?尔"
+npc_firelands["Alysrazor"] = "奥利瑟拉佐尔"
 npc_firelands["Baleroc"] = "贝尔洛克"
 npc_firelands["Beth'tilac"] = "贝丝缇拉克"
-npc_firelands["Cinderweb Drone"] = "�?�网工虫"
-npc_firelands["Cinderweb Spiderling"] = "�?�网幼蛛"
-npc_firelands["Cinderweb Spinner"] = "�?�网织网蛛"
+npc_firelands["Cinderweb Drone"] = "烬网工虫"
+npc_firelands["Cinderweb Spiderling"] = "烬网幼蛛"
+npc_firelands["Cinderweb Spinner"] = "烬网织网蛛"
 npc_firelands["Crystal Prison"] = "水晶牢笼"
-npc_firelands["Crystal Prison Trap"] = "水晶牢笼陷�?�"
-npc_firelands["Immolation Trap"] = "献祭陷�?�"
-npc_firelands["Lord Rhyolith"] = "雷奥�?�斯领主"
-npc_firelands["Majordomo Fandral Staghelm"] = "管�?�者鹿盔"
+npc_firelands["Crystal Prison Trap"] = "水晶牢笼陷陷阱"
+npc_firelands["Immolation Trap"] = "献祭陷阱"
+npc_firelands["Lord Rhyolith"] = "雷奥利斯领主"
+npc_firelands["Majordomo Fandral Staghelm"] = "管理者鹿盔"
 npc_firelands["Ragnaros"] = "拉格纳罗斯"
 npc_firelands["Riplimb"] = "裂肢"
-npc_firelands["Shannox"] = "沙�?�诺克斯"
+npc_firelands["Shannox"] = "沙恩诺克斯"
 
 AL:GetLocale("DXE").npc_firelands = AL:GetLocale("DXE NPC Firelands")
+
+-- Spell names
+local spell_firelands = AL:NewLocale("DXE Spell Firelands", "zhCN")
+
+
+-- Ragnaros
+
+AL:GetLocale("DXE").spell_firelands = AL:GetLocale("DXE Spell Firelands")
+
+-- Announce
+local announce_firelands = AL:NewLocale("DXE Announce Firelands", "zhCN")
+announce_firelands["Free him!"] = "救它"
+announce_firelands["Help him!"] = "疯狗咬人，救它"
+
+announce_firelands["{circle} %s on ME! {circle}"] = "{circle} 我中了%s! {circle}"
+announce_firelands["{square} %s on ME! {square}"] = "{square} 我中了%s! {square}"
+
+AL:GetLocale("DXE").announce_firelands = AL:GetLocale("DXE Announce Firelands")
+
+
 return
 end
 
@@ -351,8 +373,8 @@ npc_firelands["Beth'tilac"] = "貝絲堤拉克"
 -- npc_firelands["Crystal Prison"] = ""
 -- npc_firelands["Crystal Prison Trap"] = ""
 -- npc_firelands["Immolation Trap"] = ""
-npc_firelands["Lord Rhyolith"] = "�?��?��?�斯�?主"
-npc_firelands["Majordomo Fandral Staghelm"] = "管�?�者�?�?��?�·鹿盔"
+npc_firelands["Lord Rhyolith"] = "�?��?��?�斯�?主"
+npc_firelands["Majordomo Fandral Staghelm"] = "管�?�者�?�?��?�·鹿盔"
 npc_firelands["Ragnaros"] = "拉格納羅斯"
 -- npc_firelands["Riplimb"] = ""
 npc_firelands["Shannox"] = "夏諾克斯"

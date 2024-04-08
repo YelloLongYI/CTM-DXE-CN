@@ -1766,7 +1766,8 @@ end
 local CountdownVoicesDB = {
     ["Corsica (Female)"] = {
         max = 5,
-        directory = "Interface\\Addons\\DXE\\Sounds\\",
+        -- directory = "Interface\\Addons\\DXE\\Sounds\\",
+        directory = "Interface\\Addons\\DXE\\SoundsCN\\Tracy\\",
         ext = "mp3"
     },
 }
