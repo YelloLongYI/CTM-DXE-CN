@@ -440,6 +440,22 @@ do
                     },
                 },
             },
+            {
+                type = "combatevent",
+                eventtype = "SPELL_CAST_FAILED",
+                spellname = 99836,
+                execute = {
+                    {
+                        "quash","throwcrystaltrapcd",
+						"alert","throwcrystaltrapcd",
+                        "radar","crystaltrapradar",
+                    },
+                    {
+                        "set",{throwcrystaltraptext = format(L.alert["%s CAST FAILED"],SN[99836])},
+                        "alert","throwcrystaltrapwarn",
+                    },
+                },
+            },
 			-- Crystal Prison Trap
 			{
 				type = "combatevent",
