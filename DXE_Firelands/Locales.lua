@@ -282,11 +282,19 @@ if L then
 
 -- Chat triggers
 local chat_firelands = AL:NewLocale("DXE Chat Firelands", "zhCN")
+
+-- Alysrazor
+chat_firelands["^These skies are MINE!"] = "^天空，归我统治！"
+chat_firelands["^I will burn you from the sky"] = "^我会从空中烧死你们！"
+chat_firelands["^Fire..."] = "^火焰……火焰……"
+chat_firelands["^Reborn in flame"] = "^浴火重生！"
+
+
 chat_firelands["Aha! The interlopers"] = "啊�?�?闯入者�?杀掉他们。�??掉他们�?"
 -- chat_firelands["^Enough"] = "^够了�?�?�会亲自解决。"
 chat_firelands["^Enough"] = "^够了！我会亲自解决。"
 chat_firelands["^Fall to your knees"] = "^跪下吧，凡人们！一切都结束了。"
-chat_firelands["^Fire..."] = "^�?�焰……�?�焰……"
+-- chat_firelands["^Fire..."] = "^�?�焰……�?�焰……"
 chat_firelands["^Hah? Hruumph?"] = "^�?？软骨头的血肉凡人？在这里？麻�?�，真麻�?��?"
 chat_firelands["^I serve a new master now"] = "^凡人们，�?�现在侍奉新的主人�?"
 chat_firelands["^No, fiend"] = "^No, fiend" -- Needs review
@@ -295,7 +303,6 @@ chat_firelands["^Spiderlings have been roused from their nest"] = "^幼蛛从巢
 -- chat_firelands["^Sulfuras will be your end"] = "^�?�弗拉斯将会�?�你的末日。"
 chat_firelands["^Sulfuras will be your end"] = "^萨弗拉斯将会是你的末日。"
 chat_firelands["^The Molten Eggs begin to hatch"] = "^The Molten Eggs begin to hatch" -- Needs review
-chat_firelands["^These skies are MINE!"] = "^天空，归�?�统治�?"
 chat_firelands["^Too soon!"] = "^太早了�?……你们来得太早了……"
 chat_firelands["stumbles as his armor is shattered"] = "因护甲碎裂而开始蹒跚�? "
 
@@ -312,10 +319,16 @@ npc_firelands["Crystal Prison"] = "水晶牢笼"
 npc_firelands["Crystal Prison Trap"] = "水晶牢笼陷陷阱"
 npc_firelands["Immolation Trap"] = "献祭陷阱"
 npc_firelands["Lord Rhyolith"] = "雷奥利斯领主"
-npc_firelands["Majordomo Fandral Staghelm"] = "管理者鹿盔"
+npc_firelands["Majordomo Staghelm"] = "管理者鹿盔"
 npc_firelands["Ragnaros"] = "拉格纳罗斯"
 npc_firelands["Riplimb"] = "裂肢"
 npc_firelands["Shannox"] = "沙恩诺克斯"
+
+npc_firelands["Cinderweb Spinners"] = "烬网织网蛛"
+npc_firelands["Cinderweb Spiderlings"] = "烬网幼蛛"
+npc_firelands["Cinderweb Drone"] = "烬网工虫"
+npc_firelands["Fragments of Rhyolith"] = "雷奥利斯的碎片"
+npc_firelands["Spark of Rhyolith"] = "雷奥利斯的火花"
 
 AL:GetLocale("DXE").npc_firelands = AL:GetLocale("DXE NPC Firelands")
 

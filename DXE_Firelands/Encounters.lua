@@ -440,6 +440,7 @@ do
                     },
                 },
             },
+            -- This may not work
             {
                 type = "combatevent",
                 eventtype = "SPELL_CAST_FAILED",
@@ -1438,7 +1439,8 @@ do
 				flashtime = 3,
 				color1 = "PEACH",
 				icon = ST[97225],
-				sound = "ALERT7",
+				-- sound = "ALERT7",
+                sound = "fireline",
 			},
             lavaduration = {
                 varname = format(L.alert["%s Duration"],SN[97225]),
@@ -1453,7 +1455,7 @@ do
             fragmentscd = {
 				varname = format(L.alert["%s CD"],SN[98136]),
 				type = "dropdown",
-				text = format(L.alert["New %s"],"Fragments of Rhyolith"),
+				text = format(L.alert["New %s"],L.npc_firelands["Fragments of Rhyolith"]),
 				time = 23,
 				flashtime = 5,
 				color1 = "BROWN",
@@ -1465,7 +1467,7 @@ do
 			sparkcd = {
 				varname = format(L.alert["%s CD"],SN[98552]),
 				type = "dropdown",
-				text = format(L.alert["New %s"],"Spark of Rhyolith"),
+				text = format(L.alert["New %s"], L.npc_firelands["Spark of Rhyolith"]),
 				time = 23,
 				flashtime = 5,
 				color1 = "YELLOW",
