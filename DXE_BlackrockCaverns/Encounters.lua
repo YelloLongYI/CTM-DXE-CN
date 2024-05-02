@@ -9,7 +9,7 @@ do
         key = "romogg",
         zone = L.zone["Blackrock Caverns"],
         category = L.zone["Blackrock Caverns"],
-        name = "Rom'ogg Bonecrusher", -- Bonecrusher
+        name = L.npc_blackrockcaverns["Rom'ogg Bonecrusher"], -- Bonecrusher
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Romogg Bonecrusher.blp",
         triggers = {
             scan = {
@@ -287,7 +287,7 @@ do
         key = "corla",
         zone = L.zone["Blackrock Caverns"],
         category = L.zone["Blackrock Caverns"],
-        name = "Corla, Herald of Twilight",
+        name = L.npc_blackrockcaverns["Corla, Herald of Twilight"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Corla, Herald of Twilight.blp",
         triggers = {
             scan = {
@@ -565,7 +565,7 @@ do
         key = "karsh",
         zone = L.zone["Blackrock Caverns"],
         category = L.zone["Blackrock Caverns"],
-        name = "Karsh Steelbender",
+        name = L.npc_blackrockcaverns["Karsh Steelbender"],
         icon = {"Interface\\EncounterJournal\\UI-EJ-BOSS-Karsh Steelbender.blp",true},
         triggers = {
             scan = {
@@ -777,7 +777,7 @@ do
         key = "beauty",
         zone = L.zone["Blackrock Caverns"],
         category = L.zone["Blackrock Caverns"],
-        name = "Beauty",
+        name = L.npc_blackrockcaverns["Beauty"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Beauty.blp",
         triggers = {
             scan = {
@@ -1002,7 +1002,7 @@ do
         key = "ascendantlordobsidius",
         zone = L.zone["Blackrock Caverns"],
         category = L.zone["Blackrock Caverns"],
-        name = "Ascendant Lord Obsidius",
+        name = L.npc_blackrockcaverns["Ascendant Lord Obsidius"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Ascendant Lord Obsidius.blp",
         triggers = {
             scan = {

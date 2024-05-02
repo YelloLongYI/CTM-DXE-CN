@@ -136,6 +136,12 @@ AL:GetLocale("DXE").chat_deadmines = AL:GetLocale("DXE Chat Deadmines")
 -- NPC names
 local npc_deadmines = AL:NewLocale("DXE NPC Deadmines", "zhCN")
 -- npc_deadmines["..."] = "..."
+npc_deadmines["Glubtok"] = "格拉布托克"
+npc_deadmines["Helix Gearbreaker"] = "赫利克斯·破甲"
+npc_deadmines["Foe Reaper 5000"] = "死神5000"
+npc_deadmines["Admiral Ripsnarl"] = "撕心狼将军"
+npc_deadmines["\"Captain\" Cookie"] = "“船长”曲奇"
+npc_deadmines["Vanessa VanCleef"] = "梵妮莎·范克里夫"
 
 AL:GetLocale("DXE").npc_deadmines = AL:GetLocale("DXE NPC Deadmines")
 return

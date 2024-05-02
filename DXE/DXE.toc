@@ -1,7 +1,7 @@
 ## Interface: 40300
 ## Title: DXE
 ## Notes: Deus Vox Encounters
-## Author: Kollektiv, Fariel, Harleschorsch, Alfieri0815
+## Author: Kollektiv, Fariel, Harleschorsch, Alfieri0815, Xxlong
 ## OptionalDeps: LibSharedMedia-3.0, LibSink-2.0, LibDualSpec-1.0
 ## LoadOnDemand: 1
 ## Dependencies: DXE_Loader

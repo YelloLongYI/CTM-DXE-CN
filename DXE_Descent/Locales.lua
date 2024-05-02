@@ -194,37 +194,37 @@ if L then
 
 -- Chat triggers
 local chat_descent = AL:NewLocale("DXE Chat Descent", "koKR")
-chat_descent["^Arcanotron"] = "^비전골�?"
-chat_descent["^Electron"] = "^전기골�?"
-chat_descent["^I have tried to be an accomodating host"] = "^�?위�?는 집주인답게 행동�?려 �?건만"
+chat_descent["^Arcanotron"] = "^비전골�?"
+chat_descent["^Electron"] = "^전기골�?"
+chat_descent["^I have tried to be an accomodating host"] = "^�?위�?는 집주인답게 행동�?려 �?건만"
 chat_descent["^Inconceivable"] = "^이런 곤란할"
-chat_descent["^Magmatron"] = "^용암골�?"
-chat_descent["^See how the shadowflame animates the bones"] = "^암흑�?길이 어떻게 �?를 일으키는지 �?라"
-chat_descent["^The air crackles"] = "^전기가 튀며 파지�?�?는"
-chat_descent["^Toxitron"] = "^맹독골�?"
+chat_descent["^Magmatron"] = "^용암골�?"
+chat_descent["^See how the shadowflame animates the bones"] = "^암흑�?길이 어떻게 �?를 일으키는지 �?라"
+chat_descent["^The air crackles"] = "^전기가 튀며 파지�?�?는"
+chat_descent["^Toxitron"] = "^맹독골�?"
 chat_descent["^Yes, run!"] = "^도망가라"
-chat_descent["becomes impaled"] = "노출�??�?습�?다"
-chat_descent["blue|r vial"] = "푸른�?�|r 약병을"
-chat_descent["green|r vial"] = "�?록�?�|r 약병을"
-chat_descent["magic"] = "암흑|r �?법"
-chat_descent["red|r vial"] = "붉은�?�|r 약병을"
-chat_descent["slumps forward"] = "기울입�?다"
+chat_descent["becomes impaled"] = "노출�??�?습�?다"
+chat_descent["blue|r vial"] = "푸른�?�|r 약병을"
+chat_descent["green|r vial"] = "�?록�?�|r 약병을"
+chat_descent["magic"] = "암흑|r �?법"
+chat_descent["red|r vial"] = "붉은�?�|r 약병을"
+chat_descent["slumps forward"] = "기울입�?다"
 chat_descent["unit activated"] = "유닛 가동"
 
 AL:GetLocale("DXE").chat_descent = AL:GetLocale("DXE Chat Descent")
 -- NPC names
 local npc_descent = AL:NewLocale("DXE NPC Descent", "koKR")
-npc_descent["Arcanotron"] = "비전골�?"
+npc_descent["Arcanotron"] = "비전골�?"
 npc_descent["Atramedes"] = "아트라메데스"
-npc_descent["Chimaeron"] = "키�?이론"
-npc_descent["Electron"] = "전기골�?"
-npc_descent["Magmatron"] = "용암골�?"
+npc_descent["Chimaeron"] = "키�?이론"
+npc_descent["Electron"] = "전기골�?"
+npc_descent["Magmatron"] = "용암골�?"
 npc_descent["Magmaw"] = "용암아귀"
-npc_descent["Maloriak"] = "�?로리악"
-npc_descent["Nefarian"] = "네파리�?"
-npc_descent["Obnoxious Fiend"] = "�?쾌한 �?귀"
-npc_descent["Omnitron Defense System"] = "만능골�? 방어 시스템"
-npc_descent["Toxitron"] = "맹독골�?"
+npc_descent["Maloriak"] = "�?로리악"
+npc_descent["Nefarian"] = "네파리�?"
+npc_descent["Obnoxious Fiend"] = "�?쾌한 �?귀"
+npc_descent["Omnitron Defense System"] = "만능골�? 방어 시스템"
+npc_descent["Toxitron"] = "맹독골�?"
 
 AL:GetLocale("DXE").npc_descent = AL:GetLocale("DXE NPC Descent")
 return
@@ -237,18 +237,18 @@ if L then
 local chat_descent = AL:NewLocale("DXE Chat Descent", "ruRU")
 chat_descent["^Arcanotron"] = "^Чаротрон"
 chat_descent["^Electron"] = "^Электрон"
-chat_descent["^I have tried to be an accomodating host"] = "^Я пытал�?я �?ледовать законам го�?теприим�?тва"
-chat_descent["^Inconceivable"] = "^Непо�?тижимо"
+chat_descent["^I have tried to be an accomodating host"] = "^Я пытал�?я �?ледовать законам го�?теприим�?тва"
+chat_descent["^Inconceivable"] = "^Непо�?тижимо"
 chat_descent["^Magmatron"] = "^Магматрон"
-chat_descent["^See how the shadowflame animates the bones"] = "^Смотрите, как Пламя тьмы вдыхает жизнь в их ко�?ти"
-chat_descent["^The air crackles"] = "^В возд�?хе трещат электриче�?кие разряды"
-chat_descent["^Toxitron"] = "^Ток�?итрон"
+chat_descent["^See how the shadowflame animates the bones"] = "^Смотрите, как Пламя тьмы вдыхает жизнь в их ко�?ти"
+chat_descent["^The air crackles"] = "^В возд�?хе трещат электриче�?кие разряды"
+chat_descent["^Toxitron"] = "^Ток�?итрон"
 chat_descent["^Yes, run!"] = "^Да, беги!" -- Needs review
-chat_descent["becomes impaled"] = "на�?аживает�?я на пик�?" -- Needs review
-chat_descent["blue|r vial"] = "�?иний|r п�?зырек" -- Needs review
-chat_descent["green|r vial"] = "зеленый|r п�?зырек" -- Needs review
+chat_descent["becomes impaled"] = "на�?аживает�?я на пик�?" -- Needs review
+chat_descent["blue|r vial"] = "�?иний|r п�?зырек" -- Needs review
+chat_descent["green|r vial"] = "зеленый|r п�?зырек" -- Needs review
 chat_descent["magic"] = "магию" -- Needs review
-chat_descent["red|r vial"] = "кра�?ный|r п�?зырек" -- Needs review
+chat_descent["red|r vial"] = "кра�?ный|r п�?зырек" -- Needs review
 chat_descent["slumps forward"] = "внезапно падает" -- Needs review
 chat_descent["unit activated"] = "активирован"
 
@@ -256,16 +256,16 @@ AL:GetLocale("DXE").chat_descent = AL:GetLocale("DXE Chat Descent")
 -- NPC names
 local npc_descent = AL:NewLocale("DXE NPC Descent", "ruRU")
 npc_descent["Arcanotron"] = "Чаротрон"
-npc_descent["Atramedes"] = "�?трамед"
+npc_descent["Atramedes"] = "�?трамед"
 npc_descent["Chimaeron"] = "Химерон"
 npc_descent["Electron"] = "Электрон"
 npc_descent["Magmatron"] = "Магматрон"
 npc_descent["Magmaw"] = "Магмарь"
 npc_descent["Maloriak"] = "Малориак"
 npc_descent["Nefarian"] = "Нефариан"
-npc_descent["Obnoxious Fiend"] = "Гн�?�?ный бе�?"
-npc_descent["Omnitron Defense System"] = "Защитная �?и�?тема Омнотрона"
-npc_descent["Toxitron"] = "Ток�?итрон"
+npc_descent["Obnoxious Fiend"] = "Гн�?�?ный бе�?"
+npc_descent["Omnitron Defense System"] = "Защитная �?и�?тема Омнотрона"
+npc_descent["Toxitron"] = "Ток�?итрон"
 
 AL:GetLocale("DXE").npc_descent = AL:GetLocale("DXE NPC Descent")
 return
@@ -276,37 +276,40 @@ if L then
 
 -- Chat triggers
 local chat_descent = AL:NewLocale("DXE Chat Descent", "zhCN")
-chat_descent["^Arcanotron"] = "^奥�?�金�?�"
-chat_descent["^Electron"] = "^电荷金�?�"
-chat_descent["^I have tried to be an accomodating host"] = "^�?�一直在尝试扮演好客的主人，可你们就�?�不肯受死�?该卸下伪装了……杀光你们�?"
+chat_descent["^Arcanotron"] = "^奥能金刚"
+chat_descent["^Electron"] = "^电荷金刚"
+chat_descent["^I have tried to be an accomodating host"] = "^�?�一直在尝试扮演好客的主人，可你们就�?�不肯受死�?该卸下伪装了……杀光你们�?"
 chat_descent["^Inconceivable"] = "^难以置信"
-chat_descent["^Magmatron"] = "^熔岩金�?�"
-chat_descent["^See how the shadowflame animates the bones"] = "^暗影�??焰为他们的骨骼注入了活力"
-chat_descent["^The air crackles"] = "^空气中激荡的电�?噼啪作响"
-chat_descent["^Toxitron"] = "^剧毒金�?�"
-chat_descent["^Yes, run!"] = "^对，跑�?��?每跑一步你的�?跳�?�会加快。"
-chat_descent["becomes impaled"] = "将自己钉在�?�上"
+chat_descent["^Magmatron"] = "^熔岩金刚"
+chat_descent["^See how the shadowflame animates the bones"] = "^暗影�??焰为他们的骨骼注入了活力"
+chat_descent["^The air crackles"] = "^空气中激荡的电�?噼啪作响"
+chat_descent["^Toxitron"] = "^剧毒金刚"
+chat_descent["^Yes, run!"] = "^对，跑�?��?每跑一步你的�?跳�?�会加快。"
+chat_descent["becomes impaled"] = "将自己钉在�?�上"
 chat_descent["blue|r vial"] = "蓝瓶"
 chat_descent["green|r vial"] = "绿瓶"
 chat_descent["magic"] = "魔法"
 chat_descent["red|r vial"] = "红瓶"
-chat_descent["slumps forward"] = "�?�前倒下"
-chat_descent["unit activated"] = "单位已激活"
+chat_descent["slumps forward"] = "�?�前倒下"
+chat_descent["unit activated"] = "单位已激活。"
 
 AL:GetLocale("DXE").chat_descent = AL:GetLocale("DXE Chat Descent")
 -- NPC names
 local npc_descent = AL:NewLocale("DXE NPC Descent", "zhCN")
-npc_descent["Arcanotron"] = "奥�?�金�?�"
+npc_descent["Arcanotron"] = "奥能金刚"
 npc_descent["Atramedes"] = "艾卓曼德斯"
 npc_descent["Chimaeron"] = "奇美隆"
-npc_descent["Electron"] = "电荷金�?�"
-npc_descent["Magmatron"] = "熔岩金�?�"
+npc_descent["Electron"] = "电荷金刚"
+npc_descent["Magmatron"] = "熔岩金刚"
 npc_descent["Magmaw"] = "熔喉"
 npc_descent["Maloriak"] = "马洛拉克"
-npc_descent["Nefarian"] = "�?法�?�安"
-npc_descent["Obnoxious Fiend"] = "喧闹�?�鬼"
-npc_descent["Omnitron Defense System"] = "全�?�金�?��?�御系统"
-npc_descent["Toxitron"] = "剧毒金�?�"
+npc_descent["Nefarian"] = "奈法利安"
+npc_descent["Obnoxious Fiend"] = "喧闹�?�鬼"
+npc_descent["Omnotron Defense System"] = "全能金刚防御系统"
+npc_descent["Toxitron"] = "剧毒金刚"
+
+-- Magmaw
+npc_descent["Lava Parasites"] = "熔岩寄生虫"
 
 AL:GetLocale("DXE").npc_descent = AL:GetLocale("DXE NPC Descent")
 return
@@ -317,37 +320,37 @@ if L then
 
 -- Chat triggers
 local chat_descent = AL:NewLocale("DXE Chat Descent", "zhTW")
-chat_descent["^Arcanotron"] = "^�?法號"
+chat_descent["^Arcanotron"] = "^�?法號"
 chat_descent["^Electron"] = "^雷電號"
-chat_descent["^I have tried to be an accomodating host"] = "^�?�本來只�?�略盡地主之誼"
-chat_descent["^Inconceivable"] = "^真難�?��?�!"
+chat_descent["^I have tried to be an accomodating host"] = "^�?�本來只�?�略盡地主之誼"
+chat_descent["^Inconceivable"] = "^真難�?��?�!"
 chat_descent["^Magmatron"] = "^熔岩號"
 -- chat_descent["^See how the shadowflame animates the bones"] = ""
-chat_descent["^The air crackles"] = "^響起了電�?霹啪作響的�?�音!"
-chat_descent["^Toxitron"] = "^�??毒號"
-chat_descent["^Yes, run!"] = "^沒錯，�?�?�!"
-chat_descent["becomes impaled"] = "被�?在尖�?�上"
-chat_descent["blue|r vial"] = "藍色|r瓶�?"
-chat_descent["green|r vial"] = "綠色|r瓶�?"
+chat_descent["^The air crackles"] = "^響起了電�?霹啪作響的�?�音!"
+chat_descent["^Toxitron"] = "^�??毒號"
+chat_descent["^Yes, run!"] = "^沒錯，�?�?�!"
+chat_descent["becomes impaled"] = "被�?在尖�?�上"
+chat_descent["blue|r vial"] = "藍色|r瓶�?"
+chat_descent["green|r vial"] = "綠色|r瓶�?"
 -- chat_descent["magic"] = ""
-chat_descent["red|r vial"] = "紅色|r瓶�?"
+chat_descent["red|r vial"] = "紅色|r瓶�?"
 chat_descent["slumps forward"] = "往前撲倒"
 -- chat_descent["unit activated"] = ""
 
 AL:GetLocale("DXE").chat_descent = AL:GetLocale("DXE Chat Descent")
 -- NPC names
 local npc_descent = AL:NewLocale("DXE NPC Descent", "zhTW")
-npc_descent["Arcanotron"] = "�?法號"
+npc_descent["Arcanotron"] = "�?法號"
 npc_descent["Atramedes"] = "亞特拉米德"
 npc_descent["Chimaeron"] = "奇瑪隆"
 npc_descent["Electron"] = "雷電號"
 npc_descent["Magmatron"] = "熔岩號"
 npc_descent["Magmaw"] = "熔喉"
 npc_descent["Maloriak"] = "瑪洛里亞克"
-npc_descent["Nefarian"] = "�?法�?�安"
-npc_descent["Obnoxious Fiend"] = "討人厭的�?�魔"
-npc_descent["Omnitron Defense System"] = "全�?�魔�?��?�禦系統"
-npc_descent["Toxitron"] = "�??毒號"
+npc_descent["Nefarian"] = "�?法�?�安"
+npc_descent["Obnoxious Fiend"] = "討人厭的�?�魔"
+npc_descent["Omnitron Defense System"] = "全�?�魔�?��?�禦系統"
+npc_descent["Toxitron"] = "�??毒號"
 
 AL:GetLocale("DXE").npc_descent = AL:GetLocale("DXE NPC Descent")
 return

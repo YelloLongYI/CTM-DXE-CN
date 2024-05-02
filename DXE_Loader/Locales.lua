@@ -216,6 +216,16 @@ zone["Throne of the Four Winds"] = "风神王座"
 -- 5H Zone names
 zone["Zul'Aman"] = "祖阿曼"
 zone["Zul'Gurub"] = "祖尔格拉布"
+zone["Blackrock Caverns"] = "黑石岩窟"
+zone["The Deadmines"] = "死亡矿井"
+zone["End Time"] = "时光之末"
+zone["Grim Batol"] = "格瑞姆巴托"
+zone["Lost City of the Tol'vir"] = "托维尔失落之城"
+zone["Shadowfang Keep"] = "影牙城堡"
+zone["The Stonecore"] = "巨石之核"
+zone["Throne of Tides"] = "潮汐王座"
+zone["The Vortex Pinnacle"] = "旋云之巅"
+zone["Well of Eternity"] = "永恒之井"
 
 
 AL:GetLocale("DXE").zone = AL:GetLocale("DXE Zone")

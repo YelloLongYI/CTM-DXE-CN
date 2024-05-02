@@ -10,7 +10,7 @@ do
         key = "umbriss",
         zone = L.zone["Grim Batol"],
         category = L.zone["Grim Batol"],
-        name = "General Umbriss",
+        name = L.npc_grimbatol["General Umbriss"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-General Umbriss.blp",
         triggers = {
             scan = {
@@ -310,7 +310,7 @@ do
         key = "throngus",
         zone = L.zone["Grim Batol"],
         category = L.zone["Grim Batol"],
-        name = "Forgemaster Throngus",
+        name = L.npc_grimbatol["Forgemaster Throngus"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Forgemaster Throngus.blp",
         triggers = {
             scan = {
@@ -716,7 +716,7 @@ do
         key = "drahga",
         zone = L.zone["Grim Batol"],
         category = L.zone["Grim Batol"],
-        name = "Drahga Shadowburner",
+        name = L.npc_grimbatol["Drahga Shadowburner"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Drahga Shadowburner.blp",
         icon2 = "Interface\\EncounterJournal\\UI-EJ-BOSS-Valiona Dungeon.blp",
         triggers = {
@@ -1101,7 +1101,7 @@ do
         key = "erudax",
         zone = L.zone["Grim Batol"],
         category = L.zone["Grim Batol"],
-        name = "Erudax",
+        name = L.npc_grimbatol["Erudax"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Erudax.blp",
         triggers = {
             scan = {

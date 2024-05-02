@@ -10,7 +10,7 @@ do
         key = "glubtok",
         zone = L.zone["The Deadmines"],
         category = L.zone["The Deadmines"],
-        name = "Glubtok",
+        name = L.npc_deadmines["Glubtok"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Glubtok.blp",
         triggers = {
             scan = {
@@ -237,7 +237,7 @@ do
         key = "helix",
         zone = L.zone["The Deadmines"],
         category = L.zone["The Deadmines"],
-        name = "Helix Gearbreaker",
+        name = L.npc_deadmines["Helix Gearbreaker"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Helix Gearbreaker.blp",
         icon2 = "Interface\\EncounterJournal\\UI-EJ-BOSS-Lumbering Oaf.blp",
         triggers = {
@@ -470,7 +470,7 @@ do
         key = "foereaper",
         zone = L.zone["The Deadmines"],
         category = L.zone["The Deadmines"],
-        name = "Foe Reaper 5000",
+        name = L.npc_deadmines["Foe Reaper 5000"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Foe Reaper 5000.blp",
         triggers = {
             scan = {
@@ -793,7 +793,7 @@ do
         key = "ripsnarl",
         zone = L.zone["The Deadmines"],
         category = L.zone["The Deadmines"],
-        name = "Admiral Ripsnarl",
+        name = L.npc_deadmines["Admiral Ripsnarl"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Admiral Ripsnarl.blp",
         triggers = {
             scan = {
@@ -983,7 +983,7 @@ do
         key = "cookie",
         zone = L.zone["The Deadmines"],
         category = L.zone["The Deadmines"],
-        name = "\"Captain\" Cookie",
+        name = L.npc_deadmines["\"Captain\" Cookie"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Captain Cookie.blp",
         triggers = {
             scan = {
@@ -1046,7 +1046,7 @@ do
         key = "vanessa",
         zone = L.zone["The Deadmines"],
         category = L.zone["The Deadmines"],
-        name = "Vanessa VanCleef",
+        name = L.npc_deadmines["Vanessa VanCleef"],
         icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Vanessa VanCleef.blp",
         triggers = {
             scan = {

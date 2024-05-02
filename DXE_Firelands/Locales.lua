@@ -288,6 +288,7 @@ chat_firelands["^These skies are MINE!"] = "^天空，归我统治！"
 chat_firelands["^I will burn you from the sky"] = "^我会从空中烧死你们！"
 chat_firelands["^Fire..."] = "^火焰……火焰……"
 chat_firelands["^Reborn in flame"] = "^浴火重生！"
+chat_firelands["^Fiery Lava Worms erupt"] = "^熔岩火虫从地下涌出来了！"
 
 
 chat_firelands["Aha! The interlopers"] = "啊�?�?闯入者�?杀掉他们。�??掉他们�?"
@@ -299,7 +300,8 @@ chat_firelands["^Hah? Hruumph?"] = "^�?？软骨头的血肉凡人？在这里
 chat_firelands["^I serve a new master now"] = "^凡人们，�?�现在侍奉新的主人�?"
 chat_firelands["^No, fiend"] = "^No, fiend" -- Needs review
 chat_firelands["^Reborn in flame"] = "^浴�?�重生�?"
-chat_firelands["^Spiderlings have been roused from their nest"] = "^幼蛛从巢穴里�?�出来了�?"
+chat_firelands["^Spiderlings have been roused from their nest"] = "^幼蛛从巢穴里爬出来了！"
+chat_firelands["^Cinderweb Spinners dangle from above"] = "^烬网织网蛛爬下来了！"
 -- chat_firelands["^Sulfuras will be your end"] = "^�?�弗拉斯将会�?�你的末日。"
 chat_firelands["^Sulfuras will be your end"] = "^萨弗拉斯将会是你的末日。"
 chat_firelands["^The Molten Eggs begin to hatch"] = "^The Molten Eggs begin to hatch" -- Needs review

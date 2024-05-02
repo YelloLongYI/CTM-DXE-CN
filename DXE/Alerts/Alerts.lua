@@ -204,7 +204,8 @@ local defaults = {
 		WarnPopupMessage = true,
         -- Sounds
         SoundOutputChannel = "Master",
-        CountdownVoice = "Corsica (Female)",
+        -- CountdownVoice = "Corsica (Female)",
+        CountdownVoice = "YIKE",
         -- Animation
         AnimationTime = 0.6,
         FadeTime = 1,
@@ -1766,7 +1767,11 @@ end
 local CountdownVoicesDB = {
     ["Corsica (Female)"] = {
         max = 5,
-        -- directory = "Interface\\Addons\\DXE\\Sounds\\",
+        directory = "Interface\\Addons\\DXE\\Sounds\\",
+        ext = "mp3"
+    },
+    ["YIKE"] = {
+        max = 5,
         directory = "Interface\\Addons\\DXE\\SoundsCN\\Tracy\\",
         ext = "mp3"
     },

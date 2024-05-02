@@ -136,6 +136,11 @@ AL:GetLocale("DXE").chat_blackrockcaverns = AL:GetLocale("DXE Chat Blackrock Cav
 -- NPC names
 local npc_blackrockcaverns = AL:NewLocale("DXE NPC Blackrock Caverns", "zhCN")
 -- npc_blackrockcaverns["..."] = "..."
+npc_blackrockcaverns["Rom'ogg Bonecrusher"] = "摧骨者罗姆欧格"
+npc_blackrockcaverns["Corla, Herald of Twilight"] = "柯尔拉，暮光之兆"
+npc_blackrockcaverns["Karsh Steelbender"] = "卡尔什·断钢"
+npc_blackrockcaverns["Beauty"] = "如花"
+npc_blackrockcaverns["Ascendant Lord Obsidius"] = "升腾者领主奥西迪斯"
 
 AL:GetLocale("DXE").npc_blackrockcaverns = AL:GetLocale("DXE NPC Blackrock Caverns")
 return

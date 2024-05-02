@@ -2272,9 +2272,11 @@ do
             {
                 "set",{phase = 1},
                 "alert","enragecd",
+                "alert", {"furycd", time = 2},
                 "expect",{"&difficulty&",">=","3"}, --10h&25h
                 "set",{
                     adherenttime = {64, 92 ,loop = false, type = "series"},
+                    furycd = {63, 47, loop = false, type = "series"}
                 },
             },
             {
@@ -2436,6 +2438,7 @@ do
                 type = "dropdown",
                 text = format(L.alert["Next %s"], SN[82524]),
                 time = 47,
+                time2 = 63,
                 flashtime = 10,
                 color1 = "CYAN",
                 color2 = "TURQUOISE",

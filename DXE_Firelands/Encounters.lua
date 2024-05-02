@@ -869,7 +869,7 @@ do
 				time = "<spinnerscd>",
 				flashtime = 5,
 				color1 = "PINK",
-				sound = "ALERT4",
+				-- sound = "ALERT4",
                 icon = ST[97503],
 			},
             spinnerswarn = {
@@ -879,7 +879,8 @@ do
                 time = 1,
                 color1 = "MAGENTA",
                 color2 = "Off",
-                sound = "ALERT7",
+                -- sound = "ALERT7",
+                sound = "spinner",
                 icon = ST[97503],
             },
             
@@ -891,7 +892,7 @@ do
 				time = "<spiderlingscd>",
 				flashtime = 5,
 				color1 = "TEAL",
-				sound = "ALERT5",
+				-- sound = "ALERT5",
                 icon = ST[87084],
 			},     
             spiderlingswarn = {
@@ -901,7 +902,8 @@ do
                 time = 1,
                 color1 = "TEAL",
                 color2 = "Off",
-                sound = "ALERT9",
+                -- sound = "ALERT9",
+                sound = "spiderling",
                 icon = ST[87084],
             },
             -- Cinderweb Drone
@@ -912,7 +914,7 @@ do
 				time = "<dronescd>",
 				flashtime = 5,
 				color1 = "YELLOW",
-				sound = "ALERT6",
+				-- sound = "ALERT6",
                 icon = ST[81302],
 			},
             droneswarn = {
@@ -922,7 +924,7 @@ do
                 time = 1,
                 color1 = "YELLOW",
                 color2 = "Off",
-                sound = "MINORWARNING",
+                sound = "drone",
                 icon = ST[81302],
             },
             
@@ -1416,7 +1418,8 @@ do
                 text = format(L.alert["%s"],SN[98493]),
                 time = 1,
                 color1 = "ORANGE",
-                sound = "ALERT9",
+                -- sound = "ALERT9",
+                sound = "volcano",
                 icon = ST[98493],
             },
             volcanoduration = {
@@ -1470,9 +1473,9 @@ do
 				text = format(L.alert["New %s"], L.npc_firelands["Spark of Rhyolith"]),
 				time = 23,
 				flashtime = 5,
-				color1 = "YELLOW",
+				color1 = "VIOLET",
 				icon = ST[99262],
-				sound = "ALERT3",
+				sound = "sparksoon",
                 throttle = 10,
 			},
 			sparkwarn = {
@@ -1778,7 +1781,7 @@ do
             },
             {
                 phase = 1,
-                alerts = {"fieroblastkickwarn","cataclysmcd","cataclysmwarn","cataclysmcast","eggscd","imprinted","wormscd","wormswarn","tantrumcd","firestormcd","firestormwarn","firestormcast","firestormduration"},
+                alerts = {"fieroblastkickwarn","cataclysmcd","cataclysmwarn","cataclysmcast","meteowarn","eggscd","imprinted","wormscd","wormswarn","tantrumcd","tantrumwarn","firestormcd","firestormwarn","firestormcast","firestormduration"},
             },
             {
                 phase = 2,
@@ -1907,6 +1910,18 @@ do
 				icon = ST[100852],
 				throttle = 2, --possbily
 			},
+            -- China customize
+            tantrumwarn = {
+				varname = format(L.alert["%s Warning"],SN[99362]),
+				type = "simple",
+				-- text = format(L.alert["%s dissipates"],SN[99362]),
+                text = format(L.alert["%s"],SN[99362]),
+				time = 1,
+				flashtime = 15,
+				color1 = "VIOLET",
+                sound = "chickenfrenzy",
+				icon = ST[99362],
+			},
             ------------- Lava Worm ------------
             wormscd = {
                 varname = format(L.alert["%s CD"],"Summon Lava Worms"),
@@ -1932,14 +1947,16 @@ do
             -- Cataclysm
             cataclysmcast = {
 				varname = format(L.alert["%s Casting"],SN[100761]),
-				type = "centerpopup",
+				type = "dropdown",
 				text = format(L.alert["%s"],SN[100761]),
 				time = 5,
-				flashtime = 5,
+				flashtime = 3,
 				color1 = "LIGHTBLUE",
                 color2 = "CYAN",
 				icon = ST[100761],
-				sound = "ALERT2",
+				-- sound = "ALERT2",
+                sound = "catalysm",
+                audiocd = true,
 			},
             cataclysmwarn = {
                 varname = format(L.alert["%s Warning"],SN[100761]),
@@ -1947,7 +1964,8 @@ do
                 text = format(L.alert["Herald: %s"],SN[100761]),
                 time = 1,
                 color1 = "LIGHTBLUE",
-                sound = "None",
+                -- sound = "None",
+                -- sound = "catalysm",
                 icon = ST[100761],
             },
 			cataclysmcd = {
@@ -1959,6 +1977,15 @@ do
 				color1 = "BROWN",
 				icon = ST[100761],
 			},
+            meteowarn = {
+                varname = format(L.alert["%s Warning"],"molten-meteor"),
+                type = "simple",
+                text = format(L.alert["New: %s"],"molten-meteor"),
+                time = 1,
+                color1 = "LIGHTBLUE",
+                icon = ST[100761],
+                sound = "killmeteor",
+            },
             -- Firestorm
             firestormcd = {
 				varname = format(L.alert["%s CD"],SN[100744]),
@@ -2180,6 +2207,18 @@ do
                     },
                 },
             },
+            -- China customize
+            {
+                type = "combatevent",
+                eventtype = "SPELL_AURA_APPLIED",
+                spellname = 99362,
+                execute = {
+                    {
+                        "expect",{"&guidisplayertarget|#1#&","==","true"},
+                        "quash","tantrumwarn",
+                    },
+                },
+            },
             -- Fieroblast
             {
                 type = "combatevent",
@@ -2207,6 +2246,18 @@ do
 					},
 				},
 			},
+            {
+				type = "combatevent",
+				eventtype = "SPELL_CAST_SUCCESS",
+				spellname = 102111,
+				srcisnpctype = true,
+				execute = {
+					{
+						"alert","meteowarn",
+					},
+				},
+			},
+            
 			-- Firestorm
 			{
 				type = "combatevent",

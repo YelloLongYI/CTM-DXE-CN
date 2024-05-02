@@ -129,21 +129,21 @@ if L then
 
 -- Chat triggers
 local chat_bastion = AL:NewLocale("DXE Chat Bastion", "koKR")
-chat_bastion["^Enough of this foolishness"] = "^우리가 �??대�?겠다"
+chat_bastion["^Enough of this foolishness"] = "^우리가 �??대�?겠다"
 chat_bastion["^Enough!"] = "^그만!"
-chat_bastion["^Feed, children"] = "^�?들아, 먹어�?워라"
+chat_bastion["^Feed, children"] = "^�?들아, 먹어�?워라"
 chat_bastion["^You dare invade"] = "^성소를 침범해"
-chat_bastion["^You mistake this for weakness?"] = "^이게 약해지는 걸로 보이�?�???"
+chat_bastion["^You mistake this for weakness?"] = "^이게 약해지는 걸로 보이�?�???"
 
 AL:GetLocale("DXE").chat_bastion = AL:GetLocale("DXE Chat Bastion")
 -- NPC names
 local npc_bastion = AL:NewLocale("DXE NPC Bastion", "koKR")
-npc_bastion["Arion"] = "아리�?�"
-npc_bastion["Cho'gall"] = "�?�?"
-npc_bastion["Halfus Wyrmbreaker"] = "할푸스 웜브�?이커"
+npc_bastion["Arion"] = "아리�?�"
+npc_bastion["Cho'gall"] = "�?�?"
+npc_bastion["Halfus Wyrmbreaker"] = "할푸스 웜브�?이커"
 npc_bastion["Lady Sinestra"] = "시네스트라"
-npc_bastion["The Ascendant Council"] = "승천 �?회"
-npc_bastion["Valiona & Theralion"] = "발리�?��?와 테랄리�?�"
+npc_bastion["The Ascendant Council"] = "승천 �?회"
+npc_bastion["Valiona & Theralion"] = "발리�?��?와 테랄리�?�"
 
 AL:GetLocale("DXE").npc_bastion = AL:GetLocale("DXE NPC Bastion")
 return
@@ -154,19 +154,19 @@ if L then
 
 -- Chat triggers
 local chat_bastion = AL:NewLocale("DXE Chat Bastion", "ruRU")
-chat_bastion["^Enough of this foolishness"] = "^Закончим этот фар�?"
+chat_bastion["^Enough of this foolishness"] = "^Закончим этот фар�?"
 chat_bastion["^Enough!"] = "^Довольно!"
-chat_bastion["^Feed, children"] = "^Е�?ьте, дети мои "
+chat_bastion["^Feed, children"] = "^Е�?ьте, дети мои "
 chat_bastion["^You dare invade"] = "^Вы заплатите жизнями"
-chat_bastion["^You mistake this for weakness?"] = "^Ты так в этом �?верен?"
+chat_bastion["^You mistake this for weakness?"] = "^Ты так в этом �?верен?"
 
 AL:GetLocale("DXE").chat_bastion = AL:GetLocale("DXE Chat Bastion")
 -- NPC names
 local npc_bastion = AL:NewLocale("DXE NPC Bastion", "ruRU")
-npc_bastion["Arion"] = "�?эрон"
+npc_bastion["Arion"] = "�?эрон"
 npc_bastion["Cho'gall"] = "Чо'Галл"
 npc_bastion["Halfus Wyrmbreaker"] = "Халфий Змеерез"
-npc_bastion["Lady Sinestra"] = "Сине�?тра"
+npc_bastion["Lady Sinestra"] = "Сине�?тра"
 npc_bastion["The Ascendant Council"] = "Совет Перерожденных"
 npc_bastion["Valiona & Theralion"] = "Валиона и Тералион"
 
@@ -179,21 +179,24 @@ if L then
 
 -- Chat triggers
 local chat_bastion = AL:NewLocale("DXE Chat Bastion", "zhCN")
-chat_bastion["^Enough of this foolishness"] = "^�?�止你的愚行"
+chat_bastion["^Enough of this foolishness"] = "^�?�止你的愚行"
 chat_bastion["^Enough!"] = "^够了"
-chat_bastion["^Feed, children"] = "^�??�?�，孩�?们�?尽�?�享用他们肥美的躯壳�?��?"
+chat_bastion["^Feed, children"] = "^�??�?�，孩�?们�?尽�?�享用他们肥美的躯壳�?��?"
 chat_bastion["^You dare invade"] = "^你们竟敢"
-chat_bastion["^You mistake this for weakness?"] = "^你以为就这�?简单"
+chat_bastion["^You mistake this for weakness?"] = "^你以为就这�?简单"
 
 AL:GetLocale("DXE").chat_bastion = AL:GetLocale("DXE Chat Bastion")
 -- NPC names
 local npc_bastion = AL:NewLocale("DXE NPC Bastion", "zhCN")
-npc_bastion["Arion"] = "艾里�?�"
+npc_bastion["Halfus Wyrmbreaker"] = "哈尔弗斯·碎龙者"
+npc_bastion["Valiona & Theralion"] = "瑟纳利昂和瓦里昂娜"
+npc_bastion["Ascendant Council"] = "升腾者议会"
 npc_bastion["Cho'gall"] = "古加尔"
-npc_bastion["Halfus Wyrmbreaker"] = "�?尔弗斯·碎龙者"
-npc_bastion["Lady Sinestra"] = "希�?丝特拉"
-npc_bastion["The Ascendant Council"] = "升腾者议会"
-npc_bastion["Valiona & Theralion"] = "瓦里�?�娜和瑟纳�?��?�"
+npc_bastion["Lady Sinestra"] = "希奈丝特拉"
+
+npc_bastion["Arion"] = "艾里昂"
+
+
 
 AL:GetLocale("DXE").npc_bastion = AL:GetLocale("DXE NPC Bastion")
 return
@@ -204,7 +207,7 @@ if L then
 
 -- Chat triggers
 local chat_bastion = AL:NewLocale("DXE Chat Bastion", "zhTW")
-chat_bastion["^Enough of this foolishness"] = "^�?�們�?解決他們!"
+chat_bastion["^Enough of this foolishness"] = "^�?�們�?解決他們!"
 -- chat_bastion["^Enough!"] = ""
 -- chat_bastion["^Feed, children"] = ""
 -- chat_bastion["^You dare invade"] = ""
@@ -213,12 +216,12 @@ chat_bastion["^Enough of this foolishness"] = "^�?�們�?解決他們!"
 AL:GetLocale("DXE").chat_bastion = AL:GetLocale("DXE Chat Bastion")
 -- NPC names
 local npc_bastion = AL:NewLocale("DXE NPC Bastion", "zhTW")
-npc_bastion["Arion"] = "艾�?�奧"
-npc_bastion["Cho'gall"] = "�?加�?�"
-npc_bastion["Halfus Wyrmbreaker"] = "�?福斯•破龍者"
+npc_bastion["Arion"] = "艾�?�奧"
+npc_bastion["Cho'gall"] = "�?加�?�"
+npc_bastion["Halfus Wyrmbreaker"] = "�?福斯•破龍者"
 npc_bastion["Lady Sinestra"] = "賽絲特拉女士"
-npc_bastion["The Ascendant Council"] = "卓越者議�?"
-npc_bastion["Valiona & Theralion"] = "瓦莉�?娜和瑟拉里�?�"
+npc_bastion["The Ascendant Council"] = "卓越者議�?"
+npc_bastion["Valiona & Theralion"] = "瓦莉�?娜和瑟拉里�?�"
 
 AL:GetLocale("DXE").npc_bastion = AL:GetLocale("DXE NPC Bastion")
 return

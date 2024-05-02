@@ -136,6 +136,10 @@ AL:GetLocale("DXE").chat_grimbatol = AL:GetLocale("DXE Chat Grim Batol")
 -- NPC names
 local npc_grimbatol = AL:NewLocale("DXE NPC Grim Batol", "zhCN")
 -- npc_grimbatol["..."] = "..."
+npc_grimbatol["General Umbriss"] = "乌比斯将军"
+npc_grimbatol["Forgemaster Throngus"] = "铸炉之主索朗格斯"
+npc_grimbatol["Drahga Shadowburner"] = "达加·燃影者"
+npc_grimbatol["Erudax"] = "地狱公爵埃鲁达克"
 
 AL:GetLocale("DXE").npc_grimbatol = AL:GetLocale("DXE NPC Grim Batol")
 return

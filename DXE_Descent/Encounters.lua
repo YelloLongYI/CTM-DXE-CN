@@ -173,9 +173,9 @@ do
             },
             -- Pillar of Flame
             pillarcd = {
-                varname = format(L.alert["%s CD"],L.alert["Lava Parasites"]),
+                varname = format(L.alert["%s CD"],L.npc_descent["Lava Parasites"]),
                 type = "dropdown",
-                text = format(L.alert["New %s"],L.alert["Lava Parasites"]),
+                text = format(L.alert["New %s"],L.npc_descent["Lava Parasites"]),
                 time = "<pillarcd>",
                 time2 = 40,
                 time3 = 20,
@@ -185,9 +185,9 @@ do
                 icon = ST[78097],
             },
             pillarwarn = {
-                varname = format(L.alert["%s Warning"],L.alert["Lava Parasites"]),
+                varname = format(L.alert["%s Warning"],L.npc_descent["Lava Parasites"]),
                 type = "simple",
-                text = format(L.alert["New: %s"],L.alert["Lava Parasites"]),
+                text = format(L.alert["New: %s"],L.npc_descent["Lava Parasites"]),
                 time = 5,
                 flashtime = 5,
                 color1 = "MAGENTA",
@@ -764,16 +764,17 @@ do
             },
             -- Flamethrower
             flamethrowercd = {
-                varname = format(L.alert["Acquiring Target CD"],SN[91533]),
+                varname = format(L.alert["%s CD"],SN[91533]),
                 type = "dropdown",
-                text = format(L.alert["Next Acquiring Target"],SN[91533]),
+                text = format(L.alert["Next %s"],SN[91533]),
                 time = "<flamethrowercd>",
                 flashtime = 5,
                 color1 = "RED",
                 icon = ST[91533]
             },
             flamethrowerdur = {
-                varname = "Acquiring Target Warning",
+                -- varname = "Acquiring Target Warning",
+                varname = format(L.alert["%s Warning"],SN[91533]),
                 type = "centerpopup",
                 text = "<flamethrowertext>",
                 time = 8,
@@ -782,9 +783,10 @@ do
                 icon = ST[91533],
             },
             flamethrowerselfwarn = {
-                varname = "Acquiring Target on me Warning",
+                -- varname = "Acquiring Target on me Warning",
+                varname = format(L.alert["%s on me Warning"],SN[91533]),
                 type = "centerpopup",
-                text = format(L.alert["Acquiring Target on <%s>!"],L.alert["YOU"]),
+                text = format(L.alert["%s on <%s>!"],SN[91533],L.alert["YOU"]),
                 time = 8,
                 color1 = "GOLD",
                 sound = "ALERT10",
@@ -902,7 +904,8 @@ do
                 text = "<infusiontext>",
                 time = 5,
                 color1 = "MAGENTA",
-                sound = "ALERT2",
+                -- sound = "ALERT2",
+                sound = "shadowae",
                 icon = ST[92048]
             },
             infusionselfwarn = {

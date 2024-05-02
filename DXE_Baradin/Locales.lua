@@ -103,8 +103,8 @@ AL:GetLocale("DXE").chat_baradin = AL:GetLocale("DXE Chat Baradin")
 -- NPC names
 local npc_baradin = AL:NewLocale("DXE NPC Baradin", "koKR")
 -- npc_baradin["Alizabal"] = ""
-npc_baradin["Argaloth"] = "아르�?로스"
-npc_baradin["Occu'thar"] = "�?�쿠�?�르"
+npc_baradin["Argaloth"] = "아르�?로스"
+npc_baradin["Occu'thar"] = "�?�쿠�?�르"
 
 AL:GetLocale("DXE").npc_baradin = AL:GetLocale("DXE NPC Baradin")
 return
@@ -119,9 +119,9 @@ local chat_baradin = AL:NewLocale("DXE Chat Baradin", "ruRU")
 AL:GetLocale("DXE").chat_baradin = AL:GetLocale("DXE Chat Baradin")
 -- NPC names
 local npc_baradin = AL:NewLocale("DXE NPC Baradin", "ruRU")
-npc_baradin["Alizabal"] = "�?лизабаль"
-npc_baradin["Argaloth"] = "�?ргалот"
-npc_baradin["Occu'thar"] = "Ок�?'тар"
+npc_baradin["Alizabal"] = "�?лизабаль"
+npc_baradin["Argaloth"] = "�?ргалот"
+npc_baradin["Occu'thar"] = "Ок�?'тар"
 
 AL:GetLocale("DXE").npc_baradin = AL:GetLocale("DXE NPC Baradin")
 return
@@ -136,9 +136,10 @@ local chat_baradin = AL:NewLocale("DXE Chat Baradin", "zhCN")
 AL:GetLocale("DXE").chat_baradin = AL:GetLocale("DXE Chat Baradin")
 -- NPC names
 local npc_baradin = AL:NewLocale("DXE NPC Baradin", "zhCN")
--- npc_baradin["Alizabal"] = ""
-npc_baradin["Argaloth"] = "�?�尔加洛斯"
+
+npc_baradin["Argaloth"] = "阿尔加洛斯"
 npc_baradin["Occu'thar"] = "欧库塔尔"
+npc_baradin["Alizabal"] = "憎恨女王阿丽萨巴尔"
 
 AL:GetLocale("DXE").npc_baradin = AL:GetLocale("DXE NPC Baradin")
 return
@@ -154,8 +155,8 @@ AL:GetLocale("DXE").chat_baradin = AL:GetLocale("DXE Chat Baradin")
 -- NPC names
 local npc_baradin = AL:NewLocale("DXE NPC Baradin", "zhTW")
 -- npc_baradin["Alizabal"] = ""
-npc_baradin["Argaloth"] = "�?�加羅斯"
-npc_baradin["Occu'thar"] = "�?庫薩"
+npc_baradin["Argaloth"] = "�?�加羅斯"
+npc_baradin["Occu'thar"] = "�?庫薩"
 
 AL:GetLocale("DXE").npc_baradin = AL:GetLocale("DXE NPC Baradin")
 return
