@@ -2564,7 +2564,8 @@ do
 				flashtime = 3,
 				color1 = "PURPLE",
 				icon = ST[99352],
-				sound = "BEWARE",
+				-- sound = "BEWARE",
+                sound = "deciblade",
 			},
 			decimationbladedur = {
 				varname = format(L.alert["%s Duration"],SN[99352]),
@@ -2606,7 +2607,8 @@ do
 				flashtime = 3,
 				color1 = "YELLOW",
 				icon = ST[99350],
-				sound = "ALERT1",
+				-- sound = "ALERT1",
+                sound = "inferblade",
 			},
 			infernobladedur = {
 				varname = format(L.alert["%s Duration"],SN[99350]),
@@ -2651,7 +2653,8 @@ do
 				flashtime = 3,
 				color1 = "MAGENTA",
 				icon = ST[99259],
-				sound = "ALERT2",
+				-- sound = "ALERT2",
+                sound = "shard", -- China TODO: move to special warn after cast success
                 counter = true,
 			},
 			tormentwarn = {
@@ -2662,7 +2665,8 @@ do
                 stacks = 10,
 				icon = ST[99256],
 				color1 = "CYAN",
-                sound = "ALERT8",
+                -- sound = "ALERT8",
+                sound = "awayshard",
 			},
             -- Tormented
             tormentedcd = {
@@ -2723,7 +2727,8 @@ do
 				flashtime = 8,
 				color1 = "ORANGE",
 				icon = ST[99516],
-				sound = "ALERT1",
+				-- sound = "ALERT1",
+                sound = "followline",
 				flashscreen = true,
                 audiocd = true,
 			},
