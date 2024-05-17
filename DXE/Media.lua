@@ -182,6 +182,7 @@ do
 		["inferblade"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\inferblade.mp3",
 		["jumpsoon"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\jumpsoon.mp3",
 		["justrun"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\justrun.mp3",
+		["kickcast"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\kickcast.mp3",
 		["killblack"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\killblack.mp3",
 		["killblue"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\killblue.mp3",
 		["killcrystal"] = "Interface\\AddOns\\DXE\\SoundsCN\\extrasounds\\killcrystal.mp3",

@@ -2215,7 +2215,7 @@ do
                 execute = {
                     {
                         "expect",{"&guidisplayertarget|#1#&","==","true"},
-                        "quash","tantrumwarn",
+                        "alert","tantrumwarn",
                     },
                 },
             },
@@ -3224,7 +3224,9 @@ do
 				color1 = "PURPLE",
                 color2 = "RED",
 				icon = ST[98450],
-				sound = "ALERT10",
+				-- sound = "ALERT10",
+                sound = "runout",
+                audiocd = true,
 			},
 			jumpselfwarn = {
 				varname = format(L.alert["%s at me Warning"],SN[100207]),
@@ -3926,7 +3928,7 @@ do
 				text2 = format(L.alert["%s Casting"],SN[101233]),
 				time = 3,
 				color1 = "ORANGE",
-				sound = "ALERT1",
+				-- sound = "ALERT1",
 				icon = ST[101233],
 			},
 			trapself = {

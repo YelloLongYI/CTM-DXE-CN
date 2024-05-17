@@ -1484,7 +1484,8 @@ do
                 text = format(L.alert["%s: %s - INTERRUPT"],"Ignacious", SN[82643]),
                 time = 1,
                 color1 = "YELLOW",
-                sound = "ALERT10",
+                -- sound = "ALERT10",
+                sound = "kickcast",
                 icon = ST[82643],
             },          
             -----------------------
@@ -2276,7 +2277,7 @@ do
                 "expect",{"&difficulty&",">=","3"}, --10h&25h
                 "set",{
                     adherenttime = {64, 92 ,loop = false, type = "series"},
-                    furycd = {63, 47, loop = false, type = "series"}
+                    furycd = {45, 47, loop = false, type = "series"}
                 },
             },
             {
@@ -2511,7 +2512,7 @@ do
                 flashtime = 5,
                 color1 = "YELLOW",
                 icon = ST[91303],
-                audiocd = true,
+                -- audiocd = true,
                 sticky = true,
             },
             conversionwarn = {
@@ -2625,7 +2626,8 @@ do
                 text = format("%s: %s","Corrupting Adherent",SN[81713]),
                 time = 1.5,
                 color1 = "GOLD",
-                sound = "ALERT10",
+                -- sound = "ALERT10",
+                sound = "kickcast",
                 icon = ST[81713],
                 tag = "#1#",
             },

@@ -345,6 +345,7 @@ local defaults = {
             inferblade = "inferblade",
             jumpsoon = "jumpsoon",
             justrun = "justrun",
+            kickcast = "kickcast",
             killblack = "killblack",
             killblue = "killblue",
             killcrystal = "killcrystal",
