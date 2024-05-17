@@ -182,9 +182,9 @@ local chat_bastion = AL:NewLocale("DXE Chat Bastion", "zhCN")
 chat_bastion["^Enough of this foolishness"] = "^停止你的愚行"
 chat_bastion["^BEHOLD YOUR DOOM"] = "^面对你的末日"
 chat_bastion["^Enough!"] = "^够了"
-chat_bastion["^Feed, children"] = "^�??�?�，孩�?们�?尽�?�享用他们肥美的躯壳�?��?"
+chat_bastion["^Feed, children"] = "^吃吧，孩子们！尽情享用他们肥美的躯壳吧！"
 chat_bastion["^You dare invade"] = "^你们竟敢"
-chat_bastion["^You mistake this for weakness?"] = "^你以为就这�?简单"
+chat_bastion["^You mistake this for weakness?"] = "^你以为就这么简单"
 
 AL:GetLocale("DXE").chat_bastion = AL:GetLocale("DXE Chat Bastion")
 -- NPC names

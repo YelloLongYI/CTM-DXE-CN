@@ -137,9 +137,9 @@ AL:GetLocale("DXE").chat_baradin = AL:GetLocale("DXE Chat Baradin")
 -- NPC names
 local npc_baradin = AL:NewLocale("DXE NPC Baradin", "zhCN")
 
+npc_baradin["Alizabal"] = "阿丽萨巴尔"
 npc_baradin["Argaloth"] = "阿尔加洛斯"
 npc_baradin["Occu'thar"] = "欧库塔尔"
-npc_baradin["Alizabal"] = "憎恨女王阿丽萨巴尔"
 
 AL:GetLocale("DXE").npc_baradin = AL:GetLocale("DXE NPC Baradin")
 return

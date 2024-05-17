@@ -162,12 +162,12 @@ if L then
 
 -- Chat triggers
 local chat_throne = AL:NewLocale("DXE Chat Throne", "zhCN")
-chat_throne["^Enough! I will no longer be contained!"] = "^够了�?�?�不会再容忍下去了�?"
-chat_throne["^Storms! I summon you to my side!"] = "^暴风啊�?�?��?�的身边来�?"
-chat_throne["^Your futile persistance angers me!"] = "^你们无谓的顽固激怒了�?��?"
-chat_throne["honor of slaying the interlopers"] = "�?�?�入侵者的荣誉属于�?�"
-chat_throne["shall be I that earns"] = "shall be I that earns" -- Needs review
-chat_throne["strongest wind"] = "�?��?�最猛�??的风暴"
+chat_throne["^Enough! I will no longer be contained!"] = "^够了！我不会再容忍下去了！"
+chat_throne["^Storms! I summon you to my side!"] = "^暴风啊！到我的身边来！"
+chat_throne["^Your futile persistance angers me!"] = "^你们无谓的顽固激怒了我！"
+chat_throne["honor of slaying the interlopers"] = "消灭入侵者的荣誉属于我"
+chat_throne["shall be I that earns"] = "消灭入侵者的功绩应该属于我"
+chat_throne["strongest wind"] = "我是最猛烈的风暴"
 
 AL:GetLocale("DXE").chat_throne = AL:GetLocale("DXE Chat Throne")
 -- NPC names

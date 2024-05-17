@@ -180,13 +180,13 @@ local npc_dragonsoul = AL:NewLocale("DXE NPC Dragon Soul", "ruRU")
 -- npc_dragonsoul["Dragonriders"] = ""
 npc_dragonsoul["Hagara the Stormbinder"] = "Хагара Владычица Штормов"
 npc_dragonsoul["Kohcrom"] = "Корхом"
-npc_dragonsoul["Madness of Deathwing"] = "Без�?мие Смертокрыла"
+npc_dragonsoul["Madness of Deathwing"] = "Без�?мие Смертокрыла"
 npc_dragonsoul["Morchok"] = "Морхок"
 npc_dragonsoul["Spine of Deathwing"] = "Хребет Смертокрыла"
-npc_dragonsoul["Ultraxion"] = "Ультрак�?ион"
+npc_dragonsoul["Ultraxion"] = "Ультрак�?ион"
 npc_dragonsoul["Warlord Zon'ozz"] = "Полководец Зон'озз"
 npc_dragonsoul["Warmaster Blackhorn"] = "Воевода Черный Рог"
-npc_dragonsoul["Yor'sahj the Unsleeping"] = "Йор'�?адж Не�?пящий"
+npc_dragonsoul["Yor'sahj the Unsleeping"] = "Йор'�?адж Не�?пящий"
 
 AL:GetLocale("DXE").npc_dragonsoul = AL:GetLocale("DXE NPC Dragon Soul")
 return
@@ -197,24 +197,24 @@ if L then
 
 -- Chat triggers
 local chat_dragonsoul = AL:NewLocale("DXE Chat Dragon Soul", "zhCN")
--- chat_dragonsoul["He's about to roll"] = ""
--- chat_dragonsoul["^All ahead full"] = ""
--- chat_dragonsoul["^You have done NOTHING"] = ""
--- chat_dragonsoul["levels out"] = ""
+chat_dragonsoul["He's about to roll"] = "他开始向" -- Needs review
+chat_dragonsoul["^All ahead full"] = "^全速前进" -- Needs review
+chat_dragonsoul["^You have done NOTHING"] = "^你们什么都没做到" -- Needs review
+chat_dragonsoul["levels out"] = "保持平衡" -- Needs review
 
 AL:GetLocale("DXE").chat_dragonsoul = AL:GetLocale("DXE Chat Dragon Soul")
 -- NPC names
 local npc_dragonsoul = AL:NewLocale("DXE NPC Dragon Soul", "zhCN")
--- npc_dragonsoul["Dragonriders"] = ""
-npc_dragonsoul["Hagara the Stormbinder"] = "缚风者�?格拉"
--- npc_dragonsoul["Kohcrom"] = ""
+npc_dragonsoul["Dragonriders"] = "龙骑士" -- Needs review
+npc_dragonsoul["Hagara the Stormbinder"] = "缚风者哈格拉"
+npc_dragonsoul["Kohcrom"] = "克卓莫"
 npc_dragonsoul["Madness of Deathwing"] = "疯狂的死亡之翼"
 npc_dragonsoul["Morchok"] = "莫卓克"
-npc_dragonsoul["Spine of Deathwing"] = "死亡之翼的�?�脊"
-npc_dragonsoul["Ultraxion"] = "奥卓克希�?�"
-npc_dragonsoul["Warlord Zon'ozz"] = "督军�?诺兹"
-npc_dragonsoul["Warmaster Blackhorn"] = "�??争大�?黑角"
-npc_dragonsoul["Yor'sahj the Unsleeping"] = "不眠的约�?�希"
+npc_dragonsoul["Spine of Deathwing"] = "死亡之翼的背脊"
+npc_dragonsoul["Ultraxion"] = "奥卓克希昂"
+npc_dragonsoul["Warlord Zon'ozz"] = "督军佐诺兹"
+npc_dragonsoul["Warmaster Blackhorn"] = "战争大师黑角"
+npc_dragonsoul["Yor'sahj the Unsleeping"] = "不眠的约萨希"
 
 AL:GetLocale("DXE").npc_dragonsoul = AL:GetLocale("DXE NPC Dragon Soul")
 return

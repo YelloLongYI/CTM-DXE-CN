@@ -201,7 +201,7 @@ if L then
 
 -- Raid Zone names
 local zone = AL:NewLocale("DXE Zone", "zhCN")
-zone["Baradin"] = "巴拉�?海湾"
+zone["Baradin"] = "巴拉丁海湾"
 zone["Baradin Hold"] = "巴拉丁监狱"
 zone["Bastion"] = "暮光堡垒"
 zone["Blackwing Descent"] = "黑翼血环"
@@ -209,7 +209,7 @@ zone["Descent"] = "黑翼血环"
 zone["Dragon Soul"] = "巨龙之魂"
 zone["Firelands"] = "火焰之地"
 zone["The Bastion of Twilight"] = "暮光堡垒"
--- zone["The Dragon Wastes"] = ""
+zone["The Dragon Wastes"] = "巨龙废土"
 zone["Throne"] = "风神王座"
 zone["Throne of the Four Winds"] = "风神王座"
 
@@ -231,9 +231,9 @@ zone["Well of Eternity"] = "永恒之井"
 AL:GetLocale("DXE").zone = AL:GetLocale("DXE Zone")
 -- Loader
 local loader = AL:NewLocale("DXE Loader", "zhCN")
-loader["Deus Vox Encounters"] = "Deus Vox �??斗警报"
+loader["Deus Vox Encounters"] = "Deus Vox 战斗警报"
 loader["|cffffff00Click|r to load"] = "|cffffff00点击|r加载"
-loader["|cffffff00Click|r to toggle the settings window"] = "|cffffff00点击|r�?�换设置窗口"
+loader["|cffffff00Click|r to toggle the settings window"] = "|cffffff00点击|r切换设置窗口"
 
 AL:GetLocale("DXE").loader = AL:GetLocale("DXE Loader")
 
