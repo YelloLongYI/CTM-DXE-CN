@@ -3869,6 +3869,7 @@ do
 				flashtime = 5,
 				color1 = "BROWN",
 				icon = ST[100258],
+                sound = "firecirclesoon",
 			},
             smashwarn = {
 				varname = format(L.alert["%s Warning"],SN[100258]),
@@ -3878,7 +3879,8 @@ do
 				flashtime = 2.5,
 				color1 = "BROWN",
 				icon = ST[100258],
-				sound = "ALERT2",
+				-- sound = "ALERT2",
+                sound = "firewall",
 			},
             -------------------
             ----- Phase 1 -----
@@ -3923,6 +3925,8 @@ do
 				text = format(L.alert["Next %s"],SN[101233]),
 				time = "<trapcd>",
 				flashtime = 5,
+                -- sound = "firecircle",
+                -- audiocd = true,
 				color1 = "ORANGE",
 				icon = ST[101233],
 			},
@@ -3934,6 +3938,7 @@ do
 				time = 3,
 				color1 = "ORANGE",
 				-- sound = "ALERT1",
+                sound = "firecircle",
 				icon = ST[101233],
 			},
 			trapself = {
@@ -3989,6 +3994,7 @@ do
 				flashtime = 5,
 				color1 = "YELLOW",
 				icon = ST[100172],
+                sound = "flamerepeat",
 			},
             flameswarn = {
 				varname = format(L.alert["%s Warning"],SN[100172]),

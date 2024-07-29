@@ -2273,12 +2273,19 @@ do
             {
                 "set",{phase = 1},
                 "alert","enragecd",
-                "alert", {"furycd", time = 2},
+                -- "alert", {"furycd", time = 2},
+                "expect",{"&difficulty&","<","3"}, --10h&25h
+                "set",{
+                    furycd = {63, 47, loop = false, type = "series"}
+                },
                 "expect",{"&difficulty&",">=","3"}, --10h&25h
                 "set",{
                     adherenttime = {64, 92 ,loop = false, type = "series"},
                     furycd = {45, 47, loop = false, type = "series"}
                 },
+                -- "set",{
+                --     smashcd = {6,50.5,40, loop = false, type = "series"},
+                -- },
             },
             {
                 "expect",{"&difficulty&","==","2"},
