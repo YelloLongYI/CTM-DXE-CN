@@ -1044,6 +1044,9 @@ do
             scan = {
                 43687, -- Feludius
                 43686, -- Ignacious
+
+                43688, -- Arion
+                43689, -- Terrastra
             },
             keepalive = {
                 43691, -- Ascendant Council Controller -- may be obsolete after the update
@@ -1315,7 +1318,7 @@ do
             {
                 phase = 1,
                 alerts = {"bloodwarn","aegiscd","aegiswarn","aegisabsorb","risingflameskickwarn", -- Ignacious
-                          "icewarn","waterbombcd","waterbombwarn","waterlogged","glaciatecd","glaciatewarn", -- Feludius
+                          "icewarn","waterbombcd","waterbombwarn","waterlogged","glaciatecd","glaciatewarn","frostboltwarn", -- Feludius
                           "corewarn","coreselfwarn", -- Terrastra
                           "overloadwarn","overloadselfwarn"} -- Arion
             },
@@ -1487,7 +1490,20 @@ do
                 -- sound = "ALERT10",
                 sound = "kickcast",
                 icon = ST[82643],
-            },          
+            },
+            frostboltwarn = {
+                varname = format(L.alert["%s Casting"],SN[82752]),
+                type = "centerpopup",
+                text = format(L.alert["%s"],SN[82752]),
+                time = 3,
+                flashtime = 3,
+                color1 = "GREEN",
+                sound = "ALERT10",
+                icon = ST[82752],
+                enabled = {
+                    Tank = true,
+                },
+            },
             -----------------------
             ------- Phase 2 -------
             -----------------------
@@ -1565,7 +1581,8 @@ do
                 text = "Get Winds!",
                 time = 5,
                 color1 = "GOLD",
-                sound = "ALERT10",
+                -- sound = "ALERT10",
+                sound = "findwind",
                 icon = ST[8385],
             },
             -- Thundershock
@@ -1588,7 +1605,8 @@ do
                 text = "Get Grounded!",
                 time = 5,
                 color1 = "GOLD",
-                sound = "ALERT10",
+                -- sound = "ALERT10",
+                sound = "findwell",
                 icon = ST[1604],
             },
             -----------------------
@@ -1599,8 +1617,10 @@ do
                 varname = format(L.alert["%s CD"],SN[92488]),
                 type = "dropdown",
                 text = format(L.alert["%s CD"],SN[92488]),
-                time = 23,
-                time2 = 24,
+                time = 23, -- Apollo setting
+                time2 = 24, -- Apollo setting
+                time3 = 42, -- Jingrange JRG setting
+                time4 = 24, -- Jingrange JRG setting
                 flashtime = 5,
                 color1 = "TAN",
                 icon = ST[92488],
@@ -1633,8 +1653,10 @@ do
                 varname = format(L.alert["%s CD"], SN[84913]),
                 type = "dropdown",
                 text = format(L.alert["%s CD"], SN[84913]),
-                time = 23,
-                time2 = 16,
+                time = 23, -- Apollo
+                time2 = 16, -- Apollo
+                time3 = 29,  -- Jingrange JRG
+                time4 = 22,  -- Jingrange JRG
                 flashtime = 5,
                 color1 = "RED",
                 sound = "ALERT4",
@@ -1875,6 +1897,16 @@ do
                     },
                 },
             },
+            {
+                type = "combatevent",
+                eventtype = "SPELL_CAST_START",
+                spellname = 82752,
+                execute = {
+                    {
+                        "alert","frostboltwarn"
+                    },
+                },
+            },
             -- Phase 2 Trigger
             {
                 type = "event",
@@ -2003,6 +2035,8 @@ do
                         "quashall",true,
                         "set",{phase = 3},
                         "alert","phasetransition",
+                        "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG
+                        "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG
                     },
                 },
             },
@@ -2043,7 +2077,8 @@ do
                         "scheduletimer",{"crushtimer",1},
                         "quash","crushcd",
                         "alert","crushduration",
-                        "alert","crushcd",
+                        -- "alert","crushcd", -- Apollo setting
+                        "alert",{"crushcd",time = 4}, -- Jingrange JRG setting
                     },
                     {
                         "expect",{"&listsize|crushunits&","==","<crushmax>"},
@@ -2064,6 +2099,7 @@ do
                 },
             },
             -- Lava Seed
+            -- Appolo setting
             {
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
@@ -2072,11 +2108,12 @@ do
                     {
                         "alert","lavaseedwarn",
                         "quash","lavaseedcd",
-                        "alert","lavaseedcd",
+                        -- "alert","lavaseedcd", -- Apollo setting
+                        "alert",{"lavaseedcd",time = 4}, -- Jingrange JRG setting
                     },
                 },
             },
-      
+               
             -- Heroic Events
             -- Static Overload
             {
@@ -2274,6 +2311,8 @@ do
                 "set",{phase = 1},
                 "alert","enragecd",
                 -- "alert", {"furycd", time = 2},
+
+                -- Apollo setting
                 "expect",{"&difficulty&","<","3"}, --10h&25h
                 "set",{
                     furycd = {63, 47, loop = false, type = "series"}
@@ -2283,6 +2322,13 @@ do
                     adherenttime = {64, 92 ,loop = false, type = "series"},
                     furycd = {45, 47, loop = false, type = "series"}
                 },
+
+                -- JRG
+                -- Jingrange setting
+                -- "set",{
+                --         furycd = {35, 55, loop = false, type = "series"}
+                --     },
+
                 -- "set",{
                 --     smashcd = {6,50.5,40, loop = false, type = "series"},
                 -- },

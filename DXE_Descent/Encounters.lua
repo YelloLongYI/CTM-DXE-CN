@@ -835,7 +835,8 @@ do
                 time = 10,
                 flashtime = 8,
                 color1 = "WHITE",
-                sound = "RUNAWAY",
+                -- sound = "RUNAWAY",
+                sound = "bluecircleboom",
                 icon = ST[91857],
                 throttle = 10,
             },
@@ -2483,7 +2484,7 @@ do
         grouping = {
             {
                 general = true,
-                alerts = {"enragecd","firstphase","remedywarn","relabercd","relaberwarn","stormcd"},
+                alerts = {"enragecd","firstphase","remedywarn","relabercd","relaberwarn","stormcd", "stormwarn"},
             },
             {
                 name = format("|cffff0000%s|r |cffffffffPhase|r","Red"),
@@ -2588,8 +2589,18 @@ do
                 time2 = 16,
                 color1 = "LIGHTBLUE",
                 sound = "None",
+                -- sound = "kickcast",
                 icon = ST[77896],  
                 sticky = true,
+            },
+            stormwarn = {
+                varname = format(L.alert["%s Warning"],SN[77896]),
+                type = "simple",
+                text = "<adstext>",
+                time = 5,
+                color1 = "MAGENTA",
+                sound = "kickcast",
+                icon = ST[77896],
             },
             --------------------------
             -- BLACK PHASE (HEROIC) --
@@ -3167,18 +3178,33 @@ do
             },
             
             -- Arcane Storm
+
+            -- Apollo setting
+
+            -- {
+            --     type = "combatevent",
+            --     eventtype = "SPELL_CAST_START",
+            --     spellid = 77896,
+            --     execute = {
+            --         {
+            --             "quash","stormcd",
+            --             "expect",{"&timeleft|firstphase&",">","10",
+            --                 "OR","&timeleft|redphasedur&",">","10",
+            --                 "OR","&timeleft|bluephasedur&",">","10",
+            --                 "OR","&timeleft|greenphasedur&",">","10"},
+            --             "alert","stormcd",
+            --         },
+            --     },
+            -- },
+
+            -- Jingrange JRG setting
             {
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
                 spellid = 77896,
                 execute = {
                     {
-                        "quash","stormcd",
-                        "expect",{"&timeleft|firstphase&",">","10",
-                            "OR","&timeleft|redphasedur&",">","10",
-                            "OR","&timeleft|bluephasedur&",">","10",
-                            "OR","&timeleft|greenphasedur&",">","10"},
-                        "alert","stormcd",
+                        "alert","stormwarn",
                     },
                 },
             },
