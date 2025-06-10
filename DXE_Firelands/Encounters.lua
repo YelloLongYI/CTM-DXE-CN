@@ -759,7 +759,8 @@ do
             spinnerscd = {9, 10, 10, 0, loop = true, type = "series"},
 			spiderlingscd = {10,30, loop = false, type = "series"},
 			dronescd = {45,60, loop = false, type = "series"},
-            kisscd = {35.5, 32, loop = false, type = "series"},
+            -- kisscd = {35.5, 32, loop = false, type = "series"}, -- Apollo setting
+            kisscd = {17, 32, loop = false, type = "series"},
             
             -- Texts
             kisstext = "",
@@ -3504,7 +3505,8 @@ do
 		},
 		userdata = {
 			-- Timers
-            trapcd = {15, 25, 26, 30, loop = false, type = "series"},
+            -- trapcd = {15, 25, 26, 30, loop = false, type = "series"}, -- Apollo setting
+            trapcd = {15.5, 29, 27, 27, 27, loop = false, type = "series"}, -- JRG Jingrange setting
 			smashcd = 30,
 			flamescd = {45, 40, loop = false, type = "series"},
 			wrathcd = {5, 37, 30, loop = false, type = "series"},
@@ -3561,7 +3563,8 @@ do
 				"alert","smashcd",
 				"alert","trapcd",
 				"alert","handcd",
-				"alert","wrathcd",
+				"alert","wrathcd", -- Apollo setting
+                -- "alert",{"wrathcd",time = 2},-- JRG Jingrange setting
                 "repeattimer",{"checkhp", 1},
 			},
             {
@@ -3902,7 +3905,9 @@ do
 				varname = format(L.alert["%s CD"],SN[100115]),
 				type = "dropdown",
 				text = format(L.alert["Next %s"],SN[100115]),
-				time = "<wrathcd>",
+				-- time = "<wrathcd>",  -- Apollo setting
+                time = 42.5, -- Jingrange JRG setting 
+                time2 = 29.5, -- Jingrange JRG setting 
 				flashtime = 5,
 				color1 = "YELLOW",
 				icon = ST[100115],
@@ -3923,7 +3928,7 @@ do
 				varname = format(L.alert["%s CD"],SN[101233]),
 				type = "dropdown",
 				text = format(L.alert["Next %s"],SN[101233]),
-				time = "<trapcd>",
+				time = "<trapcd>", -- Apollo setting
 				flashtime = 5,
                 -- sound = "firecircle",
                 -- audiocd = true,
@@ -3971,7 +3976,8 @@ do
 				text = format(L.alert["Next %s"],SN[98333]),
 				time = 60,
 				time2 = 22,
-				time3 = 16,
+				-- time3 = 16, -- Apollo setting
+                time3 = 15.5, -- JRG Jingrange setting
 				flashtime = 5,
 				color1 = "ORANGE",
 				icon = ST[98333],
@@ -4373,7 +4379,7 @@ do
                         "expect",{"#1#","find","boss"},
                         "quash","wrathcd",
 						"alert","wrathwarn",
-						"alert","wrathcd",
+						"alert",{"wrathcd", time = 2},
                     },
                 },
             },

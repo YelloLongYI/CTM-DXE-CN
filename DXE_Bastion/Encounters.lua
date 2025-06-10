@@ -1113,6 +1113,10 @@ do
                 "set",{phase = 1},
                 "alert",{"aegiscd",time = 2},
                 "alert",{"waterbombcd",time = 2, text = 2},
+
+                "alert",{"glaciatecd",time = 3},
+                "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG setting
+                "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG setting
             },
         },
         
@@ -1321,6 +1325,7 @@ do
                           "icewarn","waterbombcd","waterbombwarn","waterlogged","glaciatecd","glaciatewarn","frostboltwarn", -- Feludius
                           "corewarn","coreselfwarn", -- Terrastra
                           "overloadwarn","overloadselfwarn"} -- Arion
+                        --   "lavaseedcd", "crushcd"}  -- Jingrange JRG setting 
             },
             {
                 phase = 2,
@@ -1388,7 +1393,8 @@ do
                 type = "dropdown",
                 text = format(L.alert["%s CD"], SN[82699]),
                 text2 = format(L.alert["Next %s"], SN[82699]),
-                time = 28,
+                -- time = 28, -- Apollo setting
+                time = 33, -- Jingrange JRG setting
                 time2 = 15,
                 flashtime = 5,
                 color1 = "CYAN",
@@ -1434,7 +1440,9 @@ do
                 varname = format(L.alert["%s CD"],SN[92506]),
                 type = "dropdown",
                 text = format(L.alert["Next %s"],SN[92506]),
-                time = 15,
+                time = 15, -- Apollo setting(trigger by water bomb)
+                time2 = 37, -- Jingrange JRG setting(trigger as series)
+                time3 = 30, -- Jingrange JRG setting(trigger as series)
                 flashtime = 7.5,
                 color1 = "BLUE",
                 color2 = "TURQUOISE",
@@ -1456,7 +1464,8 @@ do
                 varname = format(L.alert["%s CD"],SN[82631]),
                 type = "dropdown",
                 text = format(L.alert["Next %s"],SN[82631]),
-                time = 60,
+                -- time = 60, -- Apollo setting
+                time = 63, -- Jingrange JRG setting
                 time2 = 30,
                 flashtime = 5,
                 color1 = "RED",
@@ -1512,8 +1521,10 @@ do
                 varname = format(L.alert["%s CD"],SN[92541]),
                 type = "dropdown",
                 text = format(L.alert["%s CD"],SN[92541]),
-                time = 42,
-                time2 = 21,
+                -- time = 42, -- Apollo setting
+                -- time2 = 21, -- Apollo setting
+                time = 43, -- Jingrange JRG setting
+                time2 = 27, -- Jingrange JRG setting
                 flashtime = 7.5,
                 color1 = "CYAN",
                 icon = ST[92541],
@@ -1565,8 +1576,10 @@ do
                 varname = format(L.alert["%s CD"],SN[83565]),
                 type = "dropdown",
                 text = "Get Winds!",
-                time = 31, -- 65
-                time2 = 27, -- 30
+                -- time = 31, -- 65 -- Apollo setting
+                -- time2 = 27, -- 30 -- Apollo setting
+                time = 35, -- Jingrange JRG setting
+                time2 = 30, -- Jingrange JRG setting
                 flashtime = 7.5,
                 audiocd = true,
                 color1 = "BROWN",
@@ -1590,7 +1603,8 @@ do
                 varname = format(L.alert["%s CD"],SN[83067]),
                 type = "dropdown",
                 text = "Get Grounded",
-                time = 36,
+                -- time = 36, -- Apollo setting
+                time = 35, -- Jingrange JRG setting
                 flashtime = 7.5,
                 audiocd = true,
                 color1 = "INDIGO",
@@ -1619,7 +1633,7 @@ do
                 text = format(L.alert["%s CD"],SN[92488]),
                 time = 23, -- Apollo setting
                 time2 = 24, -- Apollo setting
-                time3 = 42, -- Jingrange JRG setting
+                time3 = 26, -- Jingrange JRG setting
                 time4 = 24, -- Jingrange JRG setting
                 flashtime = 5,
                 color1 = "TAN",
@@ -1653,10 +1667,10 @@ do
                 varname = format(L.alert["%s CD"], SN[84913]),
                 type = "dropdown",
                 text = format(L.alert["%s CD"], SN[84913]),
-                time = 23, -- Apollo
-                time2 = 16, -- Apollo
-                time3 = 29,  -- Jingrange JRG
-                time4 = 22,  -- Jingrange JRG
+                time = 23, -- Apollo setting
+                time2 = 16, -- Apollo setting
+                time3 = 13,  -- Jingrange JRG setting
+                time4 = 22,  -- Jingrange JRG setting
                 flashtime = 5,
                 color1 = "RED",
                 sound = "ALERT4",
@@ -1834,8 +1848,10 @@ do
                     {
                         "alert","waterbombwarn",
                         "quash","waterbombcd",
-                        "alert","waterbombcd",
-                        "alert","glaciatecd",
+                        "quash","lavaseedcd", -- Jingrange JRG setting
+                        "quash","crushcd", -- Jingrange JRG setting
+                        "crushcd","waterbombcd",
+                        -- "alert","glaciatecd", -- Apollo setting
                     },
                 },
             },
@@ -1886,6 +1902,20 @@ do
                 },
             },
             -- Glaciate
+            -- Apollo setting block
+            -- {
+            --     type = "combatevent",
+            --     eventtype = "SPELL_CAST_START",
+            --     spellname = 82746,
+            --     execute = {
+            --         {
+            --             "quash","glaciatecd",
+            --             "alert","glaciatewarn",
+            --         },
+            --     },
+            -- },
+
+            -- Jingrange JRG setting
             {
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
@@ -1893,10 +1923,12 @@ do
                 execute = {
                     {
                         "quash","glaciatecd",
-                        "alert","glaciatewarn",y
+                        "alert","glaciatewarn",
+                        "alert",{"glaciatecd",time = 2},
                     },
                 },
             },
+
             {
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
@@ -2030,13 +2062,25 @@ do
                 eventtype = "SPELL_AURA_APPLIED",
                 spellname = 82285,
                 execute = {
+                    -- Apollo setting block
+                    -- {
+                    --     "expect",{"<phase>","<","3"},
+                    --     "quashall",true,
+                    --     "set",{phase = 3},
+                    --     "alert","phasetransition",
+                    --     "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG setting
+                    --     "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG setting
+                    --     "tracing",{43735}, -- Monstrosity This only for Jingrange JRG setting
+                    -- },
+
+                    -- Jingrange JRG setting block
                     {
-                        "expect",{"<phase>","<","3"},
-                        "quashall",true,
+                        -- "quashall",true,
                         "set",{phase = 3},
                         "alert","phasetransition",
-                        "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG
-                        "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG
+                        "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG setting
+                        "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG setting
+                        "tracing",{43735}, -- Monstrosity This only for Jingrange JRG setting
                     },
                 },
             },
@@ -2099,7 +2143,6 @@ do
                 },
             },
             -- Lava Seed
-            -- Appolo setting
             {
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
@@ -2108,8 +2151,12 @@ do
                     {
                         "alert","lavaseedwarn",
                         "quash","lavaseedcd",
+
                         -- "alert","lavaseedcd", -- Apollo setting
                         "alert",{"lavaseedcd",time = 4}, -- Jingrange JRG setting
+
+                        "quash","waterbombcd", -- This only for Jingrange JRG setting(quash due to trigger p1 alert)
+                        "quash","aegiscd", -- This only for Jingrange JRG setting(quash due to trigger p1 alert)
                     },
                 },
             },
