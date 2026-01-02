@@ -95,6 +95,8 @@ local defaults = {
             BackgroundColor = {0,0,0,0.8},
             BackgroundInset = 2,
             BackgroundTexture = "Blizzard Tooltip",
+            -- Custom
+            Realm = "Apollo",
         },
         Pane = {
             Show = true,

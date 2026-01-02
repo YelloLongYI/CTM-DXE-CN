@@ -724,7 +724,7 @@ do
             },
             {
                 phase = 3,
-                alerts = {"rodcd","rodwarn","rodselfwarn","cloudcd","cloudwarn","cloudactivecd"},
+                alerts = {"rodcd","rodwarn","rodselfwarn","cloudcd","cloudwarn","cloudactivecd", "windburstcd"},
             },
         },
         
@@ -761,6 +761,8 @@ do
                 text2 = format("Next %s",SN[87770]),
                 time = "<windburstcd>",
                 time2 = 25,
+                time3 = 21.8, -- APOLLO P3
+                time4 = 18.8, -- JRG P3
                 flashtime = 5,
                 color1 = "PEACH",
                 icon = ST[87770],
@@ -1025,9 +1027,11 @@ do
             -- Wind Burst (Phase 3)
             {
                 type = "combatevent",
-                eventtype = "SPELL_DAMAGE",
+                -- eventtype = "SPELL_DAMAGE",
+                eventtype = "SPELL_CAST_SUCCESS",
                 spellid = {
                     88858,
+                    89638,
                     93286,
                     93287,
                     93288,
@@ -1035,7 +1039,7 @@ do
                 execute = {
                     {
                         "quash","windburstcd",
-                        "alert",{"windburstcd", text = 2},
+                        "alert",{"windburstcd", time = 3, text = 2},
                     },
                 },
             },

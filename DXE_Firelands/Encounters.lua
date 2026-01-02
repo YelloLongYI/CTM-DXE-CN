@@ -759,8 +759,8 @@ do
             spinnerscd = {9, 10, 10, 0, loop = true, type = "series"},
 			spiderlingscd = {10,30, loop = false, type = "series"},
 			dronescd = {45,60, loop = false, type = "series"},
-            -- kisscd = {35.5, 32, loop = false, type = "series"}, -- Apollo setting
-            kisscd = {17, 32, loop = false, type = "series"},
+            kisscd = {35.5, 32, loop = false, type = "series"}, -- Apollo setting
+            -- kisscd = {17, 32, loop = false, type = "series"}, -- JRG setting
             
             -- Texts
             kisstext = "",
@@ -3501,7 +3501,8 @@ do
             },
 			tracerstart = true,
 			combatstop = true,
-			defeat = {52409,L.chat_firelands["^Too soon!"]},
+			-- defeat = {52409,L.chat_firelands["^Too soon!"]},
+            defeat = {52409,L.chat_firelands["^Tooff soon!"]},
 		},
 		userdata = {
 			-- Timers
@@ -4809,6 +4810,120 @@ do
 					},
 					{
 						"expect",{"#1#","find",L.chat_firelands["^Sulfuras will be your end"]},
+						"set",{
+							phase = "INCR|1",
+							phaseactivated = "yes",
+						},
+						"quash","intermissionduration",
+					},
+                    -- Phase 2
+					{
+                        "expect",{"<phase>","==","2"},
+                        "expect",{"<phaseactivated>","==","yes"},
+                        "removephasemarker",{1,1},
+                        "removecounter","sonscounter",
+                        "invoke",{
+							{
+								"expect",{"&difficulty&","<","3"},
+								"set",{
+									smashcd = {15,40, loop = false, type = "series"},
+								},
+								"alert","smashcd",
+								"alert","flamescd",
+								"alert",{"seedcd",time = 2},
+							},
+							{
+								"expect",{"&difficulty&",">=","3"},
+								"set",{
+									smashcd = {6,50.5,40, loop = false, type = "series"},
+								},
+								"alert","smashcd",
+								"alert","flamescd",
+								"alert",{"seedcd",time = 3},
+							},
+						},
+						"set",{
+							phaseactivated = "no",
+                            phasetext = format(L.alert["Phase %s"],"<phase>"),
+						},
+                        "alert","phasewarn",
+                    },
+					-- Phase 3
+                    {
+						"expect",{"<phase>","==","3"},
+						"expect",{"<phaseactivated>","==","yes"},
+						"removephasemarker",{1,2},
+                        "removecounter","sonscounter",
+                        "set",{
+							smashcd = {16,30, loop = false, type = "series"},
+						},
+                        "invoke",{
+                            {
+                                "expect",{"&difficulty&","<","3"},
+                                "set",{flamescd = {35, 30, loop = false, type = "series"}},
+                            },
+                            {
+                                "expect",{"&difficulty&",">=","3"},
+                                "set",{flamescd = {30, loop = false, type = "series"}},
+                            },
+                        },
+						"alert","smashcd",
+						"alert","flamescd",
+						"alert",{"meteorcd", time = 2},
+						"set",{
+							phaseactivated = "no",
+                            phasetext = format(L.alert["Phase %s"],"<phase>"),
+						},
+                        "alert","phasewarn",
+					},
+                    {
+						"expect",{"#1#","find",L.chat_firelands["^No, fiend"]},
+						"set",{
+							phase = "INCR|1",
+							phaseactivated = "yes",
+						},
+					},
+                    -- Defeat
+                    {
+                        "expect",{"&difficulty&","<=","2"},
+                        "expect",{"#1#","find",L.chat_firelands["^Too soon"]},
+                        "triggerdefeat",true,
+                    },
+				},
+			},
+
+            -- Hongxi setting block
+            {
+				type = "event",
+				event = "EMOTE",
+				execute = {
+                    -- Next Phase Activation Yells
+					{
+						"expect",{"#1#","find",L.chat_firelands["^Enough"]},
+						"set",{
+							phase = "INCR|1",
+							phaseactivated = "yes",
+						},
+						"quash","intermissionduration",
+					},
+					{
+						"expect",{"#1#","find",L.chat_firelands["^Fall to your knees"]},
+						"set",{
+							phase = "INCR|1",
+							phaseactivated = "yes",
+						},
+						"quash","intermissionduration",
+					},
+					{
+						"expect",{"#1#","find",L.chat_firelands["^Sulfuras will be your end"]},
+						"set",{
+							phase = "INCR|1",
+							phaseactivated = "yes",
+						},
+						"quash","intermissionduration",
+					},
+                    {
+						"expect",{"#1#","find",L.chat_firelands["^让火焰净化一切"]},
 						"set",{
 							phase = "INCR|1",
 							phaseactivated = "yes",

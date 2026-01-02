@@ -54,6 +54,15 @@ end
 local SwapMode
 local pull_timer_colors_args, break_timer_colors_args, lfg_timer_colors_args
 
+-- Initializes the DXE options configuration by setting up various option groups and their settings.
+-- This includes:
+-- - General addon settings (enabled state, version info)
+-- - Alert configurations (bars, sounds, colors)
+-- - Encounter-specific settings
+-- - Window settings (proximity, alternate power)
+-- - Sound configurations
+-- - Debug options (when in debug mode)
+-- The function organizes options into logical groups with proper ordering and hierarchy.
 local function InitializeOptions()
 	opts = {
 		type = "group",
@@ -263,6 +272,21 @@ local function InitializeOptions()
                     end,
                     width = "double",
                 },
+                Realm = {
+					order = 620,
+					type = "select",
+					name = L.options["Realm Name"],
+					desc = L.options["Realm Server Name"],
+					values = {
+						Apollo = L.options["Apollo"],
+						JRG = L.options["Jingrange"],
+                        Hongxi = L.options["Hongxi"],
+					},
+                    -- get = function(info) return db.profile.GENERAL.Realm end,
+                    -- set = function(info,v)
+					-- 	db.profile.GENERAL.Realm = v                       
+					-- end,
+				},
 			},
 		}
 
@@ -8527,7 +8551,6 @@ end
                             RADAR = L.options["Radar Window"],
                             TEXT = L.options["Text-based Window"],
                         }
-                        
                         return L.options["Show "]..tbl[db.profile.Windows.Proxtype]
                     end,
 					desc = L.options["Shows a proximity window."],
