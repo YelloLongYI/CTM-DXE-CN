@@ -61,6 +61,7 @@ do
 				spell = SN[98159],
 				sound = "ALERT5",
                 texture = ST[99837],
+                enabled = false,
 			},
             faceragearrow = {
                 varname = format("%s",SN[99947]),
@@ -73,6 +74,7 @@ do
                 range1 = 15,
                 range2 = 20,
                 range3 = 30,
+                enabled = false,
             }
 		},
 		announces = {
@@ -2460,6 +2462,7 @@ do
 				msg = L.alert["MOVE TOWARD"],
 				spell = SN[99516],
                 texture = ST[99516],
+                enabled = false,
 			},
 		},
 		announces = {
