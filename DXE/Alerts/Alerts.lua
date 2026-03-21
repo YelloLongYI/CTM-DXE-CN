@@ -3241,7 +3241,6 @@ do
         
         testcounters = {}
         TestTimers = {}
-        AlertTestingRunning = false
         module:Alert_Clear()
         addon:HideLFGCountdown()
         addon:HideRBGCountdown()
@@ -3261,15 +3260,15 @@ do
        
     function module:BarTest()
         CancelTestTimers()
-        if not AlertTestingRunning then
+        if AlertTestingRunning then
+            AlertTestingRunning = false
+        else
             AlertTestingRunning = true
             pcall(InitTest,"warning")
             pcall(InitTest,"dropdown")
             pcall(InitTest,"centerpopup")
             pcall(InitTest,"emphasizedcenter")
             pcall(InitTest,"individual")
-        else
-            AlertTestingRunning = false
         end
         --[[
         self:CenterPopup("alerttestdur", "Centerpopup Bar", 30, 5, "None", "RED", "ORANGE", nil, addon.ST[34889], false, nil, false, false, "FILL")
