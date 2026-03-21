@@ -902,15 +902,12 @@ function prototype:UpdateTimerSize(barHeight)
 	self.timer.left:SetVertexColor(unpack(TimerFontColor))
     self.timer:SetAlpha(TimerAlpha)
     if ScaleTimerWithBarHeight then
-		self.timer.left:SetFont((self.timer.left:GetFont()),(0.4375*barHeight)+6.875)
-		self.timer.right:SetFont((self.timer.right:GetFont()),(0.25*barHeight)+4.5)
+		addon.SafeSetFont(self.timer.left,(self.timer.left:GetFont()),(0.4375*barHeight)+6.875)
+		addon.SafeSetFont(self.timer.right,(self.timer.right:GetFont()),(0.25*barHeight)+4.5)
 	else
-		self.timer.left:SetFont((self.timer.left:GetFont()),TimerSecondsFontSize)
-		self.timer.right:SetFont((self.timer.right:GetFont()),TimerDecimalFontSize)
+		addon.SafeSetFont(self.timer.left,(self.timer.left:GetFont()),TimerSecondsFontSize)
+		addon.SafeSetFont(self.timer.right,(self.timer.right:GetFont()),TimerDecimalFontSize)
 	end
-end
-
-function prototype:AnchorToBundle(bundle)
     local stack, anchor, prefix = bundle.stack, bundle.anchor, bundle.prefix
     self:AnchorToAnchor(stack, anchor, prefix)
 end
@@ -925,7 +922,7 @@ function prototype:AnchorToAnchor(stack, anchor, prefix)
 	self:SetWidth(pfl[prefix.."BarWidth"])
     self:SetHeight(pfl[prefix.."BarHeight"])
     self:EnableMouse(not pfl[prefix.."ClickThrough"])
-    self.text:SetFont(self.text:GetFont(),pfl[prefix.."BarFontSize"])
+    addon.SafeSetFont(self.text,self.text:GetFont(),pfl[prefix.."BarFontSize"])
     self.text:SetAlpha(pfl[prefix.."TextAlpha"])
     self.text:SetVertexColor(unpack(pfl[prefix.."BarFontColor"]))
     local TextJustify = self:GetAttr("BarTextJustification")
@@ -1065,7 +1062,7 @@ do
             self:SetHeight(h)
             
             -- Font Size
-            self.text:SetFont(self.text:GetFont(), ProgressValue(data, "BarFontSize", perc))
+            addon.SafeSetFont(self.text,self.text:GetFont(), ProgressValue(data, "BarFontSize", perc))
             self.text:SetVertexColor(ProgressColor(data, "BarFontColor", perc))
             
             -- Text Position and Justification
@@ -1170,8 +1167,8 @@ do
                 local dstDecSize = scaleTimerDst and (0.25*pfl[data.targetPrefix.."BarHeight"])+4.5 or pfl[data.targetPrefix.."TimerDecimalFontSize"]
                 timerRightSize = topDecSize + ((dstDecSize - topDecSize) * perc)
             end
-            self.timer.left:SetFont((self.timer.left:GetFont()),timerLeftSize)
-            self.timer.right:SetFont((self.timer.right:GetFont()),timerRightSize)
+            addon.SafeSetFont(self.timer.left,(self.timer.left:GetFont()),timerLeftSize)
+            addon.SafeSetFont(self.timer.right,(self.timer.right:GetFont()),timerRightSize)
             
             -- Icon
             local rIconAlpha = (pfl.TopShowRightIcon and 1 or 0) + (pfl[data.targetPrefix.."ShowRightIcon"] and 1 or -1) * perc
@@ -1585,7 +1582,7 @@ local function SkinBar(bar)
         bar.text:SetPoint("LEFT",bar,"LEFT", tox, toy)
         bar.text:SetWidth(bar:GetWidth() + TextWidthBonus)
         bar.text:SetHeight(bar:GetAttr("BarFontSize")*1.2*bar:GetAttr("TextHeightBonusMult"))
-        bar.text:SetFont(bar.text:GetFont(),bar:GetAttr("BarFontSize"))
+        addon.SafeSetFont(bar.text,bar.text:GetFont(),bar:GetAttr("BarFontSize"))
         bar.text:SetVertexColor(unpack(bar:GetAttr("BarFontColor")))
         bar.text:SetAlpha(bar:GetAttr("TextAlpha"))
         bar.text:SetJustifyH(TextJustify)
@@ -1622,11 +1619,11 @@ local function SkinBar(bar)
     bar:DisplayIconBorder(ShowIconBorder)
     
     if ScaleTimerWithBarHeight then
-		bar.timer.left:SetFont((bar.timer.left:GetFont()),(0.4375*barHeight)+6.875)
-		bar.timer.right:SetFont((bar.timer.right:GetFont()),(0.25*barHeight)+4.5)
+		addon.SafeSetFont(bar.timer.left,(bar.timer.left:GetFont()),(0.4375*barHeight)+6.875)
+		addon.SafeSetFont(bar.timer.right,(bar.timer.right:GetFont()),(0.25*barHeight)+4.5)
 	else
-		bar.timer.left:SetFont((bar.timer.left:GetFont()),TimerSecondsFontSize)
-		bar.timer.right:SetFont((bar.timer.right:GetFont()),TimerDecimalFontSize)
+		addon.SafeSetFont(bar.timer.left,(bar.timer.left:GetFont()),TimerSecondsFontSize)
+		addon.SafeSetFont(bar.timer.right,(bar.timer.right:GetFont()),TimerDecimalFontSize)
 	end
 end
 
@@ -3070,22 +3067,22 @@ do
                 module:Simple(alertKey, warningData.text, 4,"None",warningData.color1, nil, warningData.icon)
             end,
             alerts = {
-                {text = "Stomp",                            color1 = "YELLOW",      icon = addon.ST[103414]},
-                {text = "Black Phase",                      color1 = "WHITE",       icon = addon.ST[108794]},
-                {text = "Deep Corruption",                  color1 = "PURPLE",      icon = addon.ST[105171]},
-                {text = "Frost Phase",                      color1 = "CYAN",        icon = addon.ST[63562]},
-                {text = "Hour of Twilight",                 color1 = "RED",         icon = addon.ST[103327]},
-                {text = "Twilight Onslaught",               color1 = "MAGENTA",     icon = addon.ST[106401]},
-                {text = "Amalgamation gets Superheated",    color1 = "GOLD",        icon = addon.ST[105834]},
-                {text = "Cataclysm",                        color1 = "GOLD",        icon = addon.ST[110044]},
+                {text = SN[103414],                         color1 = "YELLOW",      icon = addon.ST[103414]},  -- Stomp / 踩踏
+                {text = SN[108794],                         color1 = "WHITE",       icon = addon.ST[108794]},  -- Black Phase / 暗影阶段
+                {text = SN[105171],                         color1 = "PURPLE",      icon = addon.ST[105171]},  -- Deep Corruption / 深度腐蚀
+                {text = SN[63562],                          color1 = "CYAN",        icon = addon.ST[63562]},   -- Frost Phase
+                {text = SN[103327],                         color1 = "RED",         icon = addon.ST[103327]},  -- Hour of Twilight / 暮光审判
+                {text = SN[106401],                         color1 = "MAGENTA",     icon = addon.ST[106401]},  -- Twilight Onslaught / 暮光猛攻
+                {text = SN[105834],                         color1 = "GOLD",        icon = addon.ST[105834]},  -- Superheated / 过热
+                {text = SN[110044],                         color1 = "GOLD",        icon = addon.ST[110044]},  -- Cataclysm / 大灾变
                 
-                {text = "Hurl Spear",                       color1 = "YELLOW",      icon = addon.ST[71466]},
-                {text = "The Widow's Kiss",                 color1 = "LIGHTGREEN",  icon = addon.ST[99476]},
-                {text = "Heated Volcano",                   color1 = "WHITE",       icon = addon.ST[98493]},
-                {text = "Firestorm",                        color1 = "YELLOW",      icon = addon.ST[100744]},
-                {text = "Shards of Torment",                color1 = "MAGENTA",     icon = addon.ST[99259]},
-                {text = "Searing Seeds",                    color1 = "YELLOW",     icon = addon.ST[98450]},
-                {text = "Sulfuras Smash",                   color1 = "BROWN",     icon = addon.ST[100258]},
+                {text = SN[71466],                          color1 = "YELLOW",      icon = addon.ST[71466]},   -- Hurl Spear
+                {text = SN[99476],                          color1 = "LIGHTGREEN",  icon = addon.ST[99476]},   -- The Widow's Kiss / 黑寡妇之吻
+                {text = SN[98493],                          color1 = "WHITE",       icon = addon.ST[98493]},   -- Heated Volcano
+                {text = SN[100744],                         color1 = "YELLOW",      icon = addon.ST[100744]},  -- Firestorm / 火风暴
+                {text = SN[99259],                          color1 = "MAGENTA",     icon = addon.ST[99259]},   -- Shards of Torment / 折磨碎片
+                {text = SN[98450],                          color1 = "YELLOW",      icon = addon.ST[98450]},   -- Searing Seeds / 灼热之种
+                {text = SN[100258],                         color1 = "BROWN",       icon = addon.ST[100258]},  -- Sulfuras Smash / 萨弗拉斯猛击
             },
         },
         dropdown = {
@@ -3095,22 +3092,22 @@ do
                 module:Dropdown(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon)
             end,
             alerts = {
-                {text = "Next Black Blood Phase",         time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},
-                {text = "New Void of the Unmaking",       time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},
-                {text = "Next Void Bolt",                 time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},
-                {text = "Next Focused Assault",           time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},
-                {text = "Next Fading Light",              time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},
-                {text = "Twilight Elite Slayer",          time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},
-                {text = "Next Roll",                      time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},
-                {text = "New Mutated Corruption",         time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},
+                {text = format(L.alert["Next %s"], SN[103851]),  time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},  -- Next Black Blood Phase
+                {text = format(L.alert["Next %s"], SN[693]),     time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},      -- New Void of the Unmaking
+                {text = format(L.alert["Next %s"], SN[108384]),  time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},   -- Next Void Bolt
+                {text = format(L.alert["Next %s"], SN[107851]),  time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},   -- Next Focused Assault
+                {text = format(L.alert["Next %s"], SN[105925]),  time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},   -- Next Fading Light
+                {text = format(L.alert["Next %s"], SN[80325]),   time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},    -- Twilight Elite Slayer
+                {text = format(L.alert["Next %s"], SN[105195]),  time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},   -- Next Roll
+                {text = format(L.alert["Next %s"], SN[104972]),  time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},   -- New Mutated Corruption
                 
-                {text = "Next Throw Crystal Prison Trap", time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},
-                {text = "Next Smoldering Devastation",    time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},
-                {text = "Next Concussive Stomp",          time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},
-                {text = "Next Firestorm",                 time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},
-                {text = "Next Inferno Strike",            time = 10, color1 = "RED",                        icon = addon.ST[101002]},
-                {text = "Next Leaping Flames",            time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},
-                {text = "Next Magma Trap",                time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},
+                {text = format(L.alert["Next %s"], SN[99836]),   time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},    -- Next Crystal Prison Trap
+                {text = format(L.alert["Next %s"], SN[99052]),   time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},    -- Next Smoldering Devastation
+                {text = format(L.alert["Next %s"], SN[100411]),  time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},   -- Next Concussive Stomp
+                {text = format(L.alert["Next %s"], SN[100744]),  time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},   -- Next Firestorm
+                {text = format(L.alert["Next %s"], SN[101002]),  time = 10, color1 = "RED",                        icon = addon.ST[101002]},   -- Next Inferno Strike
+                {text = format(L.alert["Next %s"], SN[98535]),   time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},    -- Next Leaping Flames
+                {text = format(L.alert["Next %s"], SN[101233]),  time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},   -- Next Magma Trap
             },
         },
         centerpopup = {
@@ -3120,17 +3117,17 @@ do
                 module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, false, warningData.deplete and "DEPLETE" or "FILL")
             end,
             alerts = {
-                {text = "Next Focused Anger", time = 6, color1 = "ORANGE", icon = addon.ST[104543]},
-                {text = "Next Searing Bloods", time = 7, color1 = "RED", icon = addon.ST[108356]},
-                {text = "Feedback ends", time = 15, flashtime = 15, color1 = "TEAL", icon = addon.ST[108934]},
-                {text = "Shockwave", time = 3, color1 = "YELLOW", icon = addon.ST[108046]},
-                {text = "Seal Armor closes", time = 23, color1 = "ORANGE", icon = addon.ST[105847]},
-                {text = "Ember Flare", time = 6, color1 = "ORANGE", icon = addon.ST[100936]},
-                {text = "The Widow's Kiss dissipates", time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},
-                {text = "Magma Flow ends", time = 10, color1 = "PEACH", icon = addon.ST[97225]},
-                {text = "Fiery Vortex", time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},
-                {text = "Decimation Blade fades", time = 15, color1 = "PURPLE", deplete = true, icon = addon.ST[99352]},
-                {text = "Next Flame Scythe", time = 8, color1 = "YELLOW", icon = addon.ST[100213]},
+                {text = SN[103640],                               time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
+                {text = SN[98333],                                time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
+                {text = format(L.alert["Next %s"], SN[105937]),   time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
+                {text = SN[108046],                               time = 3,  color1 = "YELLOW",  icon = addon.ST[108046]},  -- Shockwave
+                {text = SN[105847],                               time = 23, color1 = "ORANGE",  icon = addon.ST[105847]},  -- Seal Armor
+                {text = SN[100936],                               time = 6,  color1 = "ORANGE",  icon = addon.ST[100936]},  -- Ember Flare
+                {text = SN[99476],                                time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},  -- The Widow's Kiss
+                {text = SN[97225],                                time = 10, color1 = "PEACH",   icon = addon.ST[97225]},   -- Magma Flow
+                {text = SN[99794],                                time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},  -- Fiery Vortex
+                {text = SN[99352],                                time = 15, color1 = "PURPLE",  deplete = true, icon = addon.ST[99352]},  -- Decimation Blade
+                {text = format(L.alert["Next %s"], SN[100213]),   time = 8,  color1 = "YELLOW",  icon = addon.ST[100213]},  -- Next Flame Scythe
             },
         },
         emphasizedcenter = {
@@ -3140,9 +3137,9 @@ do
                 module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, true, warningData.deplete and "DEPLETE" or "FILL")
             end,
             alerts = {
-                {text = "Resonating Crystal explodes", time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},
-                {text = "Molten Seed", time = 12, color1 = "ORANGE", icon = addon.ST[98333]},
-                {text = "Bloods: Next heal", time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},
+                {text = SN[103640],    time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
+                {text = SN[98333],     time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
+                {text = format(L.alert["Next %s"], SN[105937]),  time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
             },
         },
         individual = {
@@ -3483,7 +3480,7 @@ do
         
         bar.text:SetWidth(bar:GetWidth() - bar.timer:GetWidth() + pfl.IndividualTextWidth)
         bar.text:SetHeight(pfl.IndividualBarFontSize*1.2)
-        bar.text:SetFont(bar.text:GetFont(),pfl.IndividualBarFontSize)
+        addon.SafeSetFont(bar.text,bar.text:GetFont(),pfl.IndividualBarFontSize)
         bar.text:SetAlpha(pfl.IndividualTextAlpha)
         bar.text:SetJustifyH(pfl.IndividualBarTextJustification)
         bar.text:SetVertexColor(unpack(pfl.IndividualBarFontColor))
@@ -3761,7 +3758,7 @@ do
                 text = DUNGEON_TYPE[dungeonID]
             else
                 text = GetLFGDungeonInfo(dungeonID) or "LFG Invite"
-                LFGBar.text:SetFont(LFGBar.text:GetFont(),14)
+                addon.SafeSetFont(LFGBar.text,LFGBar.text:GetFont(),14)
             end
         end
         if LFG_test or (isRandom and DUNGEON_TYPE[dungeonID]) then

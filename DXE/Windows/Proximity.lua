@@ -84,9 +84,9 @@ local function UpdateBars()
 	for i,bar in ipairs(bars) do
 		local r,g,b = bar.statusbar:GetStatusBarColor()
 		bar.statusbar:SetStatusBarColor(r,g,b,pfl.Proximity.BarAlpha)
-		bar.name:SetFont(bar.name:GetFont(),pfl.Proximity.NameFontSize)
-		bar.left:SetFont(bar.left:GetFont(),pfl.Proximity.TimeFontSize)
-		bar.right:SetFont(bar.right:GetFont(),pfl.Proximity.TimeFontSize * 2/3)
+		addon.SafeSetFont(bar.name,bar.name:GetFont(),pfl.Proximity.NameFontSize)
+		addon.SafeSetFont(bar.left,bar.left:GetFont(),pfl.Proximity.TimeFontSize)
+		addon.SafeSetFont(bar.right,bar.right:GetFont(),pfl.Proximity.TimeFontSize * 2/3)
 
 		bar:SetWidth(width)
 		bar:SetHeight(height)

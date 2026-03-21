@@ -401,9 +401,9 @@ function addon:SkinPane()
 		hw:SetLostColor(db.LostColor)
 		hw:ApplyNeutralColor()
 
-		hw.title:SetFont(hw.title:GetFont(),db.TitleFontSize)
+		addon.SafeSetFont(hw.title,hw.title:GetFont(),db.TitleFontSize)
 		hw.title:SetVertexColor(unpack(db.FontColor))
-		hw.health:SetFont(hw.health:GetFont(),db.HealthFontSize)
+		addon.SafeSetFont(hw.health,hw.health:GetFont(),db.HealthFontSize)
 		hw.health:SetVertexColor(unpack(db.FontColor))
 	end
 end
