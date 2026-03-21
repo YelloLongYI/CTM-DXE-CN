@@ -374,14 +374,18 @@ do
 	local reg = {}
 	function addon:RegisterFontString(fontstring,size,flags)
 		reg[#reg+1] = fontstring
-		fontstring:SetFont(SM:Fetch("font",pfl.Globals.Font),size,flags)
+		if not fontstring:SetFont(SM:Fetch("font",pfl.Globals.Font),size,flags) then
+			fontstring:SetFont(STANDARD_TEXT_FONT,size,flags)
+		end
 	end
 
 	function addon:NotifyFontChanged(fontFile)
 		local font = SM:Fetch("font",pfl.Globals.Font)
 		for _,fontstring in ipairs(reg) do
 			local _,size,flags = fontstring:GetFont()
-			fontstring:SetFont(font,size,flags)
+			if not fontstring:SetFont(font,size,flags) then
+				fontstring:SetFont(STANDARD_TEXT_FONT,size,flags)
+			end
 		end
 	end
 end
@@ -390,14 +394,18 @@ do
 	local reg = {}
 	function addon:RegisterTimerFontString(fontstring,size,flags)
 		reg[#reg+1] = fontstring
-		fontstring:SetFont(SM:Fetch("font",pfl.Globals.TimerFont),size,flags)
+		if not fontstring:SetFont(SM:Fetch("font",pfl.Globals.TimerFont),size,flags) then
+			fontstring:SetFont(STANDARD_TEXT_FONT,size,flags)
+		end
 	end
 
 	function addon:NotifyTimerFontChanged(fontFile)
 		local font = SM:Fetch("font",fontFile)
 		for _,fontstring in ipairs(reg) do 
 			local _,size,flags = fontstring:GetFont()
-			fontstring:SetFont(font,size,flags)
+			if not fontstring:SetFont(font,size,flags) then
+				fontstring:SetFont(STANDARD_TEXT_FONT,size,flags)
+			end
 		end
 	end
 end
