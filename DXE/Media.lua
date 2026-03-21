@@ -320,9 +320,10 @@ end
 -------------------------
 
 do
-	SM:Register("font", "Bastardus Sans", "Interface\\AddOns\\DXE\\Fonts\\BS.ttf")
-	SM:Register("font", "Courier New", "Interface\\AddOns\\DXE\\Fonts\\CN.ttf")
-	SM:Register("font", "Franklin Gothic Medium", "Interface\\AddOns\\DXE\\Fonts\\FGM.ttf")
+	local langmask = SM.LOCALE_BIT_western + SM.LOCALE_BIT_koKR + SM.LOCALE_BIT_zhCN + SM.LOCALE_BIT_zhTW + SM.LOCALE_BIT_ruRU
+	SM:Register("font", "Bastardus Sans", "Interface\\AddOns\\DXE\\Fonts\\BS.ttf", langmask)
+	SM:Register("font", "Courier New", "Interface\\AddOns\\DXE\\Fonts\\CN.ttf", langmask)
+	SM:Register("font", "Franklin Gothic Medium", "Interface\\AddOns\\DXE\\Fonts\\FGM.ttf", langmask)
 end
 
 -------------------------
