@@ -3059,89 +3059,111 @@ do
         return AlertTestingRunning
     end
     
-    local TEST_DATA = {
-        warning = {
-            timemin = 2,
-            timemax = 6,
-            testfunc = function(alertKey, warningData)
-                module:Simple(alertKey, warningData.text, 4,"None",warningData.color1, nil, warningData.icon)
-            end,
-            alerts = {
-                {text = addon.SN[103414],                         color1 = "YELLOW",      icon = addon.ST[103414]},  -- Stomp / 踩踏
-                {text = addon.SN[108794],                         color1 = "WHITE",       icon = addon.ST[108794]},  -- Black Phase / 暗影阶段
-                {text = addon.SN[105171],                         color1 = "PURPLE",      icon = addon.ST[105171]},  -- Deep Corruption / 深度腐蚀
-                {text = addon.SN[63562],                          color1 = "CYAN",        icon = addon.ST[63562]},   -- Frost Phase
-                {text = addon.SN[103327],                         color1 = "RED",         icon = addon.ST[103327]},  -- Hour of Twilight / 暮光审判
-                {text = addon.SN[106401],                         color1 = "MAGENTA",     icon = addon.ST[106401]},  -- Twilight Onslaught / 暮光猛攻
-                {text = addon.SN[105834],                         color1 = "GOLD",        icon = addon.ST[105834]},  -- Superheated / 过热
-                {text = addon.SN[110044],                         color1 = "GOLD",        icon = addon.ST[110044]},  -- Cataclysm / 大灾变
-                
-                {text = addon.SN[71466],                          color1 = "YELLOW",      icon = addon.ST[71466]},   -- Hurl Spear
-                {text = addon.SN[99476],                          color1 = "LIGHTGREEN",  icon = addon.ST[99476]},   -- The Widow's Kiss / 黑寡妇之吻
-                {text = addon.SN[98493],                          color1 = "WHITE",       icon = addon.ST[98493]},   -- Heated Volcano
-                {text = addon.SN[100744],                         color1 = "YELLOW",      icon = addon.ST[100744]},  -- Firestorm / 火风暴
-                {text = addon.SN[99259],                          color1 = "MAGENTA",     icon = addon.ST[99259]},   -- Shards of Torment / 折磨碎片
-                {text = addon.SN[98450],                          color1 = "YELLOW",      icon = addon.ST[98450]},   -- Searing Seeds / 灼热之种
-                {text = addon.SN[100258],                         color1 = "BROWN",       icon = addon.ST[100258]},  -- Sulfuras Smash / 萨弗拉斯猛击
+    local TEST_DATA
+    
+    local function BuildTestData()
+        if TEST_DATA then return end
+        local SN = addon.SN
+        local fmt = string.format
+        local nextfmt = L.alert["Next %s"] or "Next %s"
+        TEST_DATA = {
+            warning = {
+                timemin = 2,
+                timemax = 6,
+                testfunc = function(alertKey, warningData)
+                    module:Simple(alertKey, warningData.text, 4,"None",warningData.color1, nil, warningData.icon)
+                end,
+                alerts = {
+                    {text = SN[103414] or "Stomp",                  color1 = "YELLOW",      icon = addon.ST[103414]},
+                    {text = SN[108794] or "Black Phase",            color1 = "WHITE",       icon = addon.ST[108794]},
+                    {text = SN[105171] or "Deep Corruption",        color1 = "PURPLE",      icon = addon.ST[105171]},
+                    {text = SN[63562]  or "Frost Phase",            color1 = "CYAN",        icon = addon.ST[63562]},
+                    {text = SN[103327] or "Hour of Twilight",       color1 = "RED",         icon = addon.ST[103327]},
+                    {text = SN[106401] or "Twilight Onslaught",     color1 = "MAGENTA",     icon = addon.ST[106401]},
+                    {text = SN[105834] or "Superheated",            color1 = "GOLD",        icon = addon.ST[105834]},
+                    {text = SN[110044] or "Cataclysm",              color1 = "GOLD",        icon = addon.ST[110044]},
+                    
+                    {text = SN[71466]  or "Hurl Spear",             color1 = "YELLOW",      icon = addon.ST[71466]},
+                    {text = SN[99476]  or "The Widow's Kiss",       color1 = "LIGHTGREEN",  icon = addon.ST[99476]},
+                    {text = SN[98493]  or "Heated Volcano",         color1 = "WHITE",       icon = addon.ST[98493]},
+                    {text = SN[100744] or "Firestorm",              color1 = "YELLOW",      icon = addon.ST[100744]},
+                    {text = SN[99259]  or "Shards of Torment",      color1 = "MAGENTA",     icon = addon.ST[99259]},
+                    {text = SN[98450]  or "Searing Seeds",          color1 = "YELLOW",      icon = addon.ST[98450]},
+                    {text = SN[100258] or "Sulfuras Smash",         color1 = "BROWN",       icon = addon.ST[100258]},
+                },
             },
-        },
-        dropdown = {
-            timemin = 1,
-            timemax = 5,
-            testfunc = function(alertKey, warningData) 
-                module:Dropdown(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon)
-            end,
-            alerts = {
-                {text = string.format(L.alert["Next %s"], addon.SN[103851]),  time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},  -- Next Black Blood Phase
-                {text = string.format(L.alert["Next %s"], addon.SN[693]),     time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},      -- New Void of the Unmaking
-                {text = string.format(L.alert["Next %s"], addon.SN[108384]),  time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},   -- Next Void Bolt
-                {text = string.format(L.alert["Next %s"], addon.SN[107851]),  time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},   -- Next Focused Assault
-                {text = string.format(L.alert["Next %s"], addon.SN[105925]),  time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},   -- Next Fading Light
-                {text = string.format(L.alert["Next %s"], addon.SN[80325]),   time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},    -- Twilight Elite Slayer
-                {text = string.format(L.alert["Next %s"], addon.SN[105195]),  time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},   -- Next Roll
-                {text = string.format(L.alert["Next %s"], addon.SN[104972]),  time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},   -- New Mutated Corruption
-                
-                {text = string.format(L.alert["Next %s"], addon.SN[99836]),   time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},    -- Next Crystal Prison Trap
-                {text = string.format(L.alert["Next %s"], addon.SN[99052]),   time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},    -- Next Smoldering Devastation
-                {text = string.format(L.alert["Next %s"], addon.SN[100411]),  time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},   -- Next Concussive Stomp
-                {text = string.format(L.alert["Next %s"], addon.SN[100744]),  time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},   -- Next Firestorm
-                {text = string.format(L.alert["Next %s"], addon.SN[101002]),  time = 10, color1 = "RED",                        icon = addon.ST[101002]},   -- Next Inferno Strike
-                {text = string.format(L.alert["Next %s"], addon.SN[98535]),   time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},    -- Next Leaping Flames
-                {text = string.format(L.alert["Next %s"], addon.SN[101233]),  time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},   -- Next Magma Trap
+            dropdown = {
+                timemin = 1,
+                timemax = 5,
+                testfunc = function(alertKey, warningData) 
+                    module:Dropdown(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon)
+                end,
+                alerts = {
+                    {text = fmt(nextfmt, SN[103851] or "Black Blood Phase"),   time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},
+                    {text = fmt(nextfmt, SN[693]    or "Void of the Unmaking"),time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},
+                    {text = fmt(nextfmt, SN[108384] or "Void Bolt"),           time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},
+                    {text = fmt(nextfmt, SN[107851] or "Focused Assault"),     time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},
+                    {text = fmt(nextfmt, SN[105925] or "Fading Light"),        time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},
+                    {text = fmt(nextfmt, SN[80325]  or "Elite Slayer"),        time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},
+                    {text = fmt(nextfmt, SN[105195] or "Roll"),                time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},
+                    {text = fmt(nextfmt, SN[104972] or "Mutated Corruption"),  time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},
+                    
+                    {text = fmt(nextfmt, SN[99836]  or "Crystal Prison Trap"), time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},
+                    {text = fmt(nextfmt, SN[99052]  or "Smoldering Devastation"),time = 15,color1 = "ORANGE",   color2 = "RED",  icon = addon.ST[99052]},
+                    {text = fmt(nextfmt, SN[100411] or "Concussive Stomp"),    time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},
+                    {text = fmt(nextfmt, SN[100744] or "Firestorm"),           time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},
+                    {text = fmt(nextfmt, SN[101002] or "Inferno Strike"),      time = 10, color1 = "RED",                        icon = addon.ST[101002]},
+                    {text = fmt(nextfmt, SN[98535]  or "Leaping Flames"),      time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},
+                    {text = fmt(nextfmt, SN[101233] or "Magma Trap"),          time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},
+                },
             },
-        },
-        centerpopup = {
-            timemin = 5,
-            timemax = 10,
-            testfunc = function(alertKey, warningData) 
-                module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, false, warningData.deplete and "DEPLETE" or "FILL")
-            end,
-            alerts = {
-                {text = addon.SN[103640],                               time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
-                {text = addon.SN[98333],                                time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
-                {text = string.format(L.alert["Next %s"], addon.SN[105937]),   time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
-                {text = addon.SN[108046],                               time = 3,  color1 = "YELLOW",  icon = addon.ST[108046]},  -- Shockwave
-                {text = addon.SN[105847],                               time = 23, color1 = "ORANGE",  icon = addon.ST[105847]},  -- Seal Armor
-                {text = addon.SN[100936],                               time = 6,  color1 = "ORANGE",  icon = addon.ST[100936]},  -- Ember Flare
-                {text = addon.SN[99476],                                time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},  -- The Widow's Kiss
-                {text = addon.SN[97225],                                time = 10, color1 = "PEACH",   icon = addon.ST[97225]},   -- Magma Flow
-                {text = addon.SN[99794],                                time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},  -- Fiery Vortex
-                {text = addon.SN[99352],                                time = 15, color1 = "PURPLE",  deplete = true, icon = addon.ST[99352]},  -- Decimation Blade
-                {text = string.format(L.alert["Next %s"], addon.SN[100213]),   time = 8,  color1 = "YELLOW",  icon = addon.ST[100213]},  -- Next Flame Scythe
+            centerpopup = {
+                timemin = 5,
+                timemax = 10,
+                testfunc = function(alertKey, warningData) 
+                    module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, false, warningData.deplete and "DEPLETE" or "FILL")
+                end,
+                alerts = {
+                    {text = SN[103640] or "Resonating Crystal",     time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},
+                    {text = SN[98333]  or "Molten Seed",            time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},
+                    {text = fmt(nextfmt, SN[105937] or "Bloods"),   time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},
+                    {text = SN[108046] or "Shockwave",              time = 3,  color1 = "YELLOW",  icon = addon.ST[108046]},
+                    {text = SN[105847] or "Seal Armor",             time = 23, color1 = "ORANGE",  icon = addon.ST[105847]},
+                    {text = SN[100936] or "Ember Flare",            time = 6,  color1 = "ORANGE",  icon = addon.ST[100936]},
+                    {text = SN[99476]  or "The Widow's Kiss",       time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},
+                    {text = SN[97225]  or "Magma Flow",             time = 10, color1 = "PEACH",   icon = addon.ST[97225]},
+                    {text = SN[99794]  or "Fiery Vortex",           time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},
+                    {text = SN[99352]  or "Decimation Blade",       time = 15, color1 = "PURPLE",  deplete = true, icon = addon.ST[99352]},
+                    {text = fmt(nextfmt, SN[100213] or "Flame Scythe"),time = 8, color1 = "YELLOW", icon = addon.ST[100213]},
+                },
             },
-        },
-        emphasizedcenter = {
-            timemin = 5,
-            timemax = 10,
-            testfunc = function(alertKey, warningData) 
-                module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, true, warningData.deplete and "DEPLETE" or "FILL")
-            end,
-            alerts = {
-                {text = addon.SN[103640],    time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
-                {text = addon.SN[98333],     time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
-                {text = string.format(L.alert["Next %s"], addon.SN[105937]),  time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
+            emphasizedcenter = {
+                timemin = 5,
+                timemax = 10,
+                testfunc = function(alertKey, warningData) 
+                    module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, true, warningData.deplete and "DEPLETE" or "FILL")
+                end,
+                alerts = {
+                    {text = SN[103640] or "Resonating Crystal",     time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},
+                    {text = SN[98333]  or "Molten Seed",            time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},
+                    {text = fmt(nextfmt, SN[105937] or "Bloods"),   time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},
+                },
             },
-        },
+            individual = {
+                timemin = 5,
+                timemax = 10,
+                testfunc = function(alertKey, warningData) 
+                    addon:HideLFGCountdown()
+                    addon:HideRBGCountdown()
+                    addon["Show"..warningData.type.."Countdown"](addon,nil,true,true)
+                end,
+                alerts = {
+                    {type = "RBG"},
+                    {type = "LFG"},
+                },
+            },
+        }
+    end
         individual = {
             timemin = 5,
             timemax = 10,
@@ -3213,6 +3235,7 @@ do
     end
     
     local function InitTest(testtype)
+        BuildTestData()
         local warningData = TEST_DATA[testtype]
         testRoster[testtype] = {}
         for i=1,#warningData.alerts do
