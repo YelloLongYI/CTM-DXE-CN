@@ -3227,6 +3227,7 @@ do
         
         testcounters = {}
         TestTimers = {}
+        AlertTestingRunning = false
         module:Alert_Clear()
         addon:HideLFGCountdown()
         addon:HideRBGCountdown()
