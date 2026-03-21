@@ -444,16 +444,27 @@ function module:OnInitialize()
     
 	self:SetSinkStorage(pfl.SinkStorage)
 	self:UpdateFlashSettings()
-    self:CreateEmphasisFrame()
-    self:CreateAlertsFrame()
+
+    -- #2# DEBUG START: protected alert frame creation
+    local ok, err
+    ok, err = pcall(function() self:CreateEmphasisFrame() end)
+    if not ok then addon:Print("|cffff0000[DXE] CreateEmphasisFrame error:|r " .. tostring(err)) end
+    ok, err = pcall(function() self:CreateAlertsFrame() end)
+    if not ok then addon:Print("|cffff0000[DXE] CreateAlertsFrame error:|r " .. tostring(err)) end
+    -- #2# DEBUG END
     
 	db.RegisterCallback(self, "OnProfileChanged", "RefreshProfile")
 	db.RegisterCallback(self, "OnProfileCopied", "RefreshProfile")
 	db.RegisterCallback(self, "OnProfileReset", "RefreshProfile")
     
-    self:LoadVoicePacks()
-    self:SetupSpecialBars()
-    hooksecurefunc(WorldStateScoreFrame,"Show",WorldStateScoreFrame_OnUpdate)
+    -- #2# DEBUG START: protected special bars setup
+    ok, err = pcall(function() self:LoadVoicePacks() end)
+    if not ok then addon:Print("|cffff0000[DXE] LoadVoicePacks error:|r " .. tostring(err)) end
+    ok, err = pcall(function() self:SetupSpecialBars() end)
+    if not ok then addon:Print("|cffff0000[DXE] SetupSpecialBars error:|r " .. tostring(err)) end
+    ok, err = pcall(function() hooksecurefunc(WorldStateScoreFrame,"Show",WorldStateScoreFrame_OnUpdate) end)
+    if not ok then addon:Print("|cffff0000[DXE] hooksecurefunc error:|r " .. tostring(err)) end
+    -- #2# DEBUG END
     module:RegisterEvent("UPDATE_BATTLEFIELD_SCORE","SetWinScoreText")
     module:RegisterEvent("UPDATE_WORLD_STATES","SetWinScoreText")
     addon:UpdateMute(addon.Alerts.db.profile.DisableSounds)
