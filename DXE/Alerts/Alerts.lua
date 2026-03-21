@@ -919,6 +919,9 @@ function prototype:UpdateTimerSize(barHeight)
 		addon.SafeSetFont(self.timer.left,(self.timer.left:GetFont()),TimerSecondsFontSize)
 		addon.SafeSetFont(self.timer.right,(self.timer.right:GetFont()),TimerDecimalFontSize)
 	end
+end
+
+function prototype:AnchorToBundle(bundle)
     local stack, anchor, prefix = bundle.stack, bundle.anchor, bundle.prefix
     self:AnchorToAnchor(stack, anchor, prefix)
 end
