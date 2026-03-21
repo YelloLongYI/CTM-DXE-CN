@@ -3067,22 +3067,22 @@ do
                 module:Simple(alertKey, warningData.text, 4,"None",warningData.color1, nil, warningData.icon)
             end,
             alerts = {
-                {text = SN[103414],                         color1 = "YELLOW",      icon = addon.ST[103414]},  -- Stomp / 踩踏
-                {text = SN[108794],                         color1 = "WHITE",       icon = addon.ST[108794]},  -- Black Phase / 暗影阶段
-                {text = SN[105171],                         color1 = "PURPLE",      icon = addon.ST[105171]},  -- Deep Corruption / 深度腐蚀
-                {text = SN[63562],                          color1 = "CYAN",        icon = addon.ST[63562]},   -- Frost Phase
-                {text = SN[103327],                         color1 = "RED",         icon = addon.ST[103327]},  -- Hour of Twilight / 暮光审判
-                {text = SN[106401],                         color1 = "MAGENTA",     icon = addon.ST[106401]},  -- Twilight Onslaught / 暮光猛攻
-                {text = SN[105834],                         color1 = "GOLD",        icon = addon.ST[105834]},  -- Superheated / 过热
-                {text = SN[110044],                         color1 = "GOLD",        icon = addon.ST[110044]},  -- Cataclysm / 大灾变
+                {text = addon.SN[103414],                         color1 = "YELLOW",      icon = addon.ST[103414]},  -- Stomp / 踩踏
+                {text = addon.SN[108794],                         color1 = "WHITE",       icon = addon.ST[108794]},  -- Black Phase / 暗影阶段
+                {text = addon.SN[105171],                         color1 = "PURPLE",      icon = addon.ST[105171]},  -- Deep Corruption / 深度腐蚀
+                {text = addon.SN[63562],                          color1 = "CYAN",        icon = addon.ST[63562]},   -- Frost Phase
+                {text = addon.SN[103327],                         color1 = "RED",         icon = addon.ST[103327]},  -- Hour of Twilight / 暮光审判
+                {text = addon.SN[106401],                         color1 = "MAGENTA",     icon = addon.ST[106401]},  -- Twilight Onslaught / 暮光猛攻
+                {text = addon.SN[105834],                         color1 = "GOLD",        icon = addon.ST[105834]},  -- Superheated / 过热
+                {text = addon.SN[110044],                         color1 = "GOLD",        icon = addon.ST[110044]},  -- Cataclysm / 大灾变
                 
-                {text = SN[71466],                          color1 = "YELLOW",      icon = addon.ST[71466]},   -- Hurl Spear
-                {text = SN[99476],                          color1 = "LIGHTGREEN",  icon = addon.ST[99476]},   -- The Widow's Kiss / 黑寡妇之吻
-                {text = SN[98493],                          color1 = "WHITE",       icon = addon.ST[98493]},   -- Heated Volcano
-                {text = SN[100744],                         color1 = "YELLOW",      icon = addon.ST[100744]},  -- Firestorm / 火风暴
-                {text = SN[99259],                          color1 = "MAGENTA",     icon = addon.ST[99259]},   -- Shards of Torment / 折磨碎片
-                {text = SN[98450],                          color1 = "YELLOW",      icon = addon.ST[98450]},   -- Searing Seeds / 灼热之种
-                {text = SN[100258],                         color1 = "BROWN",       icon = addon.ST[100258]},  -- Sulfuras Smash / 萨弗拉斯猛击
+                {text = addon.SN[71466],                          color1 = "YELLOW",      icon = addon.ST[71466]},   -- Hurl Spear
+                {text = addon.SN[99476],                          color1 = "LIGHTGREEN",  icon = addon.ST[99476]},   -- The Widow's Kiss / 黑寡妇之吻
+                {text = addon.SN[98493],                          color1 = "WHITE",       icon = addon.ST[98493]},   -- Heated Volcano
+                {text = addon.SN[100744],                         color1 = "YELLOW",      icon = addon.ST[100744]},  -- Firestorm / 火风暴
+                {text = addon.SN[99259],                          color1 = "MAGENTA",     icon = addon.ST[99259]},   -- Shards of Torment / 折磨碎片
+                {text = addon.SN[98450],                          color1 = "YELLOW",      icon = addon.ST[98450]},   -- Searing Seeds / 灼热之种
+                {text = addon.SN[100258],                         color1 = "BROWN",       icon = addon.ST[100258]},  -- Sulfuras Smash / 萨弗拉斯猛击
             },
         },
         dropdown = {
@@ -3092,22 +3092,22 @@ do
                 module:Dropdown(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon)
             end,
             alerts = {
-                {text = format(L.alert["Next %s"], SN[103851]),  time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},  -- Next Black Blood Phase
-                {text = format(L.alert["Next %s"], SN[693]),     time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},      -- New Void of the Unmaking
-                {text = format(L.alert["Next %s"], SN[108384]),  time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},   -- Next Void Bolt
-                {text = format(L.alert["Next %s"], SN[107851]),  time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},   -- Next Focused Assault
-                {text = format(L.alert["Next %s"], SN[105925]),  time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},   -- Next Fading Light
-                {text = format(L.alert["Next %s"], SN[80325]),   time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},    -- Twilight Elite Slayer
-                {text = format(L.alert["Next %s"], SN[105195]),  time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},   -- Next Roll
-                {text = format(L.alert["Next %s"], SN[104972]),  time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},   -- New Mutated Corruption
+                {text = string.format(L.alert["Next %s"], addon.SN[103851]),  time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},  -- Next Black Blood Phase
+                {text = string.format(L.alert["Next %s"], addon.SN[693]),     time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},      -- New Void of the Unmaking
+                {text = string.format(L.alert["Next %s"], addon.SN[108384]),  time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},   -- Next Void Bolt
+                {text = string.format(L.alert["Next %s"], addon.SN[107851]),  time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},   -- Next Focused Assault
+                {text = string.format(L.alert["Next %s"], addon.SN[105925]),  time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},   -- Next Fading Light
+                {text = string.format(L.alert["Next %s"], addon.SN[80325]),   time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},    -- Twilight Elite Slayer
+                {text = string.format(L.alert["Next %s"], addon.SN[105195]),  time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},   -- Next Roll
+                {text = string.format(L.alert["Next %s"], addon.SN[104972]),  time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},   -- New Mutated Corruption
                 
-                {text = format(L.alert["Next %s"], SN[99836]),   time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},    -- Next Crystal Prison Trap
-                {text = format(L.alert["Next %s"], SN[99052]),   time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},    -- Next Smoldering Devastation
-                {text = format(L.alert["Next %s"], SN[100411]),  time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},   -- Next Concussive Stomp
-                {text = format(L.alert["Next %s"], SN[100744]),  time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},   -- Next Firestorm
-                {text = format(L.alert["Next %s"], SN[101002]),  time = 10, color1 = "RED",                        icon = addon.ST[101002]},   -- Next Inferno Strike
-                {text = format(L.alert["Next %s"], SN[98535]),   time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},    -- Next Leaping Flames
-                {text = format(L.alert["Next %s"], SN[101233]),  time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},   -- Next Magma Trap
+                {text = string.format(L.alert["Next %s"], addon.SN[99836]),   time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},    -- Next Crystal Prison Trap
+                {text = string.format(L.alert["Next %s"], addon.SN[99052]),   time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},    -- Next Smoldering Devastation
+                {text = string.format(L.alert["Next %s"], addon.SN[100411]),  time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},   -- Next Concussive Stomp
+                {text = string.format(L.alert["Next %s"], addon.SN[100744]),  time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},   -- Next Firestorm
+                {text = string.format(L.alert["Next %s"], addon.SN[101002]),  time = 10, color1 = "RED",                        icon = addon.ST[101002]},   -- Next Inferno Strike
+                {text = string.format(L.alert["Next %s"], addon.SN[98535]),   time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},    -- Next Leaping Flames
+                {text = string.format(L.alert["Next %s"], addon.SN[101233]),  time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},   -- Next Magma Trap
             },
         },
         centerpopup = {
@@ -3117,17 +3117,17 @@ do
                 module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, false, warningData.deplete and "DEPLETE" or "FILL")
             end,
             alerts = {
-                {text = SN[103640],                               time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
-                {text = SN[98333],                                time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
-                {text = format(L.alert["Next %s"], SN[105937]),   time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
-                {text = SN[108046],                               time = 3,  color1 = "YELLOW",  icon = addon.ST[108046]},  -- Shockwave
-                {text = SN[105847],                               time = 23, color1 = "ORANGE",  icon = addon.ST[105847]},  -- Seal Armor
-                {text = SN[100936],                               time = 6,  color1 = "ORANGE",  icon = addon.ST[100936]},  -- Ember Flare
-                {text = SN[99476],                                time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},  -- The Widow's Kiss
-                {text = SN[97225],                                time = 10, color1 = "PEACH",   icon = addon.ST[97225]},   -- Magma Flow
-                {text = SN[99794],                                time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},  -- Fiery Vortex
-                {text = SN[99352],                                time = 15, color1 = "PURPLE",  deplete = true, icon = addon.ST[99352]},  -- Decimation Blade
-                {text = format(L.alert["Next %s"], SN[100213]),   time = 8,  color1 = "YELLOW",  icon = addon.ST[100213]},  -- Next Flame Scythe
+                {text = addon.SN[103640],                               time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
+                {text = addon.SN[98333],                                time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
+                {text = string.format(L.alert["Next %s"], addon.SN[105937]),   time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
+                {text = addon.SN[108046],                               time = 3,  color1 = "YELLOW",  icon = addon.ST[108046]},  -- Shockwave
+                {text = addon.SN[105847],                               time = 23, color1 = "ORANGE",  icon = addon.ST[105847]},  -- Seal Armor
+                {text = addon.SN[100936],                               time = 6,  color1 = "ORANGE",  icon = addon.ST[100936]},  -- Ember Flare
+                {text = addon.SN[99476],                                time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},  -- The Widow's Kiss
+                {text = addon.SN[97225],                                time = 10, color1 = "PEACH",   icon = addon.ST[97225]},   -- Magma Flow
+                {text = addon.SN[99794],                                time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},  -- Fiery Vortex
+                {text = addon.SN[99352],                                time = 15, color1 = "PURPLE",  deplete = true, icon = addon.ST[99352]},  -- Decimation Blade
+                {text = string.format(L.alert["Next %s"], addon.SN[100213]),   time = 8,  color1 = "YELLOW",  icon = addon.ST[100213]},  -- Next Flame Scythe
             },
         },
         emphasizedcenter = {
@@ -3137,9 +3137,9 @@ do
                 module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, true, warningData.deplete and "DEPLETE" or "FILL")
             end,
             alerts = {
-                {text = SN[103640],    time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
-                {text = SN[98333],     time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
-                {text = format(L.alert["Next %s"], SN[105937]),  time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
+                {text = addon.SN[103640],    time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},  -- Resonating Crystal
+                {text = addon.SN[98333],     time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},   -- Molten Seed
+                {text = string.format(L.alert["Next %s"], addon.SN[105937]),  time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},  -- Bloods: Next heal
             },
         },
         individual = {
