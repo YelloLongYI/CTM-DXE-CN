@@ -3260,11 +3260,11 @@ do
         CancelTestTimers()
         if not AlertTestingRunning then
             AlertTestingRunning = true
-            InitTest("warning")
-            InitTest("dropdown")
-            InitTest("centerpopup")
-            InitTest("emphasizedcenter")
-            InitTest("individual")
+            pcall(InitTest,"warning")
+            pcall(InitTest,"dropdown")
+            pcall(InitTest,"centerpopup")
+            pcall(InitTest,"emphasizedcenter")
+            pcall(InitTest,"individual")
         else
             AlertTestingRunning = false
         end
