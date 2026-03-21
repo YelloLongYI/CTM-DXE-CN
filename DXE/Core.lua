@@ -2712,10 +2712,16 @@ function addon:OnInitialize()
     RDB = self.db:RegisterNamespace("RDB", {global = {}}).global
     self.RDB = RDB
 
-    -- Pane
-    self:CreatePane()
-    self:SkinPane()
-    self:UpdatePaneButtons()
+    -- Pane (protected so errors don't break the rest of initialization) -- #1# DEBUG START
+    local paneOk, paneErr = pcall(function()
+        self:CreatePane()
+        self:SkinPane()
+        self:UpdatePaneButtons()
+    end)
+    if not paneOk then
+        self:Print("|cffff0000[DXE] Pane init error:|r " .. tostring(paneErr))
+    end
+    -- #1# DEBUG END
 
     -- The default encounter
     self:RegisterEncounter({key = "default", name = L["Default"], title = L["Default"]})
