@@ -2414,9 +2414,9 @@ do
         defeatFrame.encounterText:SetText(text)
         local textLength = text:len()
         if textLength <= 22 then
-            defeatFrame.encounterText:SetFont("Fonts\\MORPHEUS.TTF", 30)
+            addon.SafeSetFont(defeatFrame.encounterText, "Fonts\\MORPHEUS.TTF", 30)
         else
-            defeatFrame.encounterText:SetFont("Fonts\\MORPHEUS.TTF", math.floor((26*25)/textLength)-1)
+            addon.SafeSetFont(defeatFrame.encounterText, "Fonts\\MORPHEUS.TTF", math.floor((26*25)/textLength)-1)
         end
         defeatFrame.encounterText:SetWidth(defeatFrame.encounterText:GetStringWidth())
     end
@@ -2980,7 +2980,7 @@ do
     defeatFrame.hordeIcon = hordeIcon
     
     local encounterText = defeatFrame:CreateFontString(nil,"OVERLAY")
-    encounterText:SetFont("Fonts\\MORPHEUS.TTF", 30)
+    addon.SafeSetFont(encounterText, "Fonts\\MORPHEUS.TTF", 30)
     encounterText:SetPoint("CENTER",defeatFrame,"CENTER",0,-20)
     encounterText:SetShadowColor(0.38, 0.25, 0, 0.9)
     encounterText:SetShadowOffset(1,-1)
@@ -2989,7 +2989,7 @@ do
     defeatFrame.encounterText = encounterText
     
     local defeatText = defeatFrame:CreateFontString(nil,"OVERLAY")
-    defeatText:SetFont("Fonts\\FRIZQT__.ttf", 18)
+    addon.SafeSetFont(defeatText, "Fonts\\FRIZQT__.ttf", 18)
     defeatText:SetPoint("CENTER",defeatFrame,"CENTER",0,-70)
     defeatText:SetTextColor(1,0.8,0.01)
     defeatText:SetShadowColor(0,0,0,0.75)
@@ -3030,7 +3030,7 @@ do
     speedkillDividerBottom:SetAlpha(0)
     
     local speedkillLabel = defeatFrame:CreateFontString(nil,"OVERLAY")
-    speedkillLabel:SetFont("Fonts\\FRIZQT__.ttf", 24)
+    addon.SafeSetFont(speedkillLabel, "Fonts\\FRIZQT__.ttf", 24)
     speedkillLabel:SetTextColor(1,1,1)
     speedkillLabel:SetShadowColor(0,0,0,0.75)
     speedkillLabel:SetShadowOffset(2,-2)
@@ -3040,7 +3040,7 @@ do
     
     
     local speedkillValue = defeatFrame:CreateFontString(nil,"OVERLAY")
-    speedkillValue:SetFont("Interface\\Addons\\DXE\\Fonts\\FGM.ttf", 28, "OUTLINE")
+    addon.SafeSetFont(speedkillValue, "Interface\\Addons\\DXE\\Fonts\\FGM.ttf", 28, "OUTLINE")
     speedkillValue:SetTextColor(1,0.8,0.01)
     speedkillValue:SetShadowColor(0,0,0,0.75)
     speedkillValue:SetShadowOffset(2,-2)
@@ -3333,8 +3333,8 @@ do
     end
     
     function addon:UpdateEmphasisFrame()
-        EmphasisFrameAnchor.emphasisTestText:SetFont(SM:Fetch("font",pfl.EmphasisFont), pfl.EmphasisFontSize, pfl.EmphasisFontDecoration)
-        emphasisFrame.emphasisText:SetFont(SM:Fetch("font",pfl.EmphasisFont), pfl.EmphasisFontSize, pfl.EmphasisFontDecoration)
+        addon.SafeSetFont(EmphasisFrameAnchor.emphasisTestText, SM:Fetch("font",pfl.EmphasisFont), pfl.EmphasisFontSize, pfl.EmphasisFontDecoration)
+        addon.SafeSetFont(emphasisFrame.emphasisText, SM:Fetch("font",pfl.EmphasisFont), pfl.EmphasisFontSize, pfl.EmphasisFontDecoration)
     end
     
     local function EmphasisFadeAnimation()
@@ -4620,7 +4620,7 @@ do
     
     function addon:UpdateAlertsFrame(resetText)
         local slots = pfl.AlertsNumSlots + 1 -- to include fading slot
-        AlertsFrameAnchor.alertsTestText:SetFont(SM:Fetch("font",pfl.AlertsFont), pfl.AlertsFontSize, pfl.AlertsFontDecoration)
+        addon.SafeSetFont(AlertsFrameAnchor.alertsTestText, SM:Fetch("font",pfl.AlertsFont), pfl.AlertsFontSize, pfl.AlertsFontDecoration)
         if resetText then
             AlertsFrameAnchor.alertsTestText:SetText(DEFAULT_TEST_TEXT)
         end
@@ -4643,7 +4643,7 @@ do
         end
         
         for _,slot in ipairs(alertSlots) do
-            slot.text:SetFont(SM:Fetch("font",pfl.AlertsFont), pfl.AlertsFontSize, pfl.AlertsFontDecoration)
+            addon.SafeSetFont(slot.text, SM:Fetch("font",pfl.AlertsFont), pfl.AlertsFontSize, pfl.AlertsFontDecoration)
             slot:SetHeight(pfl.AlertsFontSize)
             slot.text:SetPoint("CENTER",slot,"CENTER")
         end

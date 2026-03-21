@@ -4,6 +4,14 @@ local SM = addon.SM
 local Media = {}
 addon.Media = Media
 
+-- Safe SetFont wrapper: falls back to STANDARD_TEXT_FONT if the font fails (e.g. doesn't support zhCN)
+local function SafeSetFont(fontstring, font, size, flags)
+	if not font or not fontstring:SetFont(font, size, flags) then
+		fontstring:SetFont(STANDARD_TEXT_FONT, size, flags)
+	end
+end
+addon.SafeSetFont = SafeSetFont
+
 
 -------------------------
 -- DB

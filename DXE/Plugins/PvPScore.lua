@@ -876,7 +876,7 @@ do
 
     function module:ScoreFrame_Skin()
         ScoreFrame:SetScale(pfl.Scale)
-        ScoreFrame.Timer.Text:SetFont(SM:Fetch("font",pfl.TimerFont), 24, "OUTLINE")
+        addon.SafeSetFont(ScoreFrame.Timer.Text, SM:Fetch("font",pfl.TimerFont), 24, "OUTLINE")
         ScoreFrame.Timer.Text:SetShadowColor(0,0,0,0.5)
         
         -- Score Bars
@@ -888,10 +888,10 @@ do
         ScoreFrame.Alliance.Texture:SetTexture(DXE.SM:Fetch("statusbar",pfl.ScoreTexture))
         ScoreFrame.Horde.Texture:SetTexture(DXE.SM:Fetch("statusbar",pfl.ScoreTexture))
         
-        ScoreFrame.Alliance.Text:SetFont(SM:Fetch("font",pfl.ScoreFont), 30)
+        addon.SafeSetFont(ScoreFrame.Alliance.Text, SM:Fetch("font",pfl.ScoreFont), 30)
         ScoreFrame.Alliance.Text:SetShadowColor(0,0,0,0.5)
         
-        ScoreFrame.Horde.Text:SetFont(SM:Fetch("font",pfl.ScoreFont), 30)
+        addon.SafeSetFont(ScoreFrame.Horde.Text, SM:Fetch("font",pfl.ScoreFont), 30)
         ScoreFrame.Horde.Text:SetShadowColor(0,0,0,0.5)
         
         ScoreFrame.Alliance.ProgressBar:SetAlpha(pfl.ShowScoreProgress and 1 or 0)
@@ -1389,9 +1389,9 @@ do
         
         if (lastTime < 3600 and time >= 3600) or (time < 3600 and lastTime >= 3600) then
             if time < 3600 then
-                ScoreFrame.Timer.Text:SetFont("Fonts\\FRIZQT__.TTF",24, "OUTLINE")
+                addon.SafeSetFont(ScoreFrame.Timer.Text, "Fonts\\FRIZQT__.TTF",24, "OUTLINE")
             else
-                ScoreFrame.Timer.Text:SetFont("Fonts\\FRIZQT__.TTF",18, "OUTLINE")
+                addon.SafeSetFont(ScoreFrame.Timer.Text, "Fonts\\FRIZQT__.TTF",18, "OUTLINE")
             end
         end
         
@@ -1644,7 +1644,7 @@ do
 
             -- Slot Text
             local text = slot.text
-            text:SetFont(SM:Fetch("font",pfl.ScoreSlotsFont), 14)
+            addon.SafeSetFont(text, SM:Fetch("font",pfl.ScoreSlotsFont), 14)
             text:SetShadowColor(0,0,0,0.75)
             text:SetShadowOffset(2, -2)
             text:SetAlpha(0)
@@ -1957,7 +1957,7 @@ do
             slot.texture:SetTexture(SM:Fetch("statusbar",pfl.ScoreSlotsTexture))
             slot.texture:SetAlpha(pfl.ScoreSlotsTextureAlpha)
             
-            slot.text:SetFont(SM:Fetch("font",pfl.ScoreSlotsFont), 14)
+            addon.SafeSetFont(slot.text, SM:Fetch("font",pfl.ScoreSlotsFont), 14)
             
             if globalOnly then
                 if pfl.ShowSlots and (TestMode or addon.db.profile.Encounters[CE.key].battleground.ShowScoreSlots) then
