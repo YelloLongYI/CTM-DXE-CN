@@ -2697,6 +2697,9 @@ function addon:OnInitialize()
 
     self:RefreshProfilePointers()
 
+    -- Setup slash commands early so /dxe works even if later code errors
+    self:SetupSlashCommands()
+
     -- Options
     db.RegisterCallback(self, "OnProfileChanged", "RefreshProfile")
     db.RegisterCallback(self, "OnProfileCopied", "RefreshProfile")
@@ -2713,8 +2716,6 @@ function addon:OnInitialize()
     self:CreatePane()
     self:SkinPane()
     self:UpdatePaneButtons()
-
-    self:SetupSlashCommands()
 
     -- The default encounter
     self:RegisterEncounter({key = "default", name = L["Default"], title = L["Default"]})
