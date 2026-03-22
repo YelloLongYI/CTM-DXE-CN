@@ -2980,6 +2980,7 @@ do
     defeatFrame.hordeIcon = hordeIcon
     
     local encounterText = defeatFrame:CreateFontString(nil,"OVERLAY")
+    addon:PatchFontString(encounterText)
     encounterText:SetFont("Fonts\\MORPHEUS.TTF", 30)
     encounterText:SetPoint("CENTER",defeatFrame,"CENTER",0,-20)
     encounterText:SetShadowColor(0.38, 0.25, 0, 0.9)
@@ -2989,6 +2990,7 @@ do
     defeatFrame.encounterText = encounterText
     
     local defeatText = defeatFrame:CreateFontString(nil,"OVERLAY")
+    addon:PatchFontString(defeatText)
     defeatText:SetFont("Fonts\\FRIZQT__.ttf", 18)
     defeatText:SetPoint("CENTER",defeatFrame,"CENTER",0,-70)
     defeatText:SetTextColor(1,0.8,0.01)
@@ -3030,6 +3032,7 @@ do
     speedkillDividerBottom:SetAlpha(0)
     
     local speedkillLabel = defeatFrame:CreateFontString(nil,"OVERLAY")
+    addon:PatchFontString(speedkillLabel)
     speedkillLabel:SetFont("Fonts\\FRIZQT__.ttf", 24)
     speedkillLabel:SetTextColor(1,1,1)
     speedkillLabel:SetShadowColor(0,0,0,0.75)
@@ -3040,6 +3043,7 @@ do
     
     
     local speedkillValue = defeatFrame:CreateFontString(nil,"OVERLAY")
+    addon:PatchFontString(speedkillValue)
     speedkillValue:SetFont("Interface\\Addons\\DXE\\Fonts\\FGM.ttf", 28, "OUTLINE")
     speedkillValue:SetTextColor(1,0.8,0.01)
     speedkillValue:SetShadowColor(0,0,0,0.75)
@@ -3070,22 +3074,22 @@ do
                 module:Simple(alertKey, warningData.text, 4,"None",warningData.color1, nil, warningData.icon)
             end,
             alerts = {
-                {text = "Stomp",                            color1 = "YELLOW",      icon = addon.ST[103414]},
-                {text = "Black Phase",                      color1 = "WHITE",       icon = addon.ST[108794]},
-                {text = "Deep Corruption",                  color1 = "PURPLE",      icon = addon.ST[105171]},
-                {text = "Frost Phase",                      color1 = "CYAN",        icon = addon.ST[63562]},
-                {text = "Hour of Twilight",                 color1 = "RED",         icon = addon.ST[103327]},
-                {text = "Twilight Onslaught",               color1 = "MAGENTA",     icon = addon.ST[106401]},
-                {text = "Amalgamation gets Superheated",    color1 = "GOLD",        icon = addon.ST[105834]},
-                {text = "Cataclysm",                        color1 = "GOLD",        icon = addon.ST[110044]},
+                {text = "踩踏 Stomp",                      color1 = "YELLOW",      icon = addon.ST[103414]},
+                {text = "暗影阶段 Black Phase",             color1 = "WHITE",       icon = addon.ST[108794]},
+                {text = "深度腐蚀 Deep Corruption",         color1 = "PURPLE",      icon = addon.ST[105171]},
+                {text = "冰霜阶段 Frost Phase",             color1 = "CYAN",        icon = addon.ST[63562]},
+                {text = "暮光审判 Hour of Twilight",        color1 = "RED",         icon = addon.ST[103327]},
+                {text = "暮光猛攻 Twilight Onslaught",      color1 = "MAGENTA",     icon = addon.ST[106401]},
+                {text = "过热 Superheated",                 color1 = "GOLD",        icon = addon.ST[105834]},
+                {text = "大灾变 Cataclysm",                 color1 = "GOLD",        icon = addon.ST[110044]},
                 
-                {text = "Hurl Spear",                       color1 = "YELLOW",      icon = addon.ST[71466]},
-                {text = "The Widow's Kiss",                 color1 = "LIGHTGREEN",  icon = addon.ST[99476]},
-                {text = "Heated Volcano",                   color1 = "WHITE",       icon = addon.ST[98493]},
-                {text = "Firestorm",                        color1 = "YELLOW",      icon = addon.ST[100744]},
-                {text = "Shards of Torment",                color1 = "MAGENTA",     icon = addon.ST[99259]},
-                {text = "Searing Seeds",                    color1 = "YELLOW",     icon = addon.ST[98450]},
-                {text = "Sulfuras Smash",                   color1 = "BROWN",     icon = addon.ST[100258]},
+                {text = "投掷长矛 Hurl Spear",             color1 = "YELLOW",      icon = addon.ST[71466]},
+                {text = "黑寡妇之吻 The Widow's Kiss",     color1 = "LIGHTGREEN",  icon = addon.ST[99476]},
+                {text = "加热火山 Heated Volcano",          color1 = "WHITE",       icon = addon.ST[98493]},
+                {text = "火风暴 Firestorm",                 color1 = "YELLOW",      icon = addon.ST[100744]},
+                {text = "折磨碎片 Shards of Torment",       color1 = "MAGENTA",     icon = addon.ST[99259]},
+                {text = "灼热之种 Searing Seeds",           color1 = "YELLOW",      icon = addon.ST[98450]},
+                {text = "萨弗拉斯猛击 Sulfuras Smash",      color1 = "BROWN",       icon = addon.ST[100258]},
             },
         },
         dropdown = {
@@ -3095,22 +3099,19 @@ do
                 module:Dropdown(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon)
             end,
             alerts = {
-                {text = "Next Black Blood Phase",         time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},
-                {text = "New Void of the Unmaking",       time = 7,  color1 = "MAGENTA",                    icon = addon.ST[693]},
-                {text = "Next Void Bolt",                 time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},
-                {text = "Next Focused Assault",           time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},
-                {text = "Next Fading Light",              time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},
-                {text = "Twilight Elite Slayer",          time = 8,  color1 = "GREEN",                      icon = addon.ST[80325]},
-                {text = "Next Roll",                      time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},
-                {text = "New Mutated Corruption",         time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},
-                
-                {text = "Next Throw Crystal Prison Trap", time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},
-                {text = "Next Smoldering Devastation",    time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},
-                {text = "Next Concussive Stomp",          time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},
-                {text = "Next Firestorm",                 time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},
-                {text = "Next Inferno Strike",            time = 10, color1 = "RED",                        icon = addon.ST[101002]},
-                {text = "Next Leaping Flames",            time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},
-                {text = "Next Magma Trap",                time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},
+                {text = "下一次 黑血阶段",                 time = 10, color1 = "BLACK",     color2 = "GREY", icon = addon.ST[103851]},
+                {text = "下一次 虚空箭",                    time = 7,  color1 = "MAGENTA",                    icon = addon.ST[108384]},
+                {text = "下一次 集中攻击",                  time = 15, color1 = "YELLOW",    color2 = "GOLD", icon = addon.ST[107851]},
+                {text = "下一次 渐逝之光",                  time = 10, color1 = "ORANGE",                     icon = addon.ST[105925]},
+                {text = "下一次 翻滚 Next Roll",            time = 16, color1 = "ORANGE",                     icon = addon.EJST[4050]},
+                {text = "下一次 突变腐蚀",                  time = 12, color1 = "LIGHTGREEN",                 icon = addon.ST[104972]},
+                {text = "下一次 水晶监狱陷阱",             time = 20, color1 = "TURQUOISE",                  icon = addon.ST[99836]},
+                {text = "下一次 阴燃毁灭",                  time = 15, color1 = "ORANGE",    color2 = "RED",  icon = addon.ST[99052]},
+                {text = "下一次 震荡践踏",                  time = 12, color1 = "YELLOW",                     icon = addon.ST[100411]},
+                {text = "下一次 火风暴",                    time = 8,  color1 = "YELLOW",                     icon = addon.ST[100744]},
+                {text = "下一次 炼狱打击",                  time = 10, color1 = "RED",                        icon = addon.ST[101002]},
+                {text = "下一次 跳跃烈焰",                  time = 12, color1 = "ORANGE",                     icon = addon.ST[98535]},
+                {text = "下一次 熔岩陷阱",                  time = 8,  color1 = "ORANGE",                     icon = addon.ST[101233]},
             },
         },
         centerpopup = {
@@ -3120,17 +3121,17 @@ do
                 module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, false, warningData.deplete and "DEPLETE" or "FILL")
             end,
             alerts = {
-                {text = "Next Focused Anger", time = 6, color1 = "ORANGE", icon = addon.ST[104543]},
-                {text = "Next Searing Bloods", time = 7, color1 = "RED", icon = addon.ST[108356]},
-                {text = "Feedback ends", time = 15, flashtime = 15, color1 = "TEAL", icon = addon.ST[108934]},
-                {text = "Shockwave", time = 3, color1 = "YELLOW", icon = addon.ST[108046]},
-                {text = "Seal Armor closes", time = 23, color1 = "ORANGE", icon = addon.ST[105847]},
-                {text = "Ember Flare", time = 6, color1 = "ORANGE", icon = addon.ST[100936]},
-                {text = "The Widow's Kiss dissipates", time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},
-                {text = "Magma Flow ends", time = 10, color1 = "PEACH", icon = addon.ST[97225]},
-                {text = "Fiery Vortex", time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},
-                {text = "Decimation Blade fades", time = 15, color1 = "PURPLE", deplete = true, icon = addon.ST[99352]},
-                {text = "Next Flame Scythe", time = 8, color1 = "YELLOW", icon = addon.ST[100213]},
+                {text = "共鸣水晶 Resonating Crystal",      time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},
+                {text = "熔火之种 Molten Seed",              time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},
+                {text = "下一次 治疗 Next heal",             time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},
+                {text = "震荡波 Shockwave",                  time = 3,  color1 = "YELLOW",  icon = addon.ST[108046]},
+                {text = "封印护甲 Seal Armor",               time = 23, color1 = "ORANGE",  icon = addon.ST[105847]},
+                {text = "余烬闪耀 Ember Flare",              time = 6,  color1 = "ORANGE",  icon = addon.ST[100936]},
+                {text = "黑寡妇之吻消散",                    time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[99476]},
+                {text = "熔岩之流结束",                      time = 10, color1 = "PEACH",   icon = addon.ST[97225]},
+                {text = "烈焰漩涡 Fiery Vortex",             time = 10, color1 = "LIGHTBLUE", color2 = "CYAN", icon = addon.ST[99794]},
+                {text = "毁灭之刃消退",                      time = 15, color1 = "PURPLE",  deplete = true, icon = addon.ST[99352]},
+                {text = "下一次 烈焰镰刀",                   time = 8,  color1 = "YELLOW",  icon = addon.ST[100213]},
             },
         },
         emphasizedcenter = {
@@ -3140,9 +3141,9 @@ do
                 module:CenterPopup(alertKey, warningData.text, warningData.time, warningData.flashtime or 5, "None", warningData.color1, warningData.color2 or warningData.color1, nil, warningData.icon, false, nil, false, true, warningData.deplete and "DEPLETE" or "FILL")
             end,
             alerts = {
-                {text = "Resonating Crystal explodes", time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},
-                {text = "Molten Seed", time = 12, color1 = "ORANGE", icon = addon.ST[98333]},
-                {text = "Bloods: Next heal", time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},
+                {text = "共鸣水晶爆炸",    time = 13, color1 = "MAGENTA", icon = addon.ST[103640]},
+                {text = "熔火之种",         time = 12, color1 = "ORANGE",  icon = addon.ST[98333]},
+                {text = "下一次治疗",       time = 10, color1 = "RED", color2 = "ORANGE", icon = addon.ST[105937]},
             },
         },
         individual = {
@@ -3306,9 +3307,11 @@ do
         emphasisFrame:SetPoint("CENTER",EmphasisFrameAnchor,"Center")
         
         local emphasisTestText = EmphasisFrameAnchor:CreateFontString(nil,"OVERLAY")
+        addon:PatchFontString(emphasisTestText)
         EmphasisFrameAnchor.emphasisTestText = emphasisTestText
         
         local emphasisText = emphasisFrame:CreateFontString(nil,"OVERLAY")
+        addon:PatchFontString(emphasisText)
         emphasisFrame.emphasisText = emphasisText
         addon:UpdateEmphasisFrame()
         
@@ -4575,6 +4578,7 @@ do
     function module:CreateAlertsFrame()
         local slots = pfl.AlertsNumSlots + 1 -- to include fading slot
         local alertsTestText = AlertsFrameAnchor:CreateFontString(nil,"OVERLAY")
+        addon:PatchFontString(alertsTestText)
         AlertsFrameAnchor.alertsTestText = alertsTestText
         
         local i = slots
@@ -4582,6 +4586,7 @@ do
             local frame = CreateFrame("Frame","DXE Alert frame "..i,UIParent)
             alertSlots[i] = frame
             local text = frame:CreateFontString(nil,"OVERLAY")
+            addon:PatchFontString(text)
             frame.text = text
             i = i - 1
         end

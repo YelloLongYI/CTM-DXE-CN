@@ -49,8 +49,13 @@ function module:ADDON_LOADED(name)
 		for name in pairs(B_MODS) do self:Load(name) end
 		B_MODS = nil
 		if saved_command then
-			DXE_SLASH_HANDLER(saved_command)
+			local cmd = saved_command
 			saved_command = nil
+			local f = CreateFrame("Frame")
+			f:SetScript("OnUpdate", function(self)
+				self:SetScript("OnUpdate", nil)
+				DXE_SLASH_HANDLER(cmd)
+			end)
 		end
 	elseif Z_MODS_LIST[name] then
 		self:CleanZoneModules(name)
