@@ -4,6 +4,25 @@ local SM = addon.SM
 local Media = {}
 addon.Media = Media
 
+-- Patch a DXE FontString's SetFont to auto-fallback to STANDARD_TEXT_FONT
+-- when the requested font doesn't support current locale (e.g. zhCN)
+do
+	local originalSetFont
+	function addon:PatchFontString(fontstring)
+		if fontstring._dxePatched then return end
+		if not originalSetFont then
+			originalSetFont = fontstring.SetFont
+		end
+		fontstring.SetFont = function(self, font, size, flags)
+			if not font or not originalSetFont(self, font, size, flags) then
+				return originalSetFont(self, STANDARD_TEXT_FONT, size, flags)
+			end
+			return true
+		end
+		fontstring._dxePatched = true
+	end
+end
+
 
 -------------------------
 -- DB
@@ -373,6 +392,7 @@ do
 	local reg = {}
 	function addon:RegisterFontString(fontstring,size,flags)
 		reg[#reg+1] = fontstring
+		addon:PatchFontString(fontstring)
 		fontstring:SetFont(SM:Fetch("font",pfl.Globals.Font),size,flags)
 	end
 
@@ -389,6 +409,7 @@ do
 	local reg = {}
 	function addon:RegisterTimerFontString(fontstring,size,flags)
 		reg[#reg+1] = fontstring
+		addon:PatchFontString(fontstring)
 		fontstring:SetFont(SM:Fetch("font",pfl.Globals.TimerFont),size,flags)
 	end
 
