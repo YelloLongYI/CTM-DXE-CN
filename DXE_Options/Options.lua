@@ -282,10 +282,6 @@ local function InitializeOptions()
 						JRG = L.options["Jingrange"],
                         Hongxi = L.options["Hongxi"],
 					},
-                    -- get = function(info) return db.profile.GENERAL.Realm end,
-                    -- set = function(info,v)
-					-- 	db.profile.GENERAL.Realm = v                       
-					-- end,
 				},
 			},
 		}

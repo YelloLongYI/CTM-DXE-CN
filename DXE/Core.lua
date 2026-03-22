@@ -1135,6 +1135,82 @@ local DEFEAT_NIDS
 local RegisterQueue = {}
 local Initialized = false
 local encIterator = 1
+
+---------------------------------------------
+-- REALM OVERRIDE SYSTEM
+---------------------------------------------
+
+local RealmOverrides = {}
+
+-- Deep merge: recursively merge override values into base table
+local function DeepMerge(base, override)
+    for k, v in pairs(override) do
+        if type(v) == "table" and type(base[k]) == "table" and not v[1] then
+            -- Recursive merge for dict-like tables (no numeric keys)
+            DeepMerge(base[k], v)
+        else
+            -- Direct replacement for values and array-like tables
+            base[k] = v
+        end
+    end
+end
+
+-- Apply event_overrides: match events by eventtype+spellname and replace execute
+local function ApplyEventOverrides(data, eventOverrides)
+    if not data.events or not eventOverrides then return end
+    for _, eo in ipairs(eventOverrides) do
+        for _, event in ipairs(data.events) do
+            local match = eo.match
+            if event.eventtype == match.eventtype
+                and (not match.spellname or event.spellname == match.spellname)
+                and (not match.spellid or event.spellid == match.spellid)
+                and (not match.event or event.event == match.event) then
+                event.execute = eo.replace_execute
+                break
+            end
+        end
+    end
+end
+
+-- Apply realm overrides to encounter data before registration
+local function ApplyRealmOverrides(data)
+    local key = data.key
+    if not RealmOverrides[key] then return end
+    local realm = pfl and pfl.Globals and pfl.Globals.Realm
+    if not realm then return end
+    local overrides = RealmOverrides[key][realm]
+    if not overrides then return end
+    -- Apply event_overrides separately (special handling)
+    if overrides.event_overrides then
+        ApplyEventOverrides(data, overrides.event_overrides)
+    end
+    -- Deep merge all other fields (alerts, userdata, triggers, etc.)
+    for k, v in pairs(overrides) do
+        if k ~= "event_overrides" then
+            if type(v) == "table" and type(data[k]) == "table" and not v[1] then
+                DeepMerge(data[k], v)
+            else
+                data[k] = v
+            end
+        end
+    end
+end
+
+--- Register a realm-specific override for an encounter.
+-- Called from Overrides_<Realm>.lua files before Encounters.lua loads.
+-- @param key The encounter key (e.g. "ascendcouncil")
+-- @param realm The realm name (e.g. "JRG")
+-- @param overrides Table of fields to override
+function addon:RegisterRealmOverride(key, realm, overrides)
+    if not RealmOverrides[key] then RealmOverrides[key] = {} end
+    RealmOverrides[key][realm] = overrides
+end
+
+--- Called when Realm is changed in Options UI
+function addon:NotifyRealmChanged(realm)
+    self:Print("|cff99ff33[DXE]|r Realm changed to: |cffffd700" .. tostring(realm) .. "|r. /reload to apply.")
+end
+
 function addon:RegisterEncounter(data)
     local key = data.key
     
@@ -1173,6 +1249,7 @@ function addon:RegisterEncounter(data)
     if key ~= "default" then
         data.order = encIterator
         encIterator = encIterator + 1
+        ApplyRealmOverrides(data)
         self:AddEncounterDefaults(data)
         self:RefreshDefaults()
         self.callbacks:Fire("OnRegisterEncounter",data)
