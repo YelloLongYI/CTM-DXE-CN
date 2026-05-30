@@ -476,6 +476,7 @@ local defaults = {
 
 local addon = LibStub("AceAddon-3.0"):NewAddon("DXE","AceEvent-3.0","AceTimer-3.0","AceComm-3.0","AceSerializer-3.0")
 _G.DXE = addon
+addon.Compat = _G.DXE_Compat
 addon.version = "635 | 3.3 - 17"
 addon.versionfull = format("|cff99ff33%s (official)|r|cffffffff | |r|cffe6cc80%s (developed by|r |cffffffffGreghouse|r|cffe6cc80)|r",635,"3.3 - 17")
 addon.developer = "Greghouse"

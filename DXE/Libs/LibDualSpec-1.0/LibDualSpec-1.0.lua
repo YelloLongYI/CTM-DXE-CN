@@ -31,6 +31,8 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --]]
 
+if select(4, GetBuildInfo()) >= 40400 then return end
+
 local MAJOR, MINOR = "LibDualSpec-1.0", 8
 assert(LibStub, MAJOR.." requires LibStub")
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
@@ -91,25 +93,25 @@ do
 		L_DUAL_PROFILE = "이중 프로필"
 		L_DUAL_PROFILE_DESC = "특성이 바뀔 때 프로필을 선�?�합�?다."
 		L_ENABLED = "이중 프로필 사용"
-		L_ENABLED_DESC = "특성이 변경 �?�때 �?동으로 프로필을 변경�?도록 선�?�합�?다."
+		L_ENABLED_DESC = "특성이 변경 �?�때 �?띙으로 프로필을 변경�?띄록 선�?�합�?다."
 	elseif locale == "ruRU" then
-		L_DUALSPEC_DESC = "Двойной профиль позволяет вам выбрать различные профили для каждой ра�?кладки талантов. Профили б�?д�?т переключать�?я каждый раз, когда вы переключаете ра�?кладк�? талантов."
+		L_DUALSPEC_DESC = "Двойной профиль позволѝет вам выбрать различные профили длѝ каждой ра�?кладки талантов. Профили б�?д�?т переключать�?ѝ каждый раз, когда вы переключаете ра�?кладк�? талантов."
 		L_DUAL_PROFILE = "Второй профиль"
 		L_DUAL_PROFILE_DESC = "Выберите профиль, который необходимо активировать при переключениии талантов."
 		L_ENABLED = "Включить двойной профиль"
-		L_ENABLED_DESC = "Включите эт�? опцию для автоматиче�?кого переключения межд�? профилями при переключении ра�?кладки талантов."
+		L_ENABLED_DESC = "Включите ѝт�? опцию длѝ автоматиче�?кого переключениѝ межд�? профилѝми при переключении ра�?кладки талантов."
 	elseif locale == "zhCN" then
-		L_DUALSPEC_DESC = "�?�时，你可以为你的双天赋设定另一组配置文件，你的双重配置文件将在你转换天赋时自动与目前使用配置文件交换。"
-		L_DUAL_PROFILE = "双重配置文件"
-		L_DUAL_PROFILE_DESC = "选择转换天赋时所�?使用的配置文件"
-		L_ENABLED = "开�?�双重配置文件"
-		L_ENABLED_DESC = "勾选以便转换天赋时自动交换配置文件。"
+		L_DUALSPEC_DESC = "�?�时，你坯以为你的坌天赋设定坦一组酝置文件，你的坌針酝置文件将在你转杢天赋时自动与目剝使用酝置文件交杢。"
+		L_DUAL_PROFILE = "坌針酝置文件"
+		L_DUAL_PROFILE_DESC = "选择转杢天赋时所�?使用的酝置文件"
+		L_ENABLED = "开�?�坌針酝置文件"
+		L_ENABLED_DESC = "勾选以便转杢天赋时自动交杢酝置文件。"
 	elseif locale == "zhTW" then
-		L_DUALSPEC_DESC = "啟用時，你可以為你的雙天賦設定另一組設定檔。你的雙設定檔將在你轉換天賦時自動�?�目前使用設定檔交換。"
+		L_DUALSPEC_DESC = "啟用時，你坯以為你的雙天賦設定坦一組設定檔。你的雙設定檔將在你轉杛天賦時自動�?�目剝使用設定檔交杛。"
 		L_DUAL_PROFILE = "雙設定檔"
-		L_DUAL_PROFILE_DESC = "�?�擇轉換天賦後所�?使用的設定檔"
+		L_DUAL_PROFILE_DESC = "�?�擇轉杛天賦後所�?使用的設定檔"
 		L_ENABLED = "啟用雙設定檔"
-		L_ENABLED_DESC = "勾�?�以在轉換天賦時自動交換設定檔"
+		L_ENABLED_DESC = "勾�?�以在轉杛天賦時自動交杛設定檔"
 	elseif locale == "esES" then
 		L_DUALSPEC_DESC = "Si está activa, esta característica te permite seleccionar un perfil distinto para cada configuración de talentos. El perfil secundario será intercambiado por el activo cada vez que cambies de una configuración de talentos a otra."
 		L_DUAL_PROFILE = "Perfil secundario"
