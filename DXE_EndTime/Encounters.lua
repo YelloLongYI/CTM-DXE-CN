@@ -848,7 +848,7 @@ do
     local moonlanceBranch1InPlayerRange = false
     local moonlanceBranch2InPlayerRange = false
     
-    local GetPlayerMapPosition,UnitName = GetPlayerMapPosition,UnitName
+    local GetPlayerMapPosition,UnitName = DXE.Compat.GetPlayerMapPos, DXE.Compat.UnitName
     
     local updateeyelines = function(API, mapData)
         if not linesShown then return end

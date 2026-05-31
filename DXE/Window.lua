@@ -41,7 +41,7 @@ function prototype:AddTitleButton(texture,OnClick,text)
 	assert(type(text) == "string")
 	--@end-debug@]===]
 
-	local button = CreateFrame("Button",nil,self.faux_window)
+	local button = DXE.Compat.CreateFrame("Button",nil,self.faux_window)
 	button:SetWidth(buttonSize)
 	button:SetHeight(buttonSize)
 	button:SetPoint("RIGHT",self.lastbutton,"LEFT")
@@ -138,7 +138,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 
 	local properName = name:gsub(" ","")
 
-	local window = CreateFrame("Frame","DXEWindow"..properName,UIParent)
+	local window = DXE.Compat.CreateFrame("Frame","DXEWindow"..properName,UIParent)
 	
     window:SetWidth(width)
 	window:SetHeight(height)
@@ -149,7 +149,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
     
 	-- Inside
 	-- Important: Make sure faux_window:GetEffectiveScale() == UIParent:GetEffectiveScale() on creation
-	local faux_window = CreateFrame("Frame","DXEWindow"..properName.."Frame",window)
+	local faux_window = DXE.Compat.CreateFrame("Frame","DXEWindow"..properName.."Frame",window)
 	faux_window:SetWidth(width)
 	faux_window:SetHeight(height)
 	addon:RegisterBackground(faux_window)
@@ -165,7 +165,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
     window.faux_window = faux_window
 
     
-	local corner = CreateFrame("Frame", nil, faux_window)
+	local corner = DXE.Compat.CreateFrame("Frame", nil, faux_window)
 	corner:SetFrameLevel(faux_window:GetFrameLevel() + 9)
 	corner:EnableMouse(true)
 	corner:SetScript("OnMouseDown", handlers.Corner_OnMouseDown)
@@ -181,7 +181,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 	window.corner = corner
 
 	-- Border
-	local border = CreateFrame("Frame",nil,faux_window)
+	local border = DXE.Compat.CreateFrame("Frame",nil,faux_window)
 	border:SetAllPoints(true)
 	border:SetFrameLevel(border:GetFrameLevel()+10)
 	addon:RegisterBorder(border)
@@ -189,7 +189,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 	window.border = border
 
 	-- Title Bar
-	local titlebar = CreateFrame("Frame",nil,faux_window)
+	local titlebar = DXE.Compat.CreateFrame("Frame",nil,faux_window)
 	titlebar:SetPoint("TOPLEFT",faux_window,"TOPLEFT",titleBarInset,-titleBarInset)
 	titlebar:SetPoint("BOTTOMRIGHT",faux_window,"TOPRIGHT",-titleBarInset, -(titleHeight+titleBarInset))
     titlebar:EnableMouse(false)
@@ -210,7 +210,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 	titletext:SetShadowColor(0,0,0)
 	window.titletext = titletext
     
-	local close = CreateFrame("Button",nil,faux_window)
+	local close = DXE.Compat.CreateFrame("Button",nil,faux_window)
 	close:SetFrameLevel(close:GetFrameLevel()+5)
 	close:SetScript("OnClick",function() window.closefunc() end)
     window.closefunc = function() window:Hide() end
@@ -228,7 +228,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 	window.lastbutton = close
     
 	-- Container
-    local container = CreateFrame("Frame",nil,faux_window)
+    local container = DXE.Compat.CreateFrame("Frame",nil,faux_window)
     container:SetFrameLevel(faux_window:GetFrameLevel() + 11)
 	container:SetPoint("TOPLEFT",faux_window,"TOPLEFT",1,-titleHeight-titleBarInset)
 	container:SetPoint("BOTTOMRIGHT",faux_window,"BOTTOMRIGHT",-1,1)
@@ -236,7 +236,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 	window.container = container
 
 	-- Content
-	local content = CreateFrame("Frame",nil,container)
+	local content = DXE.Compat.CreateFrame("Frame",nil,container)
 	content:SetFrameLevel(faux_window:GetFrameLevel() + 12)
 	content:SetPoint("TOPLEFT",container,"TOPLEFT")
 	content:SetPoint("BOTTOMRIGHT",container,"BOTTOMRIGHT")
@@ -303,33 +303,33 @@ end
 ---------------------------------------
 
 do
-	local UIDropDownMenu_CreateInfo = UIDropDownMenu_CreateInfo
+	local UIDropDownMenu_CreateInfo = DXE.Compat.UIDropDown_CreateInfo
 	local info
 
 	local function Initialize(self,level)
 		level = 1
 		if level == 1 then
-			info = UIDropDownMenu_CreateInfo()
+			info = DXE.Compat.UIDropDown_CreateInfo()
 			info.isTitle = true 
 			info.text = L["Windows"]
 			info.notCheckable = true 
 			info.justifyH = "LEFT"
-			UIDropDownMenu_AddButton(info,1)
+			DXE.Compat.UIDropDown_AddButton(info,1)
 
 			for name,openFunc in pairs(registry) do
-				info = UIDropDownMenu_CreateInfo()
+				info = DXE.Compat.UIDropDown_CreateInfo()
 				info.text = name
 				info.notCheckable = true
 				info.func = openFunc
 				info.owner = self
-				UIDropDownMenu_AddButton(info,1)
+				DXE.Compat.UIDropDown_AddButton(info,1)
 			end
 		end
 	end
 
 	function addon:CreateWindowsDropDown()
-		local windows = CreateFrame("Frame", "DXEPaneWindows", UIParent, "UIDropDownMenuTemplate") 
-		UIDropDownMenu_Initialize(windows, Initialize, "MENU")
+		local windows = DXE.Compat.CreateFrame("Frame", "DXEPaneWindows", UIParent, "UIDropDownMenuTemplate") 
+		DXE.Compat.UIDropDown_Initialize(windows, Initialize, "MENU")
 		return windows
 	end
 end

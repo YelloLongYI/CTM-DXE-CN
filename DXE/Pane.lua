@@ -168,7 +168,7 @@ do
 	-- @param onclick The function of the OnClick script
 	-- @param anchor SetPoints the control LEFT, anchor, RIGHT
 	function addon:AddPaneButton(normal,highlight,OnClick,name,text)
-		local control = CreateFrame("Button",nil,self.Pane)
+		local control = DXE.Compat.CreateFrame("Button",nil,self.Pane)
 		control:SetWidth(size)
 		control:SetHeight(size)
 		control:SetPoint("LEFT",buttons[#buttons] or self.Pane.timer,"RIGHT")
@@ -230,12 +230,12 @@ end
 
 -- Idea based off RDX's Pane
 function addon:CreatePane()
-	Pane = CreateFrame("Frame","DXEPane",UIParent)
+	Pane = DXE.Compat.CreateFrame("Frame","DXEPane",UIParent)
 	Pane:SetAlpha(0)
 	Pane:Hide()
 	Pane:SetClampedToScreen(true)
 	addon:RegisterBackground(Pane)
-	Pane.border = CreateFrame("Frame",nil,Pane)
+	Pane.border = DXE.Compat.CreateFrame("Frame",nil,Pane)
 	Pane.border:SetAllPoints(true)
 	addon:RegisterBorder(Pane.border)
 	Pane:SetWidth(pfl.Pane.Width)
@@ -302,13 +302,13 @@ function addon:CreatePane()
 	-- Create dropdown menu for folder
 	local selector = self:CreateSelectorDropDown()
 	Pane.SetFolderValue = function(key)
-		UIDropDownMenu_SetSelectedValue(selector,key)
+		DXE.Compat.UIDropDown_SetSelectedValue(selector,key)
 	end
 	-- Add Folder control
 	Pane.folder = self:AddPaneButton(
 		PaneTextures.."Folder",
 		PaneTextures.."Folder",
-		function() ToggleDropDownMenu(1,nil,selector,Pane.folder,0,0) end,
+		function() DXE.Compat.ToggleDropDown(1,nil,selector,Pane.folder,0,0) end,
 		L["Selector"],
 		L["Activates an encounter"]
 	)
@@ -333,7 +333,7 @@ function addon:CreatePane()
 	Pane.windows = self:AddPaneButton(
 		PaneTextures.."Windows",
 		PaneTextures.."Windows",
-		function() ToggleDropDownMenu(1,nil,windows,Pane.windows,0,0) end,
+		function() DXE.Compat.ToggleDropDown(1,nil,windows,Pane.windows,0,0) end,
 		L["Windows"],
 		L["Make windows visible"]
 	)
@@ -367,7 +367,7 @@ function addon:CreatePane()
 				local time = addon.db.profile.SpecialTimers.PullTimers[addon.db.profile.SpecialTimers.PullTimerPrefered] or 10
                 addon:AnnouncePull("pull "..time)
 			elseif button == "RightButton" then
-                ToggleDropDownMenu(1,nil,pullsbreaks,Pane.pull,0,0)
+                DXE.Compat.ToggleDropDown(1,nil,pullsbreaks,Pane.pull,0,0)
             elseif button == "MiddleButton" then
                 if GetNumPartyMembers() == 0 and GetNumRaidMembers() == 0 then
                     addon:Print("\124cffff0000You have to be member of a party or a raid group!\124r")    
@@ -1275,12 +1275,12 @@ do
 		assert(type(height) == "number" and height > 0,"expected 'height' to be a number > 0")
 		assert(type(text) == "string","expected 'text' to be a string")
 		--@end-debug@]===]
-		local frame = CreateFrame("Frame","DXE"..name,UIParent)
+		local frame = DXE.Compat.CreateFrame("Frame","DXE"..name,UIParent)
 		frame:EnableMouse(true)
 		frame:SetMovable(true)
 		frame:SetUserPlaced(false)
 		addon:RegisterBackground(frame)
-		frame.border = CreateFrame("Frame",nil,frame)
+		frame.border = DXE.Compat.CreateFrame("Frame",nil,frame)
 		frame.border:SetAllPoints(true)
 		addon:RegisterBorder(frame.border)
 		frame:SetWidth(width)
@@ -1353,7 +1353,7 @@ end
 ---------------------------------------------
 
 do
-	local UIDropDownMenu_CreateInfo = UIDropDownMenu_CreateInfo
+	local UIDropDownMenu_CreateInfo = DXE.Compat.UIDropDown_CreateInfo
 	local function closeall() CloseDropDownMenus(1) end
 
 	local function OnClick(self)
@@ -1373,20 +1373,20 @@ do
 		level = level or 1
 
 		if level == 1 then
-			info = UIDropDownMenu_CreateInfo()
+			info = DXE.Compat.UIDropDown_CreateInfo()
 			info.isTitle = true
 			info.text = L["Encounter Selector"]
 			info.notCheckable = true
 			info.justifyH = "LEFT"
-			UIDropDownMenu_AddButton(info,1)
+			DXE.Compat.UIDropDown_AddButton(info,1)
 
-			info = UIDropDownMenu_CreateInfo()
+			info = DXE.Compat.UIDropDown_CreateInfo()
 			info.text = L["Default"]
 			info.value = "default"
 			info.func = OnClick
 			info.colorCode = YELLOW
 			info.owner = self
-			UIDropDownMenu_AddButton(info,1)
+			DXE.Compat.UIDropDown_AddButton(info,1)
 
 			for key,data in addon:IterateEDB() do
 				work[data.category or data.zone] = true
@@ -1398,21 +1398,21 @@ do
 			sort(list)
 
 			for _,cat in ipairs(list) do
-				info = UIDropDownMenu_CreateInfo()
+				info = DXE.Compat.UIDropDown_CreateInfo()
 				info.text = cat
 				info.value = cat
 				info.hasArrow = true
 				info.notCheckable = true
 				info.owner = self
-				UIDropDownMenu_AddButton(info,1)
+				DXE.Compat.UIDropDown_AddButton(info,1)
 			end
 
-			info = UIDropDownMenu_CreateInfo()
+			info = DXE.Compat.UIDropDown_CreateInfo()
 			info.notCheckable = true
 			info.justifyH = "LEFT"
 			info.text = L["Cancel"]
 			info.func = closeall
-			UIDropDownMenu_AddButton(info,1)
+			DXE.Compat.UIDropDown_AddButton(info,1)
 		elseif level == 2 then
 			local cat = UIDROPDOWNMENU_MENU_VALUE
 
@@ -1427,21 +1427,21 @@ do
 			end
 
 			for _,name in ipairs(list) do
-				info = UIDropDownMenu_CreateInfo()
+				info = DXE.Compat.UIDropDown_CreateInfo()
 				info.hasArrow = false
 				info.text = work[name].text
 				info.owner = self
 				info.value = work[name].key
 				info.func = OnClick
-				UIDropDownMenu_AddButton(info,2)
+				DXE.Compat.UIDropDown_AddButton(info,2)
 			end
 		end
 	end
 
 	function addon:CreateSelectorDropDown()
-		local selector = CreateFrame("Frame", "DXEPaneSelector", UIParent, "UIDropDownMenuTemplate")
-		UIDropDownMenu_Initialize(selector, Initialize, "MENU")
-		UIDropDownMenu_SetSelectedValue(selector,"default")
+		local selector = DXE.Compat.CreateFrame("Frame", "DXEPaneSelector", UIParent, "UIDropDownMenuTemplate")
+		DXE.Compat.UIDropDown_Initialize(selector, Initialize, "MENU")
+		DXE.Compat.UIDropDown_SetSelectedValue(selector,"default")
 		return selector
 	end
 end

@@ -165,7 +165,7 @@ local function CreateRow(parent)
 end
 
 local function CreateHeader(content,column)
-	local header = CreateFrame("Button", nil, content)
+	local header = DXE.Compat.CreateFrame("Button", nil, content)
 	header:SetScript("OnClick",function() header.sortDir = not header.sortDir; SortColumn(column) end)
 	header:SetHeight(20)
 	local title = header:CreateFontString(nil,"OVERLAY")
@@ -216,8 +216,8 @@ local function OnShow(self)
 	if v ~= "default" then
 		-- When showing switch to the active encounter even if we already have
 		-- a dropdown value
-		UIDropDownMenu_SetSelectedValue(dropdown,v)
-		UIDropDownMenu_SetText(dropdown,EDB[v].name)
+		DXE.Compat.UIDropDown_SetSelectedValue(dropdown,v)
+		DXE.Compat.UIDropDown_SetText(dropdown,EDB[v].name)
 	elseif not dropdown.selectedValue then
 		-- if there was no value and no active encounter, grab the first one we can find
 		v = next(EDB)
@@ -225,8 +225,8 @@ local function OnShow(self)
 			v = next(EDB,v)
 		end
 		if v then
-			UIDropDownMenu_SetSelectedValue(dropdown,v)
-			UIDropDownMenu_SetText(dropdown,EDB[v].name)
+			DXE.Compat.UIDropDown_SetSelectedValue(dropdown,v)
+			DXE.Compat.UIDropDown_SetText(dropdown,EDB[v].name)
 		end
 	else
 		v = nil
@@ -247,8 +247,8 @@ local function OnEvent(self, event, ...)
 			if not dropdown.selectedValue then
 				local v = addon:GetActiveEncounter()
 				if v ~= "default" then
-					UIDropDownMenu_SetSelectedValue(dropdown,v)
-					UIDropDownMenu_SetText(dropdown,EDB[v].name)
+					DXE.Compat.UIDropDown_SetSelectedValue(dropdown,v)
+					DXE.Compat.UIDropDown_SetText(dropdown,EDB[v].name)
 				else
 					local _
 					v = next(EDB)
@@ -256,8 +256,8 @@ local function OnEvent(self, event, ...)
 						v = next(EDB,v)
 					end
 					if v then
-						UIDropDownMenu_SetSelectedValue(dropdown,v)
-						UIDropDownMenu_SetText(dropdown,EDB[v].name)
+						DXE.Compat.UIDropDown_SetSelectedValue(dropdown,v)
+						DXE.Compat.UIDropDown_SetText(dropdown,EDB[v].name)
 					end
 				end
 			end
@@ -276,7 +276,7 @@ local function CreateWindow()
 									function() addon:RequestAllVersions() end,L["Sync"])
 	--@end-debug@]===]
 	local content = window.content
-	local addonbutton = CreateFrame("Button", nil, content, "UIPanelButtonTemplate")
+	local addonbutton = DXE.Compat.CreateFrame("Button", nil, content, "UIPanelButtonTemplate")
 	addonbutton:SetWidth(content:GetWidth()/3)
 	addonbutton:SetHeight(25)
 	addonbutton:SetNormalFontObject(GameFontNormalSmall)
@@ -304,12 +304,12 @@ local function CreateWindow()
 	.."\n"..L["|cffffff00Right Click|r to display the selected versions. Repeated clicks will refresh them"])
 
 	do
-		local parent = CreateFrame("Frame",nil,content)
+		local parent = DXE.Compat.CreateFrame("Frame",nil,content)
 		parent:SetHeight(44)
 		parent:SetWidth(content:GetWidth()*2/3)
 		parent:SetPoint("TOPRIGHT")
 
-		dropdown = CreateFrame("Frame", "DXEVersionCheckDropDown", parent, "UIDropDownMenuTemplate")
+		dropdown = DXE.Compat.CreateFrame("Frame", "DXEVersionCheckDropDown", parent, "UIDropDownMenuTemplate")
 		dropdown:SetPoint("TOPLEFT",parent,"TOPLEFT",-15,0)
 		dropdown:SetPoint("BOTTOMRIGHT",parent,"BOTTOMRIGHT",17,0)
 
@@ -322,7 +322,7 @@ local function CreateWindow()
 		text:SetPoint("LEFT", left, "LEFT", 25, 2)
 
 		local function OnClick(self)
-			UIDropDownMenu_SetSelectedValue(dropdown,self.value)
+			DXE.Compat.UIDropDown_SetSelectedValue(dropdown,self.value)
 			-- No need to set the dropdown menu text since SetSelectedValue can do
 			-- it for us here, since the 2nd level menu with the proper value is
 			-- guaranteed to exist here.
@@ -353,13 +353,13 @@ local function CreateWindow()
 				sort(list)
 
 				for _,cat in ipairs(list) do
-					info = UIDropDownMenu_CreateInfo()
+					info = DXE.Compat.UIDropDown_CreateInfo()
 					info.text = cat
 					info.value = cat
 					info.hasArrow = true
 					info.notCheckable = true
 					info.owner = self
-					UIDropDownMenu_AddButton(info,1)
+					DXE.Compat.UIDropDown_AddButton(info,1)
 				end
 			elseif level == 2 then
 				local cat = UIDROPDOWNMENU_MENU_VALUE
@@ -374,13 +374,13 @@ local function CreateWindow()
 				sort(list)
 
 				for _,name in ipairs(list) do
-					info = UIDropDownMenu_CreateInfo()
+					info = DXE.Compat.UIDropDown_CreateInfo()
 					info.hasArrow = false
 					info.text = name
 					info.owner = self
 					info.value = work[name]
 					info.func = OnClick
-					UIDropDownMenu_AddButton(info,2)
+					DXE.Compat.UIDropDown_AddButton(info,2)
 				end
 			end
 
@@ -403,11 +403,11 @@ local function CreateWindow()
 				end  
 			end  
 		end
-		UIDropDownMenu_Initialize(dropdown, dropdown_initialize)
+		DXE.Compat.UIDropDown_Initialize(dropdown, dropdown_initialize)
 		OnShow(window)
 	end
 
-	heading = CreateFrame("Frame",nil,content)
+	heading = DXE.Compat.CreateFrame("Frame",nil,content)
 	heading:SetWidth(content:GetWidth())
 	heading:SetHeight(18)
 	heading:SetPoint("TOPLEFT",addonbutton,"BOTTOMLEFT",0,-2)
@@ -441,14 +441,14 @@ local function CreateWindow()
 	headers[2]:SetText(L["Version"])
 	headers[2]:SetWidth(80)
 
-	scrollframe = CreateFrame("ScrollFrame", "DXEVCScrollFrame", content, "FauxScrollFrameTemplate")
+	scrollframe = DXE.Compat.CreateFrame("ScrollFrame", "DXEVCScrollFrame", content, "FauxScrollFrameTemplate")
 	scrollframe:SetPoint("TOPLEFT", headers[1], "BOTTOMLEFT")
 	scrollframe:SetPoint("BOTTOMRIGHT",-21,0)
 	scrollframe:SetBackdrop(backdrop)
 	scrollframe:SetBackdropBorderColor(0.33,0.33,0.33)
 
 	local scrollbar = _G[scrollframe:GetName() .. "ScrollBar"]
-	local scrollbarbg = CreateFrame("Frame",nil,scrollbar)
+	local scrollbarbg = DXE.Compat.CreateFrame("Frame",nil,scrollbar)
 	scrollbarbg:SetBackdrop(backdrop)
 	scrollbarbg:SetPoint("TOPLEFT",-3,19)
 	scrollbarbg:SetPoint("BOTTOMRIGHT",3,-18)

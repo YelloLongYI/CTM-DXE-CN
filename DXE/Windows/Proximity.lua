@@ -25,14 +25,14 @@ local function Destroy(self)
 end
 
 local function CreateBar()
-	local bar = CreateFrame("Frame",nil,window.content)
+	local bar = DXE.Compat.CreateFrame("Frame",nil,window.content)
 	bar:Hide()
 
 	local icon = bar:CreateTexture(nil,"ARTWORK")
 	icon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
 	bar.icon = icon
 
-	local statusbar = CreateFrame("StatusBar",nil,bar)
+	local statusbar = DXE.Compat.CreateFrame("StatusBar",nil,bar)
 	statusbar:SetMinMaxValues(0,1)
 	addon:RegisterStatusBar(statusbar)
 	bar.statusbar = statusbar

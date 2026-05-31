@@ -57,7 +57,7 @@ local tostring,tonumber = tostring,tonumber
 local band,bor = bit.band,bit.bor
 local match,gmatch,gsub,find,split = string.match,string.gmatch,string.gsub,string.find,string.split
 local UnitGUID, UnitName, UnitExists, UnitIsUnit = UnitGUID, UnitName, UnitExists, UnitIsUnit
-local UnitBuff,UnitDebuff = UnitBuff,UnitDebuff
+local UnitBuff,UnitDebuff = DXE.Compat.UnitBuff, DXE.Compat.UnitDebuff
 
 local pfl,key,CE,alerts,raidicons,arrows,announces
 
@@ -305,7 +305,7 @@ do
 		for i, unit in next, t do
 			if UnitExists(unit) and not UnitIsPlayer(unit) then
 				local unitId = UnitGUID(unit)
-				if idType == "number" then unitId = tonumber(unitId:sub(7, 10), 16) end
+				if idType == "number" then unitId = DXE.Compat.GetNPCIDFromGUID(unitId) end
 				if unitId == id then return unit end
 			end
 		end
@@ -363,10 +363,10 @@ do
 		buffstacks = function(unit,buff) local c = select(4,UnitBuff(unit,buff)) return c end,
 		hasicon = function(unit,icon) return RaidIcons:HasIcon(unit,icon) end,
 		closest = function(container) return addon:FindClosestUnit(userdata[container]) end,
-        ischannelingspell = function(unit, spell) local name = UnitChannelInfo(unit);return spell == name end,
-		channeldur = function(unit) local name,sub,text,texture,start,finish = UnitChannelInfo(unit) if start and finish then return (finish - start) / 1000 else return 0 end end,
-		castdur =   function(unit) local name,sub,text,texture,start,finish = UnitCastingInfo(unit) if start and finish then return (finish - start) / 1000 else return 0 end end,
-        casttimeleft = function(unit) local name,sub,text,texture,start,finish = UnitCastingInfo(unit) if finish then return (finish-(GetTime()*1000)) / 1000 else return 0 end end,
+        ischannelingspell = function(unit, spell) local name = DXE.Compat.GetChannelInfo(unit);return spell == name end,
+		channeldur = function(unit) local name,sub,text,texture,start,finish = DXE.Compat.GetChannelInfo(unit) if start and finish then return (finish - start) / 1000 else return 0 end end,
+		castdur =   function(unit) local name,sub,text,texture,start,finish = DXE.Compat.GetCastInfo(unit) if start and finish then return (finish - start) / 1000 else return 0 end end,
+        casttimeleft = function(unit) local name,sub,text,texture,start,finish = DXE.Compat.GetCastInfo(unit) if finish then return (finish-(GetTime()*1000)) / 1000 else return 0 end end,
 		gethp = function(unit) unit = addon:AdjustUnit(unit) local hp,hpmax = UnitHealth(unit),UnitHealthMax(unit) if hp and hpmax then return hp / hpmax * 100 else return 0 end end,
         getguidhp = function(guid) return addon:GetHPByGUID(guid) end,
 		getup = function(unit) unit = addon:AdjustUnit(unit) local up,upmax = UnitPower(unit),UnitPowerMax(unit) if up and upmax then return up / upmax * 100 else return 0 end end,

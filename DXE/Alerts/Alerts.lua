@@ -688,7 +688,7 @@ end
 do
 	local FLASH_DURATION,PERIOD,AMP,MULT,OSC
 
-	local flash = CreateFrame("Frame","DXEAlertsFlash",UIParent)
+	local flash = DXE.Compat.CreateFrame("Frame","DXEAlertsFlash",UIParent)
 	flash:SetFrameStrata("BACKGROUND")
 	local t = flash:CreateTexture(nil,"BACKGROUND")
 	t:SetAllPoints(true)
@@ -753,7 +753,7 @@ local function OnUpdate(self,elapsed)
 	end
 end
 
-local UpdateFrame = CreateFrame("Frame",nil,UIParent)
+local UpdateFrame = DXE.Compat.CreateFrame("Frame",nil,UIParent)
 UpdateFrame:SetScript("OnUpdate",OnUpdate)
 UpdateFrame:Hide()
 
@@ -1651,7 +1651,7 @@ end
 local BarCount = 1
 
 local function CreateBar()
-    local self = CreateFrame("Button","DXEAlertBar"..BarCount,UIParent)
+    local self = DXE.Compat.CreateFrame("Button","DXEAlertBar"..BarCount,UIParent)
     self:RegisterForClicks("RightButtonUp","LeftButtonUp")
     self:SetScript("OnClick", function(info ,button,...)
         if(button == "RightButton") then
@@ -1688,7 +1688,7 @@ local function CreateBar()
 	addon:RegisterBackground(bg)
 	self.bg = bg
   
-    local spark = CreateFrame("Frame",nil,self)
+    local spark = DXE.Compat.CreateFrame("Frame",nil,self)
     self.spark = spark
     spark.t = spark:CreateTexture(nil, "OVERLAY")
     spark.t:SetBlendMode("ADD");
@@ -1696,13 +1696,13 @@ local function CreateBar()
 
 	self.data = {}
 
-	local statusbar = CreateFrame("StatusBar",nil,self)
+	local statusbar = DXE.Compat.CreateFrame("StatusBar",nil,self)
 	statusbar:SetMinMaxValues(0,1)
 	statusbar:SetValue(0)
 	addon:RegisterStatusBar(statusbar)
 	self.statusbar = statusbar
 
-	local border = CreateFrame("Frame",nil,self)
+	local border = DXE.Compat.CreateFrame("Frame",nil,self)
 	border:SetAllPoints(true)
 	border:SetFrameLevel(statusbar:GetFrameLevel()+1)
 	addon:RegisterBorder(border)
@@ -1720,21 +1720,21 @@ local function CreateBar()
 	addon:RegisterFontString(text,10)
 	self.text = text
 
-	local lefticon = CreateFrame("Frame",nil,self)
+	local lefticon = DXE.Compat.CreateFrame("Frame",nil,self)
 	self.lefticon = lefticon
 	lefticon.t = lefticon:CreateTexture(nil,"BACKGROUND")
 	lefticon.t:SetTexCoord(0.07,0.93,0.07,0.93)
 
-	lefticon.border = CreateFrame("Frame",nil,lefticon)
+	lefticon.border = DXE.Compat.CreateFrame("Frame",nil,lefticon)
 	lefticon.border:SetAllPoints(true)
 	addon:RegisterBorder(lefticon.border)
 
-	local righticon = CreateFrame("Frame",nil,self)
+	local righticon = DXE.Compat.CreateFrame("Frame",nil,self)
 	self.righticon = righticon
 	righticon.t = righticon:CreateTexture(nil,"BACKGROUND")
 	righticon.t:SetTexCoord(0.07,0.93,0.07,0.93)
 
-	righticon.border = CreateFrame("Frame",nil,righticon)
+	righticon.border = DXE.Compat.CreateFrame("Frame",nil,righticon)
 	righticon.border:SetAllPoints(true)
 	addon:RegisterBorder(righticon.border)
 
@@ -2894,7 +2894,7 @@ do
     end
 
     -- Defeat frame setup
-    defeatFrame = CreateFrame("Frame","DXE Defeat frame",UIParent)
+    defeatFrame = DXE.Compat.CreateFrame("Frame","DXE Defeat frame",UIParent)
     defeatFrame:SetFrameStrata("HIGH")
     defeatFrame:SetHeight(128)
     defeatFrame:SetWidth(512)
@@ -3300,7 +3300,7 @@ do
     
     function module:CreateEmphasisFrame()
          -- Emphasis Frame setup
-        emphasisFrame = CreateFrame("Frame","DXE Emphasis frame",UIParent)
+        emphasisFrame = DXE.Compat.CreateFrame("Frame","DXE Emphasis frame",UIParent)
         emphasisFrame:SetFrameStrata("FULLSCREEN")
         emphasisFrame:SetHeight(512)
         emphasisFrame:SetWidth(1024)
@@ -3427,7 +3427,7 @@ end
 -- SPECIAL BARS
 ---------------------------------------------
 do
-    local SpecialUpdateFrame = CreateFrame("Frame",nil,UIParent)
+    local SpecialUpdateFrame = DXE.Compat.CreateFrame("Frame",nil,UIParent)
     local SpecialBars = {}
     SpecialUpdateFrame:Hide()
     
@@ -4583,7 +4583,7 @@ do
         
         local i = slots
         while i > 0 do
-            local frame = CreateFrame("Frame","DXE Alert frame "..i,UIParent)
+            local frame = DXE.Compat.CreateFrame("Frame","DXE Alert frame "..i,UIParent)
             alertSlots[i] = frame
             local text = frame:CreateFontString(nil,"OVERLAY")
             addon:PatchFontString(text)

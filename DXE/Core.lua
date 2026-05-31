@@ -477,48 +477,41 @@ local defaults = {
 local addon = LibStub("AceAddon-3.0"):NewAddon("DXE","AceEvent-3.0","AceTimer-3.0","AceComm-3.0","AceSerializer-3.0")
 _G.DXE = addon
 
-do
-    local IS_CLASSIC = tonumber(select(4, GetBuildInfo())) >= 40400
-    local NEW_GUID_FORMAT = tonumber(select(2, GetBuildInfo())) >= 12484
+local IS_CLASSIC = false
 
-    addon.Compat = _G.DXE_Compat or setmetatable({
-        IS_CLASSIC = IS_CLASSIC,
+addon.Compat = setmetatable({
+    IS_CLASSIC = IS_CLASSIC,
 
-        GetNPCIDFromGUID = function(guid)
-            if not guid then return nil end
-            if NEW_GUID_FORMAT then
-                return tonumber(guid:sub(7, 10), 16)
-            else
-                return tonumber(guid:sub(9, 12), 16)
-            end
-        end,
+    GetNPCIDFromGUID = function(guid)
+        if not guid then return nil end
+        return tonumber(guid:sub(7, 10), 16)
+    end,
 
-        SendAddonMsg = function(prefix, msg, channel, target)
-            SendAddonMessage(prefix, msg, channel, target)
-        end,
+    SendAddonMsg = function(prefix, msg, channel, target)
+        SendAddonMessage(prefix, msg, channel, target)
+    end,
 
-        UIDropDown_CreateInfo = function()
-            return UIDropDownMenu_CreateInfo()
-        end,
-        UIDropDown_AddButton = function(info, level)
-            UIDropDownMenu_AddButton(info, level)
-        end,
-        UIDropDown_Initialize = function(frame, init, mode)
-            UIDropDownMenu_Initialize(frame, init, mode)
-        end,
-        UIDropDown_SetSelectedValue = function(frame, value)
-            UIDropDownMenu_SetSelectedValue(frame, value)
-        end,
-        UIDropDown_SetText = function(frame, text)
-            UIDropDownMenu_SetText(frame, text)
-        end,
-        ToggleDropDown = function(level, value, frame, anchor, x, y)
-            ToggleDropDownMenu(level, value, frame, anchor, x, y)
-        end,
-    }, {
-        __index = _G,
-    })
-end
+    UIDropDown_CreateInfo = function()
+        return UIDropDownMenu_CreateInfo()
+    end,
+    UIDropDown_AddButton = function(info, level)
+        UIDropDownMenu_AddButton(info, level)
+    end,
+    UIDropDown_Initialize = function(frame, init, mode)
+        UIDropDownMenu_Initialize(frame, init, mode)
+    end,
+    UIDropDown_SetSelectedValue = function(frame, value)
+        UIDropDownMenu_SetSelectedValue(frame, value)
+    end,
+    UIDropDown_SetText = function(frame, text)
+        UIDropDownMenu_SetText(frame, text)
+    end,
+    ToggleDropDown = function(level, value, frame, anchor, x, y)
+        ToggleDropDownMenu(level, value, frame, anchor, x, y)
+    end,
+}, {
+    __index = _G,
+})
 
 addon.version = "635 | 3.3 - 17"
 addon.versionfull = format("|cff99ff33%s (official)|r|cffffffff | |r|cffe6cc80%s (developed by|r |cffffffffGreghouse|r|cffe6cc80)|r",635,"3.3 - 17")
@@ -564,7 +557,7 @@ local AL
 local SN = setmetatable({},{
     __index = function(t,k)
         if type(k) ~= "number" then return "nil" end
-        local name = GetSpellInfo(k)
+        local name = DXE.Compat.GetSpellInfo(k)
         t[k] = name
         if not name then
             geterrorhandler()("Invalid spell name attempted to be retrieved")
@@ -578,7 +571,7 @@ local SN = setmetatable({},{
 local ST = setmetatable({},{
     __index = function(t,k)
         if type(k) ~= "number" then return "nil" end
-        local texture = select(3,GetSpellInfo(k))
+        local texture = select(3,DXE.Compat.GetSpellInfo(k))
         if not texture then
             geterrorhandler()("Invalid spell texture attempted to be retrieved")
             return "Interface\\Buttons\\WHITE8X8"
@@ -1363,7 +1356,7 @@ function addon:OpenWindows(isPull)
 end
 
 do
-    local frame = CreateFrame("Frame")
+    local frame = DXE.Compat.CreateFrame("Frame")
     local DEFEAT_MSG
     local DEFEAT_TBL = {}
 
@@ -1542,7 +1535,7 @@ do
     
     local WIPE_YELL = nil -- Yell activations for a raid wipe. Source: data.onactivate.wipe.yell
     
-    local wipeDummyframe = CreateFrame("Frame")
+    local wipeDummyframe = DXE.Compat.CreateFrame("Frame")
     wipeDummyframe:SetScript("OnEvent",function(self,event,msg)
         addon:CheckForMessageWipe(event, msg)
     end)
@@ -1758,7 +1751,7 @@ local function GetBosses()
         local boss = {}
         boss.name = UnitName(bossIndex)
         boss.guid = UnitGUID(bossIndex)
-        if boss.guid then boss.id = tonumber((UnitGUID(bossIndex)):sub(7, 10), 16) else boss.id = -1 end
+        if boss.guid then boss.id = DXE.Compat.GetNPCIDFromGUID(UnitGUID(bossIndex)) else boss.id = -1 end
         bosses[bossIndex] = boss;
     end
     
@@ -2477,7 +2470,7 @@ function addon:ScanForWipe()
                 for i = 0, math.max(GetNumRaidMembers(), GetNumPartyMembers()) do
                     local unit = (i == 0 and "playertarget") or uId..i.."target"
                     if UnitExists(unit) then
-                        local unitID = tonumber((UnitGUID(unit)):sub(7, 10), 16)
+                        local unitID = DXE.Compat.GetNPCIDFromGUID(UnitGUID(unit))
                         if type(info) == "table" then
                             for _,id in ipairs(info) do
                                 if unitID == id then
@@ -2890,7 +2883,7 @@ function addon:SendDBMComm(prefix,msg,channel)
         channel = GetNumRaidMembers() == 0 and "PARTY" or "RAID"
     end
     
-    SendAddonMessage("D4",("%s\t%s"):format(prefix,msg),channel) 
+    DXE.Compat.SendAddonMsg("D4",("%s\t%s"):format(prefix,msg),channel) 
 end
 
 function addon:SendBigWigsComm(prefix,msg,channel)
@@ -2898,7 +2891,7 @@ function addon:SendBigWigsComm(prefix,msg,channel)
     if not channel then
         channel = GetNumRaidMembers() == 0 and "PARTY" or "RAID"
     end
-    SendAddonMessage("BigWigs",("%s:%s"):format(prefix,msg),channel) 
+    DXE.Compat.SendAddonMsg("BigWigs",("%s:%s"):format(prefix,msg),channel) 
 end
 
 function addon:PullTimer(pullTime)
@@ -3808,25 +3801,25 @@ local function InsertTimerRegistry(name, dbtable, command)
         registry[i] = data
     end
     
-    local info = UIDropDownMenu_CreateInfo()
+    local info = DXE.Compat.UIDropDown_CreateInfo()
     info.isTitle = true 
     info.text = L[name]
     info.notCheckable = true 
     info.justifyH = "LEFT"
-    UIDropDownMenu_AddButton(info,1)
+    DXE.Compat.UIDropDown_AddButton(info,1)
     
     for i,data in ipairs(registry) do
-        info = UIDropDownMenu_CreateInfo()
+        info = DXE.Compat.UIDropDown_CreateInfo()
         info.text = data.name
         info.notCheckable = true
         info.func = data.func
         info.owner = self
         info.justifyH = "CENTER"
-        UIDropDownMenu_AddButton(info,1)
+        DXE.Compat.UIDropDown_AddButton(info,1)
     end
 end
 
-local UIDropDownMenu_CreateInfo = UIDropDownMenu_CreateInfo
+local UIDropDownMenu_CreateInfo = DXE.Compat.UIDropDown_CreateInfo
 	local info
 
 	local function Initialize(self,level)
@@ -3838,8 +3831,8 @@ local UIDropDownMenu_CreateInfo = UIDropDownMenu_CreateInfo
 	end
 
 function addon:CreatePullsBreaksDropDown()
-    local pullsbreaks = CreateFrame("Frame", "DXEPanePulls", UIParent, "UIDropDownMenuTemplate") 
-    UIDropDownMenu_Initialize(pullsbreaks, Initialize, "MENU")
+    local pullsbreaks = DXE.Compat.CreateFrame("Frame", "DXEPanePulls", UIParent, "UIDropDownMenuTemplate") 
+    DXE.Compat.UIDropDown_Initialize(pullsbreaks, Initialize, "MENU")
     return pullsbreaks
 end
 

@@ -3769,10 +3769,10 @@ end
 -- ULTRAXION
 ----------------------------
 do
-    local UnitGroupRolesAssigned,UnitClass,UnitIsUnit = UnitGroupRolesAssigned,UnitClass,UnitIsUnit
+    local UnitGroupRolesAssigned,UnitClass,UnitIsUnit = DXE.Compat.UnitGroupRolesAssigned, DXE.Compat.UnitClass, DXE.Compat.UnitIsUnit
     local ListOfClass = addon.NamedListOfClass
     local GetRaidDifficulty = addon.GetRaidDifficulty
-    local GetNumRaidMembers = GetNumRaidMembers
+    local GetNumRaidMembers = DXE.Compat.GetNumRaidMembers
     local ipairs,pairs = ipairs,pairs
     
     local hot_priorities_disabled = function() return not ItemEnabled("hotpriorities", "ultraxion") end
@@ -4277,8 +4277,8 @@ do
                 desc = L.chat_dragonsoul["By clicking the button you can send the priorities setup as a raid message so that the raid members can see what selection you have made."],
                 type = "execute",
                 func = function() 
-                    local SendChatMessage,UnitName = SendChatMessage,UnitName
-                    SendChatMessage(format("{diamond}{diamond}{diamond} %s Priorities: {diamond}{diamond}{diamond}",GetSpellLink(103327)),"RAID")
+                    local SendChatMessage,UnitName = DXE.Compat.SendChatMessage, DXE.Compat.UnitName
+                    SendChatMessage(format("{diamond}{diamond}{diamond} %s Priorities: {diamond}{diamond}{diamond}",DXE.Compat.GetSpellLink(103327)),"RAID")
                     local marks = {"{circle}","{square}","{star}","{triangle}","{diamond}","{cross}","{moon}"}
                     for hotI=1,7 do
                         local msg = format("%d %s ",hotI, marks[hotI])
@@ -4520,7 +4520,7 @@ do
                 },
                 soakrwfilter_others = {
                     name = "Soak Filter (other players only)",
-                    pattern = UnitName("player").." {circle} ",
+                    pattern = DXE.Compat.UnitName("player").." {circle} ",
                 },
             },
         },
@@ -5549,7 +5549,7 @@ do
     }
     
     local lastnumspells
-    local UnitClass,UnitGroupRolesAssigned,UnitName,GetSpellLink,SendChatMessage = UnitClass,UnitGroupRolesAssigned,UnitName,GetSpellLink,SendChatMessage
+    local UnitClass,UnitGroupRolesAssigned,UnitName,GetSpellLink,SendChatMessage = DXE.Compat.UnitClass, DXE.Compat.UnitGroupRolesAssigned, DXE.Compat.UnitName, DXE.Compat.GetSpellLink, DXE.Compat.SendChatMessage
     
     local getcooldowns = function(info) 
         local values = {}
@@ -7512,8 +7512,9 @@ end
 -- MADNESS OF DEATHWING
 ------------------------
 do
-    local GetNumRaidMembers = GetNumRaidMembers
-    local UnitIsDead,UnitIsUnit,tostring,tonumber = UnitIsDead,UnitIsUnit,tostring,tonumber
+    local GetNumRaidMembers = DXE.Compat.GetNumRaidMembers
+    local UnitIsDead,UnitIsUnit = DXE.Compat.UnitIsDead, DXE.Compat.UnitIsUnit
+    local tostring,tonumber = tostring,tonumber
     local ipairs,pairs = ipairs,pairs
     local GetRaidDifficulty = addon.GetRaidDifficulty
     

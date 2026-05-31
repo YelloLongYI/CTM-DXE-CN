@@ -2,167 +2,44 @@
 -- DXE/Compat.lua
 -- WoW 客户端 API 适配层
 --
--- 目标：4.3（原版）和 4.4.2（怀旧服）共用一个代码库
--- 4.3 路径：直接透传给原始 WoW API
--- 4.4.2 路径：阶段五填充
+-- IS_CLASSIC 初始值硬编码为 4.3.4，Core.lua:594 安全位置修正
 ---------------------------------------------------------
 
-local IS_CLASSIC = tonumber(select(4, GetBuildInfo())) >= 40400
-local Compat = {}
+local Compat = setmetatable({
+    IS_CLASSIC = false,
 
-Compat.IS_CLASSIC = IS_CLASSIC
-
----------------------------------------------------------
--- FRAME 创建
----------------------------------------------------------
-
-function Compat.CreateFrame(frameType, name, parent, template)
-    return CreateFrame(frameType, name, parent, template)
-end
-
----------------------------------------------------------
--- GUID 解析：从 UnitGUID 字符串中提取 NPC ID
----------------------------------------------------------
-
-local NEW_GUID_FORMAT = tonumber(select(2, GetBuildInfo())) >= 12484
-
-function Compat.GetNPCIDFromGUID(guid)
-    if not guid then return nil end
-    if NEW_GUID_FORMAT then
+    -- GUID 解析
+    GetNPCIDFromGUID = function(guid)
+        if not guid then return nil end
         return tonumber(guid:sub(7, 10), 16)
-    else
-        return tonumber(guid:sub(9, 12), 16)
-    end
-end
+    end,
 
----------------------------------------------------------
--- 法术
----------------------------------------------------------
+    -- 通信
+    SendAddonMsg = function(prefix, msg, channel, target)
+        SendAddonMessage(prefix, msg, channel, target)
+    end,
 
-function Compat.GetSpellInfo(id)
-    return GetSpellInfo(id)
-end
+    -- 下拉菜单
+    UIDropDown_CreateInfo = function()
+        return UIDropDownMenu_CreateInfo()
+    end,
+    UIDropDown_AddButton = function(info, level)
+        UIDropDownMenu_AddButton(info, level)
+    end,
+    UIDropDown_Initialize = function(frame, init, mode)
+        UIDropDownMenu_Initialize(frame, init, mode)
+    end,
+    UIDropDown_SetSelectedValue = function(frame, value)
+        UIDropDownMenu_SetSelectedValue(frame, value)
+    end,
+    UIDropDown_SetText = function(frame, text)
+        UIDropDownMenu_SetText(frame, text)
+    end,
+    ToggleDropDown = function(level, value, frame, anchor, x, y)
+        ToggleDropDownMenu(level, value, frame, anchor, x, y)
+    end,
+}, {
+    __index = _G,
+})
 
-function Compat.GetSpellLink(id)
-    return GetSpellLink(id)
-end
-
----------------------------------------------------------
--- Aura（Buff / Debuff 查询）
----------------------------------------------------------
-
-function Compat.UnitBuff(unit, ...)
-    return UnitBuff(unit, ...)
-end
-
-function Compat.UnitDebuff(unit, ...)
-    return UnitDebuff(unit, ...)
-end
-
----------------------------------------------------------
--- 施法
----------------------------------------------------------
-
-function Compat.GetCastInfo(unit)
-    return UnitCastingInfo(unit)
-end
-
-function Compat.GetChannelInfo(unit)
-    return UnitChannelInfo(unit)
-end
-
----------------------------------------------------------
--- 通信
----------------------------------------------------------
-
-function Compat.SendAddonMsg(prefix, msg, channel, target)
-    SendAddonMessage(prefix, msg, channel, target)
-end
-
-function Compat.SendChatMessage(msg, ...)
-    SendChatMessage(msg, ...)
-end
-
----------------------------------------------------------
--- 地图
----------------------------------------------------------
-
-function Compat.GetPlayerMapPos(unit)
-    return GetPlayerMapPosition(unit)
-end
-
----------------------------------------------------------
--- 团队
----------------------------------------------------------
-
-function Compat.GetNumRaidMembers()
-    return GetNumRaidMembers()
-end
-
-function Compat.GetNumPartyMembers()
-    return GetNumPartyMembers()
-end
-
----------------------------------------------------------
--- 单位信息
----------------------------------------------------------
-
-function Compat.UnitName(unit)
-    return UnitName(unit)
-end
-
-function Compat.UnitClass(unit)
-    return UnitClass(unit)
-end
-
-function Compat.UnitIsUnit(unit, other)
-    return UnitIsUnit(unit, other)
-end
-
-function Compat.UnitIsDead(unit)
-    return UnitIsDead(unit)
-end
-
-function Compat.UnitGroupRolesAssigned(unit)
-    return UnitGroupRolesAssigned(unit)
-end
-
----------------------------------------------------------
--- 音效
----------------------------------------------------------
-
-function Compat.PlaySoundFile(file, ...)
-    PlaySoundFile(file, ...)
-end
-
----------------------------------------------------------
--- 下拉菜单（Dragonflight 中已废弃，4.3 上透传）
----------------------------------------------------------
-
-function Compat.UIDropDown_CreateInfo()
-    return UIDropDownMenu_CreateInfo()
-end
-
-function Compat.UIDropDown_AddButton(info, level)
-    UIDropDownMenu_AddButton(info, level)
-end
-
-function Compat.UIDropDown_Initialize(frame, init, mode)
-    UIDropDownMenu_Initialize(frame, init, mode)
-end
-
-function Compat.UIDropDown_SetSelectedValue(frame, value)
-    UIDropDownMenu_SetSelectedValue(frame, value)
-end
-
-function Compat.UIDropDown_SetText(frame, text)
-    UIDropDownMenu_SetText(frame, text)
-end
-
-function Compat.ToggleDropDown(level, value, frame, anchor, x, y)
-    ToggleDropDownMenu(level, value, frame, anchor, x, y)
-end
-
----------------------------------------------------------
-
-_G.DXE_Compat = Compat
+_G.DXE.Compat = Compat
