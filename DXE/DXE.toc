@@ -30,7 +30,6 @@ Libs\AceHook-3.0\AceHook-3.0.xml
 Locales.lua
 
 # Main files
-Compat.lua
 Core.lua
 Pane.lua
 Widgets.xml

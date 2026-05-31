@@ -7,7 +7,7 @@
 -- 4.4.2 路径：阶段五填充
 ---------------------------------------------------------
 
-local IS_CLASSIC = select(4, GetBuildInfo()) >= 40400
+local IS_CLASSIC = tonumber(select(4, GetBuildInfo())) >= 40400
 local Compat = {}
 
 Compat.IS_CLASSIC = IS_CLASSIC
@@ -24,7 +24,7 @@ end
 -- GUID 解析：从 UnitGUID 字符串中提取 NPC ID
 ---------------------------------------------------------
 
-local NEW_GUID_FORMAT = select(2, GetBuildInfo()) >= 12484
+local NEW_GUID_FORMAT = tonumber(select(2, GetBuildInfo())) >= 12484
 
 function Compat.GetNPCIDFromGUID(guid)
     if not guid then return nil end

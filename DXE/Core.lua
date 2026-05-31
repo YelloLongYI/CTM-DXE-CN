@@ -476,7 +476,50 @@ local defaults = {
 
 local addon = LibStub("AceAddon-3.0"):NewAddon("DXE","AceEvent-3.0","AceTimer-3.0","AceComm-3.0","AceSerializer-3.0")
 _G.DXE = addon
-addon.Compat = _G.DXE_Compat
+
+do
+    local IS_CLASSIC = tonumber(select(4, GetBuildInfo())) >= 40400
+    local NEW_GUID_FORMAT = tonumber(select(2, GetBuildInfo())) >= 12484
+
+    addon.Compat = _G.DXE_Compat or setmetatable({
+        IS_CLASSIC = IS_CLASSIC,
+
+        GetNPCIDFromGUID = function(guid)
+            if not guid then return nil end
+            if NEW_GUID_FORMAT then
+                return tonumber(guid:sub(7, 10), 16)
+            else
+                return tonumber(guid:sub(9, 12), 16)
+            end
+        end,
+
+        SendAddonMsg = function(prefix, msg, channel, target)
+            SendAddonMessage(prefix, msg, channel, target)
+        end,
+
+        UIDropDown_CreateInfo = function()
+            return UIDropDownMenu_CreateInfo()
+        end,
+        UIDropDown_AddButton = function(info, level)
+            UIDropDownMenu_AddButton(info, level)
+        end,
+        UIDropDown_Initialize = function(frame, init, mode)
+            UIDropDownMenu_Initialize(frame, init, mode)
+        end,
+        UIDropDown_SetSelectedValue = function(frame, value)
+            UIDropDownMenu_SetSelectedValue(frame, value)
+        end,
+        UIDropDown_SetText = function(frame, text)
+            UIDropDownMenu_SetText(frame, text)
+        end,
+        ToggleDropDown = function(level, value, frame, anchor, x, y)
+            ToggleDropDownMenu(level, value, frame, anchor, x, y)
+        end,
+    }, {
+        __index = _G,
+    })
+end
+
 addon.version = "635 | 3.3 - 17"
 addon.versionfull = format("|cff99ff33%s (official)|r|cffffffff | |r|cffe6cc80%s (developed by|r |cffffffffGreghouse|r|cffe6cc80)|r",635,"3.3 - 17")
 addon.developer = "Greghouse"
