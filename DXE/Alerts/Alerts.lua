@@ -444,8 +444,8 @@ function module:OnInitialize()
     
 	self:SetSinkStorage(pfl.SinkStorage)
 	self:UpdateFlashSettings()
-    self:CreateEmphasisFrame()
-    self:CreateAlertsFrame()
+    if self.CreateEmphasisFrame then self:CreateEmphasisFrame() end
+    if self.CreateAlertsFrame then self:CreateAlertsFrame() end
     
 	db.RegisterCallback(self, "OnProfileChanged", "RefreshProfile")
 	db.RegisterCallback(self, "OnProfileCopied", "RefreshProfile")

@@ -52,11 +52,15 @@
 
 | # | 任务 | 文件 | 状态 |
 |---|------|------|:----:|
-| 5.1 | IS_CLASSIC 运行时检测 | `DXE/Core.lua` | ⬜ |
-| 5.2 | BackdropTemplate | `DXE/Core.lua` | ⬜ |
-| 5.3 | C_ChatInfo.SendAddonMessage | `DXE/Core.lua` | ⬜ |
-| 5.4 | C_Map.GetPlayerMapPosition | `DXE/Core.lua` | ⬜ |
-| 5.5 | 4.4.2 加载/Boss 测试 | — | ⬜ |
+| 5.1 | IS_CLASSIC 运行时检测 | `DXE/Core.lua` | ✅ |
+| 5.2 | BackdropTemplate | `DXE/Core.lua` | ✅ |
+| 5.3 | C_ChatInfo.SendAddonMessage | `DXE/Core.lua` | ✅ |
+| 5.4 | C_EncounterJournal.GetSectionInfo | `DXE/Core.lua` | ✅ |
+| 5.5 | GUID Dragonflight 格式 | `DXE/Core.lua` | ✅ |
+| 5.6 | OnEnable 守卫 | `DXE/Alerts/Alerts.lua` | ✅ |
+| 5.7 | Options BarTest 守卫 | `DXE_Options/Options.lua` | ✅ |
+| 5.8 | GetPlayerMapPosition | `DXE/Core.lua` | ⬜ |
+| 5.9 | 4.4.2 Boss 战斗测试 | — | ⬜ |
 
 ---
 
@@ -68,8 +72,8 @@
 | 阶段二 | 7 | 7 | 100% |
 | 阶段三 | 2 | 2 | 100% |
 | 阶段四 | 1 | 1 | 100% |
-| 阶段五 | 5 | 0 | 0% |
-| **合计** | **18** | **13** | **72%** |
+| 阶段五 | 9 | 7 | 78% |
+| **合计** | **23** | **20** | **87%** |
 
 ---
 

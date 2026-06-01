@@ -477,18 +477,33 @@ local defaults = {
 local addon = LibStub("AceAddon-3.0"):NewAddon("DXE","AceEvent-3.0","AceTimer-3.0","AceComm-3.0","AceSerializer-3.0")
 _G.DXE = addon
 
-local IS_CLASSIC = false
+local IS_CLASSIC = select(4, GetBuildInfo()) >= 40400
 
 addon.Compat = setmetatable({
     IS_CLASSIC = IS_CLASSIC,
 
+    CreateFrame = function(frameType, name, parent, template)
+        if IS_CLASSIC then
+            return CreateFrame(frameType, name, parent, template or "BackdropTemplate")
+        end
+        return CreateFrame(frameType, name, parent, template)
+    end,
+
     GetNPCIDFromGUID = function(guid)
         if not guid then return nil end
+        if IS_CLASSIC then
+            local parts = {strsplit("-", guid)}
+            return tonumber(parts[6], 10)
+        end
         return tonumber(guid:sub(7, 10), 16)
     end,
 
     SendAddonMsg = function(prefix, msg, channel, target)
-        SendAddonMessage(prefix, msg, channel, target)
+        if IS_CLASSIC then
+            C_ChatInfo.SendAddonMessage(prefix, msg, channel, target)
+        else
+            SendAddonMessage(prefix, msg, channel, target)
+        end
     end,
 
     UIDropDown_CreateInfo = function()
@@ -611,9 +626,8 @@ local EJSN = setmetatable({},{
 local EJST = setmetatable({},{
     __index = function(t,k)
         if type(k) ~= "number" then return "nil" end
-        local texture = select(4,EJ_GetSectionInfo(k))
+        local texture = select(4, IS_CLASSIC and C_EncounterJournal.GetSectionInfo(k) or EJ_GetSectionInfo(k))
         if not texture then
-            geterrorhandler()("Invalid spell texture attempted to be retrieved")
             return "Interface\\Buttons\\WHITE8X8"
         end
         return texture
