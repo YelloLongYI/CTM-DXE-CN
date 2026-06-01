@@ -489,6 +489,14 @@ addon.Compat = setmetatable({
         return CreateFrame(frameType, name, parent, template)
     end,
 
+    GetSpellInfo = function(id)
+        local name, rank, icon = GetSpellInfo(id)
+        if IS_CLASSIC and name and type(icon) == "number" then
+            icon = tostring(icon)
+        end
+        return name, rank, icon
+    end,
+
     GetNPCIDFromGUID = function(guid)
         if not guid then return nil end
         if IS_CLASSIC then
@@ -575,7 +583,6 @@ local SN = setmetatable({},{
         local name = DXE.Compat.GetSpellInfo(k)
         t[k] = name
         if not name then
-            geterrorhandler()("Invalid spell name attempted to be retrieved")
             return tostring(k)
         end
         return name
@@ -588,7 +595,6 @@ local ST = setmetatable({},{
         if type(k) ~= "number" then return "nil" end
         local texture = select(3,DXE.Compat.GetSpellInfo(k))
         if not texture then
-            geterrorhandler()("Invalid spell texture attempted to be retrieved")
             return "Interface\\Buttons\\WHITE8X8"
         end
         return texture
@@ -614,9 +620,8 @@ local SL = setmetatable({},{
 local EJSN = setmetatable({},{
     __index = function(t,k)
         if type(k) ~= "number" then return "nil" end
-        local name = select(1,EJ_GetSectionInfo(k))
+        local name = select(1, IS_CLASSIC and C_EncounterJournal.GetSectionInfo(k) or EJ_GetSectionInfo(k))
         if not name then
-            geterrorhandler()("Invalid EJ section attempted to be retrieved")
             return tostring(k)
         end
         return name
