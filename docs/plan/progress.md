@@ -1,8 +1,7 @@
 # DXE 双客户端兼容适配 — 施工进度
 
-> 基于 `docs/plan/implementation-plan.md`  
 > 开始日期：2026-05-24  
-> 最后更新：2026-06-01
+> 最后更新：2026-06-02
 
 ---
 
@@ -12,7 +11,6 @@
 |---|------|------|:----:|
 | 1.1 | Core.lua 插入 Compat 适配表 | `DXE/Core.lua` | ✅ |
 | 1.2 | LibDualSpec 守卫 | `DXE/Libs/LibDualSpec-1.0/LibDualSpec-1.0.lua` | ✅ |
-| 1.3 | Compat.lua 保留不加载 | `DXE/Compat.lua` + `DXE/DXE.toc` | ✅ |
 
 ---
 
@@ -39,28 +37,53 @@
 
 ---
 
-## 阶段四：验证
+## 阶段四：4.3.4 验证
 
-| # | 验证项 | 4.3.4 结果 |
-|---|--------|:---------:|
+| # | 验证项 | 结果 |
+|---|--------|:----:|
 | 4.1 | 插件加载无报错 | ✅ |
 | 4.2 | /dxe 面板正常打开 | ✅ |
 
 ---
 
-## 阶段五：4.4.2 分支
+## 阶段五：4.4.2 引擎适配
 
 | # | 任务 | 文件 | 状态 |
 |---|------|------|:----:|
 | 5.1 | IS_CLASSIC 运行时检测 | `DXE/Core.lua` | ✅ |
-| 5.2 | BackdropTemplate | `DXE/Core.lua` | ✅ |
-| 5.3 | C_ChatInfo.SendAddonMessage | `DXE/Core.lua` | ✅ |
-| 5.4 | C_EncounterJournal.GetSectionInfo | `DXE/Core.lua` | ✅ |
+| 5.2 | CreateFrame + BackdropTemplate | `DXE/Core.lua` | ✅ |
+| 5.3 | SendAddonMessage → C_ChatInfo | `DXE/Core.lua` | ✅ |
+| 5.4 | EJ_GetSectionInfo → C_EncounterJournal (EJSN+EJST) | `DXE/Core.lua` | ✅ |
 | 5.5 | GUID Dragonflight 格式 | `DXE/Core.lua` | ✅ |
-| 5.6 | OnEnable 守卫 | `DXE/Alerts/Alerts.lua` | ✅ |
-| 5.7 | Options BarTest 守卫 | `DXE_Options/Options.lua` | ✅ |
-| 5.8 | GetPlayerMapPosition | `DXE/Core.lua` | ⬜ |
-| 5.9 | 4.4.2 Boss 战斗测试 | — | ⬜ |
+| 5.6 | GetSpellInfo icon number→string | `DXE/Core.lua` | ✅ |
+| 5.7 | SN/ST/EJSN/EJST 去 geterrorhandler | `DXE/Core.lua` | ✅ |
+| 5.8 | OnEnable 守卫 | `DXE/Alerts/Alerts.lua` | ✅ |
+| 5.9 | Options BarTest 守卫 | `DXE_Options/Options.lua` | ✅ |
+
+---
+
+## 阶段六：4.4.2 验证
+
+| # | 验证项 | 结果 |
+|---|--------|:----:|
+| 6.1 | 插件加载无报错 | ✅ |
+| 6.2 | /dxe 面板正常打开 | ✅ |
+| 6.3 | 副本数据加载正常 | ✅ |
+| 6.4 | Start test alerts 正常 | ✅ |
+| 6.5 | 大部分技能图标/名字正常 | ✅ |
+
+---
+
+## 已知问题：Spell ID 不兼容
+
+4.4.2 数据库中部分技能 ID 与 4.3.4 不一致，`GetSpellInfo(id)` 查不到导致图标白方块。技能名字来自 Encounters.lua 硬编码 text 字段不受影响。
+
+| 副本 | 旧 ID | 状态 |
+|------|:----:|:----:|
+| 火焰之地 | 100441 | ⬜ 待查 |
+| 火焰之地 | 101219 | ⬜ 待查 |
+
+> 参考：DBM 对应副本 .lua 文件交叉对照，或 `/dump GetSpellInfo("技能名")` 反查
 
 ---
 
@@ -68,12 +91,13 @@
 
 | 阶段 | 总任务 | 已完成 | 进度 |
 |------|:------:|:------:|:----:|
-| 阶段一 | 3 | 3 | 100% |
+| 阶段一 | 2 | 2 | 100% |
 | 阶段二 | 7 | 7 | 100% |
 | 阶段三 | 2 | 2 | 100% |
-| 阶段四 | 1 | 1 | 100% |
-| 阶段五 | 9 | 7 | 78% |
-| **合计** | **23** | **20** | **87%** |
+| 阶段四 | 2 | 2 | 100% |
+| 阶段五 | 9 | 9 | 100% |
+| 阶段六 | 5 | 5 | 100% |
+| **合计** | **27** | **27** | **100%** |
 
 ---
 
@@ -81,9 +105,9 @@
 
 | 文件 | 变更 | 说明 |
 |------|:----:|------|
-| `DXE/Core.lua` | ✏️ | 内联 Compat 适配表 |
+| `DXE/Core.lua` | ✏️ | Compat 表 + 4.4.2 分支 |
 | `DXE/Invoker.lua` | ✏️ | UnitBuff/Debuff/CastInfo 替换 |
-| `DXE/Alerts/Alerts.lua` | ✏️ | CreateFrame 替换 |
+| `DXE/Alerts/Alerts.lua` | ✏️ | CreateFrame + OnEnable 守卫 |
 | `DXE/Pane.lua` | ✏️ | CreateFrame/UIDropDown 替换 |
 | `DXE/Window.lua` | ✏️ | CreateFrame/UIDropDown 替换 |
 | `DXE/Windows/Proximity.lua` | ✏️ | CreateFrame 替换 |
@@ -91,5 +115,5 @@
 | `DXE/Windows/Version_Check.lua` | ✏️ | CreateFrame/UIDropDown 替换 |
 | `DXE_DragonSoul/Encounters.lua` | ✏️ | 单位/团队/通信 API 替换 |
 | `DXE_EndTime/Encounters.lua` | ✏️ | 地图/单位 API 替换 |
+| `DXE_Options/Options.lua` | ✏️ | BarTest 守卫 |
 | `DXE/Libs/LibDualSpec-1.0/LibDualSpec-1.0.lua` | ✏️ | 4.4.2 守卫 |
-| `DXE/Compat.lua` | 📄 | 保留不加载（设计参考） |
