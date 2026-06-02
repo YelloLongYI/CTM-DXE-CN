@@ -1363,6 +1363,7 @@ function addon:RegisterEncounter(data)
         data.order = CC[ckey]
     end
     --addon:RegisterEncounterToGroup(data)
+    if self.EDB_original[key] then self.EDB_original[key].order = data.order end
     EDB[key] = data
 end
 
