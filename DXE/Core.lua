@@ -936,6 +936,32 @@ local function capitalize(text)
     return text:gsub("^%l", string.upper)
 end
 
+local function hasNumericKey(t)
+    for k in pairs(t) do
+        if type(k) == "number" and math.floor(k) == k then
+            return true
+        end
+    end
+    return false
+end
+
+local function deepMerge(target, source)
+    for k, v in pairs(source) do
+        if v == false then
+            target[k] = nil
+        elseif type(v) == "table" then
+            if hasNumericKey(v) then
+                target[k] = v
+            elseif type(target[k]) == "table" then
+                deepMerge(target[k], v)
+            else
+                target[k] = v
+            end
+        else
+            target[k] = v
+        end
+    end
+end
 
 util.tablesize = tablesize
 util.search = search
@@ -963,6 +989,30 @@ function addon:DisableAllModules()
     for name in self:IterateModules() do
         self:DisableModule(name)
     end
+end
+
+---------------------------------------------
+-- REALM PATCHING
+---------------------------------------------
+
+addon.realmPatches = {}
+
+function addon:RegisterRealmPatch(key, patchTable)
+    if self.EDB[key] then
+        self:PatchEncounter(key, patchTable)
+    else
+        self.realmPatches[key] = self.realmPatches[key] or {}
+        self.realmPatches[key][#self.realmPatches[key] + 1] = patchTable
+    end
+end
+
+function addon:PatchEncounter(key, patch)
+    local base = self.EDB[key]
+    if not base then
+        self:Print(format("|cffff0000[RealmPatch]|r encounter '%s' not found", key))
+        return
+    end
+    deepMerge(base, patch)
 end
 
 ---------------------------------------------
@@ -1196,6 +1246,14 @@ function addon:RegisterEncounter(data)
     
     -- Convert version
     data.version = type(data.version) == "string" and tonumber(data.version:match("%d+")) or data.version
+
+    -- Merge queued realm patches before registration
+    if self.realmPatches[key] then
+        for _, p in ipairs(self.realmPatches[key]) do
+            deepMerge(data, p)
+        end
+        self.realmPatches[key] = nil
+    end
 
     -- Add to queue if we're not loaded yet
     if not Initialized then RegisterQueue[key] = data return end

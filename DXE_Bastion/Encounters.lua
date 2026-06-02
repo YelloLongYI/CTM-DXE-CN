@@ -1,8 +1,6 @@
 local addon = DXE
 local L,SN,ST = DXE.L,DXE.SN,DXE.ST
 
-print("Load "..pfl.Globals.Realm.." Bastion settings")
-
 ---------------------------------
 -- HALFUS WYRMBREAKER
 ---------------------------------

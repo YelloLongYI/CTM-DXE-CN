@@ -278,14 +278,16 @@ local function InitializeOptions()
 					name = L.options["Realm Name"],
 					desc = L.options["Realm Server Name"],
 					values = {
-						Apollo = L.options["Apollo"],
-						JRG = L.options["Jingrange"],
-                        Hongxi = L.options["Hongxi"],
+						Apollo = "Apollo",
+						JRG = "JRG",
+                        Hongxi = "Hongxi",
+						Test = "Test (Dev)",
 					},
-                    -- get = function(info) return db.profile.GENERAL.Realm end,
-                    -- set = function(info,v)
-					-- 	db.profile.GENERAL.Realm = v                       
-					-- end,
+                    get = function(info) return db.profile.Globals.Realm end,
+                    set = function(info,v)
+						db.profile.Globals.Realm = v
+						DXE:Print(format("|cff00ff00[Realm]|r Switched to %s", v))
+					end,
 				},
 			},
 		}
