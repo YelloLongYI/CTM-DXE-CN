@@ -282,6 +282,7 @@ local function InitializeOptions()
 						JRG = "JRG",
                         Hongxi = "Hongxi",
 						Test = "Test (Dev)",
+						Gilneas = "Gilneas",
 					},
                     get = function(info) return db.profile.Globals.Realm end,
                     set = function(info,v)

@@ -12,4 +12,5 @@
 ## X-Curse-Repository-ID: wow/deus-vox-encounters/mainline
 
 Locales.lua
+Data_EndTime_Gilneas.lua
 Encounters.lua

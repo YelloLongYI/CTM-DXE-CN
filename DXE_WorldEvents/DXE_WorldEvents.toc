@@ -11,4 +11,5 @@
 ## X-Curse-Project-ID: deus-vox-encounters
 ## X-Curse-Repository-ID: wow/deus-vox-encounters/mainline
 
+Data_WorldEvents_Gilneas.lua
 Encounters.lua

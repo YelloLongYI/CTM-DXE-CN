@@ -8,4 +8,5 @@
 ## X-DXE-Zone: Arathi Basin, Alterac Valley, Warsong Gulch, Warsong Lumber Mill, Silverwing Hold, Twin Peaks, Wildhammer Stronghold, Dragonmaw Stronghold, The Battle for Gilneas, Eye of the Storm, Isle of Conquest,Strand of the Ancients
 
 Locales.lua
+Data_Battlegrounds_Gilneas.lua
 Battlegrounds.lua

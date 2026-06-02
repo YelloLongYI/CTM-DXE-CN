@@ -950,7 +950,9 @@ local function deepMerge(target, source)
         if v == false then
             target[k] = nil
         elseif type(v) == "table" then
-            if hasNumericKey(v) then
+            if getmetatable(v) and getmetatable(v).__dxe_replace then
+                target[k] = v
+            elseif hasNumericKey(v) then
                 target[k] = v
             elseif type(target[k]) == "table" then
                 deepMerge(target[k], v)
@@ -961,6 +963,10 @@ local function deepMerge(target, source)
             target[k] = v
         end
     end
+end
+
+DXE.Replace = function(t)
+    return setmetatable(t, { __dxe_replace = true })
 end
 
 util.tablesize = tablesize

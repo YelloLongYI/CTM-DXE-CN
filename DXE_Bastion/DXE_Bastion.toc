@@ -17,4 +17,5 @@ Locales.lua
 Data_Bastion_Apollo.lua
 Data_Bastion_JRG.lua
 Data_Bastion_Test.lua
+Data_Bastion_Gilneas.lua
 Encounters.lua
