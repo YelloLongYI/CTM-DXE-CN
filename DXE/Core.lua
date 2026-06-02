@@ -969,6 +969,15 @@ DXE.Replace = function(t)
     return setmetatable(t, { __dxe_replace = true })
 end
 
+local function deepCopy(t)
+    if type(t) ~= "table" then return t end
+    local c = {}
+    for k, v in pairs(t) do
+        c[k] = deepCopy(v)
+    end
+    return c
+end
+
 util.tablesize = tablesize
 util.search = search
 util.contains = contains
@@ -1001,15 +1010,38 @@ end
 -- REALM PATCHING
 ---------------------------------------------
 
-addon.realmPatches = {}
+addon.realmPatchDefs = setmetatable({}, { __mode = "v" })
+addon.EDB_original = {}
 
-function addon:RegisterRealmPatch(key, patchTable)
-    if self.EDB[key] then
+function addon:RegisterRealmPatch(realm, key, patchTable)
+    self.realmPatchDefs[realm] = self.realmPatchDefs[realm] or {}
+    self.realmPatchDefs[realm][key] = self.realmPatchDefs[realm][key] or {}
+    self.realmPatchDefs[realm][key][#self.realmPatchDefs[realm][key] + 1] = patchTable
+
+    if self.db.profile.Globals.Realm == realm and self.EDB[key] then
         self:PatchEncounter(key, patchTable)
-    else
-        self.realmPatches[key] = self.realmPatches[key] or {}
-        self.realmPatches[key][#self.realmPatches[key] + 1] = patchTable
+        local ACR = LibStub("AceConfigRegistry-3.0", true)
+        if ACR then ACR:NotifyChange("DXE") end
     end
+end
+
+function addon:ApplyRealmPatches(realm)
+    for key, orig in pairs(self.EDB_original) do
+        if key ~= "default" then
+            local restored = deepCopy(orig)
+            local defs = self.realmPatchDefs[realm]
+            if defs and defs[key] then
+                for _, p in ipairs(defs[key]) do
+                    deepMerge(restored, p)
+                end
+            end
+            self.callbacks:Fire("OnUnregisterEncounter", self.EDB[key])
+            self.EDB[key] = restored
+            self.callbacks:Fire("OnRegisterEncounter", restored)
+        end
+    end
+    local ACR = LibStub("AceConfigRegistry-3.0", true)
+    if ACR then ACR:NotifyChange("DXE") end
 end
 
 function addon:PatchEncounter(key, patch)
@@ -1253,12 +1285,15 @@ function addon:RegisterEncounter(data)
     -- Convert version
     data.version = type(data.version) == "string" and tonumber(data.version:match("%d+")) or data.version
 
+    -- Store original before patching
+    self.EDB_original[key] = deepCopy(data)
+
     -- Merge queued realm patches before registration
-    if self.realmPatches[key] then
-        for _, p in ipairs(self.realmPatches[key]) do
+    local currentRealm = self.db.profile.Globals.Realm
+    if self.realmPatchDefs[currentRealm] and self.realmPatchDefs[currentRealm][key] then
+        for _, p in ipairs(self.realmPatchDefs[currentRealm][key]) do
             deepMerge(data, p)
         end
-        self.realmPatches[key] = nil
     end
 
     -- Add to queue if we're not loaded yet

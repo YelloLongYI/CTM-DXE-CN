@@ -1,11 +1,10 @@
 -- Data_BlackrockCaverns_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("romogg", {})
-DXE:RegisterRealmPatch("corla", {})
-DXE:RegisterRealmPatch("karsh", {})
-DXE:RegisterRealmPatch("beauty", {})
-DXE:RegisterRealmPatch("ascendantlordobsidius", {})
-DXE:RegisterRealmPatch("blackrockcavernstrash", {})
+DXE:RegisterRealmPatch(realm, "romogg", {})
+DXE:RegisterRealmPatch(realm, "corla", {})
+DXE:RegisterRealmPatch(realm, "karsh", {})
+DXE:RegisterRealmPatch(realm, "beauty", {})
+DXE:RegisterRealmPatch(realm, "ascendantlordobsidius", {})
+DXE:RegisterRealmPatch(realm, "blackrockcavernstrash", {})

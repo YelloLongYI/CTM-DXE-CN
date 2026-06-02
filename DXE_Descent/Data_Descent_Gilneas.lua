@@ -1,12 +1,11 @@
 -- Data_Descent_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("magmaw", {})
-DXE:RegisterRealmPatch("omnitron", {})
-DXE:RegisterRealmPatch("chimaeron", {})
-DXE:RegisterRealmPatch("atramedes", {})
-DXE:RegisterRealmPatch("maloriak", {})
-DXE:RegisterRealmPatch("nefarian", {})
-DXE:RegisterRealmPatch("bwdtrash", {})
+DXE:RegisterRealmPatch(realm, "magmaw", {})
+DXE:RegisterRealmPatch(realm, "omnitron", {})
+DXE:RegisterRealmPatch(realm, "chimaeron", {})
+DXE:RegisterRealmPatch(realm, "atramedes", {})
+DXE:RegisterRealmPatch(realm, "maloriak", {})
+DXE:RegisterRealmPatch(realm, "nefarian", {})
+DXE:RegisterRealmPatch(realm, "bwdtrash", {})

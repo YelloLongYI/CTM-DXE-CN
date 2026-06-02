@@ -1,14 +1,13 @@
 -- Data_HallsOfOrigination_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("anhuur", {})
-DXE:RegisterRealmPatch("ptah", {})
-DXE:RegisterRealmPatch("volevent", {})
-DXE:RegisterRealmPatch("anraphet", {})
-DXE:RegisterRealmPatch("ammunae", {})
-DXE:RegisterRealmPatch("setesh", {})
-DXE:RegisterRealmPatch("isiset", {})
-DXE:RegisterRealmPatch("rajh", {})
-DXE:RegisterRealmPatch("hootrash", {})
+DXE:RegisterRealmPatch(realm, "anhuur", {})
+DXE:RegisterRealmPatch(realm, "ptah", {})
+DXE:RegisterRealmPatch(realm, "volevent", {})
+DXE:RegisterRealmPatch(realm, "anraphet", {})
+DXE:RegisterRealmPatch(realm, "ammunae", {})
+DXE:RegisterRealmPatch(realm, "setesh", {})
+DXE:RegisterRealmPatch(realm, "isiset", {})
+DXE:RegisterRealmPatch(realm, "rajh", {})
+DXE:RegisterRealmPatch(realm, "hootrash", {})

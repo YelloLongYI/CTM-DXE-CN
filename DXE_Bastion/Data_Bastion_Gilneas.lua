@@ -1,11 +1,10 @@
 -- Data_Bastion_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("halfus", {})
-DXE:RegisterRealmPatch("valther", {})
-DXE:RegisterRealmPatch("ascendcouncil", {})
-DXE:RegisterRealmPatch("chogall", {})
-DXE:RegisterRealmPatch("sinestra", {})
-DXE:RegisterRealmPatch("bottrash", {})
+DXE:RegisterRealmPatch(realm, "halfus", {})
+DXE:RegisterRealmPatch(realm, "valther", {})
+DXE:RegisterRealmPatch(realm, "ascendcouncil", {})
+DXE:RegisterRealmPatch(realm, "chogall", {})
+DXE:RegisterRealmPatch(realm, "sinestra", {})
+DXE:RegisterRealmPatch(realm, "bottrash", {})

@@ -1,10 +1,9 @@
 -- Data_ThroneOfTides_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("ladynazjar", {})
-DXE:RegisterRealmPatch("ulthok", {})
-DXE:RegisterRealmPatch("ghursha", {})
-DXE:RegisterRealmPatch("ozumat", {})
-DXE:RegisterRealmPatch("tottrash", {})
+DXE:RegisterRealmPatch(realm, "ladynazjar", {})
+DXE:RegisterRealmPatch(realm, "ulthok", {})
+DXE:RegisterRealmPatch(realm, "ghursha", {})
+DXE:RegisterRealmPatch(realm, "ozumat", {})
+DXE:RegisterRealmPatch(realm, "tottrash", {})

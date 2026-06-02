@@ -288,6 +288,7 @@ local function InitializeOptions()
                     set = function(info,v)
 						db.profile.Globals.Realm = v
 						DXE:Print(format("|cff00ff00[Realm]|r Switched to %s", v))
+						DXE:ApplyRealmPatches(v)
 					end,
 				},
 			},

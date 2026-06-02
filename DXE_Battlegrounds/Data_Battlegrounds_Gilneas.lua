@@ -1,13 +1,12 @@
 -- Data_Battlegrounds_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("warsonggulch", {})
-DXE:RegisterRealmPatch("twinpeaks", {})
-DXE:RegisterRealmPatch("arathibasin", {})
-DXE:RegisterRealmPatch("battleforgilneas", {})
-DXE:RegisterRealmPatch("eyeofthestorm", {})
-DXE:RegisterRealmPatch("alteracvalley", {})
-DXE:RegisterRealmPatch("isleofconquest", {})
-DXE:RegisterRealmPatch("strandoftheancients", {})
+DXE:RegisterRealmPatch(realm, "warsonggulch", {})
+DXE:RegisterRealmPatch(realm, "twinpeaks", {})
+DXE:RegisterRealmPatch(realm, "arathibasin", {})
+DXE:RegisterRealmPatch(realm, "battleforgilneas", {})
+DXE:RegisterRealmPatch(realm, "eyeofthestorm", {})
+DXE:RegisterRealmPatch(realm, "alteracvalley", {})
+DXE:RegisterRealmPatch(realm, "isleofconquest", {})
+DXE:RegisterRealmPatch(realm, "strandoftheancients", {})

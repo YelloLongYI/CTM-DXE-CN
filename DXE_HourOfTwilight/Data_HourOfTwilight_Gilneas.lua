@@ -1,9 +1,8 @@
 -- Data_HourOfTwilight_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("arcurion", {})
-DXE:RegisterRealmPatch("asiradownslayer", {})
-DXE:RegisterRealmPatch("archbishopbenedictus", {})
-DXE:RegisterRealmPatch("hottrash", {})
+DXE:RegisterRealmPatch(realm, "arcurion", {})
+DXE:RegisterRealmPatch(realm, "asiradownslayer", {})
+DXE:RegisterRealmPatch(realm, "archbishopbenedictus", {})
+DXE:RegisterRealmPatch(realm, "hottrash", {})

@@ -1,11 +1,10 @@
 -- Data_ShadowfangKeep_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("baronashbury", {})
-DXE:RegisterRealmPatch("baronsilverlaine", {})
-DXE:RegisterRealmPatch("commanderspringvale", {})
-DXE:RegisterRealmPatch("lordwalden", {})
-DXE:RegisterRealmPatch("lordgodfrey", {})
-DXE:RegisterRealmPatch("sfktrash", {})
+DXE:RegisterRealmPatch(realm, "baronashbury", {})
+DXE:RegisterRealmPatch(realm, "baronsilverlaine", {})
+DXE:RegisterRealmPatch(realm, "commanderspringvale", {})
+DXE:RegisterRealmPatch(realm, "lordwalden", {})
+DXE:RegisterRealmPatch(realm, "lordgodfrey", {})
+DXE:RegisterRealmPatch(realm, "sfktrash", {})

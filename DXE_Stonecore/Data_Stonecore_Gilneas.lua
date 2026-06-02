@@ -1,10 +1,9 @@
 -- Data_Stonecore_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("corborus", {})
-DXE:RegisterRealmPatch("slabhide", {})
-DXE:RegisterRealmPatch("ozruk", {})
-DXE:RegisterRealmPatch("azil", {})
-DXE:RegisterRealmPatch("stonecoretrash", {})
+DXE:RegisterRealmPatch(realm, "corborus", {})
+DXE:RegisterRealmPatch(realm, "slabhide", {})
+DXE:RegisterRealmPatch(realm, "ozruk", {})
+DXE:RegisterRealmPatch(realm, "azil", {})
+DXE:RegisterRealmPatch(realm, "stonecoretrash", {})

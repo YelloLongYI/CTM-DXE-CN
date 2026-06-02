@@ -1,16 +1,15 @@
 -- Data_ZulGurub_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("venoxis", {})
-DXE:RegisterRealmPatch("mandokir", {})
-DXE:RegisterRealmPatch("grilek", {})
-DXE:RegisterRealmPatch("renataki", {})
-DXE:RegisterRealmPatch("hazzarah", {})
-DXE:RegisterRealmPatch("wushoolay", {})
-DXE:RegisterRealmPatch("kilnara", {})
-DXE:RegisterRealmPatch("zanzil", {})
-DXE:RegisterRealmPatch("jindo", {})
-DXE:RegisterRealmPatch("zulgurubtrash", {})
-DXE:RegisterRealmPatch("cacheofmadness", {})
+DXE:RegisterRealmPatch(realm, "venoxis", {})
+DXE:RegisterRealmPatch(realm, "mandokir", {})
+DXE:RegisterRealmPatch(realm, "grilek", {})
+DXE:RegisterRealmPatch(realm, "renataki", {})
+DXE:RegisterRealmPatch(realm, "hazzarah", {})
+DXE:RegisterRealmPatch(realm, "wushoolay", {})
+DXE:RegisterRealmPatch(realm, "kilnara", {})
+DXE:RegisterRealmPatch(realm, "zanzil", {})
+DXE:RegisterRealmPatch(realm, "jindo", {})
+DXE:RegisterRealmPatch(realm, "zulgurubtrash", {})
+DXE:RegisterRealmPatch(realm, "cacheofmadness", {})

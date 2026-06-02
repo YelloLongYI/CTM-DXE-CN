@@ -26,28 +26,31 @@ values = {
 
 ```lua
 -- Data_Bastion_MyServer.lua
-if DXE.db.profile.Globals.Realm ~= "MyServer" then return end
+local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "MyServer"
 
-DXE:RegisterRealmPatch("halfus", {
+DXE:RegisterRealmPatch(realm, "halfus", {
 })
 
-DXE:RegisterRealmPatch("valther", {
+DXE:RegisterRealmPatch(realm, "valther", {
 })
 
-DXE:RegisterRealmPatch("ascendcouncil", {
+DXE:RegisterRealmPatch(realm, "ascendcouncil", {
 })
 
-DXE:RegisterRealmPatch("chogall", {
+DXE:RegisterRealmPatch(realm, "chogall", {
 })
 
-DXE:RegisterRealmPatch("sinestra", {
+DXE:RegisterRealmPatch(realm, "sinestra", {
 })
 
-DXE:RegisterRealmPatch("bottrash", {
+DXE:RegisterRealmPatch(realm, "bottrash", {
 })
 ```
 
-`key` 必须与 `Encounters.lua` 中各 `data.key` 一致。空 `{}` = 无差异。
+`realm` 变量值与下拉框中的 key 一致。`"halfus"` 等必须与 `Encounters.lua` 中各 `data.key` 一致。空 `{}` = 无差异。
+
+> 文件不再需要 Realm 守卫。切换 Realm 后补丁自动生效，无需 `/reload`。
 
 ---
 
@@ -87,20 +90,21 @@ DXE_Options/            ← 设置面板，非副本模块 ❌
 
 ### 5.1 文件头声明
 
-补丁文件需要声明 `L`、`SN`、`ST` 等快捷变量：
+补丁文件声明 `L`、`SN`、`ST` 等快捷变量及 `realm`，无需 Realm 守卫：
 
 ```lua
-if DXE.db.profile.Globals.Realm ~= "MyServer" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "MyServer"
 ```
+
+`RegisterRealmPatch` 的第一个参数 `realm` 决定了补丁在哪个 Realm 生效。
 
 ### 5.2 字段覆盖（默认行为）
 
 有差异时在对应 `{}` 中写入字段：
 
 ```lua
-DXE:RegisterRealmPatch("halfus", {
+DXE:RegisterRealmPatch(realm, "halfus", {
     alerts = {
         enragecd = { time = 420 },
     },
@@ -122,7 +126,9 @@ DXE:RegisterRealmPatch("halfus", {
 默认行为下，字典型字段（如 `alerts`）是递归合并。如果希望**整个字典替换**而非合并，用 `DXE.Replace`：
 
 ```lua
-DXE:RegisterRealmPatch("halfus", {
+local realm = "MyServer"
+
+DXE:RegisterRealmPatch(realm, "halfus", {
     alerts = DXE.Replace({
         enragecd = {
             varname = L.alert["Berserk CD"],

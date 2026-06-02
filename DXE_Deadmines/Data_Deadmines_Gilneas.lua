@@ -1,13 +1,12 @@
 -- Data_Deadmines_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("glubtok", {})
-DXE:RegisterRealmPatch("helix", {})
-DXE:RegisterRealmPatch("foereaper", {})
-DXE:RegisterRealmPatch("ripsnarl", {})
-DXE:RegisterRealmPatch("cookie", {})
-DXE:RegisterRealmPatch("vanessa", {})
-DXE:RegisterRealmPatch("vanessaevent", {})
-DXE:RegisterRealmPatch("deadminestrash", {})
+DXE:RegisterRealmPatch(realm, "glubtok", {})
+DXE:RegisterRealmPatch(realm, "helix", {})
+DXE:RegisterRealmPatch(realm, "foereaper", {})
+DXE:RegisterRealmPatch(realm, "ripsnarl", {})
+DXE:RegisterRealmPatch(realm, "cookie", {})
+DXE:RegisterRealmPatch(realm, "vanessa", {})
+DXE:RegisterRealmPatch(realm, "vanessaevent", {})
+DXE:RegisterRealmPatch(realm, "deadminestrash", {})

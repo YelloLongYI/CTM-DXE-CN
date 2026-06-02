@@ -1,11 +1,10 @@
 -- Data_LostCityOfTolvir_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("husam", {})
-DXE:RegisterRealmPatch("lockmaw", {})
-DXE:RegisterRealmPatch("augh", {})
-DXE:RegisterRealmPatch("barim", {})
-DXE:RegisterRealmPatch("siamat", {})
-DXE:RegisterRealmPatch("lostcitytrash", {})
+DXE:RegisterRealmPatch(realm, "husam", {})
+DXE:RegisterRealmPatch(realm, "lockmaw", {})
+DXE:RegisterRealmPatch(realm, "augh", {})
+DXE:RegisterRealmPatch(realm, "barim", {})
+DXE:RegisterRealmPatch(realm, "siamat", {})
+DXE:RegisterRealmPatch(realm, "lostcitytrash", {})

@@ -1,15 +1,14 @@
 -- Data_DragonSoul_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("morchok", {})
-DXE:RegisterRealmPatch("zonozz", {})
-DXE:RegisterRealmPatch("yorsahj", {})
-DXE:RegisterRealmPatch("hagara", {})
-DXE:RegisterRealmPatch("sumitevent", {})
-DXE:RegisterRealmPatch("ultraxion", {})
-DXE:RegisterRealmPatch("blackhorn", {})
-DXE:RegisterRealmPatch("spineofdeathwing", {})
-DXE:RegisterRealmPatch("madnessofdeathwing", {})
-DXE:RegisterRealmPatch("dragonsoultrash", {})
+DXE:RegisterRealmPatch(realm, "morchok", {})
+DXE:RegisterRealmPatch(realm, "zonozz", {})
+DXE:RegisterRealmPatch(realm, "yorsahj", {})
+DXE:RegisterRealmPatch(realm, "hagara", {})
+DXE:RegisterRealmPatch(realm, "sumitevent", {})
+DXE:RegisterRealmPatch(realm, "ultraxion", {})
+DXE:RegisterRealmPatch(realm, "blackhorn", {})
+DXE:RegisterRealmPatch(realm, "spineofdeathwing", {})
+DXE:RegisterRealmPatch(realm, "madnessofdeathwing", {})
+DXE:RegisterRealmPatch(realm, "dragonsoultrash", {})

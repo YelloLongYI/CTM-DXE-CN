@@ -30,11 +30,9 @@ DXE_Bastion/
 
 ```lua
 -- Data_Bastion_JRG.lua
--- 守卫：非目标 Realm 直接跳过
-if DXE.db.profile.Globals.Realm ~= "JRG" then return end
+local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 
--- 每个有差异的 BOSS 调用一次
-DXE:RegisterRealmPatch("halfus", {
+DXE:RegisterRealmPatch("JRG", "halfus", {
     triggers = {
         scan = { 44600, 44650, 99999, 44797, 44652 },   -- NPC ID 不同
     },
@@ -44,7 +42,7 @@ DXE:RegisterRealmPatch("halfus", {
     },
 })
 
-DXE:RegisterRealmPatch("chogall", {
+DXE:RegisterRealmPatch("JRG", "chogall", {
     triggers = {
         scan = { 43324, 88888 },
         yell = "Worship me, mortals!",
@@ -53,6 +51,8 @@ DXE:RegisterRealmPatch("chogall", {
 
 -- 无差异的 BOSS（valther、ascendcouncil、sinestra、bottrash）不写
 ```
+
+`RegisterRealmPatch` 第一个参数为 Realm 标识，需与下拉框 key 一致。**文件不再需要 Realm 守卫**——所有补丁一次性注册到 `realmPatchDefs`，Realm 切换时通过 `ApplyRealmPatches` 动态匹配。
 
 ### 1.3 可补丁的数据范围
 
@@ -173,20 +173,20 @@ EDB["halfus"].alerts.enragecd = {
 
 ### 3.1 TOC 文件
 
-所有文件按顺序在 `.toc` 中列出，补丁文件必须在 `Encounters.lua` 之前加载，确保补丁队列在注册时已被填充：
+所有文件按顺序在 `.toc` 中列出，补丁文件必须在 `Encounters.lua` 之前加载：
 
 ```
 # DXE_Bastion.toc
 Locales.lua
-Data_Bastion_Apollo.lua         ← 补丁文件先加载，Realm 守卫过滤
-Data_Bastion_JRG.lua            ← 匹配 Realm 的补丁入队列
-Data_Bastion_Test.lua           ← 匹配 Realm 的补丁入队列
-Encounters.lua                  ← 最后注册，合并队列中的补丁
+Data_Bastion_Apollo.lua         ← 补丁文件先加载，注册到 realmPatchDefs
+Data_Bastion_JRG.lua            ← 注册到 realmPatchDefs
+Data_Bastion_Test.lua           ← 注册到 realmPatchDefs
+Encounters.lua                  ← 最后注册，根据当前 Realm 合入补丁
 ```
 
 ### 3.2 Realm 配置
 
-Realm 标识由玩家在 DXE 设置中手动配置，存储在 `DXE.db.profile.Globals.Realm`，默认值为 `"Apollo"`。Core.lua 中的 `pfl` 是文件级 `local` 变量，外部模块不可访问，因此补丁文件中必须通过 `DXE.db.profile.Globals.Realm` 读取。
+Realm 标识由玩家在 DXE 设置中手动配置，存储在 `DXE.db.profile.Globals.Realm`，默认值为 `"Apollo"`。切换 Realm 时触发 `ApplyRealmPatches()`，补丁立即生效无需 `/reload`。
 
 ```lua
 -- Core.lua 默认设置
@@ -201,129 +201,82 @@ defaults = {
 
 ### 3.2.1 从玩家配置到补丁生效 —— 完整流程
 
-以玩家将 Realm 设为 `"JRG"` 后进入暮光堡垒为例：
-
 ```
-玩家配置 Realm = "JRG"
-        │
-        ▼
-进入 The Bastion of Twilight
-        │
-        ▼
-DXE_Loader 扫描到 DXE_Bastion 的 X-DXE-Zone 匹配 → LoadAddOn
-        │
-        ▼
-TOC 按序加载所有文件:
-        │
-        ├── Locales.lua              ← 多语言文本加载
-        │
-        ├── Encounters.lua           ← RegisterEncounter 注册所有 BOSS（Apollo 默认数据）
-        │
-        ├── Data_Bastion_Apollo.lua
-        │   │  if DXE.db.profile.Globals.Realm ~= "Apollo" then return end
-        │   │  "JRG" ~= "Apollo" → return（跳过）
-        │   └── 不执行任何补丁
-        │
-        └── Data_Bastion_JRG.lua
-            │  if DXE.db.profile.Globals.Realm ~= "JRG" then return end
-            │  "JRG" == "JRG" → 通过
-            │
-            ├── RegisterRealmPatch("halfus", { ... })
-            ├── RegisterRealmPatch("chogall", { ... })
-            │       │
-            │       ▼
-            │   EDB["halfus"] 已存在 → deepMerge 就地修改
-            │   EDB["chogall"] 已存在 → deepMerge 就地修改
-            │
-            └── 补丁完成
+模块加载时（一次性）:
+──────────────────────────────────
+Data_Bastion_Apollo.lua   → RegisterRealmPatch("Apollo", ...) → 存入 realmPatchDefs
+Data_Bastion_JRG.lua      → RegisterRealmPatch("JRG", ...)    → 存入 realmPatchDefs
+Data_Bastion_Test.lua     → RegisterRealmPatch("Test", ...)   → 存入 realmPatchDefs
+                                │
+Encounters.lua            → RegisterEncounter → 读取 realmPatchDefs[currentRealm]
+                                │
+                                ▼
+                          当前 Realm 匹配的补丁 → deepMerge 合入 data
+
+切换 Realm 时（即时生效）:
+──────────────────────────────────
+Options 下拉框选 "JRG"  → ApplyRealmPatches("JRG")
+                              │
+                              ▼
+                         realmPatchDefs["JRG"] → 遍历所有已加载的 encounter
+                              │
+                              ▼
+                         PatchEncounter → deepMerge → ACR:NotifyChange 刷新 UI
 ```
 
-同样一次加载，**如果玩家 Realm 保持默认 `"Apollo"`**：
-
-```
-Data_Bastion_Apollo.lua    → "Apollo" == "Apollo" → 通过（当前为空，零补丁）
-Data_Bastion_JRG.lua       → "Apollo" ~= "JRG"    → return（跳过）
-```
+> 无需 `/reload`，无需重新加载模块。补丁数据在模块首次加载时一次性注册，Realm 切换时即时应用。
 
 **结论**：同一个 TOC 列出所有服务器文件，运行时根据 `DXE.db.profile.Globals.Realm` 的值，只有一个文件的补丁生效，其余全部跳过。不需要重新打包、不需要切换分支。
 
-### 3.3 注册队列机制
+### 3.3 补丁持久化与即时应用
 
-补丁文件**不直接修改 EDB**，而是通过 `RegisterRealmPatch` 注册，由框架自动调度，**消除 TOC 顺序依赖**。
+补丁文件**不直接修改 EDB**，而是通过 `RegisterRealmPatch(realm, key, patch)` 存入 `realmPatchDefs`：
 
 ```lua
--- Core.lua 新增
+addon.realmPatchDefs = setmetatable({}, { __mode = "v" })
 
--- 待处理的补丁队列
-addon.realmPatches = {}
+function addon:RegisterRealmPatch(realm, key, patchTable)
+    -- 持久存储
+    self.realmPatchDefs[realm] = self.realmPatchDefs[realm] or {}
+    self.realmPatchDefs[realm][key] = self.realmPatchDefs[realm][key] or {}
+    self.realmPatchDefs[realm][key][#self.realmPatchDefs[realm][key] + 1] = patchTable
 
--- 注册补丁（TOC 顺序无关）
-function addon:RegisterRealmPatch(key, patchTable)
-    if EDB[key] then
-        -- encounter 已注册 → 立即 patch
+    -- 当前 Realm 匹配且 encounter 已加载 → 立即应用
+    if self.db.profile.Globals.Realm == realm and self.EDB[key] then
         self:PatchEncounter(key, patchTable)
-    else
-        -- encounter 尚未注册 → 入队列等待
-        self.realmPatches[key] = self.realmPatches[key] or {}
-        self.realmPatches[key][#self.realmPatches[key] + 1] = patchTable
     end
 end
 
--- PatchEncounter：执行 deepMerge
-function addon:PatchEncounter(key, patch)
-    local base = EDB[key]
-    if not base then
-        self:Print(format("|cffff0000[RealmPatch]|r encounter '%s' not found", key))
-        return
+function addon:ApplyRealmPatches(realm)
+    local defs = self.realmPatchDefs[realm]
+    if not defs then return end
+    for key, patches in pairs(defs) do
+        if self.EDB[key] then
+            for _, p in ipairs(patches) do
+                self:PatchEncounter(key, p)
+            end
+        end
     end
-    deepMerge(base, patch)
+end
+```
+
+`RegisterEncounter` 内根据当前 Realm 从 `realmPatchDefs` 合入补丁：
+
+```lua
+function addon:RegisterEncounter(data)
+    local key = data.key
+    -- ...
+    local currentRealm = self.db.profile.Globals.Realm
+    if self.realmPatchDefs[currentRealm] and self.realmPatchDefs[currentRealm][key] then
+        for _, p in ipairs(self.realmPatchDefs[currentRealm][key]) do
+            deepMerge(data, p)
+        end
+    end
+    -- ... 剩余注册逻辑 ...
 end
 ```
 
 ---
-
-## 四、补丁应用时序
-
-### 4.1 消费队列
-
-在 `RegisterEncounter` 末尾新增队列消费逻辑：
-
-```lua
-function addon:RegisterEncounter(data)
-    -- ... 现有 80 行注册逻辑不变 ...
-    EDB[key] = data
-
-    -- 消费等候中的补丁
-    if self.realmPatches[key] then
-        for _, patch in ipairs(self.realmPatches[key]) do
-            self:PatchEncounter(key, patch)
-        end
-        self.realmPatches[key] = nil
-    end
-end
-```
-
-### 4.2 两种情况
-
-```
-情况A：补丁文件先加载（TOC 中 Data_* 在 Encounters 之前）
-─────────────────────────────────────────────────────
-RegisterRealmPatch("halfus", patch)
-    → EDB["halfus"] 不存在 → 进队列
-Encounters.lua 加载
-    → RegisterEncounter(data) → EDB["halfus"] = data
-        → realmPatches["halfus"] 有等候 → 消费 → PatchEncounter ✅
-
-情况B：Encounters.lua 先加载（TOC 中 Encounters 在前）
-─────────────────────────────────────────────────────
-RegisterEncounter(data) → EDB["halfus"] = data
-    → realmPatches["halfus"] 为空 → 无操作
-Data_*.lua 加载
-    → RegisterRealmPatch("halfus", patch)
-        → EDB["halfus"] 存在 → 立即 PatchEncounter ✅
-```
-
-**结论：两种 TOC 顺序均正确。**
 
 ### 4.3 完整生命周期
 
@@ -351,10 +304,10 @@ data.key = "halfus"
 DXE:RegisterEncounter(data)
 
 -- 补丁文件（正确）
-DXE:RegisterRealmPatch("halfus", { ... })   -- ✅ 匹配，补丁生效
+DXE:RegisterRealmPatch("JRG", "halfus", { ... })   -- ✅
 
--- 补丁文件（错误）
-DXE:RegisterRealmPatch("halfus_typo", { ... })  -- ❌ 不匹配，补丁丢弃
+-- 补丁文件（错误：key 写错）
+DXE:RegisterRealmPatch("JRG", "halfus_typo", { ... })  -- ❌
 ```
 
 执行流程：
@@ -409,9 +362,9 @@ end
 **Data_Bastion_JRG.lua**（补丁数据，仅差异）：
 
 ```lua
-if DXE.db.profile.Globals.Realm ~= "JRG" then return end
+local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 
-DXE:RegisterRealmPatch("halfus", {
+DXE:RegisterRealmPatch("JRG", "halfus", {
     triggers = {
         scan = { 44600, 44650, 99999, 44797, 44652 },
     },
@@ -446,72 +399,36 @@ DXE:RegisterRealmPatch("halfus", {
 
 ## 六、关键发现
 
-### 6.1 Realm 守卫的变量作用域
+### 6.1 文件无需 Realm 守卫
 
-`pfl` 是 `DXE/Core.lua` 中的 `local` 变量（第 562 行），**外部 addon 文件无法访问**。
-
-```lua
--- Core.lua
-local db, gbl, pfl    -- 文件级 local，仅 Core.lua 内部可用
-```
-
-补丁文件运行在 `DXE_Bastion` 的加载上下文中，`pfl` 为 `nil`，`pfl.Globals` 会直接报错。正确写法是使用 DXE 的公开接口：
+补丁文件使用 `DXE:RegisterRealmPatch(realm, key, patch)` 声明目标 Realm，**不再需要文件头守卫**。所有补丁在模块加载时一次性注册到 `realmPatchDefs`，Realm 切换时通过 `ApplyRealmPatches` 即时匹配。
 
 ```lua
--- ❌ 错误：pfl 在其他文件中为 nil
-if pfl.Globals.Realm ~= "JRG" then return end
+-- ✅ 当前写法
+DXE:RegisterRealmPatch("JRG", "halfus", { ... })
 
--- ✅ 正确：DXE.db 是全局可访问的
+-- ❌ 旧写法（已废弃）
 if DXE.db.profile.Globals.Realm ~= "JRG" then return end
+DXE:RegisterRealmPatch("halfus", { ... })
 ```
 
-### 6.2 数据文件禁止包含 RegisterEncounter
+有守卫时，非当前 Realm 的补丁无法入库，切 Realm 后补丁丢失。
 
-每个副本模块只能有一个文件调用 `RegisterEncounter(data)`——即 `Encounters.lua`。
+### 6.2 切换 Realm 即时生效
 
-若补丁文件也调用 `RegisterEncounter`，与 `Encounters.lua` 注册相同的 key 时会触发：
+Realm 下拉框切换时调用 `DXE:ApplyRealmPatches(realm)`，遍历 `realmPatchDefs` 中该 Realm 的所有补丁并应用到已加载的 encounter，然后 `ACR:NotifyChange` 刷新 UI。无需 `/reload`。
 
-```lua
-if EDB[key] then error("Encounter "..key.." already exists") return end
-```
+### 6.3 数据文件禁止包含 RegisterEncounter
 
-这会导致 `Encounters.lua` 的注册被拦截，`OnRegisterEncounter` 回调不会触发，Options 面板无法构建。
-
-补丁文件只能用 `DXE:RegisterRealmPatch(key, patch)`，框架会在 `RegisterEncounter` 内自动合入队列中的补丁。
-
-### 6.3 TOC 加载顺序
-
-补丁文件必须在 `Encounters.lua` **之前**加载，确保补丁队列在注册时已被填充：
-
-```
-Locales.lua
-Data_Bastion_Apollo.lua       ← 先加载所有补丁文件
-Data_Bastion_JRG.lua          ← Realm 守卫过滤
-Data_Bastion_Test.lua         ← 匹配 Realm 的补丁入队列
-Encounters.lua                ← 后注册，合并队列中的补丁
-```
+每个副本模块只能 `Encounters.lua` 调用 `RegisterEncounter`。补丁文件只能用 `DXE:RegisterRealmPatch`。
 
 ### 6.4 EDB 为 Core.lua 的 local 变量
 
-`EDB` 在 `DXE/Core.lua` 中声明为 `local EDB = {}`（第 1178 行），同时暴露为 `addon.EDB`（第 1179 行）。`RegisterRealmPatch` 和 `PatchEncounter` 定义在 `EDB` 赋值之前，闭包中直接引用 local `EDB` 在函数调用时可能为 `nil`。
+`RegisterRealmPatch` 和 `PatchEncounter` 内必须使用 `self.EDB`（`addon.EDB`），闭包中直接引用 local `EDB` 可能为 `nil`。
 
-```lua
--- ❌ 错误：闭包中 local EDB 可能为 nil
-function addon:RegisterRealmPatch(key, patchTable)
-    if EDB[key] then
-        ...
-    end
-end
+### 6.5 TOC 加载顺序
 
--- ✅ 正确：使用 addon 上的公共引用
-function addon:RegisterRealmPatch(key, patchTable)
-    if self.EDB[key] then
-        ...
-    end
-end
-```
-
-`self.EDB`（即 `addon.EDB` / `DXE.EDB`）指向同一个表，不受闭包变量提升影响。
+补丁文件必须在 `Encounters.lua` 之前加载。
 
 ---
 
@@ -519,6 +436,7 @@ end
 
 | 文件 | 改动 |
 |------|------|
-| `DXE/Core.lua` | 新增 `hasNumericKey`、`deepMerge` 工具函数；新增 `realmPatches` 队列、`RegisterRealmPatch`、`PatchEncounter`（内部使用 `self.EDB`）；`RegisterEncounter` 开头合入队列补丁到 data |
-| 各模块 `Data_<Module>_<Realm>.lua` | 只含 Realm 守卫 + `DXE:RegisterRealmPatch`，不含 `RegisterEncounter` |
+| `DXE/Core.lua` | 新增 `hasNumericKey`、`deepMerge`、`DXE.Replace` 工具函数；新增 `realmPatchDefs` 持久存储、`RegisterRealmPatch(realm, key, patch)`、`PatchEncounter`、`ApplyRealmPatches(realm)`；`RegisterEncounter` 开头按当前 Realm 合入补丁 |
+| `DXE_Options/Options.lua` | Realm 下拉框 set 函数末尾调用 `ApplyRealmPatches` |
+| 各模块 `Data_<Module>_<Realm>.lua` | 不含文件头守卫，只用 `DXE:RegisterRealmPatch(realm, key, patch)` |
 | 各模块 `DXE_<Module>.toc` | `Data_*` 补丁文件排在 `Encounters.lua` 之前 |

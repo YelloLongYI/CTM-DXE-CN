@@ -1,10 +1,10 @@
 -- Data_Bastion_Test.lua
 -- Test realm patch for verifying the realm patching mechanism
-if DXE.db.profile.Globals.Realm ~= "Test" then return end
 
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Test"
 
-DXE:RegisterRealmPatch("halfus", {
+DXE:RegisterRealmPatch(realm, "halfus", {
     alerts = DXE.Replace({
         enragecd = {
             varname = L.alert["Berserk CD"],

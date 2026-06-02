@@ -1,12 +1,11 @@
 -- Data_EndTime_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("echobaine", {})
-DXE:RegisterRealmPatch("echojaina", {})
-DXE:RegisterRealmPatch("echosylvanas", {})
-DXE:RegisterRealmPatch("echotyrande", {})
-DXE:RegisterRealmPatch("murozond", {})
-DXE:RegisterRealmPatch("ettrash", {})
-DXE:RegisterRealmPatch("echoofthepast", {})
+DXE:RegisterRealmPatch(realm, "echobaine", {})
+DXE:RegisterRealmPatch(realm, "echojaina", {})
+DXE:RegisterRealmPatch(realm, "echosylvanas", {})
+DXE:RegisterRealmPatch(realm, "echotyrande", {})
+DXE:RegisterRealmPatch(realm, "murozond", {})
+DXE:RegisterRealmPatch(realm, "ettrash", {})
+DXE:RegisterRealmPatch(realm, "echoofthepast", {})

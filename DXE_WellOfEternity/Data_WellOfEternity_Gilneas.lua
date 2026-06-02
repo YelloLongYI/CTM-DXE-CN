@@ -1,9 +1,8 @@
 -- Data_WellOfEternity_Gilneas.lua
-if DXE.db.profile.Globals.Realm ~= "Gilneas" then return end
-
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
+local realm = "Gilneas"
 
-DXE:RegisterRealmPatch("perotharn", {})
-DXE:RegisterRealmPatch("queenazshara", {})
-DXE:RegisterRealmPatch("mannorothvarothen", {})
-DXE:RegisterRealmPatch("wellofeternitytrash", {})
+DXE:RegisterRealmPatch(realm, "perotharn", {})
+DXE:RegisterRealmPatch(realm, "queenazshara", {})
+DXE:RegisterRealmPatch(realm, "mannorothvarothen", {})
+DXE:RegisterRealmPatch(realm, "wellofeternitytrash", {})
