@@ -2,14 +2,34 @@
 
 > 扫描范围：DXE 项目自有代码（排除 `Libs/` 目录下的第三方库）
 > 生成日期：2026-05-24
+> 最后更新：2026-06-03
 
-## 一、总览
+## 一、GetNumRaidMembers / GetNumPartyMembers / GetNumGroupMembers
+
+4.4.2 Classic 移除了 `GetNumRaidMembers()` 和 `GetNumPartyMembers()`，统一为 `GetNumGroupMembers()`。
+
+| API | 4.3.4 | 4.4.2 Classic |
+|-----|-------|--------------|
+| `GetNumRaidMembers()` | 团队中返回人数（含自己），否则 0 | **已移除** |
+| `GetNumPartyMembers()` | 小队中返回人数（不含自己），否则 0 | **已移除** |
+| `GetNumGroupMembers()` | 不存在 | 返回队伍总人数（含自己） |
+
+### Shim（`DXE/Core.lua` 第 482-491 行）
+
+用 `IsInRaid()` 判断场景，`GetNumGroupMembers()` 兼容替换：
+
+| | 单人 | 5 人队 | 团队 |
+|------|:--:|:--:|:--:|
+| `GetNumRaidMembers()` | 0 | 0 | N |
+| `GetNumPartyMembers()` | 0 | 4 | 0 |
+
+## 二、总览
 
 - **API 总数：~130+**
 - 全部为 4.3 时代原生全局函数，未使用任何 `C_*` 命名空间 API
 - 按密集度排序：`Core.lua` > `Invoker.lua` > `Alerts.lua` > `PvPScore.lua`
 
-## 二、按 Compat.lua 封装需求分类
+## 三、按 Compat.lua 封装需求分类
 
 ### 🔴 必须封装（4.4.2 行为有变化）
 
@@ -159,7 +179,7 @@
 `UIParent` `RaidWarningFrame` `RaidBossEmoteFrame` `WorldStateScoreFrame` `MovieFrame`
 `ALTERNATE_POWER_INDEX`
 
-## 三、Compat.lua 封装优先级
+## 四、Compat.lua 封装优先级
 
 | 优先级 | API 组 | 说明 |
 |--------|--------|------|
@@ -171,9 +191,9 @@
 | P2 | `UnitCastingInfo` / `UnitChannelInfo` | 仅 ~4 处调用 |
 | P2 | `UnitGUID` NPC ID 提取 | 已有 `NID` 代理表，需新增偏移 |
 | P3 | `GetSpellInfo` / `GetSpellLink` | 低用量，向后兼容性高 |
-| P3 | `GetNumRaidMembers` / `GetNumPartyMembers` | 可能直接兼容 |
+| P3 | `GetNumRaidMembers` / `GetNumPartyMembers` | **4.4.2 已移除**，全局 shim 已实施 |
 
-## 四、副本 Encounters.lua 分类
+## 五、副本 Encounters.lua 分类
 
 ### 需要修改（2 个）
 
@@ -229,7 +249,7 @@
 | DXE_ZulAman | `DXE_ZulAman/Encounters.lua` | — |
 | DXE_ZulGurub | `DXE_ZulGurub/Encounters.lua` | — |
 
-## 五、其他无需改动的部分
+## 六、其他无需改动的部分
 
 - `Locales.lua` 系列——仅使用 `GetLocale()`
 - 大部分 `SendChatMessage`、`GetTime`、事件注册——行为一致

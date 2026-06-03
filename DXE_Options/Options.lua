@@ -2500,7 +2500,9 @@ end
                 if info.texture then
                     icon = format("|T%s:16:16|t ",info.texture)
                 elseif info.icon then
-                    if info.icon:match("^<.+>$") then
+                    if type(info.icon) == "number" then
+                        icon = ""
+                    elseif info.icon:match("^<.+>$") then
                         icon = format("|T%s:16:16|t ","Interface\\ICONS\\INV_Misc_QuestionMark")
                     else
                         icon = format("|T%s:16:16|t ",info.icon)
@@ -2511,7 +2513,7 @@ end
             elseif optionType == "arrows" and info.texture then
                 icon = format("|T%s:16:16|t ",info.texture)
             end
-
+            
             option_args[var] = option_args[var] or {
                 name = GetColoredVarName(info, optionType, icon),
                 width = "full",
@@ -3397,7 +3399,9 @@ end
                 if info.texture then
                     icon = format("|T%s:16:16|t ",info.texture) 
                 elseif info.icon then
-                    if info.icon:match("^<.+>$") then
+                    if type(info.icon) == "number" then
+                        icon = format("|TInterface\\ICONS\\INV_Misc_QuestionMark:16:16|t ")
+                    elseif info.icon:match("^<.+>$") then
                         icon = format("|T%s:16:16|t ","Interface\\ICONS\\INV_Misc_QuestionMark")
                     else
                         icon = format("|T%s:16:16|t ",info.icon)

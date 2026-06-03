@@ -14,7 +14,7 @@ local window
 local pfl
 
 --Radial upvalues
-local GetPlayerMapPosition = GetPlayerMapPosition
+local GetPlayerMapPosition = DXE.Compat.GetPlayerMapPos
 local GetPlayerFacing = GetPlayerFacing
 local format = string.format
 local UnitInRange = UnitInRange
@@ -221,7 +221,7 @@ end
 
 local function CreateWindow()
     window = addon:CreateWindow(L["Radar"],110,100)
-	window:SetMinResize(100, 30)
+	if DXE.Compat.IS_CLASSIC then window:SetResizeBounds(100,30,0,0) else window:SetMinResize(100,30) end
 	--window:SetClampedToScreen(true)
 	window.closefunc = Deactivate
     window:Hide()

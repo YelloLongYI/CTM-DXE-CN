@@ -145,7 +145,7 @@ function addon:CreateWindow(name,width,height,regularMovingScaling)
 	window:SetMovable(true)
 	window:SetClampedToScreen(true)
 	window:SetResizable(true)
-	window:SetMinResize(50,50)
+	if DXE.Compat.IS_CLASSIC then window:SetResizeBounds(50,50,0,0) else window:SetMinResize(50,50) end
     
 	-- Inside
 	-- Important: Make sure faux_window:GetEffectiveScale() == UIParent:GetEffectiveScale() on creation

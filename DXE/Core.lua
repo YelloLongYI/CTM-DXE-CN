@@ -479,6 +479,18 @@ _G.DXE = addon
 
 local IS_CLASSIC = select(4, GetBuildInfo()) >= 40400
 
+if IS_CLASSIC and not GetNumRaidMembers then
+    _G.GetNumRaidMembers = function()
+        return IsInRaid() and GetNumGroupMembers() or 0
+    end
+end
+if IS_CLASSIC and not GetNumPartyMembers then
+    _G.GetNumPartyMembers = function()
+        if IsInRaid() then return 0 end
+        return IsInGroup() and (GetNumGroupMembers() - 1) or 0
+    end
+end
+
 addon.Compat = setmetatable({
     IS_CLASSIC = IS_CLASSIC,
 
@@ -497,6 +509,19 @@ addon.Compat = setmetatable({
         return name, rank, icon
     end,
 
+    GetNumRaidMembers = function()
+        local f = _G.GetNumRaidMembers or _G.GetNumGroupMembers
+        return f and f() or 0
+    end,
+
+    UnitIsDead = function(unit)
+        return (_G.UnitIsDead or function(u) return UnitHealth(u) <= 0 end)(unit)
+    end,
+
+    UnitIsUnit = function(unit, other)
+        return (_G.UnitIsUnit or function(u, o) return u == o end)(unit, other)
+    end,
+
     GetNPCIDFromGUID = function(guid)
         if not guid then return nil end
         if IS_CLASSIC then
@@ -511,6 +536,18 @@ addon.Compat = setmetatable({
             C_ChatInfo.SendAddonMessage(prefix, msg, channel, target)
         else
             SendAddonMessage(prefix, msg, channel, target)
+        end
+    end,
+
+    GetPlayerMapPos = function(unit)
+        if IS_CLASSIC then
+            local mapID = C_Map.GetBestMapForUnit(unit)
+            if not mapID then return 0, 0 end
+            local pos = C_Map.GetPlayerMapPosition(mapID, unit)
+            if not pos then return 0, 0 end
+            return pos.x, pos.y
+        else
+            return GetPlayerMapPosition(unit)
         end
     end,
 
@@ -620,10 +657,16 @@ local SL = setmetatable({},{
 local EJSN = setmetatable({},{
     __index = function(t,k)
         if type(k) ~= "number" then return "nil" end
-        local name = select(1, IS_CLASSIC and C_EncounterJournal.GetSectionInfo(k) or EJ_GetSectionInfo(k))
-        if not name then
-            return tostring(k)
+        local info = IS_CLASSIC and C_EncounterJournal.GetSectionInfo(k) or EJ_GetSectionInfo(k)
+        local name
+        if type(info) == "table" then
+            name = info[1] or info.name or info
+        elseif type(info) == "string" then
+            name = info
+        else
+            name = select(1, info)
         end
+        if not name or type(name) ~= "string" then return tostring(k) end
         return name
     end,
 })
@@ -631,10 +674,16 @@ local EJSN = setmetatable({},{
 local EJST = setmetatable({},{
     __index = function(t,k)
         if type(k) ~= "number" then return "nil" end
-        local texture = select(4, IS_CLASSIC and C_EncounterJournal.GetSectionInfo(k) or EJ_GetSectionInfo(k))
-        if not texture then
-            return "Interface\\Buttons\\WHITE8X8"
+        local info = IS_CLASSIC and C_EncounterJournal.GetSectionInfo(k) or EJ_GetSectionInfo(k)
+        local texture
+        if type(info) == "table" then
+            texture = info[4] or info.texture or info.icon
+        elseif type(info) == "string" then
+            texture = info
+        else
+            texture = select(4, info)
         end
+        if not texture or type(texture) ~= "string" then return "Interface\\Buttons\\WHITE8X8" end
         return texture
     end,
 })
@@ -1286,7 +1335,13 @@ function addon:RegisterEncounter(data)
     data.version = type(data.version) == "string" and tonumber(data.version:match("%d+")) or data.version
 
     -- Store original before patching
-    self.EDB_original[key] = deepCopy(data)
+    local ok, copy = pcall(deepCopy, data)
+    if not ok then
+        self:Print(format("|cffff0000[RealmPatch]|r deepCopy failed for %s", key))
+        self.EDB_original[key] = {}
+    else
+        self.EDB_original[key] = copy
+    end
 
     -- Merge queued realm patches before registration
     local currentRealm = self.db.profile.Globals.Realm
