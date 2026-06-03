@@ -1,12 +1,51 @@
--- Data_Deadmines_Gilneas.lua
+﻿-- Data_Deadmines_Gilneas.lua
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
-DXE:RegisterRealmPatch(realm, "glubtok", {})
-DXE:RegisterRealmPatch(realm, "helix", {})
-DXE:RegisterRealmPatch(realm, "foereaper", {})
-DXE:RegisterRealmPatch(realm, "ripsnarl", {})
-DXE:RegisterRealmPatch(realm, "cookie", {})
-DXE:RegisterRealmPatch(realm, "vanessa", {})
-DXE:RegisterRealmPatch(realm, "vanessaevent", {})
-DXE:RegisterRealmPatch(realm, "deadminestrash", {})
+DXE:RegisterRealmPatch(realm, "glubtok", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "helix", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "foereaper", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "ripsnarl", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "cookie", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "vanessa", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "vanessaevent", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "deadminestrash", {
+    windows = {
+        proxwindow = false,
+    },
+})

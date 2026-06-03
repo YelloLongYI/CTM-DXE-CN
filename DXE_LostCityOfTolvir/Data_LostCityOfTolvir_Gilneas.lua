@@ -1,10 +1,39 @@
--- Data_LostCityOfTolvir_Gilneas.lua
+﻿-- Data_LostCityOfTolvir_Gilneas.lua
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
-DXE:RegisterRealmPatch(realm, "husam", {})
-DXE:RegisterRealmPatch(realm, "lockmaw", {})
-DXE:RegisterRealmPatch(realm, "augh", {})
-DXE:RegisterRealmPatch(realm, "barim", {})
-DXE:RegisterRealmPatch(realm, "siamat", {})
-DXE:RegisterRealmPatch(realm, "lostcitytrash", {})
+DXE:RegisterRealmPatch(realm, "husam", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "lockmaw", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "augh", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "barim", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "siamat", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "lostcitytrash", {
+    windows = {
+        proxwindow = false,
+    },
+})

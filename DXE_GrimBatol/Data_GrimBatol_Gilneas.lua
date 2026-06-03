@@ -1,9 +1,33 @@
--- Data_GrimBatol_Gilneas.lua
+﻿-- Data_GrimBatol_Gilneas.lua
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
-DXE:RegisterRealmPatch(realm, "umbriss", {})
-DXE:RegisterRealmPatch(realm, "throngus", {})
-DXE:RegisterRealmPatch(realm, "drahga", {})
-DXE:RegisterRealmPatch(realm, "erudax", {})
-DXE:RegisterRealmPatch(realm, "grimbatoltrash", {})
+DXE:RegisterRealmPatch(realm, "umbriss", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "throngus", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "drahga", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "erudax", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "grimbatoltrash", {
+    windows = {
+        proxwindow = false,
+    },
+})

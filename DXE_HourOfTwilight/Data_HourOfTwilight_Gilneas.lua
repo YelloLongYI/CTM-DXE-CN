@@ -1,8 +1,27 @@
--- Data_HourOfTwilight_Gilneas.lua
+﻿-- Data_HourOfTwilight_Gilneas.lua
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
-DXE:RegisterRealmPatch(realm, "arcurion", {})
-DXE:RegisterRealmPatch(realm, "asiradownslayer", {})
-DXE:RegisterRealmPatch(realm, "archbishopbenedictus", {})
-DXE:RegisterRealmPatch(realm, "hottrash", {})
+DXE:RegisterRealmPatch(realm, "arcurion", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "asiradownslayer", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "archbishopbenedictus", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "hottrash", {
+    windows = {
+        proxwindow = false,
+    },
+})

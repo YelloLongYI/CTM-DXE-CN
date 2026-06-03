@@ -1,10 +1,39 @@
--- Data_Bastion_Gilneas.lua
+﻿-- Data_Bastion_Gilneas.lua
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
-DXE:RegisterRealmPatch(realm, "halfus", {})
-DXE:RegisterRealmPatch(realm, "valther", {})
-DXE:RegisterRealmPatch(realm, "ascendcouncil", {})
-DXE:RegisterRealmPatch(realm, "chogall", {})
-DXE:RegisterRealmPatch(realm, "sinestra", {})
-DXE:RegisterRealmPatch(realm, "bottrash", {})
+DXE:RegisterRealmPatch(realm, "halfus", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "valther", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "ascendcouncil", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "chogall", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "sinestra", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "bottrash", {
+    windows = {
+        proxwindow = false,
+    },
+})

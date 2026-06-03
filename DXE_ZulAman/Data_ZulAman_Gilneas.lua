@@ -1,11 +1,45 @@
--- Data_ZulAman_Gilneas.lua
+﻿-- Data_ZulAman_Gilneas.lua
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
-DXE:RegisterRealmPatch(realm, "akilzon", {})
-DXE:RegisterRealmPatch(realm, "nalorakk", {})
-DXE:RegisterRealmPatch(realm, "janalai", {})
-DXE:RegisterRealmPatch(realm, "halazzi", {})
-DXE:RegisterRealmPatch(realm, "malacrass", {})
-DXE:RegisterRealmPatch(realm, "daakara", {})
-DXE:RegisterRealmPatch(realm, "zulamantrash", {})
+DXE:RegisterRealmPatch(realm, "akilzon", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "nalorakk", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "janalai", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "halazzi", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "malacrass", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "daakara", {
+    windows = {
+        proxwindow = false,
+    },
+})
+
+DXE:RegisterRealmPatch(realm, "zulamantrash", {
+    windows = {
+        proxwindow = false,
+    },
+})
