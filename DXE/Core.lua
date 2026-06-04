@@ -1077,11 +1077,37 @@ end
 function addon:ApplyRealmPatches(realm)
     for key, orig in pairs(self.EDB_original) do
         if key ~= "default" then
+            -- 从 EDB_original 重建 profile（不受之前 Realm 污染）
+            local prof = self.db.profile.Encounters[key]
+            if prof then
+                for section, sectionData in pairs(orig) do
+                    if type(sectionData) == "table" then
+                        for k, v in pairs(sectionData) do
+                            prof[k] = type(v) == "table" and deepCopy(v) or { enabled = (v ~= false) }
+                        end
+                    end
+                end
+            end
+
             local restored = deepCopy(orig)
             local defs = self.realmPatchDefs[realm]
             if defs and defs[key] then
                 for _, p in ipairs(defs[key]) do
                     deepMerge(restored, p)
+                    if prof then
+                        for section, sectionPatch in pairs(p) do
+                            if type(sectionPatch) == "table" then
+                                for k, v in pairs(sectionPatch) do
+                                    if v == false then
+                                        prof[k] = { enabled = false }
+                                    elseif type(v) == "table" then
+                                        prof[k] = prof[k] or {}
+                                        deepMerge(prof[k], v)
+                                    end
+                                end
+                            end
+                        end
+                    end
                 end
             end
             self.callbacks:Fire("OnUnregisterEncounter", self.EDB[key])
@@ -1091,6 +1117,12 @@ function addon:ApplyRealmPatches(realm)
     end
     local ACR = LibStub("AceConfigRegistry-3.0", true)
     if ACR then ACR:NotifyChange("DXE") end
+
+    if self.CE and self.CE.key and self.EDB[self.CE.key] then
+        local oldKey = self.CE.key
+        self.CE = nil
+        self:SetActiveEncounter(oldKey)
+    end
 end
 
 function addon:PatchEncounter(key, patch)
@@ -1782,7 +1814,7 @@ function addon:SetActiveEncounter(key, autoStartTrash)
     -- Check the new encounter
     if not EDB[key] then return end
     -- Already set to this encounter
-    if CE and CE.key == key then
+    if CE and CE.key == key and addon.CE and addon.CE.key == key then
         if autoStartTrash and UnitAffectingCombat("player") then
             self:StartEncounter()
         end
