@@ -175,4 +175,84 @@ DXE:RegisterRealmPatch(realm, "blackrockcavernstrash", {
     windows = {
         proxwindow = false,
     },
+    raidicons = {
+        shacklesmark = {
+            varname = format("%s {%s}",SN[76484],"PLAYER_DEBUFF"),
+            texture = ST[76484],
+        },
+        volleymark = {
+            varname = format("%s {%s-%s}",SN[76718],"ENEMY_CAST","Incediary Spark's"),
+            texture = ST[76718],
+        },
+    },
+    alerts = {
+        -- Shackles
+        shackleswarn = {
+            varname = format(L.alert["%s Warning"],SN[76484]),
+            icon = ST[76484],
+        },
+        -- Final Volley
+        volleycd = {
+            varname = format(L.alert["%s CD"],SN[76718]),
+            text = format(L.alert["%s CD"],SN[76718]),
+            time = 7,
+            icon = ST[76718],
+        },
+        
+    },
+    events = {
+        -- Shackles
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellname = 76484,
+            execute = {
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "set",{shacklestext = format(L.alert["%s on %s - DISPEL!"],SN[76484],L.alert["YOU"])},
+                    "alert","shackleswarn",
+                },
+                {
+                    "expect",{"#4#","~=","&playerguid&"},
+                    "set",{shacklestext = format(L.alert["%s on <%s> - DISPEL!"],SN[76484],"#5#")},
+                    "alert","shackleswarn",
+                },
+                {
+                    "raidicon","shacklesmark",
+                },
+            },
+        },
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_REMOVED",
+            spellname = 76484,
+            execute = {
+                {
+                    "removeraidicon","#5#",
+                },
+            },
+        },
+        -- Final Volley
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 76718,
+            execute = {
+                {
+                    "alert","volleycd",
+                    "raidicon","volleymark",
+                },
+            },
+        },
+        {
+            type = "combatevent",
+            eventtype = "UNIT_DIED",
+            execute = {
+                {
+                    "expect",{"&npcid|#4#&","==","40021"},
+                    "quash",{"volleycd","#4#"},
+                },
+            },
+        },
+    },
 })
