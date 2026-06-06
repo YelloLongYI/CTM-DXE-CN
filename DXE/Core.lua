@@ -604,7 +604,6 @@ addon.Compat = setmetatable({
         if IS_CLASSIC then
             local kitID = SOUND_KIT_MAP[path]
             if kitID then
-                print("|cffff0000[SOUND MAP]|r path:", path, "kitID:", kitID, "channel:", channel)
                 PlaySound(kitID, channel)
             else
                 PlaySoundFile(path, channel)
@@ -2302,7 +2301,6 @@ local prevGroupType = "NONE"
 local RosterHandle
 addon.GroupType = "NONE"
 function addon:RAID_ROSTER_UPDATE()
-    print("|cffff0000[DXE Roster]|r updating, group:", addon.GroupType, "raid:", GetNumRaidMembers(), "party:", GetNumPartyMembers())
     --[===[@debug@
     debug("RAID_ROSTER_UPDATE","Invoked")
     --@end-debug@]===]
@@ -2386,7 +2384,6 @@ function addon:RAID_ROSTER_UPDATE()
     numOnline = tmpOnline
     
     addon:UpdateThrottlingScores()
-    print("|cffff0000[DXE Roster]|r done, unit_to_unittarget has:", next(Roster.unit_to_unittarget) and "entries" or "empty")
 end
 
 function addon:IsPromoted()
@@ -2985,7 +2982,6 @@ end
 -- Initialization
 function addon:OnInitialize()
     Initialized = true
-    print("|cffff0000DXE 1|r")
 
     -- Database
     self.db = LibStub("AceDB-3.0"):New("DXEDB",self.defaults)
@@ -2997,7 +2993,6 @@ function addon:OnInitialize()
 
     -- Setup slash commands early so /dxe works even if later UI code errors
     self:SetupSlashCommands()
-    print("|cffff0000DXE 2|r")
 
     -- Options
     db.RegisterCallback(self, "OnProfileChanged", "RefreshProfile")
@@ -3008,26 +3003,19 @@ function addon:OnInitialize()
     --@end-debug@]===]
 
     -- Received database
-    print("|cffff0000DXE 2.5|r RDB register")
     RDB = self.db:RegisterNamespace("RDB", {global = {}}).global
     self.RDB = RDB
 
     -- Pane
-    print("|cffff0000DXE 2.8 pre CreatePane|r")
     local ok, err = pcall(self.CreatePane, self)
     if not ok then print("|cffff0000[DXE CreatePane ERROR]|r", err) end
-    print("|cffff0000DXE 3 post CreatePane|r")
-    print("|cffff0000DXE 3|r")
+
     self:SkinPane()
     self:UpdatePaneButtons()
-    print("|cffff0000DXE 4|r")
 
     -- The default encounter
-    print("|cffff0000[DXE]|r before RegisterEncounter")
     self:RegisterEncounter({key = "default", name = L["Default"], title = L["Default"]})
-    print("|cffff0000[DXE]|r after RegisterEncounter, EDB[default]:", EDB["default"] and "exists" or "nil")
     self:SetActiveEncounter("default")
-    print("|cffff0000[DXE]|r after SetActive, CE:", addon.CE and "exists" or "nil")
     addon.defaults.global.lastUpdateShown = addon.version
   
     -- Register DBM prefix and handle its addon comunication

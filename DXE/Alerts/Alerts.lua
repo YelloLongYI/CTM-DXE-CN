@@ -673,7 +673,6 @@ local function Pour(text,icon,color,noColoring,id,idToReplace)
 end
 
 function module:Sound(soundFile, channel)
-    print("|cffff0000[SOUND CALL]|r", soundFile, type(soundFile))
     if soundFile == "None" then return end
     if(type(tonumber(soundFile)) == "number") then
         DXE.Compat.PlaySoundKitID(tonumber(soundFile),pfl.SoundOutputChannel,false)
