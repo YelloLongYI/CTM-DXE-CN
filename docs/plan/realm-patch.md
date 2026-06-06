@@ -91,8 +91,11 @@ local function deepMerge(target, source)
 
         -- ② source 值是 table
         elseif type(v) == "table" then
+            -- DXE.Replace 包裹 → 强制整表替换
+            if getmetatable(v) and getmetatable(v).__dxe_replace then
+                target[k] = v
             -- 含整数 key → 整表替换
-            if hasNumericKey(v) then
+            elseif hasNumericKey(v) then
                 target[k] = v
             -- 纯字典 + target 存在同名字典 → 递归进入
             elseif type(target[k]) == "table" then
@@ -107,6 +110,10 @@ local function deepMerge(target, source)
             target[k] = v
         end
     end
+end
+
+DXE.Replace = function(t)
+    return setmetatable(t, { __dxe_replace = true })
 end
 ```
 
@@ -248,15 +255,24 @@ function addon:RegisterRealmPatch(realm, key, patchTable)
 end
 
 function addon:ApplyRealmPatches(realm)
-    local defs = self.realmPatchDefs[realm]
-    if not defs then return end
-    for key, patches in pairs(defs) do
-        if self.EDB[key] then
-            for _, p in ipairs(patches) do
-                self:PatchEncounter(key, p)
+    for key, orig in pairs(self.EDB_original) do
+        if key ~= "default" then
+            -- 从 EDB_original 复原，重新合入目标 Realm 的补丁
+            local restored = deepCopy(orig)
+            local defs = self.realmPatchDefs[realm]
+            if defs and defs[key] then
+                for _, p in ipairs(defs[key]) do
+                    deepMerge(restored, p)
+                end
             end
+            -- 注销旧 encounter，注册新 encounter，触发 Options 刷新
+            self.callbacks:Fire("OnUnregisterEncounter", self.EDB[key])
+            self.EDB[key] = restored
+            self.callbacks:Fire("OnRegisterEncounter", restored)
         end
     end
+    local ACR = LibStub("AceConfigRegistry-3.0", true)
+    if ACR then ACR:NotifyChange("DXE") end
 end
 ```
 
@@ -265,7 +281,11 @@ end
 ```lua
 function addon:RegisterEncounter(data)
     local key = data.key
-    -- ...
+    -- 保存原始数据副本，用于 Realm 切换时恢复
+    local ok, copy = pcall(deepCopy, data)
+    self.EDB_original[key] = ok and copy or {}
+
+    -- 根据当前 Realm 合入补丁
     local currentRealm = self.db.profile.Globals.Realm
     if self.realmPatchDefs[currentRealm] and self.realmPatchDefs[currentRealm][key] then
         for _, p in ipairs(self.realmPatchDefs[currentRealm][key]) do
@@ -281,15 +301,27 @@ end
 ### 4.3 完整生命周期
 
 ```
-    启动登录                  进入副本                   BOSS 战
-       │                         │                         │
-       ▼                         ▼                         ▼
-┌──────────────┐   ┌─────────────────────┐   ┌──────────────────────┐
-│ DXE 核心初始化 │   │ Loader 按区域加载    │   │ Invoker 读取 CE       │
-│ OnInitialize  │   │ DXE_Bastion         │   │ CE = EDB["halfus"]    │
-│ EDB 已就绪    │──▶│ Encounters 注册 ──┐  │──▶│ 此时已是补丁后的最终数据│
-│              │   │ Realm Patch apply ◄┘  │   │ 透明生效              │
-└──────────────┘   └─────────────────────┘   └──────────────────────┘
+    启动登录                      进入副本                        BOSS 战
+       │                             │                              │
+       ▼                             ▼                              ▼
+┌──────────────┐   ┌─────────────────────────┐   ┌──────────────────────────┐
+│ DXE 核心初始化 │   │ Loader 按区域加载模块     │   │ Invoker 读取 CE           │
+│ OnInitialize  │   │ 补丁文件 → realmPatchDefs │   │ CE = EDB["halfus"]        │
+│ EDB 已就绪    │──▶│ Encounters → 按当前Realm  │──▶│ 此时已是补丁后的最终数据    │
+│              │   │           合入补丁到 data  │   │ 透明生效                  │
+└──────────────┘   │ EDB_original 留存原始数据  │   └──────────────────────────┘
+                   └─────────────────────────┘
+                             │
+                   ┌─────────┴──────────┐
+                   │ 切换 Realm（即时生效）  │
+                   │ ApplyRealmPatches()  │
+                   │  → EDB_original 复原   │
+                   │  → 新 Realm 补丁合入   │
+                   │  → OnUnregister+       │
+                   │    OnRegister 回调     │
+                   │  → ACR:NotifyChange    │
+                   │    刷新 UI             │
+                   └───────────────────────┘
 ```
 
 ### 4.4 安全保证
