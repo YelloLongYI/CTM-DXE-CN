@@ -472,3 +472,188 @@ Realm 下拉框切换时调用 `DXE:ApplyRealmPatches(realm)`，遍历 `realmPat
 | `DXE_Options/Options.lua` | Realm 下拉框 set 函数末尾调用 `ApplyRealmPatches` |
 | 各模块 `Data_<Module>_<Realm>.lua` | 不含文件头守卫，只用 `DXE:RegisterRealmPatch(realm, key, patch)` |
 | 各模块 `DXE_<Module>.toc` | `Data_*` 补丁文件排在 `Encounters.lua` 之前 |
+
+---
+
+## 八、未来计划：数组补丁优化
+
+> **状态：设计阶段，均未实现**
+
+### 8.1 方案A：`_N` 命名索引
+
+#### 8.1.1 动机
+
+当前 `deepMerge` 遇到数组（`hasNumericKey = true`）执行整表替换。补丁中 `events`、`onstart`、`grouping` 等数组字段必须完整复制 base 的全部元素，即使只改了其中一条的 spellname。
+
+以 `anhuur` 为例，补丁中 `events` 需要复制 base 的全部 6 个 event（104 行），而实际差异仅 3 个 spellname。
+
+#### 8.1.2 方案
+
+补丁中数组改用 `_1`/`_5`/`_N` 命名 key 声明差异，框架按名称匹配 base 数组位置执行逐元素合并。`_` 前缀遵循 Lua 惯例，表示"框架内部标记"，不绑定任何字段语义，适用于所有数组字段：
+
+```lua
+-- events：只改第 1、2、5 个 event
+events = {
+    _1 = { spellname = 75592 },
+    _2 = { spellname = 75592 },
+    _5 = { spellname = 75322 },
+},
+
+-- onstart：只改第 1 条命令
+onstart = {
+    _1 = { "alert", "newcd" },
+},
+
+-- grouping：用 DXE.Replace 整体替换 + 命名索引改内部
+grouping = DXE.Replace({
+    _2 = { alerts = {"phalanxwarn", "phalanxduration"} },
+}),
+
+-- triggers.scan：只改第 1 个 NPC ID
+triggers = {
+    scan = DXE.Replace({
+        _1 = 99999,
+        _100 = 88888,    -- 支持任意位数
+    }),
+},
+```
+
+**命名规范**：
+- key 格式：`_\d+`（下划线 + 任意位数字），如 `_1`、`_10`、`_100`
+- 数字为 base 数组的 1-based 索引（Lua 数组最小索引为 1）
+- 作用域限定在所在 table 内：`events._1` 和 `onstart._1` 互不冲突
+
+**对比**：
+
+| | 当前（整表替换） | 命名索引 |
+|---|---|---|
+| 补丁行数（anhuur events） | 104 行（全抄 6 个 event） | 6 行（只写差异） |
+| base 增删中间 event | 补丁位置错乱须重写 | `_5` 永远命中位置 5 |
+| 可读性 | 看不出差异 | 一眼就知改了哪些 |
+| 新增 event | 必须全抄 | `_7 = {...}` 即可 |
+
+#### 8.1.3 deepMerge 检测逻辑
+
+在 `hasNumericKey` 之前插入命名数组检测：
+
+```
+deepMerge(target, source):
+  for k, v in source:
+    ...
+    ② type(v) == "table":
+       a) DXE.Replace → 整表替换
+       b) isNamedArray(v) + target[k] 是 array
+          → 对每个 nk, nv in v:
+              idx = tonumber(nk:match("^_(%d+)$"))
+              if target[k][idx] exists → deepMerge(target[k][idx], nv)
+       c) hasNumericKey(v) + target[k] 是 array
+          → 按 index 逐元素合并
+       d) target[k] 是 table → 递归合并
+       e) 否则 → 赋值
+```
+
+其中 `isNamedArray` 检测 table 的所有 key 是否匹配模式 `_\d+`（至少有一个 key）。
+
+#### 8.1.4 最终结果
+
+补丁合并后 target 的数组仍是 `{ {...}, {...}, ... }` 纯数组格式，`_1`/`_5` 仅作为临时匹配索引，不会残留。`DXE.Replace` 仍可在任意层级强制整表替换。
+
+#### 8.1.5 优劣
+
+| 优点 | 缺点 |
+|------|------|
+| 零 base 改动 | 位置偏移时须手动更新 `_N` |
+| 实现简单，仅需 `isNamedArray` + regex | `_3` 不直观，需对照 base 数位置 |
+| 适用于所有数组字段 | |
+
+---
+
+### 8.2 方案B：Tag 匹配
+
+> **状态：设计阶段，未实现**
+
+#### 8.2.1 方案
+
+给需要被补丁修改的数组元素加 `tag` 语义标签，补丁按 tag 匹配而非按位置。**只有被 patch 的条目需要 tag，其余条目不动。**
+
+**Base Encounters.lua** — 仅 e2（blitz）和 e5（malady）加 tag：
+
+```lua
+events = {
+    { spellname = 90249, ... },                         -- [1] 无 tag → 永久不变
+    { tag = "blitz",  spellname = 90250, ... },         -- [2] 有 tag → 可被补丁匹配
+    { type = "emote", ... },                            -- [3] 无 tag
+    { type = "yell", ... },                             -- [4] 无 tag
+    { tag = "malady", spellname = 90170, ... },         -- [5] 有 tag → 可被补丁匹配
+    { ... },                                            -- [6] 无 tag
+},
+```
+
+**Gilneas 补丁** — 只写有差异的，按 tag 匹配：
+
+```lua
+events = {
+    { tag = "blitz",  spellname = 74670 },              -- 匹配 base[2]
+    { tag = "malady", spellname = 74699 },              -- 匹配 base[5]
+},
+```
+
+#### 8.2.2 合并逻辑
+
+```
+deepMerge(base.events, patch.events):
+
+1. 扫描 base，建 tag → index 映射:  { blitz→2, malady→5 }
+
+2. 遍历 patch:
+   patch[1]: tag="blitz" → 在映射中找到 → base[2]
+             deepMerge(base[2], {spellname=74670})
+             → base[2].spellname=74670, type/eventtype/execute 保留
+   patch[2]: tag="malady" → base[5]
+             deepMerge(base[5], {spellname=74699})
+
+3. 未匹配 entry:
+   base[1][3][4][6] (无 tag 或 tag 不在 patch 中) → 原封不动
+```
+
+**四种情况**：
+
+| | base 有 tag | base 无 tag |
+|---|---|---|
+| **patch 有匹配** | ✅ deepMerge，只改指定字段 | —（匹配不到，静默跳过） |
+| **patch 无对应条目** | ✅ base 原封不动 | ✅ base 原封不动 |
+| **patch 有 tag 但 base 无** | — | 追加到末尾 |
+
+#### 8.2.3 deepMerge 检测逻辑
+
+与方案 A 的 `isNamedArray` 并列，优先检测 tag：
+
+```
+② type(v) == "table":
+   a) DXE.Replace → 整表替换
+   b) hasTaggedItems(v) + target[k] 是 array
+      → 对 base 建 tag→index 映射
+      → 遍历 patch：每条的 tag 匹配 base → deepMerge(base[idx], item)
+      → 未匹配的 base 条目保持不动
+   c) isNamedArray(v) + target[k] 是 array  (方案 A)
+      → 按 _N 索引合并
+   d) hasNumericKey(v) + target[k] 是 array
+      → 按位置逐元素合并
+   e) target[k] 是 table → 递归合并
+```
+
+其中 `hasTaggedItems` 检测数组中是否有条目含 `tag` 字段。
+
+#### 8.2.4 与方案A 对比
+
+| | 方案A（`_N` 位置索引） | 方案B（tag 匹配） |
+|---|---|---|
+| 匹配依据 | `_1`、`_5` 数字位置 | `"blitz"`、`"malady"` 语义 tag |
+| base 改动 | 无 | 被 patch 的 event 加 `tag`（其余不动） |
+| base 插入新 event | 后续 `_N` 全部偏移，须手动修正 | tag 不变则补丁无需改动 |
+| base 重排顺序 | 须改补丁 | 不受影响 |
+| 可读性 | `_3` 不知道是什么 | `"blitz"` 一眼看懂 |
+| tag 重名 | 不存在 | 需保证同一数组内 tag 唯一 |
+| 实现复杂度 | `isNamedArray` + regex | `hasTaggedItems` + tag→index 映射 |
+| 工程风险 | 低（不改 base） | 中（须给被 patch 的 event 加 tag） |
+
