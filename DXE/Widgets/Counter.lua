@@ -5,7 +5,7 @@ local Counter,prototype = {},{}
 DXE.Counter = Counter
 
 function Counter:New(parent)
-    local counter = CreateFrame("Button",nil,parent)
+    local counter = DXE.Compat.CreateFrame("Button",nil,parent)
     -- Embed
     for k,v in pairs(prototype) do counter[k] = v end
     counter.events = {}
@@ -14,25 +14,25 @@ function Counter:New(parent)
     counter:SetHeight(22)
     addon:RegisterBackground(counter)
     
-    local counterbar = CreateFrame("StatusBar",nil,counter)
+    local counterbar = DXE.Compat.CreateFrame("StatusBar",nil,counter)
     counterbar:SetPoint("TOPLEFT",2,-2)
 	counterbar:SetPoint("BOTTOMRIGHT",-2,2)
     addon:RegisterStatusBar(counterbar,"HealthWatcher")
     counter.counterbar = counterbar
     
     -- Border
-    local border = CreateFrame("Frame",nil,counter)
+    local border = DXE.Compat.CreateFrame("Frame",nil,counter)
 	border:SetAllPoints(true)
 	border:SetFrameLevel(counterbar:GetFrameLevel()+2)
 	addon:RegisterBorder(border)
 	counter.border = border
     
-    local region = CreateFrame("Frame",nil,counterbar)
+    local region = DXE.Compat.CreateFrame("Frame",nil,counterbar)
 	region:SetAllPoints(true)
 	region:SetFrameLevel(counterbar:GetFrameLevel()+10)
 
     -- Spark
-    local spark = CreateFrame("Frame",nil,counterbar)
+    local spark = DXE.Compat.CreateFrame("Frame",nil,counterbar)
     counter.spark = spark
     spark.t = spark:CreateTexture(nil, "OVERLAY")
     spark.t:SetBlendMode("ADD");

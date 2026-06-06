@@ -43,7 +43,8 @@ end
 
 function prototype:Test(unit)
 	if not UnitExists(unit) then return end
-    if self.attribute(unit) == self.goal then
+    local attr = self.attribute(unit)
+    if attr == self.goal then
         return true
     end
 end

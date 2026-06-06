@@ -443,7 +443,7 @@ do
         addon:LoadPosition("DXEScoreFrameAnchor")
         
         -- Score Frame
-        ScoreFrame = CreateFrame("Frame","DXEScoreFrame",UIParent)
+        ScoreFrame = DXE.Compat.CreateFrame("Frame","DXEScoreFrame",UIParent)
         ScoreFrame:ClearAllPoints()
 
         ScoreFrame:SetPoint("TOP",DXEScoreFrameAnchor,"TOP",0,0)
@@ -456,7 +456,7 @@ do
         ScoreFrame.Timer = {}
         
         -- Timer Frame
-        local TimerFrame = CreateFrame("Frame","DXE Globe Frame",ScoreFrame)
+        local TimerFrame = DXE.Compat.CreateFrame("Frame","DXE Globe Frame",ScoreFrame)
         TimerFrame:ClearAllPoints()
         TimerFrame:SetPoint("CENTER",ScoreFrame,"CENTER",0,0)
         TimerFrame:SetWidth(128)
@@ -476,7 +476,7 @@ do
         ScoreFrame.Timer.GlobeTexture = GlobeTexture
 
         -- Fire Ring (frame)
-        local FireRingFrame = CreateFrame("Frame","DXE Fire Ring Frame",ScoreFrame)
+        local FireRingFrame = DXE.Compat.CreateFrame("Frame","DXE Fire Ring Frame",ScoreFrame)
         FireRingFrame:ClearAllPoints()
         FireRingFrame:SetPoint("CENTER",ScoreFrame,"CENTER",0,0)
         FireRingFrame:SetWidth(128)
@@ -507,7 +507,7 @@ do
         end
 
         -- Not enough players dummy frame
-        BattlegroundShutdown.UpdateFrame = CreateFrame("Frame","DXE Not Enough Players Frame",ScoreFrame)
+        BattlegroundShutdown.UpdateFrame = DXE.Compat.CreateFrame("Frame","DXE Not Enough Players Frame",ScoreFrame)
 
         -- Timer Text
         local TimerText = FireRingFrame:CreateFontString(nil, "OVERLAY")
@@ -521,7 +521,7 @@ do
         ScoreFrame.Timer.Text = TimerText
 
         -- Score Border (frame)
-        local BorderFrame = CreateFrame("Frame","DXE Score Bar Border",ScoreFrame)
+        local BorderFrame = DXE.Compat.CreateFrame("Frame","DXE Score Bar Border",ScoreFrame)
         BorderFrame:ClearAllPoints()
         BorderFrame:SetPoint("CENTER",FireRingTexture,"CENTER",0,0)
         BorderFrame:SetWidth(300)
@@ -576,7 +576,7 @@ do
             ScoreFrame.Alliance.Texture = Texture
             
             -- Progress Bar
-            local ProgressBar = CreateFrame("StatusBar",nil,ScoreFrame)
+            local ProgressBar = DXE.Compat.CreateFrame("StatusBar",nil,ScoreFrame)
             ProgressBar:SetMinMaxValues(0, 100)
             ProgressBar:ClearAllPoints()
             ProgressBar:SetPoint("TOPLEFT",Texture,"TOPLEFT")
@@ -633,7 +633,7 @@ do
             ScoreFrame.Horde.Texture = Texture
             
             -- Progress Bar
-            local ProgressBar = CreateFrame("StatusBar",nil,ScoreFrame)
+            local ProgressBar = DXE.Compat.CreateFrame("StatusBar",nil,ScoreFrame)
             ProgressBar:SetMinMaxValues(0,100)
             ProgressBar:ClearAllPoints()
             ProgressBar:SetPoint("TOPLEFT",Texture,"TOPLEFT")
@@ -1539,13 +1539,13 @@ do
             
             -- Creating slot frame
             if not slotPool[i] then
-                slot = CreateFrame("Button",name, ScoreFrame)
+                slot = DXE.Compat.CreateFrame("Button",name, ScoreFrame)
                 slot.texture = slot:CreateTexture(nil,"OVERLAY",nil,2)
                 slot.text = slot:CreateFontString(nil, "OVERLAY")
                 if updateMacrosLater then 
                     slot.macro = {}
                 else
-                    slot.macro = CreateFrame("Button", format("DXE Score Slot Button %s",i), UIParent, "SecureActionButtonTemplate")
+                    slot.macro = DXE.Compat.CreateFrame("Button", format("DXE Score Slot Button %s",i), UIParent, "SecureActionButtonTemplate")
                 end
                 slot.highlight = slot:CreateTexture(nil,"OVERLAY")
                 slot.fadein = slot:CreateAnimationGroup()
@@ -1814,7 +1814,7 @@ do
             local combatUpdate = slot.combatUpdate
             if combatUpdate then
                 if combatUpdate.createMacro then
-                    local macro = CreateFrame("Button", format("DXE Score Slot Button %s",i), UIParent, "SecureActionButtonTemplate")
+                    local macro = DXE.Compat.CreateFrame("Button", format("DXE Score Slot Button %s",i), UIParent, "SecureActionButtonTemplate")
                     macro:SetScale(0.7)
                     macro:ClearAllPoints()
                     macro:SetWidth(slot:GetWidth())
@@ -2299,7 +2299,7 @@ do
 
     function CaptureBar:Create()
         -- Capture Bar (Border)
-        local CaptureFrame = CreateFrame("Frame","DXE Score Capture Bar",ScoreFrame)
+        local CaptureFrame = DXE.Compat.CreateFrame("Frame","DXE Score Capture Bar",ScoreFrame)
         CaptureFrame:ClearAllPoints()
         CaptureFrame:SetPoint("CENTER",ScoreFrame.Timer.FireRingTexture,"CENTER",0,-35)
         CaptureFrame:SetWidth(350)

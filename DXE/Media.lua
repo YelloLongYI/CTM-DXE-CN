@@ -311,13 +311,28 @@ do
 	}
 	local sound_defaults = addon.defaults.profile.Sounds
 
+    local GAME_SOUND_KIT_MAP = {
+        ["Bell Toll Alliance"] = 6594,
+        ["Bell Toll Horde"] = 6595,
+        ["PvP Flag Taken"] = 8174,
+        ["Bad Press"] = 11756,
+        ["Run Away"] = 9278,
+        ["FF1 Wipe"] = 15757,
+        ["Minor Warning"] = 6674,
+        ["Shadow Dance"] = 32382,
+        ["Algalon Beware"] = 15391,
+    }
+
 	function Sounds:GetFile(id)
     if id == "None" or not id then
       return "Interface\\Quiet.mp3"
     elseif string.find(id,"\\") then
       return id
     else
-        local soundSource = sound_defaults[id] and pfl.Sounds[id] or pfl.CustomSounds[id]
+        local soundSource = sound_defaults[id] and (pfl.Sounds[id] or sound_defaults[id]) or pfl.CustomSounds[id]
+        if addon.Compat.IS_CLASSIC and GAME_SOUND_KIT_MAP[soundSource] then
+            return GAME_SOUND_KIT_MAP[soundSource]
+        end
         if addon.db.profile.CustomSoundFiles[soundSource] then
             return addon.db.profile.CustomSoundFiles[soundSource]
         else
@@ -451,41 +466,41 @@ end
 
 do
 	local reg = {}
-	function addon:RegisterBorder(frame,noskin)
-		reg[#reg+1] = frame
-		if not noskin then
-            local r,g,b,a = unpack(pfl.Globals.BorderColor)
-            borderBackdrop.edgeFile = SM:Fetch("border",pfl.Globals.Border)
-            borderBackdrop.edgeSize = pfl.Globals.BorderEdgeSize
-            frame:SetBackdrop(borderBackdrop)
-            frame:SetBackdropBorderColor(r,g,b,a)
-        end
-	end
+function addon:RegisterBorder(frame,noskin)
+    reg[#reg+1] = frame
+    if not noskin then
+        local r,g,b,a = unpack(pfl.Globals.BorderColor)
+        borderBackdrop.edgeFile = SM:Fetch("border",pfl.Globals.Border)
+        borderBackdrop.edgeSize = pfl.Globals.BorderEdgeSize
+        pcall(frame.SetBackdrop, frame, borderBackdrop)
+        pcall(frame.SetBackdropBorderColor, frame, r, g, b, a)
+    end
+end
 
 	function addon:NotifyBorderChanged()
         borderBackdrop.edgeFile = SM:Fetch("border",pfl.Globals.Border)
 
-		for _,frame in ipairs(reg) do 
-			frame:SetBackdrop(borderBackdrop)
-		end
-		-- setting backdrop resets color
-		addon:NotifyBorderColorChanged()
-	end
+    for _,frame in ipairs(reg) do 
+        pcall(frame.SetBackdrop, frame, borderBackdrop)
+    end
+    -- setting backdrop resets color
+    addon:NotifyBorderColorChanged()
+end
 
-	function addon:NotifyBorderEdgeSizeChanged()
-		borderBackdrop.edgeSize = pfl.Globals.BorderEdgeSize
-		for _,frame in ipairs(reg) do 
-			frame:SetBackdrop(borderBackdrop)
-		end
+function addon:NotifyBorderEdgeSizeChanged()
+    borderBackdrop.edgeSize = pfl.Globals.BorderEdgeSize
+    for _,frame in ipairs(reg) do 
+        pcall(frame.SetBackdrop, frame, borderBackdrop)
+    end
 		-- setting backdrop resets color
 		addon:NotifyBorderColorChanged()
 	end
 
 	function addon:NotifyBorderColorChanged()
 		local r,g,b,a = unpack(pfl.Globals.BorderColor)
-		for _,frame in ipairs(reg) do 
-			frame:SetBackdropBorderColor(r,g,b,a)
-		end
+    for _,frame in ipairs(reg) do 
+        pcall(frame.SetBackdropBorderColor, frame, r, g, b, a)
+    end
 	end
 end
 
@@ -501,9 +516,9 @@ do
 		bgBackdrop.insets.right = inset
 		bgBackdrop.insets.top = inset
 		bgBackdrop.insets.bottom = inset
-		if widget:IsObjectType("Frame") then
-			widget:SetBackdrop(bgBackdrop)
-			widget:SetBackdropColor(r,g,b,a)
+    if widget:IsObjectType("Frame") then
+        pcall(widget.SetBackdrop, widget, bgBackdrop)
+        pcall(widget.SetBackdropColor, widget, r, g, b, a)
 		elseif widget:IsObjectType("Texture") then
 			widget:SetTexture(bgBackdrop.bgFile) -- Odebere pozadí prázdného baru
 			widget:SetVertexColor(r,g,b,a) -- Odebere obarvení prázdného baru
@@ -514,9 +529,9 @@ do
 	function addon:NotifyBackgroundTextureChanged()
 		bgBackdrop.bgFile = SM:Fetch("background",pfl.Globals.BackgroundTexture)
 		for _,widget in ipairs(reg) do
-			if widget:IsObjectType("Frame") then
-				widget:SetBackdrop(bgBackdrop)
-			elseif widget:IsObjectType("Texture") then
+    if widget:IsObjectType("Frame") then
+        pcall(widget.SetBackdrop, widget, bgBackdrop)
+    elseif widget:IsObjectType("Texture") then
 				widget:SetTexture(bgBackdrop.bgFile)
 			end
 		end
@@ -543,9 +558,9 @@ do
 	function addon:NotifyBackgroundColorChanged()
 		local r,g,b,a = unpack(pfl.Globals.BackgroundColor)
 		for _,widget in ipairs(reg) do 
-			if widget:IsObjectType("Frame") then
-				widget:SetBackdropColor(r,g,b,a)
-			elseif widget:IsObjectType("Texture") then
+        if widget:IsObjectType("Frame") then
+            pcall(widget.SetBackdropColor, widget, r, g, b, a)
+        elseif widget:IsObjectType("Texture") then
 				widget:SetVertexColor(r,g,b,a)
 			end
 		end

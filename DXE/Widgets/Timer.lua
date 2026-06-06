@@ -6,7 +6,7 @@ local Timer,prototype = {},{}
 DXE.Timer = Timer
 
 function Timer:New(parent,leftsize,rightsize)
-	local timer = CreateFrame("Frame",nil,parent)
+	local timer = DXE.Compat.CreateFrame("Frame",nil,parent)
 	for k,v in pairs(prototype) do timer[k] = v end
 
 	timer:SetWidth(80); timer:SetHeight(20)

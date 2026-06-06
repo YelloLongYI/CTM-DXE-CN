@@ -43,7 +43,7 @@ function addon:SetPaneWidth()
 end
 
 function addon:UpdatePaneVisibility(enteringWorld)
-    if not addon:ShouldStartTimer(addon.CE) then return end
+    if addon.CE and not addon:ShouldStartTimer(addon.CE) then return end
     if addon.db.profile.Enabled and pfl.Pane.Show then
 		local op = 0
 		local instanceType = select(2,IsInInstance())
@@ -54,7 +54,7 @@ function addon:UpdatePaneVisibility(enteringWorld)
 		op = op + (pfl.Pane.OnlyInPartyInstance and (instanceType == "party"	and 8  or 0) or 8)
 		op = op + (pfl.Pane.OnlyIfRunning and (self:IsRunning() and 16 or 0) or 16)
         op = op + ((not pfl.Pane.ShowTest and addon:GetActiveEncounter() == "default") and 0 or 32)
-        op = op + ((not pfl.Pane.ShowTest and addon:IsModuleTrash(addon.CE.key)) and 32 or 0)
+        op = op + ((not pfl.Pane.ShowTest and addon.CE and addon:IsModuleTrash(addon.CE.key)) and 32 or 0)
     
         local show = op == 63
 		Pane[show and "Show" or "Hide"](Pane)

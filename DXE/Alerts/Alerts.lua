@@ -673,11 +673,12 @@ local function Pour(text,icon,color,noColoring,id,idToReplace)
 end
 
 function module:Sound(soundFile, channel)
+    print("|cffff0000[SOUND CALL]|r", soundFile, type(soundFile))
     if soundFile == "None" then return end
     if(type(tonumber(soundFile)) == "number") then
-        PlaySoundKitID(tonumber(soundFile),pfl.SoundOutputChannel,false)
+        DXE.Compat.PlaySoundKitID(tonumber(soundFile),pfl.SoundOutputChannel,false)
     else
-        PlaySoundFile(soundFile, pfl.SoundOutputChannel)
+        DXE.Compat.PlaySoundFile(soundFile, pfl.SoundOutputChannel)
     end
 end
 
@@ -1175,9 +1176,9 @@ do
             
             -- Icon
             local rIconAlpha = (pfl.TopShowRightIcon and 1 or 0) + (pfl[data.targetPrefix.."ShowRightIcon"] and 1 or -1) * perc
-            self.righticon:SetAlpha(rIconAlpha)
+            self.righticon:SetAlpha(math.max(0, math.min(1, rIconAlpha)))
             local lIconAlpha = (pfl.TopShowLeftIcon and 1 or 0) + (pfl[data.targetPrefix.."ShowLeftIcon"] and 1 or -1) * perc
-            self.lefticon:SetAlpha(lIconAlpha)
+            self.lefticon:SetAlpha(math.max(0, math.min(1, lIconAlpha)))
             
 			local escale = self:GetEffectiveScale()
 			local data = self.data

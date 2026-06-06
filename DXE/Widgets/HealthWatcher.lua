@@ -14,7 +14,7 @@ local DEAD = DEAD:upper()
 
 
 function HealthWatcher:New(parent)
-	local hw = CreateFrame("Button",nil,parent)
+	local hw = DXE.Compat.CreateFrame("Button",nil,parent)
     -- Embed
 	for k,v in pairs(prototype) do hw[k] = v end
 	hw.events = {}
@@ -23,7 +23,7 @@ function HealthWatcher:New(parent)
     hw:SetHeight(22)
 	addon:RegisterBackground(hw)
 
-	local healthbar = CreateFrame("StatusBar",nil,hw)
+	local healthbar = DXE.Compat.CreateFrame("StatusBar",nil,hw)
 	healthbar:SetMinMaxValues(0,1)
 	healthbar:SetPoint("TOPLEFT",2,-2)
 	healthbar:SetPoint("BOTTOMRIGHT",-2,2)
@@ -31,13 +31,13 @@ function HealthWatcher:New(parent)
     healthbar.phaseMarkers = {}
 	hw.healthbar = healthbar
     
-    local spark = CreateFrame("Frame",nil,healthbar)
+    local spark = DXE.Compat.CreateFrame("Frame",nil,healthbar)
     hw.spark = spark
     spark.t = spark:CreateTexture(nil, "OVERLAY")
     spark.t:SetBlendMode("ADD");
     spark.t:SetTexture([[Interface\AddOns\DXE\Textures\Spark]])
     
-	local powerbar = CreateFrame("StatusBar",nil,hw)
+	local powerbar = DXE.Compat.CreateFrame("StatusBar",nil,hw)
 	powerbar:SetMinMaxValues(0,1)
 	powerbar:SetPoint("BOTTOMLEFT",healthbar,"BOTTOMLEFT")
 	powerbar:SetPoint("BOTTOMRIGHT",healthbar,"BOTTOMRIGHT")
@@ -47,7 +47,7 @@ function HealthWatcher:New(parent)
 	addon:RegisterStatusBar(powerbar)
 	hw.powerbar = powerbar
     
-    local altpowerbar = CreateFrame("StatusBar",nil,hw)
+    local altpowerbar = DXE.Compat.CreateFrame("StatusBar",nil,hw)
 	altpowerbar:SetMinMaxValues(0,1)
 	altpowerbar:SetPoint("BOTTOMLEFT",healthbar,"BOTTOMLEFT")
 	altpowerbar:SetPoint("BOTTOMRIGHT",healthbar,"BOTTOMRIGHT")
@@ -57,14 +57,14 @@ function HealthWatcher:New(parent)
 	addon:RegisterStatusBar(altpowerbar)
 	hw.altpowerbar = altpowerbar
 	
-	local border = CreateFrame("Frame",nil,hw)
+	local border = DXE.Compat.CreateFrame("Frame",nil,hw)
 	border:SetAllPoints(true)
 	border:SetFrameLevel(healthbar:GetFrameLevel()+2)
 	addon:RegisterBorder(border)
 	hw.border = border
 
 	-- parent for font strings so they appears above powerbar
-	local region = CreateFrame("Frame",nil,healthbar)
+	local region = DXE.Compat.CreateFrame("Frame",nil,healthbar)
 	region:SetAllPoints(true)
 	region:SetFrameLevel(healthbar:GetFrameLevel()+10)
 
@@ -279,7 +279,7 @@ function PhaseSeparator_OnLeave(self)
 end
 
 function prototype:CreatePhaseMarker(index)
-    local phaseMarker = CreateFrame("Frame","Phase Separator Frame",self.healthbar)
+    local phaseMarker = DXE.Compat.CreateFrame("Frame","Phase Separator Frame",self.healthbar)
     phaseMarker:SetWidth(SEPARATOR_WIDTH)
     phaseMarker:SetHeight(SEPARATOR_HEIGHT)
 

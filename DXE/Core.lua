@@ -491,6 +491,28 @@ if IS_CLASSIC and not GetNumPartyMembers then
     end
 end
 
+local SOUND_KIT_MAP = {
+    ["Sound\\Doodad\\BellTollAlliance.wav"] = 6594,
+    ["Sound\\Doodad\\BellTollHorde.wav"] = 6595,
+    ["Sound\\Spells\\PVPFlagTaken.wav"] = 8174,
+    ["Sound\\Spells\\SimonGame_Visual_BadPress.wav"] = 11756,
+    ["Sound\\Creature\\HoodWolf\\HoodWolfTransformPlayer01.wav"] = 9278,
+    ["Sound\\Creature\\YoggSaron\\UR_YoggSaron_Slay01.ogg"] = 15757,
+    ["Sound\\Doodad\\BellTollNightElf.wav"] = 6674,
+    ["Sound\\SPELLS\\Rogue_shadowdance_state.ogg"] = 32382,
+    ["Sound\\Creature\\AlgalonTheObserver\\UR_Algalon_BHole01.wav"] = 15391,
+    ["Sound\\interface\\levelup.ogg"] = 888,
+    ["Sound\\interface\\levelup2.ogg"] = 889,
+}
+
+local KIT_ID_REMAP = {
+    [1] = 6594,
+    [2] = 6595,
+    [10] = 8174,
+    [11] = 11756,
+    [12] = 9278,
+}
+
 addon.Compat = setmetatable({
     IS_CLASSIC = IS_CLASSIC,
 
@@ -568,6 +590,28 @@ addon.Compat = setmetatable({
     end,
     ToggleDropDown = function(level, value, frame, anchor, x, y)
         ToggleDropDownMenu(level, value, frame, anchor, x, y)
+    end,
+
+    PlaySoundKitID = function(id, channel, force)
+        if IS_CLASSIC then
+            PlaySound(id, channel)
+        else
+            PlaySoundKitID(id, channel, force)
+        end
+    end,
+
+    PlaySoundFile = function(path, channel)
+        if IS_CLASSIC then
+            local kitID = SOUND_KIT_MAP[path]
+            if kitID then
+                print("|cffff0000[SOUND MAP]|r path:", path, "kitID:", kitID, "channel:", channel)
+                PlaySound(kitID, channel)
+            else
+                PlaySoundFile(path, channel)
+            end
+        else
+            PlaySoundFile(path, channel)
+        end
     end,
 }, {
     __index = _G,
@@ -700,7 +744,14 @@ local NEW_GUID_FORMAT = tonumber((select(2,GetBuildInfo()))) >= 12484
 
 local NID = setmetatable({},{
     __index = function(t,guid)
-        if type(guid) ~= "string" or #guid ~= GUID_LENGTH or not guid:find("%xx%x+") then return end
+        if type(guid) ~= "string" then return end
+        if IS_CLASSIC then
+            local parts = {strsplit("-", guid)}
+            local npcid = tonumber(parts[6], 10)
+            if npcid then t[guid] = npcid end
+            return npcid
+        end
+        if #guid ~= GUID_LENGTH or not guid:find("%xx%x+") then return end
         local ut = tonumber(sub(guid,5,5),16) % 8
         local isNPC = ut == UT_NPC or ut == UT_VEHICLE
         local npcid
@@ -2251,6 +2302,7 @@ local prevGroupType = "NONE"
 local RosterHandle
 addon.GroupType = "NONE"
 function addon:RAID_ROSTER_UPDATE()
+    print("|cffff0000[DXE Roster]|r updating, group:", addon.GroupType, "raid:", GetNumRaidMembers(), "party:", GetNumPartyMembers())
     --[===[@debug@
     debug("RAID_ROSTER_UPDATE","Invoked")
     --@end-debug@]===]
@@ -2334,6 +2386,7 @@ function addon:RAID_ROSTER_UPDATE()
     numOnline = tmpOnline
     
     addon:UpdateThrottlingScores()
+    print("|cffff0000[DXE Roster]|r done, unit_to_unittarget has:", next(Roster.unit_to_unittarget) and "entries" or "empty")
 end
 
 function addon:IsPromoted()
@@ -2574,6 +2627,7 @@ function addon:Scan(encounterStart)
     local trashKeys = {}
     local trashFound = false
     if not TRGS["scan"] then return end
+    if not next(TRGS["scan"]) then return end
     
     for _,unit in pairs(Roster.unit_to_unittarget) do
         if UnitExists(unit) then
@@ -2931,6 +2985,7 @@ end
 -- Initialization
 function addon:OnInitialize()
     Initialized = true
+    print("|cffff0000DXE 1|r")
 
     -- Database
     self.db = LibStub("AceDB-3.0"):New("DXEDB",self.defaults)
@@ -2942,6 +2997,7 @@ function addon:OnInitialize()
 
     -- Setup slash commands early so /dxe works even if later UI code errors
     self:SetupSlashCommands()
+    print("|cffff0000DXE 2|r")
 
     -- Options
     db.RegisterCallback(self, "OnProfileChanged", "RefreshProfile")
@@ -2952,17 +3008,26 @@ function addon:OnInitialize()
     --@end-debug@]===]
 
     -- Received database
+    print("|cffff0000DXE 2.5|r RDB register")
     RDB = self.db:RegisterNamespace("RDB", {global = {}}).global
     self.RDB = RDB
 
     -- Pane
-    self:CreatePane()
+    print("|cffff0000DXE 2.8 pre CreatePane|r")
+    local ok, err = pcall(self.CreatePane, self)
+    if not ok then print("|cffff0000[DXE CreatePane ERROR]|r", err) end
+    print("|cffff0000DXE 3 post CreatePane|r")
+    print("|cffff0000DXE 3|r")
     self:SkinPane()
     self:UpdatePaneButtons()
+    print("|cffff0000DXE 4|r")
 
     -- The default encounter
+    print("|cffff0000[DXE]|r before RegisterEncounter")
     self:RegisterEncounter({key = "default", name = L["Default"], title = L["Default"]})
+    print("|cffff0000[DXE]|r after RegisterEncounter, EDB[default]:", EDB["default"] and "exists" or "nil")
     self:SetActiveEncounter("default")
+    print("|cffff0000[DXE]|r after SetActive, CE:", addon.CE and "exists" or "nil")
     addon.defaults.global.lastUpdateShown = addon.version
   
     -- Register DBM prefix and handle its addon comunication
@@ -3118,17 +3183,15 @@ end
 function addon:OnEnable()
     -- Patch to refresh Pane texture
     self:NotifyAllMedia()
-
     forceBlockDisable = false
     self:SetPlayerConstants()
     self:UpdateTriggers()
     addon:UpdateLock()
     self:LayoutHealthWatchers()
     self:LayoutCounters()
-    
     -- Events
     self:RegisterEvent("RAID_ROSTER_UPDATE")
-    self:RegisterEvent("PARTY_MEMBERS_CHANGED","RAID_ROSTER_UPDATE")
+    pcall(self.RegisterEvent, self, "PARTY_MEMBERS_CHANGED", "RAID_ROSTER_UPDATE")
     self:RAID_ROSTER_UPDATE()
     self:RegisterEvent("ZONE_CHANGED_NEW_AREA","UpdateTriggers")
     self:RegisterEvent("ZONE_CHANGED","UpdateTriggers")

@@ -1008,6 +1008,7 @@ do
 
 	-- @ADD TO HANDLERS
 	handlers.alert = function(info)
+		print("|cffff0000[ALERT]|r", info)
         local var = prefilter(info,"alert")
 		if not var then return true end
         local stgs = pfl.Encounters[key][var]
@@ -1222,6 +1223,7 @@ do
 	end
 
 	handlers.quash = function(info)
+		print("|cffff0000[QUASH]|r", info)
 		if type(info) == "table" then
             Alerts:QuashByPattern(getid(info[1],info[2]))
         else
@@ -2639,6 +2641,8 @@ do
 
 	local function main_event_handler(bundles,bundle_to_filter,attr_handles,...)
 		if not bundles then return end
+		local srcName = select(2, ...)
+		if srcName == "摧骨者罗姆欧格" then print("|cffff0000[EVENT BOSS]|r bundles:", #bundles) end
 		for _,bundle in ipairs(bundles) do
 			local skip = false
 			if throttles[bundle] then
@@ -2661,6 +2665,7 @@ do
 					end
 				end
 				if flag then
+					print("|cffff0000[INVOKE]|r bundle:", bundle)
 					module:InvokeCommands(bundle,...)
 				end
 			end
@@ -2738,12 +2743,39 @@ do
 	}
 
 	local weare42 = tonumber((select(4, GetBuildInfo()))) > 40100
-	if weare42 then
+	local isCataClassic = select(4, GetBuildInfo()) >= 40400
+	local combatEventCount = 0
+	local firstEventDumped = false
+	if isCataClassic then
+		function module:COMBAT_EVENT(event)
+			combatEventCount = combatEventCount + 1
+			local timestamp, subEvent, hideCaster, srcGUID, srcName, srcFlags, srcFlags2, dstGUID, dstName, dstFlags, dstFlags2 = CombatLogGetCurrentEventInfo()
+			if not firstEventDumped then
+				firstEventDumped = true
+				print("|cffff0000[COMBAT Cata]|r type:", tostring(subEvent), "srcN:", tostring(srcName), "dstN:", tostring(dstName))
+			end
+			if (subEvent == "SPELL_CAST_START" or subEvent == "SPELL_CAST_SUCCESS" or subEvent == "SPELL_AURA_APPLIED") and srcName == "摧骨者罗姆欧格" then
+				print("|cffff0000[SPELL BOSS]|r", subEvent, srcName, select(12, CombatLogGetCurrentEventInfo()))
+			end
+			main_event_handler(eventtype_to_bundle[subEvent],combatbundle_to_filter,combat_attr_handles, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, select(12, CombatLogGetCurrentEventInfo()))
+		end
+	elseif weare42 then
 		function module:COMBAT_EVENT(event,timestamp,eventtype,hideCaster,srcGUID, srcName, srcFlags, srcFlags2, dstGUID, dstName, dstFlags, dstFlags2, ...)
+			combatEventCount = combatEventCount + 1
+			if not firstEventDumped then
+				firstEventDumped = true
+				local params = {}
+				for i = 1, select("#", ...) do
+					params[i] = tostring(select(i, ...))
+				end
+				print("|cffff0000[COMBAT]|r event:", tostring(event), "ts:", tostring(timestamp), "type:", tostring(eventtype), "payload#:", select("#", ...), "payload:", table.concat(params, ","))
+			end
 			main_event_handler(eventtype_to_bundle[eventtype],combatbundle_to_filter,combat_attr_handles, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
 		end
 	else
 		function module:COMBAT_EVENT(event,timestamp,eventtype,hideCaster,...)
+			combatEventCount = combatEventCount + 1
+			if combatEventCount % 100 == 1 then print("|cffff0000[COMBAT 4.0]|r events:", combatEventCount, "latest:", eventtype) end
 			main_event_handler(eventtype_to_bundle[eventtype],combatbundle_to_filter,combat_attr_handles,...)
 		end
 	end
