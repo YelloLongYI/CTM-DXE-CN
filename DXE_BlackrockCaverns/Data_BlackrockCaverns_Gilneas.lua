@@ -6,11 +6,114 @@ DXE:RegisterRealmPatch(realm, "romogg", {
     windows = {
         proxwindow = false,
     },
+    alerts = {
+        -- Quake
+        quakecd = {
+            varname = format(L.alert["%s CD"],SN[75272]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[75272]),
+            time = 26,
+            time2 = 8,
+            flashtime = 5,
+            color1 = "ORANGE",
+            color2 = "RED",
+            sound = "MINORWARNING",
+            icon = ST[75272],
+        },
+    },
+    events = {
+        -- Quake
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 75272,
+            execute = {
+                {
+                    "quash","quakecd",
+                    "alert","quakecd",
+                    "alert","quakewarn",
+                },
+            },
+        },
+        
+        -- The Skullcracker
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 75543,
+            execute = {
+                {
+                    "quash","quakecd",
+                    "alert","skullcrackerwarn",
+                    "alert",{"quakecd",time = 2},
+                },
+            },
+        },
+        
+        -- Chains of Woe
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 75539,
+            execute = {
+                {
+                    "alert","chainswarn",
+                },
+            },
+        },
+        
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 75441,
+            execute = {
+                {
+                    "temptracing","#1#",
+                    "raidicon","chainsmark",
+                    "scheduletimer",{"removechains", 20},
+                    
+                },
+            },
+        },
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 75539,
+            execute = {
+                {
+                    "quash","quakecd",
+                },
+            },
+        },
+        
+        -- Skullcracker kills Angered Earth - achievement [Crushing Bones and Cracking Skulls]
+        {
+            type = "combatevent",
+            eventtype = "SPELL_DAMAGE",
+            spellname = 93454,
+            execute = {
+                {
+                    "expect",{"&itemenabled|achievementcomplete&","==","true"},
+                    "expect",{"#11#",">=","1"},
+                    "expect",{"&npcid|#4#&","==","50376"},
+                    "set",{elementalscount = "INCR|1"},
+                    "expect",{"<elementalscount>",">=","10"},
+                    "expect",{"<achievementwarned>","==","no"},
+                    "set",{achievementwarned = "yes"},
+                    "announce","achievementcomplete",
+                },
+            },
+        },
+        
+    },
 })
 
 DXE:RegisterRealmPatch(realm, "corla", {
     windows = {
         proxwindow = false,
+    },
+    userdata = {
+        darkcommandcd = {22, 30, loop = false, type = "series"},
     },
 })
 
