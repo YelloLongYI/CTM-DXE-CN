@@ -7,7 +7,7 @@ DXE:RegisterRealmPatch(realm, "baronashbury", {
         proxwindow = false,
     },
     userdata = {
-        paincd = {5, 21, loop = false, type = "series"},
+        paincd = {6, 23, loop = false, type = "series"},
         asphyxiatecd = {20.5,47, loop = false, type = "series"},
     },
     alerts = {

@@ -20,6 +20,13 @@ DXE:RegisterRealmPatch(realm, "umbriss", {
             },
         },
     },
+    userdata = {
+        blitzcd = {20, 23, loop = false, type = "series"},
+        siegecd = {26, 26, loop = false, type = "series"},
+        troggscd = {10, 32.8, loop = false, type = "series"},
+        maladytext = "",
+        maladywarningtext = "",
+    },
     alerts = {
         -- Ground Siege
         siegecd = {
@@ -178,6 +185,10 @@ DXE:RegisterRealmPatch(realm, "umbriss", {
 DXE:RegisterRealmPatch(realm, "throngus", {
     windows = {
         proxwindow = false,
+    },
+    userdata = {
+        pickweaponcd = {5, 35, loop = false, type = "series"},
+        stompcd = {7, 35, loop = false, type = "series"},
     },
     grouping = DXE.Replace({
         {
@@ -411,18 +422,22 @@ DXE:RegisterRealmPatch(realm, "drahga", {
         proxwindow = false,
     },
     alerts = {
+        spiritcd = {
+            varname = format(L.alert["%s CD"],"Flaming Spirit"),
+            text = format(L.alert["New %s"],"Flaming Spirit"),
+            time = 20,
+            time2 = 10.5,
+            time3 = 19,
+            --time = "<spiritcd>",
+            icon = ST[2894],
+        },
         -- Seeping Twilight
         seepingcd = {
             varname = format(L.alert["%s CD"],SN[75317]),
             text = format(L.alert["Next %s"],SN[75317]),
             time = "<seepingcd>",
             icon = ST[75271],
-        },
-        seepingwarn = {
-            varname = format(L.alert["%s Warning"],SN[75317]),
-            text = format(L.alert["%s on %s - GET AWAY!"],SN[75317],L.alert["YOU"]),
-            icon = ST[75271],
-        },            
+        },        
     },
     events = {
         {
@@ -550,6 +565,11 @@ DXE:RegisterRealmPatch(realm, "erudax", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        galecd = {27, 35, loop = false, type = "series"},
+        bindingcd = {14, 0, loop = true, type = "series"},
+        binding_units = {type = "container", wipein = 3},
+    },
     raidicons = {
         bindingmark = {
             varname = format("%s {%s}",SN[79466],"ABILITY_TARGET_HARM"),
@@ -572,7 +592,7 @@ DXE:RegisterRealmPatch(realm, "erudax", {
             varname = format(L.alert["%s CD"],SN[79466]),
             text = format(L.alert["Next %s"],SN[79466]),
             time = "<bindingcd>",
-            time2 = {8,0, loop = false, type = "series"},
+            time2 = 9,
             time3 = 15,
             icon = ST[79466],
         },
@@ -639,7 +659,7 @@ DXE:RegisterRealmPatch(realm, "erudax", {
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = 79466,
+            spellname = {79466, 75861},
             execute = {
                 {
                     "quash","bindingcd",
