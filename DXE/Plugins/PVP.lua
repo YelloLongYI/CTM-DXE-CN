@@ -348,7 +348,7 @@ do
     ChatFrame_AddMessageEventFilter("CHAT_MSG_BG_SYSTEM_ALLIANCE", FactionChatFilter)
     ChatFrame_AddMessageEventFilter("CHAT_MSG_BG_SYSTEM_HORDE",    FactionChatFilter)
     ChatFrame_AddMessageEventFilter("CHAT_MSG_BG_SYSTEM_NEUTRAL",  FactionChatFilter)
-    ChatFrame_AddMessageEventFilter("CHAT_MSG_MONSTER_YELL",       FactionChatFilter)
+    -- ChatFrame_AddMessageEventFilter("CHAT_MSG_MONSTER_YELL",       FactionChatFilter)
     ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID_BOSS_EMOTE",    FactionChatFilter)
 
     OF.GetBattlefieldScore = GetBattlefieldScore
