@@ -570,6 +570,19 @@ DXE:RegisterRealmPatch(realm, "erudax", {
         bindingcd = {14, 0, loop = true, type = "series"},
         binding_units = {type = "container", wipein = 3},
     },
+    onstart = {
+        {
+            "alert",{"bindingcd",time = 2},
+            "alert","galecd",
+        },
+        {
+            "expect",{"&difficulty&","==","2"},
+            "set",{
+                feebletime = 3,
+                corruptortext = "Faceless Corruptors",
+            },
+        },
+    },
     raidicons = {
         bindingmark = {
             varname = format("%s {%s}",SN[79466],"ABILITY_TARGET_HARM"),
@@ -589,12 +602,12 @@ DXE:RegisterRealmPatch(realm, "erudax", {
         },
         -- Binding Shadows
         bindingcd = {
-            varname = format(L.alert["%s CD"],SN[79466]),
-            text = format(L.alert["Next %s"],SN[79466]),
-            time = "<bindingcd>",
+            varname = format(L.alert["%s CD"],SN[91081]),
+            text = format(L.alert["Next %s"],SN[91081]),
+            time = 13,
             time2 = 9,
-            time3 = 15,
-            icon = ST[79466],
+            time3 = 18,
+            icon = ST[91081],
         },
         bindingcast = {
             varname = format(L.alert["%s Warning"],SN[79466]),
@@ -659,7 +672,7 @@ DXE:RegisterRealmPatch(realm, "erudax", {
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = {79466, 75861},
+            spellname = {79466, 75861, 91081},
             execute = {
                 {
                     "quash","bindingcd",
@@ -673,7 +686,7 @@ DXE:RegisterRealmPatch(realm, "erudax", {
                 {
                     "expect",{"<pullbinding>","==","yes"},
                     "set",{pullbinding = "no"},
-                    "alert",{"bindingcd",time = 2},
+                    "alert","bindingcd",
                 },
             },
         },

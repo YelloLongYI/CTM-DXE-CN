@@ -320,7 +320,7 @@ do
             defeat = 43875,
         },
         userdata = {
-            fieldcd = {20, 24.5, loop = false, type = "series"},
+            fieldcd = {18, 45, loop = false, type = "series"},
             secondstorm = "no",
         },
         onstart = {
@@ -341,7 +341,7 @@ do
             },
         },
         ordering = {
-            alerts = {"staticwarn","fieldcd","fieldwarn","stormwarn","stormduration"},
+            alerts = {"staticwarn", "staticcd", "fieldcd", "fieldwarn", "stormwarn", "stormduration"},
         },
         
         alerts = {
@@ -355,6 +355,17 @@ do
                 sound = "ALERT8",
                 icon = ST[87618],
                 emphasizewarning = true,
+            },
+            staticcd = {
+                varname = format(L.alert["%s CD"],SN[87618]),
+                type = "dropdown",
+                text = format(L.alert["Next %s"],SN[87618]),
+                time = 10,
+                time2 = 17,
+                time3 = 24,
+                flashtime = 5,
+                color1 = "RED",
+                icon = ST[87618],
             },
             -- Unstable Grounding Field
             fieldcd = {
@@ -416,6 +427,8 @@ do
                 execute = {
                     {
                         "alert","staticwarn",
+                        "quash","staticcd",
+                        "alert",{"staticcd", time = 2},
                     },
                 },
             },
@@ -429,6 +442,8 @@ do
                         "quash","fieldcd",
                         "alert","fieldwarn",
                         "schedulealert",{"fieldcd", 26},
+                        "quash", "staticcd",
+                        "alert", {"staticcd", time = 3},
                     },
                 },
             },
