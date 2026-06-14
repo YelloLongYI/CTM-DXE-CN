@@ -1015,6 +1015,7 @@ do
                 },
             },
             {
+                tag = "p2_end",
                 type = "combatevent",
                 eventtype = "SPELL_AURA_REMOVED",
                 spellname = 79002,

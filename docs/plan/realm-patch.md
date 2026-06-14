@@ -531,13 +531,14 @@ deepMerge(base.events, patch.events):
 4. 合并完成后清理 tag 字段，不留残留
 ```
 
-**四种情况**：
+**五种情况**：
 
 | | base 有 tag | base 无 tag |
 |---|---|---|
 | **patch 有匹配** | ✅ deepMerge，只改指定字段 | —（匹配不到，静默跳过） |
 | **patch 无对应条目** | ✅ base 原封不动 | ✅ base 原封不动 |
 | **patch 有 tag 但 base 无** | — | 追加到末尾 |
+| **patch 无 tag（混写）** | — | 追加到末尾 |
 
 ### 8.4 deepMerge 检测逻辑
 
@@ -553,9 +554,10 @@ deepMerge(target, source):
        a) DXE.Replace → 整表替换（最高优先级）
        b) hasTaggedItems(v) + target[k] 是 array → Tag 匹配
           → 建 tag→index 映射
-          → 遍历 patch，按 tag 匹配合并 base 对应元素
-          → patch 有 tag 但 base 无 → 追加到末尾
-          → 合并完成后洗掉所有 entry.tag
+           → 遍历 patch，按 tag 匹配合并 base 对应元素
+           → patch 有 tag 但 base 无 → 追加到末尾
+           → patch 无 tag → 追加到末尾
+           → 合并完成后洗掉所有 entry.tag
        c) hasNumericKey(v) → 整表替换（维持当前行为）
        d) target[k] 是 table → 递归合并
        e) 否则 → 赋值/新增
@@ -591,7 +593,81 @@ hasNumericKey(v) → true
 → target.events = v              ← 整表替换（原行为）
 ```
 
-### 8.5 对比
+### 8.5 events 合并场景速查
+
+patch 中有 tag 和无 tag 混写时，触发 Tag 匹配分支。五种场景：
+
+| # | base tag | patch tag | 触发分支 | 结果 |
+|:--:|------|------|------|------|
+| 1 | 全部无 | 全部有 | Tag 匹配 | base 保留，patch 全部追加到末尾 |
+| 2 | 全部无 | 部分有 | Tag 匹配 | base 保留，patch（tag + 无 tag）全部追加到末尾 |
+| 3 | 部分有 | 全部无 | `hasNumericKey` → 整表替换 | base 被完全覆盖 |
+| 4 | 部分有 | 全部有 | Tag 匹配 | base 中有 tag 的被定位 deepMerge，匹配不到的追加；base 中无 tag 的保留 |
+| 5 | 部分有 | 部分有 | Tag 匹配 | 同 #4 + 无 tag 的追加到末尾 |
+
+**场景 1：base 全无 tag，patch 全有 tag**
+```
+base:  [ {spellname=91477}, {spellname=75683} ]
+patch: [ {tag="a", spellname=76008}, {tag="b", spellname=99999} ]
+
+tagToQueues = {}   -- base 无 tag
+patch[1] tag="a" → 队列空 → 追加
+patch[2] tag="b" → 队列空 → 追加
+
+结果: [ {91477}, {75683}, {76008}, {99999} ]
+```
+> ⚠️ base 原有 events 全保留，patch 追加在后面。同一技能可能被两个 event 重复触发。
+
+**场景 2：base 全无 tag，patch 部分有 tag**
+```
+base:  [ {spellname=91477}, {spellname=75683} ]
+patch: [ {tag="a", spellname=76008}, {spellname=99999} ]
+
+hasTaggedItems = true
+tagToQueues = {}
+patch[1] tag="a" → 追加
+patch[2] 无 tag  → 追加
+
+结果: [ {91477}, {75683}, {76008}, {99999} ]
+```
+
+**场景 3：base 部分有 tag，patch 全部无 tag**
+```
+base:  [ {tag="a", spellname=91477}, {spellname=75683} ]
+patch: [ {spellname=76008}, {spellname=99999} ]
+
+hasTaggedItems(v) = false   -- patch 没有 tag
+hasNumericKey(v) = true     -- events 是数组
+→ 整表替换
+
+结果: [ {76008}, {99999} ]   -- base 全部被覆盖
+```
+
+**场景 4：base 部分有 tag，patch 全部有 tag**
+```
+base:  [ {tag="a", spellname=91477}, {spellname=75683} ]
+patch: [ {tag="a", spellname=76008}, {tag="b", spellname=99999} ]
+
+tagToQueues = { "a" → {1} }
+patch[1] tag="a" → queue {1} → deepMerge → base[1].spellname=76008
+patch[2] tag="b" → 队列空 → 追加
+
+结果: [ {76008}, {75683}, {99999} ]
+```
+
+**场景 5：base 部分有 tag，patch 部分有 / 部分无**
+```
+base:  [ {tag="a", spellname=91477}, {spellname=75683} ]
+patch: [ {tag="a", spellname=76008}, {spellname=99999} ]
+
+tagToQueues = { "a" → {1} }
+patch[1] tag="a" → queue {1} → deepMerge → base[1].spellname=76008
+patch[2] 无 tag  → 追加
+
+结果: [ {76008}, {75683}, {99999} ]
+```
+
+### 8.6 对比
 
 | | 当前（整表替换） | Tag 匹配 |
 |---|---|---|
@@ -603,17 +679,17 @@ hasNumericKey(v) → true
 | 实现复杂度 | — | `hasTaggedItems` + tag→index 映射 |
 | Replace 兼容 | — | Replace 优先级更高，互不冲突 |
 
-### 8.6 未来扩展：多对多 Tag 匹配
+### 8.7 未来扩展：多对多 Tag 匹配
 
 > **状态：已实现**
 
-#### 8.6.1 动机
+#### 8.7.1 动机
 
 当前实现 `tag → index` 为一对一映射（`tagToIndex[entry.tag] = i`），
 base 中同 tag 条目只有最后一个可被补丁命中。如果 base 中有多个同类型事件（如
 同一 BOSS 多次释放相同技能），需要在 base 中用唯一 tag 区分每个出现。
 
-#### 8.6.2 方案
+#### 8.7.2 方案
 
 改为 `tag → {idx1, idx2, ...}` 多对多映射，patch 中每条按序消费。
 
@@ -641,7 +717,7 @@ patch 耗尽 → base[2] 不动（spellname 仍为 88322）
 5. 合并完成后洗掉所有 entry.tag
 ```
 
-#### 8.6.3 对比
+#### 8.7.3 对比
 
 | | 当前（一对一） | 多对多 |
 |---|---|---|

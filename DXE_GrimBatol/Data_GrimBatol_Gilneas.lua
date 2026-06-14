@@ -602,12 +602,12 @@ DXE:RegisterRealmPatch(realm, "erudax", {
         },
         -- Binding Shadows
         bindingcd = {
-            varname = format(L.alert["%s CD"],SN[91081]),
-            text = format(L.alert["Next %s"],SN[91081]),
+            varname = format(L.alert["%s CD"],SN[79466]),
+            text = format(L.alert["Next %s"],SN[79466]),
             time = 13,
             time2 = 9,
             time3 = 18,
-            icon = ST[91081],
+            icon = ST[79466],
         },
         bindingcast = {
             varname = format(L.alert["%s Warning"],SN[79466]),

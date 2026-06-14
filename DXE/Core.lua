@@ -1071,11 +1071,15 @@ local function deepMerge(target, source)
                     end
                 end
                 for _, patchEntry in ipairs(v) do
-                    if type(patchEntry) == "table" and patchEntry.tag then
-                        local queue = tagToQueues[patchEntry.tag]
-                        if queue and #queue > 0 then
-                            local idx = remove(queue, 1)
-                            deepMerge(target[k][idx], patchEntry)
+                    if type(patchEntry) == "table" then
+                        if patchEntry.tag then
+                            local queue = tagToQueues[patchEntry.tag]
+                            if queue and #queue > 0 then
+                                local idx = remove(queue, 1)
+                                deepMerge(target[k][idx], patchEntry)
+                            else
+                                target[k][#target[k] + 1] = patchEntry
+                            end
                         else
                             target[k][#target[k] + 1] = patchEntry
                         end
