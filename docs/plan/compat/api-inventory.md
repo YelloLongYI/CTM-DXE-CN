@@ -115,7 +115,7 @@
 #### 单位基础
 `UnitName` `UnitExists` `UnitIsUnit` `UnitIsDead` `UnitIsDeadOrGhost`
 `UnitIsFriend` `UnitIsEnemy` `UnitIsPlayer` `UnitIsConnected`
-`UnitIsVisible` `UnitIsPartyLeader` `UnitIsRaidOfficer` `UnitAffectingCombat`
+`UnitIsVisible` `UnitIsRaidOfficer` `UnitAffectingCombat`
 `UnitHealth` `UnitHealthMax` `UnitPower` `UnitPowerMax` `UnitPowerType`
 `UnitClass` `UnitInVehicle` `UnitReaction`
 
@@ -253,3 +253,15 @@
 
 - `Locales.lua` 系列——仅使用 `GetLocale()`
 - 大部分 `SendChatMessage`、`GetTime`、事件注册——行为一致
+
+## 七、已移除 / 已替换 API
+
+### `IsPartyLeader()` → `UnitIsGroupLeader(unit)`
+
+| API | 状态 | 引入 | 移除 |
+|-----|------|------|------|
+| `IsPartyLeader()` | ❌ 已移除 | 原版 | 5.0.4 |
+| `UnitIsPartyLeader(unit)` | ❌ 已移除 | 4.x | 5.0.4 |
+| `UnitIsGroupLeader(unit)` | ✅ 当前 | 5.0.4 | — |
+
+**Core.lua 处理**（`GetRaidRank`，第 4226 行）：三级 fallback 探测，按优先级 `UnitIsGroupLeader` → `UnitIsPartyLeader` → `IsPartyLeader`，都不存在时降级返回 0。覆盖 MoP+、Cata、WotLK 及部分私服（仅 `UnitIsGroupLeader` 可用）。

@@ -321,7 +321,7 @@ DXE:RegisterRealmPatch(realm, "lordgodfrey", {
             type = "dropdown",
             text = format(L.alert["Next %s"],SN[93520]),
             time = 11.5,
-            time2 = 30
+            time2 = 30,
             color1 = "YELLOW",
             sound = "MINORWARNING",
             icon = ST[93520],

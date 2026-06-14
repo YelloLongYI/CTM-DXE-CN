@@ -1109,18 +1109,46 @@ end
 -- REALM PATCHING
 ---------------------------------------------
 
-addon.realmPatchDefs = setmetatable({}, { __mode = "v" })
+addon.realmPatchDefs = {}
 addon.EDB_original = {}
 
 function addon:RegisterRealmPatch(realm, key, patchTable)
     self.realmPatchDefs[realm] = self.realmPatchDefs[realm] or {}
-    self.realmPatchDefs[realm][key] = self.realmPatchDefs[realm][key] or {}
-    self.realmPatchDefs[realm][key][#self.realmPatchDefs[realm][key] + 1] = patchTable
+    local d = self.realmPatchDefs[realm]
+    if not d._keys then d._keys = {}; d._keyCount = 0 end
+    if not d._keys[key] then d._keys[key] = true; d._keyCount = d._keyCount + 1 end
+    d._appliedKeyCount = d._appliedKeyCount or 0
+    d._callCount = (d._callCount or 0) + 1
+    d[key] = d[key] or {}
+    d[key][#d[key] + 1] = patchTable
 
     if self.db.profile.Globals.Realm == realm and self.EDB[key] then
         self:PatchEncounter(key, patchTable)
         local ACR = LibStub("AceConfigRegistry-3.0", true)
         if ACR then ACR:NotifyChange("DXE") end
+    end
+end
+
+function addon:PrintPatchReport(realm)
+    self:Print("|cff00ff00=== Realm Patch Report ===")
+    if realm then
+        local defs = self.realmPatchDefs[realm]
+        if not defs then return end
+        local keys = defs._keyCount or 0
+        local applied = defs._appliedKeyCount or 0
+        local status = (keys == applied) and "|cff00ff00OK|r" or "|cffff0000MISSING|r"
+        self:Print(format("  %s %s: %d/%d keys patched", status, realm, applied, keys))
+        defs._keyCount = 0; defs._appliedKeyCount = 0; defs._keys = {}
+    else
+        if not next(self.realmPatchDefs) then
+            self:Print("  No patches registered"); return
+        end
+        for r, defs in pairs(self.realmPatchDefs) do
+            local keys = defs._keyCount or 0
+            local applied = defs._appliedKeyCount or 0
+            local s = (keys == applied) and "|cff00ff00OK|r" or "|cffff0000MISSING|r"
+            self:Print(format("  %s %s: %d/%d keys patched", s, r, applied, keys))
+        end
     end
 end
 
@@ -1430,6 +1458,17 @@ function addon:RegisterEncounter(data)
     if self.realmPatchDefs[currentRealm] and self.realmPatchDefs[currentRealm][key] then
         for _, p in ipairs(self.realmPatchDefs[currentRealm][key]) do
             deepMerge(data, p)
+        end
+        local d = self.realmPatchDefs[currentRealm]
+        d._appliedKeyCount = (d._appliedKeyCount or 0) + 1
+        if d._appliedKeyCount == d._keyCount then
+            local keys, applied = d._keyCount, d._appliedKeyCount
+            d._keyCount = 0; d._appliedKeyCount = 0; d._keys = {}
+            self:ScheduleTimer(function()
+                self:Print("|cff00ff00=== Realm Patch Report ===")
+                local s = (keys == applied) and "|cff00ff00OK|r" or "|cffff0000MISSING|r"
+                self:Print(format("  %s %s: %d/%d keys patched", s, currentRealm, applied, keys))
+            end, 0.5)
         end
     end
 
@@ -4188,9 +4227,14 @@ function addon:GetRaidRank(unit)
     if GetNumRaidMembers() <= 1 then
         if GetNumPartyMembers() > 0 then
             if not unit or (unit == "player") or (UnitName("player") == unit) then
-                return IsPartyLeader() or 0
+                if UnitIsGroupLeader then return UnitIsGroupLeader("player") or 0 end
+                if UnitIsPartyLeader then return UnitIsPartyLeader("player") or 0 end
+                if IsPartyLeader then return IsPartyLeader() or 0 end
+                return 0
             else
-                return UnitIsPartyLeader(unit) or 0
+                if UnitIsGroupLeader then return UnitIsGroupLeader(unit) or 0 end
+                if UnitIsPartyLeader then return UnitIsPartyLeader(unit) or 0 end
+                return 0
             end
         else
             return 0

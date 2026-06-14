@@ -50,7 +50,7 @@ DXE:RegisterRealmPatch(realm, "asaad", {
             varname = format(L.alert["%s CD"],SN[86911]),
             type = "dropdown",
             text = format(L.alert["Next %s"],SN[86911]),
-            time = 18
+            time = 18,
             time2 = 45,
             flashtime = 5,
             icon = ST[86911],
