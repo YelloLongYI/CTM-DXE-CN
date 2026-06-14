@@ -146,3 +146,74 @@ DXE:RegisterRealmPatch(realm, "halfus", {
 ⚠️ `DXE.Replace` 会**丢弃目标中未提及的全部字段**。上面例子中 `halfus` 除 `enragecd` 外所有告警都会被删除。同时被替换的告警必须写全字段（`type`、`text`、`icon` 等），否则告警无法正常显示。
 
 一般场景下**不需要**使用 `DXE.Replace`，默认的合并行为已够用。
+
+---
+
+## 六、快速测试验证
+
+### 6.1 切换 Realm 立即生效
+
+补丁写完后 `/reload` 加载，在 DXE 设置面板的 Realm 下拉框中切换到目标 Realm，补丁即时生效无需再 `/reload`。可通过以下命令确认当前 Realm：
+
+```
+/dump DXE.db.profile.Globals.Realm
+```
+
+### 6.2 查看 BOSS 最终数据
+
+`DXE.EDB[key]` 是补丁合并后的最终数据（游戏实际使用的），`DXE.EDB_original[key]` 是 `Encounters.lua` 原始副本。两者对比即可确认补丁是否正确合入。
+
+以 `DXE_Bastion` 的 `"halfus"` 为例：
+
+**dump 指定子表**（避免输出过长）：
+```
+/dump DXE.EDB["halfus"].events
+/dump DXE.EDB["halfus"].alerts
+/dump DXE.EDB["halfus"].triggers
+/dump DXE.EDB["halfus"].userdata
+```
+
+**dump 子表的 key 列表**（只看结构，不展开内容）：
+```
+/run local t=DXE.EDB["halfus"] for k in pairs(t) do print(k) end
+/run local t=DXE.EDB["halfus"].alerts for k in pairs(t) do print(k) end
+```
+
+**对比单个具体值**：
+```
+/dump DXE.EDB["halfus"].events[1].spellname
+/dump DXE.EDB_original["halfus"].events[1].spellname
+```
+
+**一次性找出所有差异字段**（EDB 比 EDB_original 多的或不同的 key）：
+```
+/run local a,b=DXE.EDB_original["halfus"],DXE.EDB["halfus"] for k,v in pairs(b) do if a[k]~=v then print("DIFF:",k) end end
+```
+
+**检查 icon 是否正确加载**（spell ID 在 4.4.2 是否存在）：
+```
+/dump GetSpellInfo(74670)
+```
+返回 `nil` 表示该 spell ID 在 4.4.2 中不存在，技能图标会显示为白方块。
+
+### 6.3 获取 BOSS 的 key
+
+每个 BOSS 的 key 在对应 `Encounters.lua` 中：
+
+```lua
+local data = {
+    key = "halfus",   -- ← 这就是 dump 时的 key
+    ...
+}
+DXE:RegisterEncounter(data)
+```
+
+### 6.4 验证流程
+
+```
+1. /reload                         ← 加载新补丁文件
+2. DXE 设置面板 → Realm → 选目标  ← 切换 Realm
+3. /dump DXE.EDB["bossKey"]        ← 查看补丁后数据
+4. /dump DXE.EDB_original["bossKey"] ← 对比原始数据
+5. 确认差异字段和预期一致           ← 完成
+```

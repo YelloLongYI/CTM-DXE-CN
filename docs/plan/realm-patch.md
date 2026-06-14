@@ -574,6 +574,23 @@ local function hasTaggedItems(t)
 end
 ```
 
+#### 向后兼容
+
+patch 的数组（`events` 等）中只要没有任何条目带 `tag` 字段，`hasTaggedItems(v)` 返回 `false`，
+跳过 Tag 匹配分支，走 `hasNumericKey(v) → 整表替换` 原路径。即：**不动 base 不加 tag 的情况下，
+现有补丁行为完全不变**。
+
+```
+patch events = {
+    { spellname = 74670 },       ← 无 tag
+    { type = "emote" },          ← 无 tag
+}
+
+hasTaggedItems(v) → false
+hasNumericKey(v) → true
+→ target.events = v              ← 整表替换（原行为）
+```
+
 ### 8.5 对比
 
 | | 当前（整表替换） | Tag 匹配 |

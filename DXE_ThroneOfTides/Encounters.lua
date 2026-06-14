@@ -173,6 +173,7 @@ do
             },
             -- Shock Blast
             {
+                tag = "shock_blast_cast",
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
                 spellname = 91477,
@@ -185,6 +186,7 @@ do
                 },
             },
             {
+                tag = "shock_blast_kick",
                 type = "event",
                 event = "UNIT_SPELLCAST_INTERRUPTED",
                 execute = {
@@ -349,6 +351,7 @@ do
         events = {
 			-- Dark Fissure
             {
+                tag = "dark_fissure",
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
                 spellname = 96311,
@@ -375,6 +378,7 @@ do
             },
             -- Squeeze
             {
+                tag = "squeeze_start",
                 type = "combatevent",
                 eventtype = "SPELL_CAST_START",
                 spellname = 91484,
@@ -386,6 +390,7 @@ do
                 },
             },
             {
+                tag = "squeeze_apply",
                 type = "combatevent",
                 eventtype = "SPELL_AURA_APPLIED",
                 spellname = 91484,
@@ -404,6 +409,7 @@ do
                 },
             },
             {
+                tag = "squeeze_remove",
                 type = "combatevent",
                 eventtype = "SPELL_AURA_REMOVED",
                 spellname = 91484,
