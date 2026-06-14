@@ -477,7 +477,7 @@ Realm 下拉框切换时调用 `DXE:ApplyRealmPatches(realm)`，遍历 `realmPat
 
 ## 八、未来计划：Tag 数组补丁
 
-> **状态：设计阶段，未实现**
+> **状态：已实现（含多对多）**
 
 ### 8.1 动机
 
@@ -585,5 +585,51 @@ end
 | 可读性 | 看不出差异 | `"blitz"` 一眼看懂 |
 | 实现复杂度 | — | `hasTaggedItems` + tag→index 映射 |
 | Replace 兼容 | — | Replace 优先级更高，互不冲突 |
+
+### 8.6 未来扩展：多对多 Tag 匹配
+
+> **状态：已实现**
+
+#### 8.6.1 动机
+
+当前实现 `tag → index` 为一对一映射（`tagToIndex[entry.tag] = i`），
+base 中同 tag 条目只有最后一个可被补丁命中。如果 base 中有多个同类型事件（如
+同一 BOSS 多次释放相同技能），需要在 base 中用唯一 tag 区分每个出现。
+
+#### 8.6.2 方案
+
+改为 `tag → {idx1, idx2, ...}` 多对多映射，patch 中每条按序消费。
+
+```
+base.events:
+  [1] { tag = "breath", spellname = 88322 }
+  [2] { tag = "breath", spellname = 88322 }
+
+patch.events:
+  { tag = "breath", spellname = 74670 }
+
+映射: "breath" → {1, 2}
+patch[1] 消费 idx=1 → base[1].spellname = 74670
+         剩余队列: "breath" → {2}
+patch 耗尽 → base[2] 不动（spellname 仍为 88322）
+```
+
+**合并逻辑**：
+
+```
+1. 扫描 base，建 tag → {idx, idx, ...} 映射
+2. 遍历 patch，每个 entry 从对应队列 shift 一个 idx 来消费
+3. patch 耗尽后，队列中剩余 idx 原封不动
+4. patch 条目超出队列 → 追加到末尾
+5. 合并完成后洗掉所有 entry.tag
+```
+
+#### 8.6.3 对比
+
+| | 当前（一对一） | 多对多 |
+|---|---|---|
+| base 同 tag 条目 | 仅最后一条可命中 | 按序逐条命中 |
+| patch 同 tag 条目 | 依次合并到同一 base 条目 | 依次消费不同 base 条目 |
+| 实现复杂度 | `tag→index` | `tag→{idx队列}` |
 
 

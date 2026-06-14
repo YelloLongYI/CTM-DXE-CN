@@ -1044,6 +1044,15 @@ local function hasNumericKey(t)
     return false
 end
 
+local function hasTaggedItems(t)
+    for _, entry in ipairs(t) do
+        if type(entry) == "table" and entry.tag then
+            return true
+        end
+    end
+    return false
+end
+
 local function deepMerge(target, source)
     for k, v in pairs(source) do
         if v == false then
@@ -1051,6 +1060,32 @@ local function deepMerge(target, source)
         elseif type(v) == "table" then
             if getmetatable(v) and getmetatable(v).__dxe_replace then
                 target[k] = v
+            elseif hasTaggedItems(v) and type(target[k]) == "table" and hasNumericKey(target[k]) then
+                local tagToQueues = {}
+                for i, entry in ipairs(target[k]) do
+                    if type(entry) == "table" and entry.tag then
+                        if not tagToQueues[entry.tag] then
+                            tagToQueues[entry.tag] = {}
+                        end
+                        tagToQueues[entry.tag][#tagToQueues[entry.tag] + 1] = i
+                    end
+                end
+                for _, patchEntry in ipairs(v) do
+                    if type(patchEntry) == "table" and patchEntry.tag then
+                        local queue = tagToQueues[patchEntry.tag]
+                        if queue and #queue > 0 then
+                            local idx = remove(queue, 1)
+                            deepMerge(target[k][idx], patchEntry)
+                        else
+                            target[k][#target[k] + 1] = patchEntry
+                        end
+                    end
+                end
+                for _, entry in ipairs(target[k]) do
+                    if type(entry) == "table" then
+                        entry.tag = nil
+                    end
+                end
             elseif hasNumericKey(v) then
                 target[k] = v
             elseif type(target[k]) == "table" then
