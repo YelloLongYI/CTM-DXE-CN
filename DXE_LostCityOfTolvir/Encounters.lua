@@ -353,6 +353,7 @@ do
         events = {
 			-- Scent of Blood
             {
+                tag = "scent_of_blood",
                 type = "combatevent",
                 eventtype = "SPELL_AURA_APPLIED",
                 spellname = 89998,
