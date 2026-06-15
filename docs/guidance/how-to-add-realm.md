@@ -173,6 +173,14 @@ DXE:RegisterRealmPatch(realm, "halfus", {
 /dump DXE.EDB["halfus"].userdata
 ```
 
+**dump 数组长度和指定下标**（如 `events`，Lua 下标从 1 开始）：
+```
+/dump #DXE.EDB["halfus"].events              -- events 总数
+/dump DXE.EDB["halfus"].events[1]            -- 第 1 个 event
+/dump DXE.EDB["halfus"].events[2]            -- 第 2 个 event
+/dump DXE.EDB["halfus"].events[1].spellname  -- 第 1 个 event 的 spellname
+```
+
 **dump 子表的 key 列表**（只看结构，不展开内容）：
 ```
 /run local t=DXE.EDB["halfus"] for k in pairs(t) do print(k) end

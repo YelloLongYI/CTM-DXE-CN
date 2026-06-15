@@ -1354,6 +1354,7 @@ do
         events = {
 			-- Veil of Sky
             {
+                tag = "veil_of_sky",
                 type = "combatevent",
                 eventtype = "SPELL_AURA_APPLIED",
                 spellname = 90760,

@@ -263,26 +263,10 @@ DXE:RegisterRealmPatch(realm, "anraphet", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        alphacd = {10, 47, loop = false, type = "series"},
+    },
     alerts = {
-        alphawarn = {
-            varname = format(L.alert["%s Warning"],SN[76184]),
-            type = "centerpopup",
-            text = format(L.alert["%s"],SN[76184]),
-            time = 3,
-            color1 = "PURPLE",
-            sound = "ALERT2",
-            icon = ST[76184],
-        },
-        alphaduration = {
-            varname = format(L.alert["%s Warning"],SN[76184]),
-            type = "centerpopup",
-            text = format(L.alert["%s"],SN[76184]),
-            time = 12.5,
-            color1 = "MAGENTA",
-            color2 = "RED",
-            sound = "MINORWARNING",
-            icon = ST[76184],
-        },
         alphaselfwarn = {
             varname = format(L.alert["%s on me Warning"],SN[76184]),
             type = "simple",
@@ -401,7 +385,14 @@ DXE:RegisterRealmPatch(realm, "ammunae", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        withercd = {8.5, 18, loop = false, type = "series"},
+    },
     alerts = {
+        -- Wither
+        withercd = {
+            time = "<withercd>",
+        },
         -- Noxious Spores
         sporesselfwarn = {
             varname = format(L.alert["%s on me Warning"],SN[75702]),
@@ -552,11 +543,208 @@ DXE:RegisterRealmPatch(realm, "isiset", {
     windows = {
         proxwindow = false,
     },
+    alerts = {
+        -- Veil of Sky
+        veilwarn = {
+            varname = format(L.alert["%s Warning"],SN[74133]),
+            type = "simple",
+            text = "<veiltext>",
+            time = 1,
+            color1 = "LIGHTBLUE",
+            sound = "ALERT8",
+            icon = ST[74133],
+        },
+        -- Supernova
+        supernovacd = {
+            varname = format(L.alert["%s CD"],SN[74136]),
+            text = format(L.alert["%s CD"],SN[74136]),
+            time = 20,
+            time2 = 20,
+            time3 = 24,
+            icon = ST[74136],
+        },
+    },
+    events = {
+        -- Veil of Sky
+        {
+            tag = "veil_of_sky",
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellname = 74133,
+            execute = {
+                {
+                    "expect",{"#5#","==","Isiset"},
+                    "set",{veiltext = format(L.alert["%s on %s - DISPEL!"],SN[74133],"#5#")},
+                    "alert","veilwarn",
+                },
+            },
+        },
+    },
 })
 
 DXE:RegisterRealmPatch(realm, "rajh", {
     windows = {
         proxwindow = false,
+    },
+    alerts = {
+        -- Solar Winds
+        windswarn = {
+            varname = format(L.alert["%s Warning"],SN[74104]),
+            type = "simple",
+            text = format(L.alert["%s"],SN[74104]),
+            time = 1,
+            color1 = "ORANGE",
+            sound = "ALERT7",
+            icon = ST[64724],
+        },
+        -- Blessing of the Sun
+        blessingsoonwarn = {
+            varname = format(L.alert["%s soon Warning"],SN[76352]),
+            type = "simple",
+            text = format(L.alert["%s soon ..."],SN[76352]),
+            time = 1,
+            color1 = "YELLOW",
+            sound = "MINORWARNING",
+            icon = ST[11242],
+        },
+        blessingwarn = {
+            varname = format(L.alert["%s Warning"],SN[76352]),
+            type = "centerpopup",
+            text = format(L.alert["%s"],SN[76352]),
+            time = 20,
+            color1 = "GOLD",
+            sound = "BEWARE",
+            icon = ST[76355],
+        },
+        -- Achievement: Son of a
+        sonofacd = {
+            varname = format(L.alert["%s %s Countdown"],TI["AchievementShield"],AN[5295]),
+            type = "centerpopup",
+            text = format(L.alert["%s window"],AN[5295]),
+            time = 20,
+            color1 = "ORANGE",
+            color2 = "RED",
+            sound = "None",
+            icon = AT[5295],
+        },
+        -- Inferno Leap
+        leapwarn = {
+            varname = format(L.alert["%s Warning"],SN[87647]),
+            type = "centerpopup",
+            text = format(L.alert["%s - INTERRUPT!"],SN[87647]),
+            time = 1.5,
+            color1 = "ORANGE",
+            sound = "ALERT10",
+            icon = ST[87647],
+        },
+        -- Summon Sun Orb
+        orbwarn = {
+            varname = format(L.alert["%s Warning"],SN[80352]),
+            type = "centerpopup",
+            text = format(L.alert["%s - INTERRUPT!"],SN[80352]),
+            time = 3,
+            color1 = "ORANGE",
+            color2 = "RED",
+            sound = "ALERT2",
+            icon = ST[80352],
+        },
+        -- Solar Fire
+        fireselfwarn = {
+            varname = format(L.alert["%s on me Warning"],SN[89131]),
+            text = format(L.alert["%s on %s - GET AWAY!"],SN[89131],L.alert["YOU"]),
+            icon = ST[89131],
+        },
+    },
+    events = {
+        {
+            type = "event",
+            event = "UNIT_SPELLCAST_SUCCEEDED",
+            execute = {
+                -- Solar Winds
+                {
+                    "expect",{"#5#","==","74104"},
+                    "expect",{"#1#","==","boss1"},
+                    "alert","windswarn",
+                    "scheduletimer",{"checkenergy", 2},
+                },
+                -- Blessing of the Sun
+                {
+                    "expect",{"#2#","==",SN[76352]},
+                    "expect",{"#1#","==","boss1"},
+                    "alert","blessingwarn",
+                    "scheduletimer",{"blessingends", 20},
+                    "expect",{"&difficulty&","==","2"},
+                    "expect",{"<sonofafailed>","==","no"},
+                    "alert","sonofacd",
+                },
+            },
+        },            
+        -- Inferno Leap
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 87653,
+            execute = {
+                {
+                    "alert","leapwarn",
+                },
+                {
+                    "scheduletimer",{"checkenergy", 2},
+                },
+            },
+        },
+        -- Summon Sun Orb
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 80352,
+            execute = {
+                {
+                    "alert","orbwarn",
+                },
+                {
+                    "scheduletimer",{"checkenergy", 2},
+                },
+            },
+        },
+        {
+            type = "event",
+            event = "UNIT_SPELLCAST_INTERRUPTED",
+            execute = {
+                -- Inferno Leap
+                {
+                    "expect",{"#2#","==",SN[87653]},
+                    "expect",{"#1#","find","boss"},
+                    "quash","leapwarn",
+                },
+            },
+        },
+        -- Summon Sun Orb
+        {
+            type = "event",
+            event = "UNIT_SPELLCAST_CHANNEL_STOP",
+            execute = {
+                {
+                    "expect",{"#2#","==",SN[80352]},
+                    "expect",{"#1#","find","boss"},
+                    "quash","orbwarn",
+                },
+            },
+        },
+        
+        -- Solar Fire
+        {
+            type = "combatevent",
+            eventtype = "SPELL_DAMAGE",
+            spellname = 89131,
+            execute = {
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "alert","fireselfwarn",
+                },
+            },
+        },
+        
     },
 })
 
