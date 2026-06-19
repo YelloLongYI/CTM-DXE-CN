@@ -2,6 +2,12 @@
 local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "Gilneas"
 
+if DXE.db.profile.Globals.Realm == realm and L.chat_throneoftides then
+    for k in pairs(L.chat_throneoftides) do
+        L.chat_throneoftides[k] = k
+    end
+end
+
 DXE:RegisterRealmPatch(realm, "ladynazjar", {
     windows = {
         proxwindow = false,
