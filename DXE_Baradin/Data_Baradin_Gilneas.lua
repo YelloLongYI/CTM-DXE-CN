@@ -10,7 +10,9 @@ DXE:RegisterRealmPatch(realm, "argaloth", {
         meteorcd = {
             varname = format(L.alert["%s CD"],SN[45150]),
             text = format(L.alert["Next %s"],SN[45150]),
-            time = 16.5,
+            time = 8,   -- first cast
+            time2 = 13, -- cd
+            time3 = 12, -- transition, need confirm
             icon = ST[45150],
         },
         meteorwarn = {
@@ -36,7 +38,8 @@ DXE:RegisterRealmPatch(realm, "argaloth", {
         consumingcd = {
             varname = format(L.alert["%s CD"],SN[88954]),
             text = format(L.alert["Next %s"],SN[88954]),
-            time = 22,
+            time = 5.2,   -- first cast
+            time2 = 17, -- cd
             flashtime = 5,
             icon = ST[88954],
         },
@@ -44,6 +47,7 @@ DXE:RegisterRealmPatch(realm, "argaloth", {
     events = {
     -- Consuming Darkness
         {
+            -- This should be fake
             type = "combatevent",
             eventtype = "SPELL_AURA_APPLIED",
             spellname = 95173,       
@@ -61,7 +65,7 @@ DXE:RegisterRealmPatch(realm, "argaloth", {
             execute = {
                 {
                 "quash","consumingcd",
-                "alert","consumingcd",
+                "alert",{"consumingcd", time=2},
                 },
             },              
         },
@@ -73,7 +77,7 @@ DXE:RegisterRealmPatch(realm, "argaloth", {
             execute = {
                 {
                     "quash","meteorcd",
-                    "alert","meteorcd",
+                    "alert",{"meteorcd", time=2},
                 },
             },
         },
