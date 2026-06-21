@@ -1,0 +1,1710 @@
+{
+  "3887": {
+    "n": "Baron Silverlaine",
+    "r": "boss",
+    "z": "Shadowfang Keep",
+    "e": "baronsilverlaine",
+    "en": "Worgen Spirit Spawning Countdown"
+  },
+  "4278": {
+    "n": "Commander Springvale",
+    "r": "boss",
+    "z": "Shadowfang Keep",
+    "e": "commanderspringvale",
+    "en": "Commander Springvale"
+  },
+  "5000": {
+    "n": "NPC_5000",
+    "r": "add",
+    "z": "The Deadmines",
+    "e": "foereaper",
+    "en": "Foe Reaper 5000"
+  },
+  "23542": {
+    "n": "Amani'shi Axe Thrower",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "23574": {
+    "n": "Akil'zon",
+    "r": "boss",
+    "z": "Zul'Aman",
+    "e": "akilzon",
+    "en": "Akil'zon"
+  },
+  "23576": {
+    "n": "Nalorakk",
+    "r": "boss",
+    "z": "Zul'Aman",
+    "e": "nalorakk",
+    "en": "Nalorakk"
+  },
+  "23577": {
+    "n": "Halazzi",
+    "r": "boss",
+    "z": "Zul'Aman",
+    "e": "halazzi",
+    "en": "Halazzi"
+  },
+  "23578": {
+    "n": "Jan'alai",
+    "r": "boss",
+    "z": "Zul'Aman",
+    "e": "janalai",
+    "en": "Jan'alai"
+  },
+  "23581": {
+    "n": "Amani'shi Medicine Man",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "23582": {
+    "n": "Amani'shi Tribesman",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "23596": {
+    "n": "Amani'shi Flame Caster",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "23597": {
+    "n": "Amani'shi Guardian",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "23863": {
+    "n": "Daakara",
+    "r": "boss",
+    "z": "Zul'Aman",
+    "e": "daakara",
+    "en": "Daakara"
+  },
+  "24059": {
+    "n": "Amani’shi Beast Tamer",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "24239": {
+    "n": "Hex Lord Malacrass",
+    "r": "boss",
+    "z": "Zul'Aman",
+    "e": "malacrass",
+    "en": "Hex Lord Malacrass"
+  },
+  "25740": {
+    "n": "Ahune",
+    "r": "boss",
+    "z": "The Slave Pens",
+    "e": "eventahune",
+    "en": "Ahune"
+  },
+  "36272": {
+    "n": "Apothecary Frye",
+    "r": "add",
+    "z": "Shadowfang Keep",
+    "e": "eventcrownchemical",
+    "en": "The Crown Chemical Co."
+  },
+  "36296": {
+    "n": "Apothecary Hummel",
+    "r": "boss",
+    "z": "Shadowfang Keep",
+    "e": "eventcrownchemical",
+    "en": "The Crown Chemical Co."
+  },
+  "36565": {
+    "n": "Apothecary Baxter",
+    "r": "add",
+    "z": "Shadowfang Keep",
+    "e": "eventcrownchemical",
+    "en": "The Crown Chemical Co."
+  },
+  "39378": {
+    "n": "Rajh",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "rajh",
+    "en": "Rajh"
+  },
+  "39381": {
+    "n": "Crimsonborne Guardian",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39405": {
+    "n": "Crimsonborne Seer",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39425": {
+    "n": "Temple Guardian Anhuur",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "anhuur",
+    "en": "Temple Guardian Anhuur"
+  },
+  "39428": {
+    "n": "Earthrager Ptah",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "ptah",
+    "en": "Earthrager Ptah"
+  },
+  "39587": {
+    "n": "Isiset",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "isiset",
+    "en": "Isiset"
+  },
+  "39625": {
+    "n": "General Umbriss",
+    "r": "boss",
+    "z": "Grim Batol",
+    "e": "umbriss",
+    "en": "General Umbriss"
+  },
+  "39626": {
+    "n": "Crimsonborne Warlord",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39665": {
+    "n": "Rom'ogg Bonecrusher",
+    "r": "boss",
+    "z": "Blackrock Caverns",
+    "e": "romogg",
+    "en": "Rom'ogg Bonecrusher"
+  },
+  "39679": {
+    "n": "Corla, Herald of Twilight",
+    "r": "boss",
+    "z": "Blackrock Caverns",
+    "e": "corla",
+    "en": "Corla, Herald of Twilight"
+  },
+  "39698": {
+    "n": "Karsh Steelbender",
+    "r": "boss",
+    "z": "Blackrock Caverns",
+    "e": "karsh",
+    "en": "Karsh Steelbender"
+  },
+  "39700": {
+    "n": "Beauty",
+    "r": "boss",
+    "z": "Blackrock Caverns",
+    "e": "beauty",
+    "en": "Beauty"
+  },
+  "39705": {
+    "n": "Ascendant Lord Obsidius",
+    "r": "boss",
+    "z": "Blackrock Caverns",
+    "e": "ascendantlordobsidius",
+    "en": "Ascendant Lord Obsidius"
+  },
+  "39731": {
+    "n": "Ammunae",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "ammunae",
+    "en": "Ammunae"
+  },
+  "39732": {
+    "n": "Setesh",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "setesh",
+    "en": "Setesh"
+  },
+  "39788": {
+    "n": "Anraphet",
+    "r": "boss",
+    "z": "Halls of Origination",
+    "e": "anraphet",
+    "en": "Anraphet"
+  },
+  "39854": {
+    "n": "Azureborne Guardian",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39855": {
+    "n": "Azureborne Seer",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39909": {
+    "n": "Azureborne Warlord",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39954": {
+    "n": "Twilight Shadow Weaver",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39956": {
+    "n": "Twilight Enforcer",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "39978": {
+    "n": "Twilight Torturer",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "39980": {
+    "n": "Twilight Sadist",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "39982": {
+    "n": "Crazed Mage",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "39985": {
+    "n": "Mad Prisoner",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "40017": {
+    "n": "Twilight Element Warden",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "40019": {
+    "n": "Twilight Obsidian Borer",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "40021": {
+    "n": "Incediary Spark",
+    "r": "trash",
+    "z": "Blackrock Caverns",
+    "e": "blackrockcavernstrash",
+    "en": "Trash"
+  },
+  "40177": {
+    "n": "Forgemaster Throngus",
+    "r": "boss",
+    "z": "Grim Batol",
+    "e": "throngus",
+    "en": "Forgemaster Throngus"
+  },
+  "40290": {
+    "n": "Crimsonborne Seer",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "40319": {
+    "n": "Drahga Shadowburner",
+    "r": "boss",
+    "z": "Grim Batol",
+    "e": "drahga",
+    "en": "Drahga Shadowburner"
+  },
+  "40446": {
+    "n": "NPC_40446",
+    "r": "add",
+    "z": "The Slave Pens",
+    "e": "eventahune",
+    "en": "Ahune"
+  },
+  "40484": {
+    "n": "Erudax",
+    "r": "boss",
+    "z": "Grim Batol",
+    "e": "erudax",
+    "en": "Erudax"
+  },
+  "40577": {
+    "n": "Naz'jar Sentinel",
+    "r": "trash",
+    "z": "Throne of Tides",
+    "e": "tottrash",
+    "en": "Trash"
+  },
+  "40586": {
+    "n": "Lady Naz'jar",
+    "r": "boss",
+    "z": "Throne of Tides",
+    "e": "ladynazjar",
+    "en": "Lady Naz'jar"
+  },
+  "40765": {
+    "n": "Commander Ulthok,",
+    "r": "boss",
+    "z": "Throne of Tides",
+    "e": "ulthok",
+    "en": "Commander Ulthok"
+  },
+  "40788": {
+    "n": "Mindbender Ghur'sha",
+    "r": "add",
+    "z": "Throne of Tides",
+    "e": "ghursha",
+    "en": "Mindbender Ghur'sha"
+  },
+  "40792": {
+    "n": "Neptulon",
+    "r": "boss",
+    "z": "Throne of Tides",
+    "e": "ozumat",
+    "en": "Ozumat"
+  },
+  "40825": {
+    "n": "Erunak Stonespeaker",
+    "r": "boss",
+    "z": "Throne of Tides",
+    "e": "ghursha",
+    "en": "Mindbender Ghur'sha"
+  },
+  "40953": {
+    "n": "Khaaphom",
+    "r": "trash",
+    "z": "Grim Batol",
+    "e": "grimbatoltrash",
+    "en": "Trash"
+  },
+  "41096": {
+    "n": "Naz'jar Spiritmender",
+    "r": "trash",
+    "z": "Throne of Tides",
+    "e": "tottrash",
+    "en": "Trash"
+  },
+  "41270": {
+    "n": "Onyxia",
+    "r": "boss",
+    "z": "Blackwing Descent",
+    "e": "nefarian",
+    "en": "Nefarian"
+  },
+  "41376": {
+    "n": "Nef",
+    "r": "add",
+    "z": "Blackwing Descent",
+    "e": "nefarian",
+    "en": "Nefarian"
+  },
+  "41378": {
+    "n": "Maloriak",
+    "r": "boss",
+    "z": "Blackwing Descent",
+    "e": "maloriak",
+    "en": "Maloriak"
+  },
+  "41442": {
+    "n": "Atramedes",
+    "r": "boss",
+    "z": "Blackwing Descent",
+    "e": "atramedes",
+    "en": "Atramedes"
+  },
+  "41570": {
+    "n": "Magmaw",
+    "r": "boss",
+    "z": "Blackwing Descent",
+    "e": "magmaw",
+    "en": "Magmaw"
+  },
+  "42166": {
+    "n": "Arcanotron",
+    "r": "boss",
+    "z": "Blackwing Descent",
+    "e": "omnitron",
+    "en": "Omnotron Defense System"
+  },
+  "42178": {
+    "n": "Magmatron",
+    "r": "add",
+    "z": "Blackwing Descent",
+    "e": "omnitron",
+    "en": "Omnotron Defense System"
+  },
+  "42179": {
+    "n": "Electron",
+    "r": "add",
+    "z": "Blackwing Descent",
+    "e": "omnitron",
+    "en": "Omnotron Defense System"
+  },
+  "42180": {
+    "n": "Toxitron",
+    "r": "add",
+    "z": "Blackwing Descent",
+    "e": "omnitron",
+    "en": "Omnotron Defense System"
+  },
+  "42188": {
+    "n": "Ozruk",
+    "r": "boss",
+    "z": "The Stonecore",
+    "e": "ozruk",
+    "en": "Ozruk"
+  },
+  "42333": {
+    "n": "High Priestess Azil",
+    "r": "boss",
+    "z": "The Stonecore",
+    "e": "azil",
+    "en": "High Priestess Azil"
+  },
+  "42362": {
+    "n": "Drakonid Drudge",
+    "r": "trash",
+    "z": "Blackwing Descent",
+    "e": "bwdtrash",
+    "en": "Trash"
+  },
+  "42649": {
+    "n": "Drakonid Chainwielder",
+    "r": "trash",
+    "z": "Blackwing Descent",
+    "e": "bwdtrash",
+    "en": "Trash"
+  },
+  "42691": {
+    "n": "Stonecore Rift Conjurer",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "42696": {
+    "n": "Stonecore Warbringer",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "42767": {
+    "n": "Ivoroc",
+    "r": "trash",
+    "z": "Blackwing Descent",
+    "e": "bwdtrash",
+    "en": "Trash"
+  },
+  "42768": {
+    "n": "Maimgor",
+    "r": "trash",
+    "z": "Blackwing Descent",
+    "e": "bwdtrash",
+    "en": "Trash"
+  },
+  "42789": {
+    "n": "Stonecore Magmalord",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "42800": {
+    "n": "Golem Sentry",
+    "r": "trash",
+    "z": "Blackwing Descent",
+    "e": "bwdtrash",
+    "en": "Trash"
+  },
+  "42808": {
+    "n": "Stonecore Flayer",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "42810": {
+    "n": "Crystalspawn Giant",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "43214": {
+    "n": "Slabhide",
+    "r": "boss",
+    "z": "The Stonecore",
+    "e": "slabhide",
+    "en": "Slabhide"
+  },
+  "43296": {
+    "n": "Chimaeron",
+    "r": "boss",
+    "z": "Blackwing Descent",
+    "e": "chimaeron",
+    "en": "Chimaeron"
+  },
+  "43324": {
+    "n": "Cho'gall",
+    "r": "boss",
+    "z": "The Bastion of Twilight",
+    "e": "chogall",
+    "en": "Cho'gall"
+  },
+  "43391": {
+    "n": "Millhouse Manastorm",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "43430": {
+    "n": "Stonecore Berserker",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "43438": {
+    "n": "Corborus",
+    "r": "boss",
+    "z": "The Stonecore",
+    "e": "corborus",
+    "en": "Corborus"
+  },
+  "43537": {
+    "n": "Stonecore Earthshaper",
+    "r": "trash",
+    "z": "The Stonecore",
+    "e": "stonecoretrash",
+    "en": "Trash"
+  },
+  "43612": {
+    "n": "High Prophet Barim",
+    "r": "boss",
+    "z": "Lost City of the Tol'vir",
+    "e": "barim",
+    "en": "High Prophet Barim"
+  },
+  "43614": {
+    "n": "Lockmaw",
+    "r": "boss",
+    "z": "Lost City of the Tol'vir",
+    "e": "lockmaw",
+    "en": "Lockmaw"
+  },
+  "43686": {
+    "n": "Ignacious",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "ascendcouncil",
+    "en": "Ascendant Council"
+  },
+  "43687": {
+    "n": "Feludius",
+    "r": "boss",
+    "z": "The Bastion of Twilight",
+    "e": "ascendcouncil",
+    "en": "Ascendant Council"
+  },
+  "43688": {
+    "n": "Arion",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "ascendcouncil",
+    "en": "Ascendant Council"
+  },
+  "43689": {
+    "n": "Terrastra",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "ascendcouncil",
+    "en": "Ascendant Council"
+  },
+  "43778": {
+    "n": "Foe Reaper 5000",
+    "r": "boss",
+    "z": "The Deadmines",
+    "e": "foereaper",
+    "en": "Foe Reaper 5000"
+  },
+  "43873": {
+    "n": "Altairus",
+    "r": "boss",
+    "z": "The Vortex Pinnacle",
+    "e": "altairus",
+    "en": "Altairus"
+  },
+  "43875": {
+    "n": "Asaad, Caliph of Zephyrs",
+    "r": "boss",
+    "z": "The Vortex Pinnacle",
+    "e": "asaad",
+    "en": "Asaad"
+  },
+  "43878": {
+    "n": "Grand Vizier Ertan",
+    "r": "boss",
+    "z": "The Vortex Pinnacle",
+    "e": "ertan",
+    "en": "Grand Vizier Ertan"
+  },
+  "44577": {
+    "n": "General Husam",
+    "r": "boss",
+    "z": "Lost City of the Tol'vir",
+    "e": "husam",
+    "en": "General Husam"
+  },
+  "44600": {
+    "n": "Halfus Wyrmbreaker",
+    "r": "boss",
+    "z": "The Bastion of Twilight",
+    "e": "halfus",
+    "en": "Halfus Wyrmbreaker"
+  },
+  "44645": {
+    "n": "Nether Scion",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "halfus",
+    "en": "Halfus Wyrmbreaker"
+  },
+  "44650": {
+    "n": "Storm Rider",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "halfus",
+    "en": "Halfus Wyrmbreaker"
+  },
+  "44652": {
+    "n": "Slate Dragon",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "halfus",
+    "en": "Halfus Wyrmbreaker"
+  },
+  "44797": {
+    "n": "Time Warden",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "halfus",
+    "en": "Halfus Wyrmbreaker"
+  },
+  "44819": {
+    "n": "Siamat",
+    "r": "boss",
+    "z": "Lost City of the Tol'vir",
+    "e": "siamat",
+    "en": "Siamat"
+  },
+  "45122": {
+    "n": "Oathsworn Captain",
+    "r": "trash",
+    "z": "Lost City of the Tol'vir",
+    "e": "lostcitytrash",
+    "en": "Trash"
+  },
+  "45213": {
+    "n": "Sinestra",
+    "r": "boss",
+    "z": "The Bastion of Twilight",
+    "e": "sinestra",
+    "en": "Lady Sinestra"
+  },
+  "45261": {
+    "n": "Twlight Shadow Knight",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45264": {
+    "n": "Twilight Crossfire",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45265": {
+    "n": "Twilight Soul Blade",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45266": {
+    "n": "Twilight Dark Mender",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45687": {
+    "n": "Twilight-Shifter",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45699": {
+    "n": "Twilight Shadow Mender",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45700": {
+    "n": "Twilight Portal Shaper",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45703": {
+    "n": "Faceless Minion",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "45870": {
+    "n": "Anshal",
+    "r": "add",
+    "z": "Throne of the Four Winds",
+    "e": "windconclave",
+    "en": "The Conclave of Wind"
+  },
+  "45871": {
+    "n": "Nezir",
+    "r": "boss",
+    "z": "Throne of the Four Winds",
+    "e": "windconclave",
+    "en": "The Conclave of Wind"
+  },
+  "45872": {
+    "n": "Rohash",
+    "r": "add",
+    "z": "Throne of the Four Winds",
+    "e": "windconclave",
+    "en": "The Conclave of Wind"
+  },
+  "45924": {
+    "n": "Turbulent Squall",
+    "r": "trash",
+    "z": "The Vortex Pinnacle",
+    "e": "vortexpinnacletrash",
+    "en": "Trash"
+  },
+  "45926": {
+    "n": "Servant of Asaad",
+    "r": "trash",
+    "z": "The Vortex Pinnacle",
+    "e": "vortexpinnacletrash",
+    "en": "Trash"
+  },
+  "45928": {
+    "n": "Executor of the Caliph",
+    "r": "trash",
+    "z": "The Vortex Pinnacle",
+    "e": "vortexpinnacletrash",
+    "en": "Trash"
+  },
+  "45930": {
+    "n": "Minister of Air",
+    "r": "trash",
+    "z": "The Vortex Pinnacle",
+    "e": "vortexpinnacletrash",
+    "en": "Trash"
+  },
+  "45935": {
+    "n": "Temple Adept",
+    "r": "trash",
+    "z": "The Vortex Pinnacle",
+    "e": "vortexpinnacletrash",
+    "en": "Trash"
+  },
+  "45992": {
+    "n": "Valiona",
+    "r": "boss",
+    "z": "The Bastion of Twilight",
+    "e": "valther",
+    "en": "Valiona & Theralion"
+  },
+  "45993": {
+    "n": "Theralion",
+    "r": "add",
+    "z": "The Bastion of Twilight",
+    "e": "valther",
+    "en": "Valiona & Theralion"
+  },
+  "46753": {
+    "n": "Al'Akir",
+    "r": "boss",
+    "z": "Throne of the Four Winds",
+    "e": "alakir",
+    "en": "Al'Akir"
+  },
+  "46962": {
+    "n": "Baron Ashbury",
+    "r": "boss",
+    "z": "Shadowfang Keep",
+    "e": "baronashbury",
+    "en": "Baron Ashbury"
+  },
+  "46963": {
+    "n": "Lord Walden",
+    "r": "boss",
+    "z": "Shadowfang Keep",
+    "e": "lordwalden",
+    "en": "Lord Walden"
+  },
+  "46964": {
+    "n": "Lord Godfrey",
+    "r": "boss",
+    "z": "Shadowfang Keep",
+    "e": "lordgodfrey",
+    "en": "Lord Godfrey"
+  },
+  "47081": {
+    "n": "Elemental Firelord",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47086": {
+    "n": "Crimsonborne Firestarter",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47087": {
+    "n": "Azureborne Destroyer",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47120": {
+    "n": "Argaloth",
+    "r": "boss",
+    "z": "Baradin Hold",
+    "e": "argaloth",
+    "en": "Argaloth"
+  },
+  "47135": {
+    "n": "Fetid Ghoul",
+    "r": "trash",
+    "z": "Shadowfang Keep",
+    "e": "sfktrash",
+    "en": "Trash"
+  },
+  "47140": {
+    "n": "Sorcerous Skeleton",
+    "r": "trash",
+    "z": "Shadowfang Keep",
+    "e": "sfktrash",
+    "en": "Trash"
+  },
+  "47150": {
+    "n": "Earth Ravager",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47151": {
+    "n": "Wind Breaker",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47152": {
+    "n": "Twilight Elementalist",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47161": {
+    "n": "Twilight Brute",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "47162": {
+    "n": "Glubtok",
+    "r": "boss",
+    "z": "The Deadmines",
+    "e": "glubtok",
+    "en": "Glubtok"
+  },
+  "47296": {
+    "n": "Helix Gearbreaker",
+    "r": "add",
+    "z": "The Deadmines",
+    "e": "helix",
+    "en": "Helix Gearbreaker"
+  },
+  "47297": {
+    "n": "Lumbering Oaf",
+    "r": "boss",
+    "z": "The Deadmines",
+    "e": "helix",
+    "en": "Helix Gearbreaker"
+  },
+  "47626": {
+    "n": "Admiral Ripsnarl",
+    "r": "boss",
+    "z": "The Deadmines",
+    "e": "ripsnarl",
+    "en": "Admiral Ripsnarl"
+  },
+  "47739": {
+    "n": "\"Captain\" Cookie",
+    "r": "boss",
+    "z": "The Deadmines",
+    "e": "cookie",
+    "en": "cookie"
+  },
+  "48139": {
+    "n": "Temple Swiftstalker",
+    "r": "trash",
+    "z": "Halls of Origination",
+    "e": "hootrash",
+    "en": "Trash"
+  },
+  "48140": {
+    "n": "Temple Runecaster",
+    "r": "trash",
+    "z": "Halls of Origination",
+    "e": "hootrash",
+    "en": "Trash"
+  },
+  "48141": {
+    "n": "Temple Shadowlancer",
+    "r": "trash",
+    "z": "Halls of Origination",
+    "e": "hootrash",
+    "en": "Trash"
+  },
+  "48143": {
+    "n": "Temple Fireshaper",
+    "r": "trash",
+    "z": "Halls of Origination",
+    "e": "hootrash",
+    "en": "Trash"
+  },
+  "48418": {
+    "n": "Defias Envoker",
+    "r": "trash",
+    "z": "The Deadmines",
+    "e": "deadminestrash",
+    "en": "Trash"
+  },
+  "48419": {
+    "n": "Defias Miner",
+    "r": "trash",
+    "z": "The Deadmines",
+    "e": "deadminestrash",
+    "en": "Trash"
+  },
+  "48421": {
+    "n": "Defias Overseer",
+    "r": "trash",
+    "z": "The Deadmines",
+    "e": "deadminestrash",
+    "en": "Trash"
+  },
+  "48521": {
+    "n": "Defias Squallshaper",
+    "r": "trash",
+    "z": "The Deadmines",
+    "e": "deadminestrash",
+    "en": "Trash"
+  },
+  "48522": {
+    "n": "Defias Pirate",
+    "r": "trash",
+    "z": "The Deadmines",
+    "e": "deadminestrash",
+    "en": "Trash"
+  },
+  "49045": {
+    "n": "Augh",
+    "r": "boss",
+    "z": "Lost City of the Tol'vir",
+    "e": "augh",
+    "en": "Augh"
+  },
+  "49541": {
+    "n": "Vanessa Van Cleef",
+    "r": "boss",
+    "z": "The Deadmines",
+    "e": "vanessa",
+    "en": "Vanessa VanCleef"
+  },
+  "49817": {
+    "n": "Bound Inferno",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "49821": {
+    "n": "Bound Zephyr",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "49825": {
+    "n": "Bound Deluge",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "49826": {
+    "n": "Bound Rumbler",
+    "r": "trash",
+    "z": "The Bastion of Twilight",
+    "e": "bottrash",
+    "en": "Trash"
+  },
+  "52053": {
+    "n": "Zanzil",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "zanzil",
+    "en": "Zanzil"
+  },
+  "52059": {
+    "n": "High Priestess Kilnara",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "kilnara",
+    "en": "High Priestess Kilnara"
+  },
+  "52076": {
+    "n": "Gurubashi Cauldron-Mixer",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52148": {
+    "n": "Jin'do the Godbreaker",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "jindo",
+    "en": "Jin'do the Godbreaker"
+  },
+  "52151": {
+    "n": "Bloodlord Mandokir",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "mandokir",
+    "en": "Bloodlord Mandokir"
+  },
+  "52155": {
+    "n": "High Priest Venoxis",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "venoxis",
+    "en": "High Priest Venoxis"
+  },
+  "52258": {
+    "n": "Gri'lek",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "grilek",
+    "en": "Gri'lek"
+  },
+  "52269": {
+    "n": "Renataki",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "renataki",
+    "en": "Renataki"
+  },
+  "52271": {
+    "n": "Hazza'rah",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "hazzarah",
+    "en": "Hazza'rah"
+  },
+  "52286": {
+    "n": "Wushoolay",
+    "r": "boss",
+    "z": "Zul'Gurub",
+    "e": "wushoolay",
+    "en": "Wushoolay"
+  },
+  "52311": {
+    "n": "Venomguard Destoyer",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52325": {
+    "n": "Gurubashi Blood Drinker",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52339": {
+    "n": "Lesser Priest of Bethekk",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52363": {
+    "n": "Occu'thar",
+    "r": "boss",
+    "z": "Baradin Hold",
+    "e": "occuthar",
+    "en": "Occu'thar"
+  },
+  "52381": {
+    "n": "Venomacer T'Kulu",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52409": {
+    "n": "NPC_52409",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Ragnaros",
+    "en": "Ragnaros"
+  },
+  "52498": {
+    "n": "Beth'tilac",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Beth'tilac",
+    "en": "Beth'tilac"
+  },
+  "52530": {
+    "n": "Alysrazor",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Alysrazor",
+    "en": "Alysrazor"
+  },
+  "52558": {
+    "n": "Lord Rhyolith",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Rhyolith",
+    "en": "Lord Rhyolith"
+  },
+  "52571": {
+    "n": "Majordomo Fandral Staghelm",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Staghelm",
+    "en": "Majordomo Staghelm"
+  },
+  "52577": {
+    "n": "Left",
+    "r": "add",
+    "z": "Firelands",
+    "e": "Rhyolith",
+    "en": "Lord Rhyolith"
+  },
+  "52606": {
+    "n": "Gurubashi Warmonger",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52956": {
+    "n": "Zandalari Juggernaut (2)",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52958": {
+    "n": "Zandalari Hierophant",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52962": {
+    "n": "Zandalari Archon",
+    "r": "trash",
+    "z": "Zul'Aman",
+    "e": "zulamantrash",
+    "en": "Trash"
+  },
+  "52968": {
+    "n": "Zandalari Archon",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "52974": {
+    "n": "Zandalari Juggernaut",
+    "r": "trash",
+    "z": "Zul'Gurub",
+    "e": "zulgurubtrash",
+    "en": "Trash"
+  },
+  "53087": {
+    "n": "Right",
+    "r": "add",
+    "z": "Firelands",
+    "e": "Rhyolith",
+    "en": "Lord Rhyolith"
+  },
+  "53094": {
+    "n": "Patriarch Fire Turtle",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53095": {
+    "n": "Matriarch Fire Turtle",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53096": {
+    "n": "Fire Turtle Hatchling",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53119": {
+    "n": "Flamewaker Forward Guard",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53120": {
+    "n": "Flamewaker Pathfinder",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53121": {
+    "n": "Flamewaker Cauterizer",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53494": {
+    "n": "Baleroc",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Baleroc",
+    "en": "Baleroc"
+  },
+  "53575": {
+    "n": "Lava Wielder",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53616": {
+    "n": "Kar the Everburning",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53619": {
+    "n": "Druid of the Flame",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53691": {
+    "n": "Shannox",
+    "r": "boss",
+    "z": "Firelands",
+    "e": "Shannox",
+    "en": "Shannox"
+  },
+  "53791": {
+    "n": "Blazing Monstrosity",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53793": {
+    "n": "Harbinger of Flame",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53795": {
+    "n": "Egg Pile",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "53879": {
+    "n": "Deathwing",
+    "r": "boss",
+    "z": "Dragon Soul",
+    "e": "spineofdeathwing",
+    "en": "Spine of Deathwing"
+  },
+  "54015": {
+    "n": "Staghelm (to trigger first encounter)",
+    "r": "add",
+    "z": "Firelands",
+    "e": "Alysrazor",
+    "en": "Alysrazor"
+  },
+  "54123": {
+    "n": "Echo of Sylvanas",
+    "r": "boss",
+    "z": "End Time",
+    "e": "echosylvanas",
+    "en": "Echo of Sylvanas"
+  },
+  "54143": {
+    "n": "Molten Flamefather",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "54161": {
+    "n": "Flame Archon",
+    "r": "trash",
+    "z": "Firelands",
+    "e": "firelandstrash",
+    "en": "Trash"
+  },
+  "54431": {
+    "n": "Echo of Baine",
+    "r": "boss",
+    "z": "End Time",
+    "e": "echobaine",
+    "en": "Echo of Baine"
+  },
+  "54432": {
+    "n": "Murozond",
+    "r": "boss",
+    "z": "End Time",
+    "e": "murozond",
+    "en": "Murozond"
+  },
+  "54445": {
+    "n": "Echo of Jaina",
+    "r": "boss",
+    "z": "End Time",
+    "e": "echojaina",
+    "en": "Echo of Jaina"
+  },
+  "54543": {
+    "n": "Time-Twisted Drake",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54552": {
+    "n": "Time-Twisted Breaker",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54553": {
+    "n": "Time-Twisted Seer",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54590": {
+    "n": "Arcurion",
+    "r": "boss",
+    "z": "Hour of Twilight",
+    "e": "arcurion",
+    "en": "Arcurion"
+  },
+  "54612": {
+    "n": "Eternal Champion",
+    "r": "trash",
+    "z": "Well of Eternity",
+    "e": "wellofeternitytrash",
+    "en": "Trash"
+  },
+  "54632": {
+    "n": "Faceless Brute",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "54633": {
+    "n": "Faceless Shadow Weaver",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "54686": {
+    "n": "Shadow Borer",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "54687": {
+    "n": "Time-Twisted Footman",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54690": {
+    "n": "Time-Twisted Priest",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54691": {
+    "n": "Time-Twisted Sorceress",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54693": {
+    "n": "Time-Twisted Rifleman",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54853": {
+    "n": "Queen Azshara",
+    "r": "boss",
+    "z": "Well of Eternity",
+    "e": "queenazshara",
+    "en": "Queen Azshara"
+  },
+  "54920": {
+    "n": "Infinite Suppressor",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54923": {
+    "n": "Infinite Warden",
+    "r": "trash",
+    "z": "End Time",
+    "e": "ettrash",
+    "en": "Trash"
+  },
+  "54938": {
+    "n": "Archbishop Benedictus",
+    "r": "boss",
+    "z": "Hour of Twilight",
+    "e": "archbishopbenedictus",
+    "en": "Archbishop Benedictus"
+  },
+  "54968": {
+    "n": "Asira Dawnslayer",
+    "r": "boss",
+    "z": "Hour of Twilight",
+    "e": "asiradownslayer",
+    "en": "Mark fo Silence mode"
+  },
+  "54969": {
+    "n": "Mannoroth",
+    "r": "boss",
+    "z": "Well of Eternity",
+    "e": "mannorothvarothen",
+    "en": "Mannoroth and Varo'then"
+  },
+  "55085": {
+    "n": "Peroth'arn",
+    "r": "boss",
+    "z": "Well of Eternity",
+    "e": "perotharn",
+    "en": "Peroth'arn"
+  },
+  "55107": {
+    "n": "Twilight Ranger",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "55109": {
+    "n": "Twilight Shadow-Walker",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "55111": {
+    "n": "Twilight Thug",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "55112": {
+    "n": "Twilight Bruiser",
+    "r": "trash",
+    "z": "Hour of Twilight",
+    "e": "hottrash",
+    "en": "Trash"
+  },
+  "55265": {
+    "n": "Morchok",
+    "r": "boss",
+    "z": "Dragon Soul",
+    "e": "morchok",
+    "en": "Morchok"
+  },
+  "55308": {
+    "n": "Warlord Zon'ozz",
+    "r": "boss",
+    "z": "Dragon Soul",
+    "e": "zonozz",
+    "en": "Warlord Zon'ozz"
+  },
+  "55312": {
+    "n": "Yor'sahj",
+    "r": "boss",
+    "z": "Dragon Soul",
+    "e": "yorsahj",
+    "en": "Yor'sahj the Unsleeping"
+  },
+  "55419": {
+    "n": "Captain Varo'then",
+    "r": "add",
+    "z": "Well of Eternity",
+    "e": "mannorothvarothen",
+    "en": "Mannoroth and Varo'then"
+  },
+  "55453": {
+    "n": "Shadowbat",
+    "r": "trash",
+    "z": "Well of Eternity",
+    "e": "wellofeternitytrash",
+    "en": "Trash"
+  },
+  "55503": {
+    "n": "Legion Demon",
+    "r": "trash",
+    "z": "Well of Eternity",
+    "e": "wellofeternitytrash",
+    "en": "Trash"
+  },
+  "55654": {
+    "n": "Corrupted Arcanist",
+    "r": "trash",
+    "z": "Well of Eternity",
+    "e": "wellofeternitytrash",
+    "en": "Trash"
+  },
+  "55656": {
+    "n": "Dreadlord Defender",
+    "r": "trash",
+    "z": "Well of Eternity",
+    "e": "wellofeternitytrash",
+    "en": "Trash"
+  },
+  "55689": {
+    "n": "Hagara",
+    "r": "boss",
+    "z": "Dragon Soul",
+    "e": "hagara",
+    "en": "Hagara the Stormbinder"
+  },
+  "55869": {
+    "n": "Alizabal",
+    "r": "boss",
+    "z": "Baradin Hold",
+    "e": "Alizabal",
+    "en": "Alizabal"
+  },
+  "57158": {
+    "n": "Earthen Destroyer",
+    "r": "trash",
+    "z": "Dragon Soul",
+    "e": "dragonsoultrash",
+    "en": "Trash"
+  },
+  "57160": {
+    "n": "Ancient Water Lord",
+    "r": "trash",
+    "z": "Dragon Soul",
+    "e": "dragonsoultrash",
+    "en": "Trash"
+  }
+}
