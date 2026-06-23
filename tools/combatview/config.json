@@ -1,3 +1,5 @@
 {
-  "hidden_event_types": []
+  "hidden_event_types": [
+    "SPELL_ABSORBED"
+  ]
 }

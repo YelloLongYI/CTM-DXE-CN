@@ -692,6 +692,22 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
     windows = {
         proxwindow = false,
     },
+    arrows = {
+        blinkarrow = {
+            varname = format("%s %s",L.npc_bastion["Arion"],SN[83070]),
+            spell = SN[83070],
+            texture = ST[83070],
+        },
+        overloadgravityarrow = {
+            varname = format("%s / %s partner", "Overload", "Gravity"),
+            unit = "<firstOverloadGravity>",
+            persist = 30,
+            action = "TOWARD",
+            msg = L.alert["MOVE TOWARD"],
+            spell = "<overloadGravitySpellName>",
+            texture = ST[92067],
+        },
+    },
     alerts = {
         -- Phase
         phasewarn = {
@@ -746,8 +762,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             type = "dropdown",
             text = format(L.alert["%s CD"], SN[82699]),
             text2 = format(L.alert["Next %s"], SN[82699]),
-            -- time = 28, -- Apollo setting
-            time = 33, -- Jingrange JRG setting
+            time = 28,
             time2 = 15,
             flashtime = 5,
             color1 = "CYAN",
@@ -781,26 +796,16 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Glaciate
         glaciatewarn = {
             varname = format(L.alert["%s Casting"],SN[82746]),
-            type = "centerpopup",
             text = format(L.alert["%s"],SN[82746]),
             time = 3,
-            flashtime = 3,
-            color1 = "GOLD",
-            sound = "RUNAWAY",
             icon = ST[82746],
         },
         glaciatecd = {
             varname = format(L.alert["%s CD"],SN[82746]),
             type = "dropdown",
             text = format(L.alert["Next %s"],SN[82746]),
-            time = 15, -- Apollo setting(trigger by water bomb)
-            time2 = 37, -- Jingrange JRG setting(trigger as series)
-            time3 = 30, -- Jingrange JRG setting(trigger as series)
-            flashtime = 7.5,
-            color1 = "BLUE",
-            color2 = "TURQUOISE",
+            time = 15,
             icon = ST[82746],
-            sticky = true,
         },
         -- Aegis of Flame
         aegiswarn = {
@@ -817,8 +822,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"],SN[82631]),
             type = "dropdown",
             text = format(L.alert["Next %s"],SN[82631]),
-            -- time = 60, -- Apollo setting
-            time = 63, -- Jingrange JRG setting
+            time = 60,
             time2 = 30,
             flashtime = 5,
             color1 = "RED",
@@ -849,10 +853,9 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             text = format(L.alert["%s: %s - INTERRUPT"],"Ignacious", SN[82643]),
             time = 1,
             color1 = "YELLOW",
-            -- sound = "ALERT10",
-            sound = "kickcast",
+            sound = "ALERT10",
             icon = ST[82643],
-        },
+        },      
         frostboltwarn = {
             varname = format(L.alert["%s Casting"],SN[82752]),
             type = "centerpopup",
@@ -865,7 +868,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             enabled = {
                 Tank = true,
             },
-        },
+        },    
         -----------------------
         ------- Phase 2 -------
         -----------------------
@@ -873,23 +876,24 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         hardencd = {
             varname = format(L.alert["%s CD"],SN[83718]),
             text = format(L.alert["%s CD"],SN[83718]),
-            -- time = 42, -- Apollo setting
-            -- time2 = 21, -- Apollo setting
-            time = 43, -- Jingrange JRG setting
-            time2 = 27, -- Jingrange JRG setting
+            time = 42,
+            time2 = 21,
             icon = ST[83718],
         },
         hardenkickwarn = {
             varname = format(L.alert["%s Interrupt Warning"],SN[83718]),
             text = format(L.alert["%s: %s - INTERRUPT"],"Terrastra",SN[83718]),
-            time = 2.5,
             icon = ST[83718],
         },
         -- Lightning Blast
         lightningkickwarn = {
             varname = format(L.alert["%s Interrupt Warning"],SN[83070]),
+            type = "simple",
             text = format(L.alert["%s: %s - INTERRUPT"],"Arion",SN[83070]),
             time = 2.5,
+            color1 = "CYAN",
+            color2 = "RED",
+            sound = "ALERT10",
             icon = ST[83070],
         },
         -- Lightning Rod
@@ -918,10 +922,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"],SN[83565]),
             type = "dropdown",
             text = "Get Winds!",
-            -- time = 31, -- 65 -- Apollo setting
-            -- time2 = 27, -- 30 -- Apollo setting
-            time = 35, -- Jingrange JRG setting
-            time2 = 30, -- Jingrange JRG setting
+            time = 31, -- 65
+            time2 = 27, -- 30
             flashtime = 7.5,
             audiocd = true,
             color1 = "BROWN",
@@ -936,8 +938,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             text = "Get Winds!",
             time = 5,
             color1 = "GOLD",
-            -- sound = "ALERT10",
-            sound = "findwind",
+            sound = "ALERT10",
             icon = ST[8385],
         },
         -- Thundershock
@@ -945,8 +946,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"],SN[83067]),
             type = "dropdown",
             text = "Get Grounded",
-            -- time = 36, -- Apollo setting
-            time = 35, -- Jingrange JRG setting
+            time = 36,
             flashtime = 7.5,
             audiocd = true,
             color1 = "INDIGO",
@@ -961,8 +961,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             text = "Get Grounded!",
             time = 5,
             color1 = "GOLD",
-            -- sound = "ALERT10",
-            sound = "findwell",
+            sound = "ALERT10",
             icon = ST[1604],
         },
         -----------------------
@@ -971,11 +970,10 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Gravity Crush
         crushcd = {
             varname = format(L.alert["%s CD"],SN[84948]),
+            type = "dropdown",
             text = format(L.alert["%s CD"],SN[84948]),
-            time = 23, -- Apollo setting
-            time2 = 24, -- Apollo setting
-            time3 = 26, -- Jingrange JRG setting
-            time4 = 24, -- Jingrange JRG setting
+            time = 23,
+            time2 = 24,
             icon = ST[84948],
         },
         crushwarn = {
@@ -987,7 +985,6 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         crushduration = {
             varname = format(L.alert["%s Duration"],SN[84948]),
             text = format(L.alert["%s"],SN[84948]),
-            time = 6.5,
             icon = ST[84948],
         },
         -- Lava Seed
@@ -995,10 +992,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"], SN[84913]),
             type = "dropdown",
             text = format(L.alert["%s CD"], SN[84913]),
-            time = 23, -- Apollo setting
-            time2 = 16, -- Apollo setting
-            time3 = 13,  -- Jingrange JRG setting
-            time4 = 22,  -- Jingrange JRG setting
+            time = 23,
+            time2 = 16,
             flashtime = 5,
             color1 = "RED",
             sound = "ALERT4",
@@ -1157,10 +1152,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
                 {
                     "alert","waterbombwarn",
                     "quash","waterbombcd",
-                    "quash","lavaseedcd", -- Jingrange JRG setting
-                    "quash","crushcd", -- Jingrange JRG setting
-                    "crushcd","waterbombcd",
-                    -- "alert","glaciatecd", -- Apollo setting
+                    "alert","waterbombcd",
+                    "alert","glaciatecd",
                 },
             },
         },
@@ -1211,20 +1204,6 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             },
         },
         -- Glaciate
-        -- Apollo setting block
-        -- {
-        --     type = "combatevent",
-        --     eventtype = "SPELL_CAST_START",
-        --     spellname = 82746,
-        --     execute = {
-        --         {
-        --             "quash","glaciatecd",
-        --             "alert","glaciatewarn",
-        --         },
-        --     },
-        -- },
-
-        -- Jingrange JRG setting
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
@@ -1232,12 +1211,11 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             execute = {
                 {
                     "quash","glaciatecd",
-                    "alert","glaciatewarn",
-                    "alert",{"glaciatecd",time = 2},
+                    "alert","glaciatewarn"
                 },
             },
         },
-
+        
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
@@ -1371,25 +1349,11 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             eventtype = "SPELL_AURA_APPLIED",
             spellname = 82285,
             execute = {
-                -- Apollo setting block
-                -- {
-                --     "expect",{"<phase>","<","3"},
-                --     "quashall",true,
-                --     "set",{phase = 3},
-                --     "alert","phasetransition",
-                --     "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG setting
-                --     "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG setting
-                --     "tracing",{43735}, -- Monstrosity This only for Jingrange JRG setting
-                -- },
-
-                -- Jingrange JRG setting block
                 {
-                    -- "quashall",true,
+                    "expect",{"<phase>","<","3"},
+                    "quashall",true,
                     "set",{phase = 3},
                     "alert","phasetransition",
-                    "alert",{"lavaseedcd",time = 3}, -- This only for Jingrange JRG setting
-                    "alert",{"crushcd",time = 3}, -- This only for Jingrange JRG setting
-                    "tracing",{43735}, -- Monstrosity This only for Jingrange JRG setting
                 },
             },
         },
@@ -1412,7 +1376,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             type = "combatevent",
             eventtype = "SPELL_AURA_APPLIED",
-            spellname = 92486,
+            spellname = {92486, 84948}, -- need confirm
             execute = {
                 {
                     "raidicon","crushmark",
@@ -1430,8 +1394,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
                     "scheduletimer",{"crushtimer",1},
                     "quash","crushcd",
                     "alert","crushduration",
-                    -- "alert","crushcd", -- Apollo setting
-                    "alert",{"crushcd",time = 4}, -- Jingrange JRG setting
+                    "alert","crushcd",
                 },
                 {
                     "expect",{"&listsize|crushunits&","==","<crushmax>"},
@@ -1460,16 +1423,11 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
                 {
                     "alert","lavaseedwarn",
                     "quash","lavaseedcd",
-
-                    -- "alert","lavaseedcd", -- Apollo setting
-                    "alert",{"lavaseedcd",time = 4}, -- Jingrange JRG setting
-
-                    "quash","waterbombcd", -- This only for Jingrange JRG setting(quash due to trigger p1 alert)
-                    "quash","aegiscd", -- This only for Jingrange JRG setting(quash due to trigger p1 alert)
+                    "alert","lavaseedcd",
                 },
             },
         },
-            
+    
         -- Heroic Events
         -- Static Overload
         {
