@@ -5,7 +5,6 @@ local sort = table.sort
 local GetPlayerMapPosition = GetPlayerMapPosition
 local SetMapToCurrentZone = SetMapToCurrentZone
 local GetCurrentMapDungeonLevel = GetCurrentMapDungeonLevel
-local GetMapInfo = GetMapInfo
 
 function addon:GetPlayerMapPosition(unit)
 	local x,y = GetPlayerMapPosition(unit)
@@ -64,7 +63,7 @@ function addon:GetDistanceToUnit(unit,fx2,fy2)
     local x1,y1 = self:GetPlayerMapPosition("player")
 	local x2,y2
     
-	local list = addon:GetMapData(GetMapInfo())
+	local list = addon:GetMapData(DXE.Compat.GetMapInfo())
 	if not list then 
         return
     end

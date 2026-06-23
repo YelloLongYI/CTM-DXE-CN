@@ -3,14 +3,1010 @@ local L, SN, ST = DXE.L, DXE.SN, DXE.ST
 local realm = "JRG"
 
 DXE:RegisterRealmPatch(realm, "halfus", {
-    windows = {
-        proxwindow = false,
+    version = 7,
+    key = "halfus",
+    zone = L.zone["The Bastion of Twilight"],
+    category = L.zone["The Bastion of Twilight"],
+    name = L.npc_bastion["Halfus Wyrmbreaker"],
+    icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Halfus Wyrmbreaker.blp",
+    triggers = {
+        scan = {
+            44600, -- Halfus Wyrmbreaker
+            44650, -- Storm Rider
+            44645, -- Nether Scion
+            44797, -- Time Warden
+            44652, -- Slate Dragon
+        },
+    },
+    onactivate = {
+        tracing = {
+            44600, -- Halfus Wyrmbreaker
+        },
+        phasemarkers = {
+            {
+                {0.50,"Furious Roar","At 50% HP, Halfus starts periodically casting Furious Roar."},
+            },
+        },
+        tracerstart = true,
+        combatstop = true,
+        combatstart = true,
+        defeat = {
+            44600, -- Halfus Wyrmbreaker
+        },
+    },
+    userdata = {
+        scorchingbreathcd = {11, 23, 21, loop = false, type = "series"},
+        whelpsreleased = "no",
+        furiouscount = 0,
+        novacast = 0.25,
+    },
+    onstart = {
+        {
+            "alert","enragecd",
+            "expect",{"&difficulty&",">=","3"}, --10h&25h
+            "alert",{"novacd",time = 2},
+            "alert","scorchingbreathcd",
+        },
+    },
+    
+    filters = {
+        bossemotes = {
+            timewardenemote = {
+                name = "Time Warden release",
+                pattern = "binds the Time Warden",
+                hasIcon = false,
+                texture = "Interface\\ICONS\\Ability_Mount_Drake_Bronze",
+                hide = true,
+            },
+            stormrideremote = {
+                name = "Storm Rider release",
+                pattern = "binds the Storm Rider",
+                hasIcon = false,
+                texture = "Interface\\ICONS\\inv_misc_stormdragonpale",
+                hide = true,
+            },
+            slatedragonemote = {
+                name = "Slate Dragon release",
+                pattern = "binds the Slate Dragon",
+                hasIcon = false,
+                texture = "Interface\\ICONS\\inv_misc_stonedragonblue",
+                hide = true,
+            },
+            netherscionemote = {
+                name = "Nether Scion release",
+                pattern = "binds the Nether Scion",
+                hasIcon = false,
+                texture = "Interface\\ICONS\\Ability_Mount_NetherdrakePurple",
+                hide = true,
+            },
+            whelpsemote = {
+                name = "Emerald Whelps release",
+                pattern = "binds the Orphaned",
+                hasIcon = false,
+                texture = "Interface\\ICONS\\INV_Misc_Head_Dragon_Green",
+                hide = true,
+            },
+            roaremote = {
+                name = "Furious Roar",
+                pattern = "roars furiously",
+                hasIcon = false,
+                hide = true,
+                texture = ST[86169],
+                hide = true,
+            },
+        },
+    },
+    counters = {
+        whelpscounter = {
+            variable = "whelpscount",
+            label = "Emerald Whelps",
+            value = 8,
+            minimum = 0,
+            maximum = 8,
+        },
+    },
+    phrasecolors = {
+        {"Time Warden:","GOLD"},
+        {"Orphaned Emerald Whelps:","GOLD"},
+        {"Storm Rider:","GOLD"},
+        {"Slate Dragon:","GOLD"},
+        {"Nether Scion:","GOLD"},
+    },
+    ordering = {
+        alerts = {"enragecd","novacd","novawarn","novacast","bindwarn","scorchingbreathcd","scorchingbreathdurwarn","furiouscd","furiouswarn","paralysiswarn"}
+    },
+    
+    alerts = {
+        -- Berserk
+        enragecd = {
+            varname = L.alert["Berserk CD"],
+            type = "dropdown",
+            text = L.alert["Berserk"],
+            time = 360,
+            flashtime = 10,
+            color1 = "RED",
+            icon = ST[12317],
+        },
+        -- Shadow Nova
+        novacd = {
+            varname = format(L.alert["%s CD"],SN[86168]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[86168]),
+            time = 12,
+            time2 = 11,
+            time3 = "<novadelayed>",
+            flashtime = 3,
+            color1 = "MAGENTA",
+            sound = "MINORWARNING",
+            icon = ST[86168],
+        },
+        novawarn = {
+            varname = format(L.alert["%s Warning"],SN[86168]),
+            type = "simple",
+            text = format(L.alert["%s - INTERRUPT"],SN[86168]),
+            time = 1,
+            color1 = "MAGENTA",
+            sound = "ALERT10",
+            icon = ST[86168],
+        },
+        novacast = {
+            varname = format(L.alert["%s Cast"],SN[86168]),
+            type = "centerpopup",
+            text = format(L.alert["%s"],SN[86168]),
+            time = "<novacast>",
+            color1 = "MAGENTA",
+            sound = "None",
+            icon = ST[86168],
+        },
+        -- Scorching Breath
+        scorchingbreathdurwarn = {
+            varname = format(L.alert["%s Duration"], SN[83707]),
+            type = "centerpopup",
+            text = format(L.alert["%s"], SN[83707]),
+            time = 8,
+            flashtime = 6,
+            color1 = "ORANGE",
+            icon = ST[83707],
+            throttle = 6,   
+            behavior = "overwrite",
+        },
+        scorchingbreathcd = {
+            varname = format(L.alert["%s CD"], SN[83707]),
+            type = "dropdown",
+            text = format(L.alert["%s CD"], SN[83707]),
+            time = "<scorchingbreathcd>",
+            flashtime = 15,
+            color1 = "RED",
+            color2 = "ORANGE",
+            icon = ST[83707],
+            throttle = 2,
+            behavior = "overwrite",
+            sticky = true,
+        },
+        -- Furious Roar
+        furiouscd = {
+            varname = format(L.alert["%s CD"],SN[86169]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[86169]),
+            time = 23.5,
+            flashtime = 10,
+            color1 = "GOLD",
+            sound = "MINORWARNING",
+            icon = ST[86169],
+            audiocd = true,
+            throttle = 10,
+        },
+        furiouswarn = {
+            varname = format(L.alert["%s Cast Warning"],SN[86169]),
+            type = "centerpopup",
+            text = format(L.alert["%s"],SN[86169]),
+            time = 6.5,
+            sound = "MINORWARNING",
+            color1 = "GOLD",
+            throttle = 5,
+            icon = ST[86169],
+            throttle = 10,
+            emphasizetimer = true,
+        },
+        -- Bind Will
+        bindwarn = {
+            varname = format(L.alert["%s Warning"],SN[83432]),
+            type = "simple",
+            text = "<bindtext>",
+            time = 1,
+            color1 = "ORANGE",
+            color2 = "RED",
+            sound = "MINORWARNING",
+            icon = "<bindicon>",
+            tag = "#4#",
+        },
+        
+        -- Paralysis
+        paralysiswarn = {
+            varname = format(L.alert["%s Duration"],SN[84030]),
+            type = "centerpopup",
+            warningtext = format(L.alert["%s"],SN[84030]),
+            text = format(L.alert["%s fades"],SN[84030]),
+            time = 12,
+            flashtime = 5,
+            color1 = "MIDGREY",
+            color2 = "WHITE",
+            sound = "MINORWARNING",
+            icon = ST[84030],
+        },
+    },
+    events = {
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 83432, -- Bind Will
+            execute = {
+                -- Releasing Storm Rider
+                {
+                    "expect",{"#5#","==","Storm Rider"},
+                    "set",{bindicon = "Interface\\ICONS\\inv_misc_stormdragonpale"},
+                    "set",{novacast = 3},
+                    "expect",{"&difficulty&","<=","2"},
+                    "alert","novacd",
+                },
+                -- Releasing Time Warden
+                {
+                    "expect",{"#5#","==","Time Warden"},
+                    "set",{bindicon = "Interface\\ICONS\\Ability_Mount_Drake_Bronze"},
+                },
+                -- Releasing Slate Dragon
+                {
+                    "expect",{"#5#","==","Slate Dragon"},
+                    "set",{bindicon = "Interface\\ICONS\\inv_misc_stonedragonblue"},
+                },
+                -- Releasing Nether Scion
+                {
+                    "expect",{"#5#","==","Nether Scion"},
+                    "set",{bindicon = "Interface\\ICONS\\Ability_Mount_NetherdrakePurple"},
+                },
+                -- Releasing Orphaned Emerald Whelps
+                {
+                    "expect",{"#5#","==","Orphaned Emerald Whelp"},
+                    "expect",{"<whelpsreleased>","==","no"},
+                    "set",{
+                        whelpsreleased = "yes",
+                        whelpscount = 8,
+                        bindicon = "Interface\\ICONS\\INV_Misc_Head_Dragon_Green",
+                    },
+                    "set",{bindtext = format(L.alert["%s: Released!"],"Orphaned Emerald Whelps")},
+                    "alert","bindwarn",
+                    "counter","whelpscounter",
+                    "expect",{"&difficulty&","<=","2"},
+                    "alert","scorchingbreathcd",
+                },
+                -- Dragon's tracing
+                {
+                    "expect",{"#5#","~=","Orphaned Emerald Whelp"},
+                    "set",{bindtext = format(L.alert["%s: Released!"],"#5#")},
+                    "alert","bindwarn",
+                    "temptracing","#4#",
+                },
+            },
+        },
+        -- Scorching Breath
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 83707,
+            execute = {
+                {
+                    "quash","scorchingbreathcd",
+                    "schedulealert",{"scorchingbreathcd",2},
+                    "schedulealert",{"scorchingbreathdurwarn",2}
+                },
+            },
+        },
+        -- Shadow Nova
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 86168,
+            execute = {
+                {
+                    "quash","novacd",
+                    "alert","novacd",
+                    "alert","novawarn",                        
+                    "alert","novacast",
+                },
+            },
+        },
+        -- Orphaned Emerald Whelp dies
+        {
+            type = "combatevent",
+            eventtype = "UNIT_DIED",
+            execute = {
+                {
+                    "expect",{"#5#","==","Orphaned Emerald Whelp"},
+                    "set",{whelpscount = "DECR|1"},
+                },
+                {
+                    "expect",{"<whelpscount>","==","0"},
+                    "removecounter","whelpscounter",
+                },
+            },
+        },
+        -- Furious Roar
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 86169,
+            execute = {
+                {
+                    "set",{furiouscount = "INCR|1"},
+                    "expect",{"<furiouscount>","==","3"},
+                    "set",{furiouscount = 0},
+                    "schedulealert",{"furiouscd", 1.5},
+                },
+                {
+                    "expect",{"<furiouscount>","==","1"},
+                    "alert","furiouswarn",
+                },
+            },
+        },
+        -- Paralysis
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellname = 84030,
+            execute = {
+                {
+                    "expect",{"&npcid|#1#&","==","44600"},
+                    "expect",{"&npcid|#4#&","==","44600"},
+                    "alert","paralysiswarn",
+                    "expect",{"&timeleft|novacd&",">","0"},
+                    "set",{novadelayed = "&timeleft|paralysiswarn&"},
+                    "quash","novacd",
+                    "alert",{"novacd",time = 3},
+                },
+            },
+        },
+        
     },
 })
 
 DXE:RegisterRealmPatch(realm, "valther", {
+    version = 18,
+    key = "valther",
+    zone = L.zone["The Bastion of Twilight"],
+    category = L.zone["The Bastion of Twilight"],
+    name = L.npc_bastion["Valiona & Theralion"],
+    lfgname = "Theralion and Valiona",
+    icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Valiona Raid.blp",
+    icon2 = "Interface\\EncounterJournal\\UI-EJ-BOSS-Theralion.blp",
+    plural = true,
+    triggers = {
+        scan = {
+            45992, -- Valiona
+            45993, -- Theralion
+        },
+    },
+    onactivate = {
+        tracing = {
+            45992, -- Valiona
+            45993, -- Theralion
+        },
+        tracerstart = true,
+        combatstop = true,
+        combatstart = true,
+        defeat = {
+            45992, -- Valiona
+            45993, -- Theralion
+        },
+    },
+    userdata = {
+        blackoutcd = {45.5, 45.5, 0, loop = false, type = "series"},
+        dazzlecd = {80, 82.35, loop = false, type = "series"},
+        shifttext = "",
+        breathwarned = "no",
+        meteoritewarned = "no",
+        dazzlingwarned = "no",
+        castingblast = "no",
+        firstblastcast = "no",
+        engulfmax = 1,
+        engulfunits = {type = "container", wipein = 3},
+    },
+    onstart = {
+        {
+            "alert","enragecd",
+            "alert",{"blackoutcd",time = 2},
+            "alert",{"flamecd",time = 2},        
+        },
+        {
+            "expect",{"&difficulty&","==","2"},
+            "set",{engulfmax = 3},
+        },
+        {
+            "expect",{"&difficulty&","==","4"},
+            "set",{engulfmax = 3},
+        },
+    },
+    
+    announces = {
+        blastsay = {
+            type = "SAY",
+            subtype = "self",
+            spell = 86369,
+            msg = format(L.alert["%s on ME!"],SN[86369]),
+            enabled = false,
+        },
+    },
+    arrows = {
+        blackoutarrow = {
+            varname = SN[92876],
+            unit = "#5#",
+            persist = 15,
+            action = "TOWARD",
+            msg = L.alert["MOVE TOWARD"],
+            spell = SN[92876],
+            texture = ST[92876],
+        },
+    },
+    raidicons = {
+        blackoutmark = {
+            varname = format("%s {%s}",SN[92876],"PLAYER_DEBUFF"),
+            type = "FRIENDLY",
+            total = 3,
+            persist = 15,
+            unit = "#5#",
+            icon = 1,
+            texture = ST[92876],
+        },
+        engulfmark = {
+            varname = format("%s {%s}",SN[95639],"PLAYER_DEBUFF"),
+            type = "MULTIFRIENDLY",
+            persist = 20,
+            unit = "#5#",
+            icon = 2,
+            reset = 3, -- Looks like 2 on 25 man, TODO: Check for 10 man count
+            total = 3,
+            texture = ST[95639],
+        },
+    },
+    filters = {
+        bossemotes = {
+            blackoutemote = {
+                name = "Blackout",
+                pattern = "Valiona casts %[Blackout%]",
+                hasIcon = true,
+                hide = true,
+                texture = ST[92876],
+            },
+            dazzlingemote = {
+                name = "Dazzling Destruction",
+                pattern = "Theralion begins to cast %[Dazzling Destruction%]",
+                hasIcon = true,
+                hide = true,
+                texture = ST[86408],
+            },
+            engulfemote = {
+                name = "Engulfing Magic",
+                pattern = "Theralion begins to cast %[Engulfing Magic%]",
+                hasIcon = true,
+                hide = true,
+                texture = ST[95639],
+            },
+        },
+    },
+    phrasecolors = {
+        {"Valiona:","GOLD"},
+        {"Theralion:","GOLD"},
+        {"is preparing for","WHITE"},
+    },
     windows = {
-        proxwindow = false,
+        proxwindow = true,
+        proxrange = 20,
+        proxoverride = true,
+        nodistancecheck = true
+    },
+    radars = {
+        blackoutradar = {
+            varname = SN[92876],
+            type = "circle",
+            player = "#5#",
+            range = 8,
+            mode = "stack",
+            count = 5,
+            color = "MAGENTA",
+            icon = ST[92876],
+        },
+        engulfradar = {
+            varname = SN[95639],
+            type = "circle",
+            player = "#5#",
+            range = 10,
+            mode = "avoid",
+            color = "TURQUOISE",
+            icon = ST[95639],
+        },
+    },
+    grouping = {
+        {
+            general = true,
+            alerts = {"enragecd"},
+        },
+        {
+            name = "|cffffd700Valiona|r |cffffffffgrounded|r",
+            icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Valiona Raid",
+            sizing = {aspect = 2, w = 128, h = 64},
+            alerts = {"shiftcd","blackoutcd","blackoutdurationwarn","blackoutselfwarn","flamecd","flamewarn","dazzlecd","dazzlewarn"}
+        },
+        {
+            name = "|cffffd700Theralion|r |cffffffffgrounded|r",
+            icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Theralion",
+            sizing = {aspect = 2, w = 128, h = 64},
+            alerts = {"fabulousselfwarn","meteoriteselfwarn","engulfcd","engulfwarn","engulfselfduration","breathcd","breathwarn"},
+        },
+    },
+    
+    alerts = {
+        -- Twilight Shift
+        shiftcd = {
+            varname = format(L.alert["%s CD"],SN[93051]),
+            type = "dropdown",
+            text = "<shifttext>",
+            time = 20,
+            flashtime = 5,
+            color1 = "PINK",
+            icon = ST[93051],
+        },
+        -- Berserk
+        enragecd = {
+            varname = L.alert["Berserk CD"],
+            type = "dropdown",
+            text = L.alert["Berserk"],
+            time = 600,
+            flashtime = 10,
+            color1 = "RED",
+            icon = ST[12317],
+        },
+        ------------------------
+        -- Theralion Airborne --
+        ------------------------
+        -- Blackout
+        blackoutcd = {
+            varname = format(L.alert["%s CD"],SN[92876]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[92876]),
+            time = "<blackoutcd>",
+            time2 = 10.7,
+            time3 = 9,
+            flashtime = 10,
+            color1 = "VIOLET",
+            icon = ST[92876],
+            sound = "MINORWARNING",
+        },
+        blackoutselfwarn = {
+            varname = format(L.alert["%s on me Warning"],SN[92876]),
+            type = "centerpopup",
+            warningtext = format("%s on %s!",SN[92876],L.alert["YOU"]),
+            text = format("%s on %s",SN[92876],L.alert["YOU"]),
+            time = 15,
+            color1 = "MAGENTA",
+            sound = "ALERT10",
+            icon = ST[92876],
+            flashscreen = true,
+            emphasizewarning = true,
+        },
+        blackoutdurationwarn = {
+            varname = format(L.alert["%s Warning"],SN[92876]),
+            type = "centerpopup",
+            text = format("%s on <#5#>!",SN[92876]),
+            time = 15,
+            color1 = "MAGENTA",
+            icon = ST[92876],
+        },
+        -- Devouring Flames
+        flamewarn = {
+            varname = format(L.alert["%s Casting"],SN[86840]),
+            type = "centerpopup",
+            text = format(L.alert["%s"],SN[86840]),
+            time = 2.5,
+            flashtime = 2.5,
+            color1 = "ORANGE",
+            sound = "BEWARE",
+            icon = ST[86840],
+        },
+        flamecd = {
+            varname = format(L.alert["%s CD"],SN[86840]),
+            type = "dropdown",
+            text = format(L.alert["%s CD"],SN[86840]),
+            time = 40,
+            time2 = 25.75,
+            flashtime = 5,
+            color1 = "MAGENTA",
+            icon = ST[86840],
+            sticky = true,
+        },
+        -- Dazzling Destruction
+        dazzlewarn = {
+            varname = format(L.alert["%s Casting"],SN[86408]),
+            type = "simple",
+            text = format(L.alert["Theralion: %s"],SN[86408]),
+            time = 4,
+            flashtime = 4,
+            color1 = "RED",
+            sound = "BEWARE",
+            icon = ST[86408],
+            throttle = 1,
+        },
+        dazzlecd = {
+            varname = format(L.alert["%s CD"],SN[86408]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[86408]),
+            time = "<dazzlecd>",
+            flashtime = 5,
+            color1 = "PINK",
+            color2 = "MAGENTA",
+            sound = "MINORWARNING",
+            icon = ST[86408],
+        },
+        ----------------------
+        -- Valiona Airborne --
+        ----------------------
+        -- Deep Breath
+        breathcd = {
+            varname = format(L.alert["%s CD"],SN[86059]),
+            type = "dropdown",
+            text = format(L.alert["%s CD"],SN[86059]),
+            time = 108,
+            flashtime = 0,
+            color1 = "PINK",
+            icon = ST[85664],
+            audiocd = true,
+            sound = "Sound\\Creature\\Valiona\\VO_BT_Valiona_Event05.ogg",
+        },
+        breathwarn = {
+            varname = format(L.alert["%s Warning"],SN[86059]),
+            type = "simple",
+            text = format(L.alert["Valiona is preparing for %s"],SN[86059]),
+            time = 5,
+            color1 = "PINK",
+            icon = ST[85664],
+        },
+        -- Engulfing Magic
+        engulfcd = {
+            varname = format(L.alert["%s CD"],SN[95639]),
+            type = "dropdown",
+            text = format(L.alert["%s CD"],SN[95639]),
+            time = 35,
+            time2 = 31,
+            flashtime = 5,
+            color1 = "CYAN",
+            icon = ST[95639],
+            sticky = true,
+        },
+        engulfselfduration = {
+            varname = format(L.alert["%s on me Duration"],SN[95639]),
+            type = "centerpopup",
+            text = format("%s on %s",SN[95639],L.alert["YOU"]),
+            time = 20,
+            color1 = "MAGENTA",
+            color2 = "CYAN",
+            icon = ST[95639],
+            flashscreen = true,
+            sound = "BURST",
+            emphasizewarning = true,
+        },
+        engulfwarn = {
+            varname = format(L.alert["%s Warning"],SN[95639]),
+            type = "simple",
+            text = format(L.alert["%s on %s"],SN[95639],"&list|engulfunits&"),
+            time = 20,
+            color1 = "MAGENTA",
+            icon = ST[95639],
+            sound = "ALERT5",
+        },
+        -- Twilight Meteorite
+        meteoriteselfwarn = {
+            varname = format(L.alert["%s on me Warning"],SN[88518]),
+            type = "centerpopup",
+            text = format(L.alert["%s on %s"],SN[88518],L.alert["YOU"]),
+            time = 6,
+            flashtime = 6,
+            color1 = "PURPLE",
+            icon = ST[88518],
+            sound = "ALERT10",
+            flashscreen = true,
+            emphasizewarning = true,
+        },
+        -- Fabulous Flames
+        fabulousselfwarn = {
+            varname = format(L.alert["%s on me Warning"],SN[86505]),
+            type = "simple",
+            text = format(L.alert["%s on %s - GET AWAY!"],SN[86505],L.alert["YOU"]),
+            time = 1,
+            color1 = "PURPLE",
+            sound = "ALERT10",
+            icon = ST[86505],
+            throttle = 2,
+            emphasizewarning = true,
+        },
+    },
+    timers = {
+        firemeteorite = {
+            {
+                "expect",{"&playerdebuff|"..SN[88518].."&","==","true"},
+                "expect",{"<meteoritewarned>","==","no"},
+                "alert","meteoriteselfwarn",
+                "set",{meteoritewarned = "yes"},
+                "scheduletimer",{"teardownmeteorite",6},
+            },
+        },
+        teardownmeteorite = {
+            {
+                "set",{meteoritewarned = "no"},
+            },
+        },
+        engulftimer = {
+            {
+                "expect",{"&listsize|engulfunits&",">","0"},
+                "alert","engulfwarn",
+            },
+        },
+        blasttimer = {
+            {
+                "expect",{"<castingblast>","==","yes"},
+                "expect",{"&unitguid|<blastsource>target&","==","&playerguid&"},
+                "announce","blastsay",
+                "set",{castingblast = "no"},
+            },
+        },
+    },
+    events = {
+        -- Twilight Shift on Tanks
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellid = 93051,
+            execute = {
+                {
+                    "quash","shiftcd",
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "set",{shifttext = format("%s on <%s>",SN[93051],L.alert["YOU"])},
+                    "alert","shiftcd",
+                },
+                {
+                    "expect",{"#4#","~=","&playerguid&"},
+                    "set",{shifttext = format("%s on <#5#>",SN[93051])},
+                    "alert","shiftcd",
+                },
+            },
+        },
+        -- Twilight Shift Dose on Tanks
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED_DOSE",
+            spellid = 93051,
+            execute = {
+                {
+                    "quash","shiftcd",
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "set",{shifttext = format("%s (%s) on %s",SN[93051],"#11#",L.alert["YOU"])},
+                    "alert","shiftcd",
+                },
+                {
+                    "expect",{"#4#","~=","&playerguid&"},
+                    "set",{shifttext = format("%s (%s) on <%s>",SN[93051],"#11#","#5#")},
+                    "alert","shiftcd",
+                },
+            },
+        },
+        -- Devouring Flames
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 86840,
+            execute = {
+                {
+                    "alert","flamewarn",
+                    "set",{breathwarned = "no"},
+                    "quash","flamecd",
+                    "alert","flamecd",
+                    "expect",{"<dazzlingwarned>","==","yes"},
+                    "set",{dazzlingwarned = "no"},
+                },
+            },
+        },
+        -- Dazzling Destruction
+        {                                             
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 86408,
+            execute = {
+                {
+                    "expect",{"<dazzlingwarned>","==","no"},
+                    "set",{dazzlingwarned = "yes"},
+                    "quash","flamecd",
+                    "quash","dazzlecd",
+                    "alert","dazzlewarn",
+                    "expect",{"<breathwarned>","==","no"},
+                    "alert","breathcd",
+                    "set",{breathwarned = "yes"},
+                    "alert",{"engulfcd",time = 2},
+                },
+            },
+        },
+        -- Engulfing Magic
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellname = 95639,
+            execute = {
+                {
+                    "raidicon","engulfmark",
+                    "radar","engulfradar",
+                    "expect",{"&timeleft|engulfcd&","<","1"},
+                    "quash","engulfcd",
+                    "alert","engulfcd",
+                },
+                {
+                    "expect",{"#4#","~=","&playerguid&"},
+                    "insert",{"engulfunits","#5#"},
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "insert",{"engulfunits",L.alert["YOU"]},
+                },
+                {
+                    "expect",{"&listsize|engulfunits&","==","1"},
+                    "scheduletimer",{"engulftimer",2},
+                },
+                {
+                    "expect",{"&listsize|engulfunits&","==","<engulfmax>"},
+                    "canceltimer","engulftimer",
+                    "alert","engulfwarn",
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "alert","engulfselfduration",
+                },
+            },
+        },
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_REMOVED",
+            spellname = 95639,
+            execute = {
+                {
+                    "removeradar",{"engulfradar", player = "#5#"},
+                    "removeraidicon",{"#5#"}
+                },
+            },
+        },
+        {
+            type = "event",
+            event = "EMOTE",
+            execute = {
+                {
+                    "expect",{"#1#","find",L.chat_bastion["begins to cast .+%[Engulfing Magic%].+"]},
+                    "expect",{"&timeleft|engulfcd&","<","1"},
+                    "quash","engulfcd",
+                    "alert","engulfcd",
+                },
+            },
+        },
+        -- Blackout
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellname = 92876,
+            execute = {
+                {
+                    "raidicon","blackoutmark",
+                    "quash","blackoutcd",
+                    "alert","blackoutcd",
+                    "radar","blackoutradar",
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "alert","blackoutselfwarn",
+                },
+                {
+                    "expect",{"#4#","~=","&playerguid&"},
+                    "alert","blackoutdurationwarn",
+                    "arrow","blackoutarrow",
+                },
+            },
+        },
+        -- Blackout removal
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_REMOVED",
+            spellname = 92876,
+            execute = {
+                {
+                    "quash","blackoutdurationwarn",
+                    "quash","blackoutselfwarn",
+                    "removeraidicon","#5#",
+                    "removearrow","#5#",
+                    "removeradar",{"blackoutradar", player = "#5#"},
+                },
+            },
+        },
+        -- Twilight Meteorite
+        {
+            type = "event",
+            event = "UNIT_AURA",
+            execute = {
+                {
+                    "expect",{"#1#","==","player"},
+                    "scheduletimer",{"firemeteorite",0.1},
+                },
+            },
+        },
+        -- Twilight Blast
+        {
+            type = "event",
+            event = "UNIT_SPELLCAST_START",
+            execute = {
+                {
+                    "expect",{"#2#","==",SN[86369]},
+                    "expect",{"#1#","find","boss"},
+                    "set",{
+                        castingblast = "yes",
+                        blastsource = "#1#",
+                    },
+                    "scheduletimer",{"blasttimer", 0.5},
+                    "expect",{"<firstblastcast>","==","no"},
+                    "set",{firstblastcast = "yes"},
+                    "alert","dazzlecd",
+                    "quash","engulfcd",
+                    "expect",{"&timeleft|blackoutcd&","==","-1"},
+                    "alert",{"blackoutcd",time = 3},
+                },
+            },
+        },
+        {
+            type = "event",
+            event = "UNIT_TARGET",
+            execute = {
+                {
+                    "expect",{"<castingblast>","==","yes"},
+                    "expect",{"#1#","==","<blastsource>"},
+                    "expect",{"&unitguid|<blastsource>target&","==","&playerguid&"},
+                    "canceltimer","blasttimer",
+                    "announce","blastsay",
+                    "set",{castingblast = "no"},
+                },
+            },
+        },
+        -- Deep Breath
+        {
+            type = "event",
+            event = "YELL",
+            execute = {
+                {
+                    "expect",{"#1#","find",L.chat_bastion["I will engulf the hallway"]},
+                    "alert","breathwarn",
+                    "set",{
+                        firstblastcast = "no",
+                        blackoutcd = {45.5, 0, loop = false, type = "series"}
+                    },
+                },
+            },
+        },
+        -- Fabulous Flames
+        {
+            type = "combatevent",
+            eventtype = "SPELL_DAMAGE",
+            spellname = 86505,
+            execute = {
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "alert","fabulousselfwarn",
+                },
+            },
+        },
+        
     },
 })
 
@@ -1292,14 +2288,1018 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
 })
 
 DXE:RegisterRealmPatch(realm, "chogall", {
+    version = 13,
+    key = "chogall",
+    zone = L.zone["The Bastion of Twilight"],
+    category = L.zone["The Bastion of Twilight"],
+    name = L.npc_bastion["Cho'gall"],
+    icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Chogall.blp",
+    advanced = {
+        preventPostDefeatPull = 5,
+    },
+    triggers = {
+        scan = {
+            43324, -- Cho'gall
+        },
+    },
+    onactivate = {
+        tracing = {43324},
+        phasemarkers = {
+            {
+                {0.85,"Fury of Cho'gall","The first Fury of Cho'gall cast."},
+                {0.25, "Phase 2","At 25 % of Cho'gall's health Phase 2 begins."},
+                {0.03, "Boss defeated","At 3 % of his health, Cho'gall is defeated.", 20},
+            },
+        },
+        tracerstart = true,
+        combatstop = true,
+        combatstart = true,
+        defeat = 43324,
+    },
+    userdata = {
+        adherenttime = {62, 91, loop = false, type = "series"},
+        depravitycd = {19, 12, loop = false, type = "series"},
+        crashcd = {12, 10, loop = false, type = "series"},
+        creationstime = {6, 40, loop = false, type = "series"},
+        conversiontime = 21,
+        adherenttext = "Corrupting Adherent",
+        firstfury = "yes",
+        phase = 1,
+        conversionmax = 2,
+        conversionunits = {type = "container", wipein = 3},
+    },
+    onstart = {
+        {
+            "set",{phase = 1},
+            "alert","enragecd",
+            -- "alert", {"furycd", time = 2},
+
+            -- Apollo setting
+            "expect",{"&difficulty&","<","3"}, --10h&25h
+            "set",{
+                furycd = {63, 47, loop = false, type = "series"}
+            },
+            "expect",{"&difficulty&",">=","3"}, --10h&25h
+            "set",{
+                adherenttime = {64, 92 ,loop = false, type = "series"},
+                furycd = {45, 47, loop = false, type = "series"}
+            },
+
+            -- JRG
+            -- Jingrange setting
+            -- "set",{
+            --         furycd = {35, 55, loop = false, type = "series"}
+            --     },
+
+            -- "set",{
+            --     smashcd = {6,50.5,40, loop = false, type = "series"},
+            -- },
+        },
+        {
+            "expect",{"&difficulty&","==","2"},
+            "set",{conversionmax = 5},
+        },
+        {
+            "expect",{"&difficulty&","==","4"},
+            "set",{conversionmax = 5},
+            adherenttext = "Corrupting Adherents",
+        },
+        {
+            "alert",{"conversioncd",time = 2, text = 2},
+            "repeattimer",{"checkhp", 1},
+        },
+    },
+    announces = {
+        crashsay = {
+            type = "SAY",
+            subtype = "self",
+            spell = 93180,
+            msg = format(L.alert["%s on ME!"],SN[93180]).."!",
+        },
+    },
+    raidicons = {
+        worshipmark = {
+            varname = format("%s {%s}",SN[91317],"PLAYER_DEBUFF"),
+            type = "MULTIFRIENDLY",
+            persist = 5,
+            reset = 5,
+            unit = "#5#",
+            icon = 1,
+            total = 4,
+            texture = ST[91317],
+        },
+        crashmark = {
+            varname = format("%s {%s}",SN[93180],"ABILITY_TARGET_HARM"),
+            type = "MULTIFRIENDLY",
+            persist = 6,
+            reset = 5,
+            unit = "&upvalue&",
+            icon = 5,
+            total = 2,
+            texture = ST[93180],
+        },
+    },
+    filters = {
+        bossemotes = {
+            conversionemote = {
+                name = "Conversion",
+                pattern = "Cho'gall beckons and casts %[Conversion%]",
+                hasIcon = false,
+                hide = true,
+                texture = ST[91303],
+            },
+            summonadherentemote = {
+                name = "Summon Corrupting Adherent",
+                pattern = "Cho'gall begins to summon Corrupt",
+                hasIcon = true,
+                hide = true,
+                texture = ST[81628],
+            },
+            festerbloodemote = {
+                name = "Fester Blood",
+                pattern = "Cho'gall begins to cast %[Fester Blood%]",
+                hasIcon = true,
+                hide = true,
+                texture = ST[82299],
+            },
+            darkenedcreationsemote = {
+                name = "Summon Darkened Creations",
+                pattern = "Cho'gall begins to summon Darkened Creations",
+                hasIcon = true,
+                hide = true,
+                texture = ST[82414],
+            },
+        },
+    },
+    phrasecolors = {
+        {"Corrupting Adherent:","GOLD"},
+    },
     windows = {
-        proxwindow = false,
+        apbtext = "Corrupted Blood",
+        apbwindow = true,
+        proxwindow = true,
+        proxrange = 30,
+        proxoverride = true,
+        nodistancecheck = true
+    },
+    radars = {
+        crashradar = {
+            varname = SN[93180],
+            type = "circle",
+            player = "#5#",
+            fixed = true,
+            range = 8,
+            mode = "avoid",
+            persist = 4,
+            color = "MAGENTA",
+            icon = ST[93180],
+        },
+    },
+    misc = {
+        args = {
+            depravitytargetonly = {
+                name = format(L.chat_bastion["Show |T%s:16:16|t |cffffd600Depravity|r for target / focus only"],ST[81713]),
+                desc = format(L.chat_bastion["Show |T%s:16:16|t |cffffd600Depravity|r cooldown and warning only for the |cffffd600Corrupting Adherent|r in your target or focus."],ST[81713]),
+                type = "toggle",
+                order = 1,
+                default = true,
+            },
+            reset_button = addon:genmiscreset(10,"depravitytargetonly"),
+        },
+    },
+    grouping = {
+        {
+            general = true,
+            alerts = {"enragecd","phasewarn"},
+        },
+        {
+            name = format("|cffffd700%s|r","Cho'gall"),
+            icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Chogall",
+            sizing = {aspect = 2, w = 128, h = 64},
+            alerts = {"conversioncd","conversionwarn","fireaddwarn","blazewarnself","shadowaddwarn","furysoon","furycd","furywarn","adherentcd","adherentwarn","festerbloodcd","festerbloodwarn",
+                        "creationscd","creationswarn"}
+        },
+        {
+            name = format("|cffffd700%s|r","Corrupting Adherent"),
+            icon = "Interface\\ICONS\\Achievement_Boss_HeraldVolazj",
+            alerts = {"crashcd","crashwarn","crashclosewarn","crashselfwarn","crashdmg","depravitycd","depravitywarn"},
+        },
+    },
+    
+    alerts = {
+        -- Berserk
+        enragecd = {
+            varname = L.alert["Berserk CD"],
+            type = "dropdown",
+            text = L.alert["Berserk"],
+            time = 600,
+            flashtime = 10,
+            color1 = "RED",
+            icon = ST[12317],
+        },           
+        -- Phases
+        phasewarn = {
+            varname = format(L.alert["Phase Warning"]),
+            type = "simple",
+            text = format(L.alert["Phase %s"],"<phase>"),
+            time = 3,
+            flashtime = 3,
+            color1 = "TURQUOISE",
+            icon = ST[11242],
+            sound = "BEWARE",
+        },
+        -- Fury of Cho'gall
+        furycd = {
+            varname = format(L.alert["%s CD"],SN[82524]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"], SN[82524]),
+            time = 47,
+            time2 = 63,
+            flashtime = 10,
+            color1 = "CYAN",
+            color2 = "TURQUOISE",
+            icon = ST[82524],
+            sticky = true,
+        },
+        furywarn = {
+            varname = format(L.alert["%s Warning"],SN[82524]),
+            type = "simple",
+            text = format("%s!",SN[82524]),
+            time = 3,
+            color1 = "GOLD",
+            sound = "MINORWARNING",
+            icon = ST[82524],
+        },
+        -----------------------
+        ------- Phase 1 -------
+        -----------------------
+        -- Flaming Destruction
+        fireaddwarn = {
+            varname = format(L.alert["%s Warning"],SN[93266]),
+            type = "centerpopup",
+            text = SN[93266],
+            time10n = 10,
+            time25n = 10,
+            time10h = 10,
+            time25h = 20.5,
+            flashtime = 5,
+            color1 = "ORANGE",
+            sound = "ALERT1",
+            icon = ST[93266],
+        },
+        -- Empowered Shadows
+        shadowaddwarn = {
+            varname = format(L.alert["%s Warning"],SN[93220]),
+            type = "centerpopup",
+            text = SN[93220],
+            time10n = 9,
+            time25n = 9,
+            time10h = 9,
+            time25h = 20.5,
+            flashtime = 5,
+            color1 = "LIGHTBLUE",
+            sound = "ALERT1",
+            icon = ST[93220],
+        },
+        -- Blaze
+        blazewarnself = {
+            varname = format(L.alert["%s on me Warning"],SN[81538]),
+            type = "simple",
+            text = format("%s on %s - %s!",SN[81538],L.alert["YOU"],L.alert["MOVE AWAY"]),
+            time = 3,
+            flashtime = 3,
+            throttle = 3,
+            flashscreen = true,
+            color1 = "RED",
+            sound = "ALERT10",
+            icon = ST[81538],
+            emphasizewarning = true,
+        },
+        -- Conversion
+        conversioncd = {
+            varname = format(L.alert["%s CD"],SN[91303]),
+            type = "dropdown",
+            text = format(L.alert["%s CD"],SN[91303]),
+            text2 = format(L.alert["Next %s"],SN[91303]),
+            time = "<conversiontime>",
+            time2 = 10,
+            time3 = 11,
+            flashtime = 5,
+            color1 = "YELLOW",
+            icon = ST[91303],
+            -- audiocd = true,
+            sticky = true,
+        },
+        conversionwarn = {
+            varname = format(L.alert["%s Warning"],SN[91303]),
+            type = "simple",
+            text = format(L.alert["%s on %s"],SN[91303],"&list|conversionunits&"),
+            time = 3,
+            color1 = "YELLOW",
+            sound = "ALERT2",
+            icon = ST[91303],
+        },
+        -- Summon Corrupting Adherent
+        adherentcd = {
+            varname = format(L.alert["%s CD"],SN[81628]),
+            type = "dropdown",
+            text = format("New %s CD","<adherenttext>"),
+            --time = "<adherenttime>",
+            time = 92,
+            time2 = 5.8,
+            flashtime = 5,
+            color1 = "CYAN",
+            color2 = "BLUE",
+            icon = ST[81628],
+            sticky = true,
+        },
+        adherentwarn = {
+            varname = format(L.alert["%s Warning"],SN[81628]),
+            type = "simple",
+            text = format("New: %s","<adherenttext>"),
+            time = 3,
+            flashtime = 3,
+            color1 = "RED",
+            sound = "ALERT2",
+            icon = ST[81628],
+        },
+        furysoon = {
+            varname = format(L.alert["%s soon"],SN[82524]),
+            type = "simple",
+            text = format(L.alert["%s soon"],SN[82524]),
+            time = 5,
+            flashtime = 5,
+            color1 = "CYAN",
+            sound = "ALERT3",
+            icon = ST[82524],
+        },
+        -- Fester Blood
+        festerbloodcd = {
+            varname = format(L.alert["%s CD"],SN[82299]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[82299]),
+            time = 40,
+            flashtime = 5,
+            color1 = "MAGENTA",
+            icon = ST[82299],
+        },
+        festerbloodwarn = {
+            varname = format(L.alert["%s Warning"],SN[82299]),
+            type = "simple",
+            text = SN[82299].."!",
+            color1 = "RED",
+            sound = "MINORWARNING",
+            time = 3,
+            flashtime = 3,
+            icon = ST[82299],
+        },
+        -- Corrupting Crash
+        crashcd = {
+            varname = format(L.alert["%s CD"],SN[93180]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[93180]),
+            time = "<crashcd>",
+            flashtime = 5,
+            color1 = "PINK",
+            icon = ST[93180],
+            tag = "#1#",
+        },
+        crashwarn = {
+            varname = format(L.alert["%s Warning"],SN[93180]),
+            type = "simple",
+            text = format("%s on <%s>",SN[93180],"#5#"),
+            time = 4,
+            color1 = "MAGENTA",
+            sound = "ALERT10",
+            icon = ST[93180],
+            tag = "#1#",
+        },
+        crashselfwarn = {
+            varname = format(L.alert["%s on me Warning"],SN[93180]),
+            type = "simple",
+            text = format("%s on <%s>!",SN[93180],L.alert["YOU"]),
+            time = 4,
+            color1 = "MAGENTA",
+            sound = "ALERT10",
+            icon = ST[93180],
+            emphasizewarning = true,
+        },
+        crashclosewarn = {
+            varname = format(L.alert["%s near me Warning"],SN[93180]),
+            type = "simple",
+            text = format(L.alert["%s near %s - MOVE AWAY!"],SN[93180],L.alert["YOU"]),
+            time = 1,
+            color1 = "TURQUOISE",
+            sound = "ALERT10",
+            icon = ST[93180],
+        },
+        -- Depravity
+        depravitywarn = {
+            varname = format(L.alert["%s Warning"],SN[81713]),
+            type = "centerpopup",
+            warningtext = format("%s: %s - INTERRUPT!","Corrupting Adherent",SN[81713]),
+            text = format("%s: %s","Corrupting Adherent",SN[81713]),
+            time = 1.5,
+            color1 = "GOLD",
+            -- sound = "ALERT10",
+            sound = "kickcast",
+            icon = ST[81713],
+            tag = "#1#",
+        },
+        depravitycd = {
+            varname = format(L.alert["%s CD"],SN[81713]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[81713]),
+            time = "<depravitycd>",
+            flashtime = 3,
+            color1 = "PINK",
+            icon = ST[81713],
+            tag = "#1#",
+        },
+        -----------------------
+        ------- Phase 2 -------
+        -----------------------
+        creationscd = {
+            varname = format(L.alert["%s CD"],SN[82414]),
+            type = "dropdown",
+            text = format(L.alert["New %s"],SN[82414]),
+            time = "<creationstime>",
+            flashtime = 5,
+            color1 = "PURPLE",
+            icon = ST[82414],
+        },
+        creationswarn = {
+            varname = format(L.alert["%s Warning"],SN[82414]),
+            type = "simple",
+            text = format("New: %s",SN[82414]),
+            time = 3,
+            flashtime = 3,
+            color1 = "MAGENTA",
+            sound = "ALERT1",
+            icon = ST[82414],
+        },
+        
+    },
+    timers = {
+        checkhp = {
+            {
+                "expect",{"&gethp|boss1&","<","88"},
+                "alert","furysoon",
+                "canceltimer","checkhp",
+            },
+        },
+        conversiontimer = {
+            {
+                "expect",{"&listsize|conversionunits&",">","0"},
+                "alert","conversionwarn",
+            },
+        },
+    },
+    events = {
+        -- Summon Corrupting Adherent
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 81628,
+            execute = {
+                {
+                    "set",{
+                        conversiontime = 37,
+                        crashcd = {12, 10, loop = false, type = "series"},
+                        depravitycd = {9, 12, loop = false, type = "series"},
+                    },
+                    "quash","adherentcd",
+                    "alert","adherentcd",
+                    "alert","adherentwarn",
+                    "alert","festerbloodcd",
+                    "alert","depravitycd",
+                    "alert","crashcd",
+                },
+            },
+        },
+        -- Shadow Crash
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 93180,
+            execute = {
+                {
+                    "alert","crashcd",          
+                    "raidicon","crashmark",
+                    "radar","crashradar",
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "alert","crashselfwarn",
+                    "announce","crashsay",
+                },
+                {
+                    "expect",{"#4#","~=","&playerguid&"},
+                    "alert","crashwarn",
+                    "expect",{"&getdistance|#4#&","<=",10},
+                    "alert","crashclosewarn",
+                },
+            },
+        },
+        -- Depravity
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellid = {
+                81713,
+                93175,
+                93176,
+                93177,
+            },
+            execute = {
+                {
+                    "invoke",{
+                        {
+                            "expect",{"&itemvalue|depravitytargetonly&","==","false"},
+                            "alert","depravitywarn",
+                            "alert","depravitycd",
+                        },
+                        {
+                            "expect",{"&itemvalue|depravitytargetonly&","==","true"},
+                            "expect",{"#1#","==","&unitguid|target&",
+                                    "OR","#1#","==","&unitguid|focus&"},
+                            "alert","depravitywarn",
+                            "alert","depravitycd",
+                        },
+                    },
+                },
+            },
+        },
+        {
+            type = "event",
+            event = "UNIT_SPELLCAST_INTERRUPTED",
+            execute = {
+                {
+                    "expect",{"#2#","==",SN[93176]},
+                    "quash",{"depravitywarn","&unitguid|#1#&"},
+                },
+            },
+        },
+        
+        -- Corrupting Adherent's Death
+        {
+            type = "combatevent",
+            eventtype = "UNIT_DIED",
+            execute = {
+                {
+                    "expect",{"&npcid|#4#&","==","43622"},
+                    "quash",{"crashcd","#4#"},
+                    "quash",{"depravitycd","#4#"},
+                    "quash",{"depravitywarn","#4#"},
+                },
+            },
+        },
+        
+        -- Fury of Cho'gall
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 82524,
+            execute = {
+                {
+                    "alert","furywarn",
+                    "quash","furycd",          
+                    "alert","furycd",
+                },
+                {
+                    "expect",{"<firstfury>","==","yes"},
+                    "set",{firstfury = "no"},
+                    "alert",{"adherentcd", time = 2},
+                    "quash","conversioncd",
+                    "alert",{"conversioncd",time = 2, text = 2},
+                },
+            },
+        },
+        -- Festerblood
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 82299,
+            execute = {
+                {
+                    "quash","festerbloodcd",
+                    "alert","festerbloodwarn",
+                },
+            },
+        },
+        -- Conversion / Worshipping
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellname = 93367,
+            srcisplayertype = true,
+            execute = {
+                {
+                    "raidicon","worshipmark",
+                    "insert",{"conversionunits","#5#"},
+                },
+                {
+                    "expect",{"&listsize|conversionunits&","==","1"},
+                    "scheduletimer",{"conversiontimer",1},
+                    "quash","conversioncd",          
+                    "alert","conversioncd",
+                },
+                {
+                    "expect",{"&listsize|conversionunits&","==","<conversionmax>"},
+                    "canceltimer","conversiontimer",
+                    "alert","conversionwarn",
+                },
+            },
+        },
+        -- Blaze
+        {
+            type = "combatevent",
+            eventtype = "SPELL_DAMAGE",
+            spellname = 81538,
+            execute = {
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "alert","blazewarnself",
+                },
+            },
+        },
+        -- Phase 2 (Consume Blood of the Old God)
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 82630,
+            execute = {
+                {
+                    "quashall",{"enragecd","furycd"},
+                    "set",{phase = 2},
+                    "alert","phasewarn",
+                    "alert","creationscd",
+                },
+            },
+        },
+        -- Darkened Creations
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellid = {
+                82414,
+                93160,
+                93161,
+                93162,
+            },
+            execute = {
+                {
+                    "alert","creationswarn",          
+                    "quash","creationscd",
+                    "alert","creationscd",
+                },
+            },
+        },
+        -- Flame Orders
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellid = {
+                81194,
+                93264,
+                93265,
+                93266,
+            },
+            execute = {
+                {
+                    "alert","fireaddwarn",
+                },
+            },
+        },
+        -- Shadow Orders
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellid = {
+                81572,
+                93218,
+                93219,
+                93220,           
+            },
+            execute = {
+                {
+                    "alert","shadowaddwarn",
+                },
+            },
+        },
     },
 })
 
 DXE:RegisterRealmPatch(realm, "sinestra", {
-    windows = {
-        proxwindow = false,
+    version = 3,
+    key = "sinestra",
+    zone = L.zone["The Bastion of Twilight"],
+    category = L.zone["The Bastion of Twilight"],
+    name = L.npc_bastion["Lady Sinestra"],
+    icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Sinestra.blp",
+    advanced = {
+        preventPostDefeatPull = 5,
+    },
+    triggers = {
+        scan = {
+            45213, -- Sinestra
+        },
+    },
+    onactivate = {
+        tracing = {45213},
+        phasemarkers = {
+            {
+                {0.3,"Phase 2","At 30% of Sinestra's HP, she protects herself with a shield and Phase 2 begins."},
+            },
+        },
+        tracerstart = true,
+        combatstop = true,
+        combatstart = true,
+        defeat = 45213,
+    },
+    userdata = {
+        slicercd = {27,27, loop = false, type = "series"},
+        slicerdelay = {27,27, loop = false, type = "series"}, 
+        wracktext = "",
+        phase = "",
+        eggstraced = "no",
+        eggsunits = {type = "container", wipein = 10},
+    },
+    onstart = {
+        {
+            "alert",{"whelpscd",time = 2},
+            "alert","breathcd",
+            "alert","slicercd",
+            "scheduletimer",{"slicer","<slicerdelay>"},
+            "alert",{"wrackcd",time = 2},
+            "set",{phase = "1"},
+        },
+    },
+    
+    raidicons = {
+        eggsmark = {
+            varname = format("%s {%s}","Twilight Pulsing Eggs","NPC_ENEMY"),
+            type = "MULTIENEMY",
+            persist = 60,
+            unit = "#1#",
+            reset = 300,
+            icon = 5,
+            total = 2,
+            texture = ST[87654],
+        },
+    },
+    phrasecolors = {
+        {"imminent","LIGHTGREEN"},
+    },
+    ordering = {
+        alerts = {"phasewarn","wrackcd","wrackwarn","whelpscd","breathcd","breathwarn","slicercd","slicerwarn","eggwarn","essencecountdown","essencewarn"}
+    },
+    
+    alerts = {
+        breathcd = {
+            varname = format(L.alert["%s CD"],SN[92944]),
+            type = "dropdown",
+            text = format(L.alert["%s CD"],SN[92944]),
+            time = 21,
+            flashtime = 10,
+            flashscreen = true,
+            color1 = "ORANGE",
+            color2 = "RED",
+            icon = ST[92944],
+            sound = "MINORWARNING",
+            sticky = true,
+        },
+        breathwarn = {
+            varname = format(L.alert["%s Warning"],SN[92944]),
+            type = "simple",
+            text = format(L.alert["%s"],SN[92944]),
+            time = 3,
+            flashtime = 3,
+            color1 = "ORANGE",
+            icon = ST[92944],
+            sound = "ALERT1",
+        },
+        slicercd = {
+            varname = format(L.alert["%s CD"],SN[92954]),
+            type = "dropdown",
+            text = format(L.alert["Next Shadow Orbs"],SN[92954]),
+            time = "<slicercd>",
+            time2 = 10,
+            flashtime = 5,
+            audiocd = true,
+            color1 = "PURPLE",
+            icon = ST[92954],
+        },
+        slicerwarn = {
+            varname = format(L.alert["%s Warning"],SN[92954]),
+            type = "simple",
+            text = format(L.alert["Shadow Orbs imminent!"],SN[92954]),
+            time = 3,
+            flashtime = 3,
+            color1 = "MAGENTA",
+            icon = ST[92954],
+            sound = "ALERT2",
+        },
+        wrackcd = {
+            varname = format(L.alert["%s CD"],SN[92955]),
+            type = "dropdown",
+            text = format(L.alert["Next %s"],SN[92955]),
+            time = 70,
+            time2 = 15,
+            flashtime = 5,
+            color1 = "BLACK",
+            icon = ST[92955],
+        },
+        wrackwarn = {
+            varname = format(L.alert["%s Warning"],SN[92955]),
+            type = "simple",
+            text = "<wracktext>",
+            time = 3,
+            flashtime = 3,
+            color1 = "BLACK",
+            icon = ST[92955],
+            sound = "ALERT3",
+        },
+        phasewarn = {
+            varname = format(L.alert["Phase Warning"]),
+            type = "simple",
+            text = format(L.alert["Phase %s"],"<phase>"),
+            time = 5,
+            flashtime = 5,
+            icon = ST[11242],
+            color1 = "TURQUOISE",
+            sound = "BEWARE",
+        },
+        eggwarn = {
+            varname = format(L.alert["Eggs Vulnerable Warning"]),
+            type = "centerpopup",
+            text = format(L.alert["Eggs vulnerable"]),
+            time = 30,
+            flashtime = 5,
+            color1 = "PINK",
+            sound = "ALERT10",
+            icon = ST[87654],
+            throttle = 2,
+            emphasizewarning = true,
+        },
+        whelpscd = {
+            varname = format(L.alert["%s CD"],"Twilight Whelps"),
+            type = "dropdown",
+            text = format(L.alert["New Twilight Whelps"]),
+            time = 50,
+            time2= 16,
+            flashtime = 5,
+            color1 = "PURPLE",
+            sound = "MINORWARNING",
+            icon = ST[10695],
+        },
+        essencecountdown = {
+            varname = format(L.alert["%s Countdown"],SN[87946]),
+            type = "dropdown",
+            text = format(L.alert["%s applied in"],SN[87946]),
+            time = 22,
+            flashtime = 10,
+            color1 = "GOLD",
+            icon = ST[87946],      
+        },
+        essencewarn = {
+            varname = format(L.alert["%s Warning"],SN[87946]),
+            type = "dropdown",
+            text = format(L.alert["%s"],SN[87946]),
+            time = 180,
+            flashtime = 20,
+            color1 = "RED",
+            icon = ST[87946],
+        },
+    },
+    timers = {
+        slicer = {
+            {
+                "alert","slicercd",
+                "alert","slicerwarn",
+                "scheduletimer",{"slicer","<slicerdelay>"},
+            },
+        },
+        spitecaller = {
+            {
+                "alert","spiteinc",
+                "scheduletimer",{"spitecaller",22},
+            },
+        },
+        eggstimer = {
+            {
+                "temptracing","<eggsunits>",
+            },
+        },
+    },
+    events = {
+        -- Flame Breath
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 92944,
+            execute = {
+                {
+                    "quash","breathcd",
+                    "alert","breathcd",
+                    "alert","breathwarn",
+                },
+            },
+        },
+        -- Wrack
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_APPLIED",
+            spellid = {89421},
+            execute = {
+                {
+                    "alert","wrackcd",
+                },
+                {
+                    "expect",{"#4#","==","&playerguid&"},
+                    "set",{wracktext = format(L.alert["%s on <%s>"],SN[92955],L.alert["YOU"])},
+                    "alert","wrackwarn",
+                },
+            },
+        },
+        -- Mana Barrier == Phase 2 starting
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_START",
+            spellname = 87299,
+            execute = {
+                {
+                    "batchquash",{"breathcd","slicercd","whelpscd"},
+                    "canceltimer","slicer",
+                    "set",{phase = "2"},
+                    "alert","phasewarn",
+                    "removephasemarker",{1,1},
+                },
+            },
+        },
+        -- Eggs vulnerable
+        {
+            type = "combatevent",
+            eventtype = "SPELL_AURA_REMOVED",
+            spellname = 87654,
+            execute = {
+                {
+                    "alert","eggwarn",
+                },
+            },
+        },
+        -- Essence of the Red
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 87946,
+            execute = {
+                {
+                    "alert","essencewarn",
+                },
+            },
+        },
+        -- Twilight Pulsing Eggs tracing
+        {
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 87654,
+            execute = {
+                {
+                    "expect",{"#2#","==","Pulsing Twilight Egg"},
+                    "raidicon","eggsmark",
+                    "expect",{"<eggstraced>","==","no"},
+                    "insert",{"eggsunits","#1#"},
+                    "expect",{"&listsize|eggsunits&","==","2"},
+                    "set",{eggstraced = "yes"},
+                    "scheduletimer",{"eggstimer",1},
+                },
+            },
+        },
+        {
+            type = "event",
+            event = "YELL",
+            execute = {
+                -- Summoning Whelps
+                {
+                    "expect",{"#1#","find",L.chat_bastion["^Feed, children"]},
+                    "alert","whelpscd",
+                },
+                -- Phase 3 trigger
+                {
+                    "expect",{"#1#","find",L.chat_bastion["^Enough!"]},
+                    "quash","eggwarn",
+                    "set",{phase = "3"},
+                    "alert","phasewarn",
+                    "set",{slicercd = {30,28, loop = false, type = "series"}},
+                    "set",{slicerdelay = {30,28, loop = false, type = "series"}},            
+                    "alert","slicercd",
+                    "scheduletimer",{"slicer","<slicerdelay>"},
+                    "alert","breathcd",
+                    "alert","essencecountdown",
+                },
+            },
+        },
     },
 })
 

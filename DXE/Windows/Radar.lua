@@ -1255,7 +1255,7 @@ function addon:Radar(enc_range,disableDistanceCheck)
     
 	UpdateTitle()
 	SetMapToCurrentZone()
-    activeMap = addon:GetMapData(GetMapInfo())
+    activeMap = addon:GetMapData(DXE.Compat.GetMapInfo())
 	if activeMap then
 		RadarSize()
 		content.playerDot:Show()
@@ -1268,7 +1268,7 @@ function addon:PopupRadar(enc_range, disableDistanceCheck)
 end
 
 function addon:UpdateRadarMap()   
-    activeMap = addon:GetMapData(GetMapInfo())
+    activeMap = addon:GetMapData(DXE.Compat.GetMapInfo())
 end
 
 function addon:HideRadar()

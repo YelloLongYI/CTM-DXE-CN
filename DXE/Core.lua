@@ -573,6 +573,23 @@ addon.Compat = setmetatable({
         end
     end,
 
+    GetRaidDifficultyIndex = function()
+        local _, type, index = GetInstanceInfo()
+        if type ~= "raid" then return index end
+        if IS_CLASSIC then
+            return index - 2
+        end
+        return index
+    end,
+
+    GetMapInfo = function()
+        if _G.GetMapInfo then
+            return _G.GetMapInfo()
+        end
+        local info = _G.C_Map and _G.C_Map.GetMapInfo and _G.C_Map.GetMapInfo()
+        return info and info.name
+    end,
+
     UIDropDown_CreateInfo = function()
         return UIDropDownMenu_CreateInfo()
     end,
@@ -1348,21 +1365,7 @@ end
 ---------------------------------------------
 
 function addon:GetRaidDifficulty()
-    local diff
-    local _, type, index, _, _, heroic, dynamic = GetInstanceInfo()
-    if type == "raid" then
-        if dynamic then
-            diff = index
-            if heroic == 1 and diff <= 2 then
-                diff = diff + 2
-            end
-        else
-            diff = index
-        end
-    elseif type == "party" then
-        diff = index
-    end
-    return diff
+    return self.Compat.GetRaidDifficultyIndex()
 end
 
 function addon:GetRaidSize()
@@ -1371,14 +1374,7 @@ function addon:GetRaidSize()
 end
 
 function addon:IsHeroic()
-    local _, type, index, _, _, heroic, dynamic = GetInstanceInfo()
-    if type == "raid" then
-        return index > 2
-    elseif type == "party" then
-        return index == 2
-    else
-        return 1
-    end
+    return self.Compat.GetRaidDifficultyIndex() > 2
 end
 
 function addon:IsRaidType()
@@ -3961,7 +3957,17 @@ end
 ---------------------------------------------
 
 local weare42 = tonumber((select(4, GetBuildInfo()))) > 40100
+local _dbgCount = 0
 function addon:COMBAT_LOG_EVENT_UNFILTERED(_, _,eventtype, _, ...)
+    if IS_CLASSIC then
+        if _dbgCount < 3 then
+            print("CLEU eventtype:", eventtype)
+            _dbgCount = _dbgCount + 1
+        end
+        if eventtype == "UNIT_DIED" or eventtype == "PARTY_KILL" then
+            print("CLEU DIED:", eventtype, select(5, ...), select(6, ...))
+        end
+    end
     if eventtype ~= "UNIT_DIED" and eventtype ~= "PARTY_KILL" then return end
     if addon:IsTempRegistered() then
         addon:ProcessTempHW(select(5,...))
@@ -3970,7 +3976,7 @@ function addon:COMBAT_LOG_EVENT_UNFILTERED(_, _,eventtype, _, ...)
     local dstGUID,destName
     if weare42 then dstGUID,destName = select(5, ...) else dstGUID,destName = select(4, ...) end     
     
-    local npcid = NID[dstGUID]
+    local npcid = addon.Compat.GetNPCIDFromGUID(dstGUID)
 
     if not npcid then 
         if self:IsRunning() then self:ConfirmWipe() end
