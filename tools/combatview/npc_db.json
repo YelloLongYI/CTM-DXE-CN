@@ -823,6 +823,14 @@
     "encounter_name": "Halfus Wyrmbreaker",
     "defeat_npc_id": 44600
   },
+  "44687": {
+    "name": "原龙巨兽",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "halfus",
+    "encounter_name": "Halfus Wyrmbreaker",
+    "defeat_npc_id": 44600
+  },
   "44797": {
     "name": "Time Warden",
     "role": "add",
