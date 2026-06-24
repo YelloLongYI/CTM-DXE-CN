@@ -9,7 +9,7 @@ class BaseParser(ABC):
     format_name: str = "unknown"
 
     @abstractmethod
-    def parse(self, text: str) -> ParseResult:
+    def parse(self, text: str, npc_db: dict | None = None) -> ParseResult:
         ...
 
     @abstractmethod

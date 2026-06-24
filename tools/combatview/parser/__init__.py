@@ -15,15 +15,20 @@ def detect_format(first_line: str) -> BaseParser | None:
     for p in _parsers:
         if p.detect(first_line):
             return p
-    # fallback: try each parser
     for p in _parsers:
         if p.LINE_RE.match(first_line):
             return p
     return None
 
 
-def parse_log(text: str) -> ParseResult | None:
-    """Parse WoWCombatLog.txt content. Auto-detects format."""
+def parse_log(text: str, npc_db: dict | None = None) -> ParseResult | None:
+    """Parse WoWCombatLog.txt content. Auto-detects format.
+
+    Args:
+        text: raw log content
+        npc_db: NPC classification database (npc_db.json).
+                Used to build encounter groups for multi-phase fights.
+    """
     if not text.strip():
         return None
     first = text.split("\n", 1)[0].strip()
@@ -32,4 +37,4 @@ def parse_log(text: str) -> ParseResult | None:
     parser = detect_format(first)
     if parser is None:
         return None
-    return parser.parse(text)
+    return parser.parse(text, npc_db)

@@ -30,13 +30,14 @@ class ParseWorker(QThread):
     finished = Signal(object)
     error = Signal(str)
 
-    def __init__(self, text: str):
+    def __init__(self, text: str, npc_db: dict):
         super().__init__()
         self._text = text
+        self._npc_db = npc_db
 
     def run(self) -> None:
         try:
-            result = parse_log(self._text)
+            result = parse_log(self._text, self._npc_db)
             self.finished.emit(result)
         except Exception as e:
             log.error("ParseWorker failed: %s", e, exc_info=True)
@@ -261,8 +262,18 @@ class MainWindow(QMainWindow):
             return self._user_npc[str(npc_id)]["r"]
         entry = self._npc_db.get(str(npc_id))
         if entry:
-            return entry.get("r", "unknown")
+            return entry.get("role", "unknown")
         return "unknown"
+
+    def _get_boss_add_ids(self) -> set[int]:
+        ids: set[int] = set()
+        for nid, entry in self._npc_db.items():
+            if entry.get("role") in ("boss", "add"):
+                ids.add(int(nid))
+        for nid, entry in self._user_npc.items():
+            if entry.get("r") in ("boss", "add"):
+                ids.add(int(nid))
+        return ids
 
     def _load_config(self) -> None:
         path = Path(__file__).resolve().parent.parent / "config.json"
@@ -650,17 +661,21 @@ class MainWindow(QMainWindow):
         log.info("Loading: %s", filepath)
         self._status.showMessage(f"解析中: {os.path.basename(filepath)} ...")
         QApplication.processEvents()
-        try:
-            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
-                text = f.read()
-            if text.startswith("\ufeff"):
-                text = text[1:]
-        except Exception as e:
-            log.error("Read failed: %s — %s", filepath, e)
-            QMessageBox.warning(self, "错误", f"读取文件失败:\n{e}")
+        text = None
+        for enc_name in ("utf-8", "gbk", "gb2312", "gb18030"):
+            try:
+                with open(filepath, "r", encoding=enc_name, errors="replace") as f:
+                    text = f.read()
+                    break
+            except Exception:
+                continue
+        if text is None:
+            QMessageBox.warning(self, "错误", "无法读取文件（编码不支持）")
             self._status.showMessage("读取失败")
             return
-        self._worker = ParseWorker(text)
+        if text.startswith("\ufeff"):
+            text = text[1:]
+        self._worker = ParseWorker(text, self._npc_db)
         self._worker.finished.connect(self._on_parse_done)
         self._worker.error.connect(self._on_parse_error)
         self._worker.start()

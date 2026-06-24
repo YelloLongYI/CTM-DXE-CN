@@ -46,18 +46,66 @@ class CataClassicParser(BaseParser):
         """Detect Cata Classic by BUILD_VERSION mention or year in date."""
         return bool(re.search(r'BUILD_VERSION,4\.4', first_line))
 
-    def parse(self, text: str) -> ParseResult:
+    SILENCE_TIMEOUT_MS = 120_000  # 120s no NPC events → auto-close
+
+    def parse(self, text: str, npc_db: dict | None = None) -> ParseResult:
         t0 = time.perf_counter()
         lines = text.split("\n")
         if lines and lines[0].startswith("\ufeff"):
             lines[0] = lines[0][1:]
 
+        # Build encounter groups from npc_db
+        enc_groups: dict[str, dict] = {}
+        npc_to_enc: dict[int, str] = {}
+        if npc_db:
+            for nid_str, entry in npc_db.items():
+                ekey = entry.get("encounter_key", "")
+                if not ekey or "trash" in ekey.lower():
+                    continue
+                if ekey not in enc_groups:
+                    enc_groups[ekey] = {
+                        "npcs": set(),
+                        "defeat": entry.get("defeat_npc_id", 0),
+                        "name": entry.get("encounter_name", ekey),
+                    }
+                enc_groups[ekey]["npcs"].add(int(nid_str))
+            for ekey, grp in enc_groups.items():
+                for nid in grp["npcs"]:
+                    npc_to_enc.setdefault(nid, ekey)
+
+        # Dynamic mapping: encounter_id (from log) → enc_key (from npc_db name match)
+        enc_id_to_key: dict[int, str] = {}
+
         encounters: list[Encounter] = []
-        current_enc: Encounter | None = None
-        current_start_abs: float = 0.0
+        # active encounter per enc_key
+        key_enc: dict[str, Encounter] = {}
+        # keys that have been closed (don't reopen)
+        closed_keys: set[str] = set()
         line_num = 0
         match_count = 0
         miss_count = 0
+
+        def _close(key: str, end_abs: float, success: bool) -> None:
+            enc = key_enc.pop(key, None)
+            if enc:
+                enc.end_abs = end_abs
+                enc.success = success
+                closed_keys.add(key)
+
+        def _get_or_create(key: str, abs_t: float) -> Encounter | None:
+            if key in closed_keys:
+                return None
+            if key not in key_enc:
+                grp = enc_groups.get(key, {})
+                enc = Encounter(
+                    name=grp.get("name", key),
+                    encounter_id=0, difficulty=0, group_size=0,
+                    start_abs=abs_t, end_abs=0.0,
+                )
+                enc._key = key
+                encounters.append(enc)
+                key_enc[key] = enc
+            return key_enc[key]
 
         for line in lines:
             line_num += 1
@@ -65,43 +113,69 @@ class CataClassicParser(BaseParser):
             if not line:
                 continue
 
-            # ENCOUNTER_START
-            if line.startswith(("ENCOUNTER_START",)) or "ENCOUNTER_START" in line[:50]:
-                name = self._extract_encounter_name(line)
+            # ---- ENCOUNTER_START ----
+            if "ENCOUNTER_START" in line[:50]:
                 abs_t = self._parse_encounter_time(line)
-                current_enc = Encounter(
-                    name=name,
-                    encounter_id=self._extract_int_field(line, 1),
-                    difficulty=self._extract_int_field(line, 3),
-                    group_size=self._extract_int_field(line, 4),
-                    start_abs=abs_t,
-                    end_abs=0.0,
-                )
-                current_start_abs = abs_t
-                encounters.append(current_enc)
+                eid = self._extract_int_field(line, 1)
+                matched_key = enc_id_to_key.get(eid)
+                if not matched_key:
+                    # Just use the first active encounter's key (only one encounter
+                    # is active before any END has fired)
+                    matched_key = next(iter(key_enc), None)
+                if eid > 0 and matched_key:
+                    enc_id_to_key[eid] = matched_key
+                if matched_key:
+                    closed_keys.discard(matched_key)
+                    if matched_key not in key_enc:
+                        _get_or_create(matched_key, abs_t)
                 continue
 
-            # ENCOUNTER_END
+            # ---- ENCOUNTER_END ----
             if "ENCOUNTER_END" in line[:50]:
-                if current_enc:
-                    current_enc.end_abs = self._parse_encounter_time(line)
-                    current_enc.success = self._extract_int_field(line, 4) == 1
-                    current_enc = None
-                    current_start_abs = 0.0
+                eid = self._extract_int_field(line, 1)
+                matched_key = enc_id_to_key.get(eid)
+                if matched_key:
+                    _close(matched_key, self._parse_encounter_time(line),
+                           self._extract_int_field(line, 4) == 1)
                 continue
 
+            # ---- combat event ----
             ev = self._parse_line(line)
             if ev is None:
                 miss_count += 1
                 continue
             match_count += 1
 
-            if current_enc:
-                ev.rel_time = (ev.abs_time - current_start_abs) / 1000.0
-                if ev.src_npc_id:
-                    self._add_npc_event(current_enc, ev, ev.src_npc_id, ev.src_name)
-                elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "UNIT_DIED", "SPELL_CREATE"):
-                    self._add_npc_event(current_enc, ev, ev.dst_npc_id, ev.dst_name)
+            # Find enc_key for this NPC
+            ekey = npc_to_enc.get(ev.src_npc_id) or npc_to_enc.get(ev.dst_npc_id)
+            if ekey is None:
+                continue  # unknown NPC, skip entirely
+
+            # UNIT_DIED on defeat target → close
+            if ev.event_type == "UNIT_DIED" and ev.dst_npc_id > 0:
+                for grp_key, grp in enc_groups.items():
+                    if grp["defeat"] == ev.dst_npc_id:
+                        _close(grp_key, ev.abs_time, True)
+                        break
+
+            # Add to encounter
+            if ev.src_npc_id:
+                enc = _get_or_create(ekey, ev.abs_time)
+                if enc is None:
+                    continue
+                ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
+                self._add_npc_event(enc, ev, ev.src_npc_id, ev.src_name)
+                enc._last_npc = ev.abs_time
+            elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "SPELL_CREATE"):
+                if ekey in key_enc:
+                    enc = key_enc[ekey]
+                    ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
+                    self._add_npc_event(enc, ev, ev.dst_npc_id, ev.dst_name)
+
+        # End of file
+        for key in list(key_enc.keys()):
+            enc = key_enc[key]
+            _close(key, getattr(enc, "_last_npc", enc.start_abs), False)
 
         # Finalize
         for enc in encounters:

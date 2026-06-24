@@ -1,1710 +1,1954 @@
 {
   "3887": {
-    "n": "Baron Silverlaine",
-    "r": "boss",
-    "z": "Shadowfang Keep",
-    "e": "baronsilverlaine",
-    "en": "Worgen Spirit Spawning Countdown"
+    "name": "Baron Silverlaine",
+    "role": "boss",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "baronsilverlaine",
+    "encounter_name": "Worgen Spirit Spawning Countdown",
+    "defeat_npc_id": 3887
   },
   "4278": {
-    "n": "Commander Springvale",
-    "r": "boss",
-    "z": "Shadowfang Keep",
-    "e": "commanderspringvale",
-    "en": "Commander Springvale"
+    "name": "Commander Springvale",
+    "role": "boss",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "commanderspringvale",
+    "encounter_name": "Commander Springvale",
+    "defeat_npc_id": 4278
   },
   "5000": {
-    "n": "NPC_5000",
-    "r": "add",
-    "z": "The Deadmines",
-    "e": "foereaper",
-    "en": "Foe Reaper 5000"
+    "name": "NPC_5000",
+    "role": "add",
+    "zone": "The Deadmines",
+    "encounter_key": "foereaper",
+    "encounter_name": "Foe Reaper 5000",
+    "defeat_npc_id": 43778
   },
   "23542": {
-    "n": "Amani'shi Axe Thrower",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Amani'shi Axe Thrower",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "23574": {
-    "n": "Akil'zon",
-    "r": "boss",
-    "z": "Zul'Aman",
-    "e": "akilzon",
-    "en": "Akil'zon"
+    "name": "Akil'zon",
+    "role": "boss",
+    "zone": "Zul'Aman",
+    "encounter_key": "akilzon",
+    "encounter_name": "Akil'zon",
+    "defeat_npc_id": 23574
   },
   "23576": {
-    "n": "Nalorakk",
-    "r": "boss",
-    "z": "Zul'Aman",
-    "e": "nalorakk",
-    "en": "Nalorakk"
+    "name": "Nalorakk",
+    "role": "boss",
+    "zone": "Zul'Aman",
+    "encounter_key": "nalorakk",
+    "encounter_name": "Nalorakk",
+    "defeat_npc_id": 23576
   },
   "23577": {
-    "n": "Halazzi",
-    "r": "boss",
-    "z": "Zul'Aman",
-    "e": "halazzi",
-    "en": "Halazzi"
+    "name": "Halazzi",
+    "role": "boss",
+    "zone": "Zul'Aman",
+    "encounter_key": "halazzi",
+    "encounter_name": "Halazzi",
+    "defeat_npc_id": 23577
   },
   "23578": {
-    "n": "Jan'alai",
-    "r": "boss",
-    "z": "Zul'Aman",
-    "e": "janalai",
-    "en": "Jan'alai"
+    "name": "Jan'alai",
+    "role": "boss",
+    "zone": "Zul'Aman",
+    "encounter_key": "janalai",
+    "encounter_name": "Jan'alai",
+    "defeat_npc_id": 23578
   },
   "23581": {
-    "n": "Amani'shi Medicine Man",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Amani'shi Medicine Man",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "23582": {
-    "n": "Amani'shi Tribesman",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Amani'shi Tribesman",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "23596": {
-    "n": "Amani'shi Flame Caster",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Amani'shi Flame Caster",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "23597": {
-    "n": "Amani'shi Guardian",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Amani'shi Guardian",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "23863": {
-    "n": "Daakara",
-    "r": "boss",
-    "z": "Zul'Aman",
-    "e": "daakara",
-    "en": "Daakara"
+    "name": "Daakara",
+    "role": "boss",
+    "zone": "Zul'Aman",
+    "encounter_key": "daakara",
+    "encounter_name": "Daakara",
+    "defeat_npc_id": 23863
   },
   "24059": {
-    "n": "Amani’shi Beast Tamer",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Amani’shi Beast Tamer",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "24239": {
-    "n": "Hex Lord Malacrass",
-    "r": "boss",
-    "z": "Zul'Aman",
-    "e": "malacrass",
-    "en": "Hex Lord Malacrass"
+    "name": "Hex Lord Malacrass",
+    "role": "boss",
+    "zone": "Zul'Aman",
+    "encounter_key": "malacrass",
+    "encounter_name": "Hex Lord Malacrass",
+    "defeat_npc_id": 24239
   },
   "25740": {
-    "n": "Ahune",
-    "r": "boss",
-    "z": "The Slave Pens",
-    "e": "eventahune",
-    "en": "Ahune"
+    "name": "Ahune",
+    "role": "boss",
+    "zone": "The Slave Pens",
+    "encounter_key": "eventahune",
+    "encounter_name": "Ahune",
+    "defeat_npc_id": 25865
   },
   "36272": {
-    "n": "Apothecary Frye",
-    "r": "add",
-    "z": "Shadowfang Keep",
-    "e": "eventcrownchemical",
-    "en": "The Crown Chemical Co."
+    "name": "Apothecary Frye",
+    "role": "add",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "eventcrownchemical",
+    "encounter_name": "The Crown Chemical Co.",
+    "defeat_npc_id": 36296
   },
   "36296": {
-    "n": "Apothecary Hummel",
-    "r": "boss",
-    "z": "Shadowfang Keep",
-    "e": "eventcrownchemical",
-    "en": "The Crown Chemical Co."
+    "name": "Apothecary Hummel",
+    "role": "boss",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "eventcrownchemical",
+    "encounter_name": "The Crown Chemical Co.",
+    "defeat_npc_id": 36296
   },
   "36565": {
-    "n": "Apothecary Baxter",
-    "r": "add",
-    "z": "Shadowfang Keep",
-    "e": "eventcrownchemical",
-    "en": "The Crown Chemical Co."
+    "name": "Apothecary Baxter",
+    "role": "add",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "eventcrownchemical",
+    "encounter_name": "The Crown Chemical Co.",
+    "defeat_npc_id": 36296
   },
   "39378": {
-    "n": "Rajh",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "rajh",
-    "en": "Rajh"
+    "name": "Rajh",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "rajh",
+    "encounter_name": "Rajh",
+    "defeat_npc_id": 39378
   },
   "39381": {
-    "n": "Crimsonborne Guardian",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Crimsonborne Guardian",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39405": {
-    "n": "Crimsonborne Seer",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Crimsonborne Seer",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39425": {
-    "n": "Temple Guardian Anhuur",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "anhuur",
-    "en": "Temple Guardian Anhuur"
+    "name": "Temple Guardian Anhuur",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "anhuur",
+    "encounter_name": "Temple Guardian Anhuur",
+    "defeat_npc_id": 39425
   },
   "39428": {
-    "n": "Earthrager Ptah",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "ptah",
-    "en": "Earthrager Ptah"
+    "name": "Earthrager Ptah",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "ptah",
+    "encounter_name": "Earthrager Ptah",
+    "defeat_npc_id": 39428
   },
   "39587": {
-    "n": "Isiset",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "isiset",
-    "en": "Isiset"
+    "name": "Isiset",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "isiset",
+    "encounter_name": "Isiset",
+    "defeat_npc_id": 39587
   },
   "39625": {
-    "n": "General Umbriss",
-    "r": "boss",
-    "z": "Grim Batol",
-    "e": "umbriss",
-    "en": "General Umbriss"
+    "name": "General Umbriss",
+    "role": "boss",
+    "zone": "Grim Batol",
+    "encounter_key": "umbriss",
+    "encounter_name": "General Umbriss",
+    "defeat_npc_id": 39625
   },
   "39626": {
-    "n": "Crimsonborne Warlord",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Crimsonborne Warlord",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39665": {
-    "n": "Rom'ogg Bonecrusher",
-    "r": "boss",
-    "z": "Blackrock Caverns",
-    "e": "romogg",
-    "en": "Rom'ogg Bonecrusher"
+    "name": "Rom'ogg Bonecrusher",
+    "role": "boss",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "romogg",
+    "encounter_name": "Rom'ogg Bonecrusher",
+    "defeat_npc_id": 39665
   },
   "39679": {
-    "n": "Corla, Herald of Twilight",
-    "r": "boss",
-    "z": "Blackrock Caverns",
-    "e": "corla",
-    "en": "Corla, Herald of Twilight"
+    "name": "Corla, Herald of Twilight",
+    "role": "boss",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "corla",
+    "encounter_name": "Corla, Herald of Twilight",
+    "defeat_npc_id": 39679
   },
   "39698": {
-    "n": "Karsh Steelbender",
-    "r": "boss",
-    "z": "Blackrock Caverns",
-    "e": "karsh",
-    "en": "Karsh Steelbender"
+    "name": "Karsh Steelbender",
+    "role": "boss",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "karsh",
+    "encounter_name": "Karsh Steelbender",
+    "defeat_npc_id": 39698
   },
   "39700": {
-    "n": "Beauty",
-    "r": "boss",
-    "z": "Blackrock Caverns",
-    "e": "beauty",
-    "en": "Beauty"
+    "name": "Beauty",
+    "role": "boss",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "beauty",
+    "encounter_name": "Beauty",
+    "defeat_npc_id": 39700
   },
   "39705": {
-    "n": "Ascendant Lord Obsidius",
-    "r": "boss",
-    "z": "Blackrock Caverns",
-    "e": "ascendantlordobsidius",
-    "en": "Ascendant Lord Obsidius"
+    "name": "Ascendant Lord Obsidius",
+    "role": "boss",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "ascendantlordobsidius",
+    "encounter_name": "Ascendant Lord Obsidius",
+    "defeat_npc_id": 39705
   },
   "39731": {
-    "n": "Ammunae",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "ammunae",
-    "en": "Ammunae"
+    "name": "Ammunae",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "ammunae",
+    "encounter_name": "Ammunae",
+    "defeat_npc_id": 39731
   },
   "39732": {
-    "n": "Setesh",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "setesh",
-    "en": "Setesh"
+    "name": "Setesh",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "setesh",
+    "encounter_name": "Setesh",
+    "defeat_npc_id": 39732
   },
   "39788": {
-    "n": "Anraphet",
-    "r": "boss",
-    "z": "Halls of Origination",
-    "e": "anraphet",
-    "en": "Anraphet"
+    "name": "Anraphet",
+    "role": "boss",
+    "zone": "Halls of Origination",
+    "encounter_key": "anraphet",
+    "encounter_name": "Anraphet",
+    "defeat_npc_id": 39788
   },
   "39854": {
-    "n": "Azureborne Guardian",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Azureborne Guardian",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39855": {
-    "n": "Azureborne Seer",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Azureborne Seer",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39909": {
-    "n": "Azureborne Warlord",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Azureborne Warlord",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39954": {
-    "n": "Twilight Shadow Weaver",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Twilight Shadow Weaver",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39956": {
-    "n": "Twilight Enforcer",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Twilight Enforcer",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39978": {
-    "n": "Twilight Torturer",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Twilight Torturer",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39980": {
-    "n": "Twilight Sadist",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Twilight Sadist",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39982": {
-    "n": "Crazed Mage",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Crazed Mage",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "39985": {
-    "n": "Mad Prisoner",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Mad Prisoner",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "40017": {
-    "n": "Twilight Element Warden",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Twilight Element Warden",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "40019": {
-    "n": "Twilight Obsidian Borer",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Twilight Obsidian Borer",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "40021": {
-    "n": "Incediary Spark",
-    "r": "trash",
-    "z": "Blackrock Caverns",
-    "e": "blackrockcavernstrash",
-    "en": "Trash"
+    "name": "Incediary Spark",
+    "role": "trash",
+    "zone": "Blackrock Caverns",
+    "encounter_key": "blackrockcavernstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "40177": {
-    "n": "Forgemaster Throngus",
-    "r": "boss",
-    "z": "Grim Batol",
-    "e": "throngus",
-    "en": "Forgemaster Throngus"
+    "name": "Forgemaster Throngus",
+    "role": "boss",
+    "zone": "Grim Batol",
+    "encounter_key": "throngus",
+    "encounter_name": "Forgemaster Throngus",
+    "defeat_npc_id": 40177
   },
   "40290": {
-    "n": "Crimsonborne Seer",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Crimsonborne Seer",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "40319": {
-    "n": "Drahga Shadowburner",
-    "r": "boss",
-    "z": "Grim Batol",
-    "e": "drahga",
-    "en": "Drahga Shadowburner"
+    "name": "Drahga Shadowburner",
+    "role": "boss",
+    "zone": "Grim Batol",
+    "encounter_key": "drahga",
+    "encounter_name": "Drahga Shadowburner",
+    "defeat_npc_id": 40319
   },
   "40446": {
-    "n": "NPC_40446",
-    "r": "add",
-    "z": "The Slave Pens",
-    "e": "eventahune",
-    "en": "Ahune"
+    "name": "NPC_40446",
+    "role": "add",
+    "zone": "The Slave Pens",
+    "encounter_key": "eventahune",
+    "encounter_name": "Ahune",
+    "defeat_npc_id": 25865
   },
   "40484": {
-    "n": "Erudax",
-    "r": "boss",
-    "z": "Grim Batol",
-    "e": "erudax",
-    "en": "Erudax"
+    "name": "Erudax",
+    "role": "boss",
+    "zone": "Grim Batol",
+    "encounter_key": "erudax",
+    "encounter_name": "Erudax",
+    "defeat_npc_id": 40484
   },
   "40577": {
-    "n": "Naz'jar Sentinel",
-    "r": "trash",
-    "z": "Throne of Tides",
-    "e": "tottrash",
-    "en": "Trash"
+    "name": "Naz'jar Sentinel",
+    "role": "trash",
+    "zone": "Throne of Tides",
+    "encounter_key": "tottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "40586": {
-    "n": "Lady Naz'jar",
-    "r": "boss",
-    "z": "Throne of Tides",
-    "e": "ladynazjar",
-    "en": "Lady Naz'jar"
+    "name": "Lady Naz'jar",
+    "role": "boss",
+    "zone": "Throne of Tides",
+    "encounter_key": "ladynazjar",
+    "encounter_name": "Lady Naz'jar",
+    "defeat_npc_id": 40586
   },
   "40765": {
-    "n": "Commander Ulthok,",
-    "r": "boss",
-    "z": "Throne of Tides",
-    "e": "ulthok",
-    "en": "Commander Ulthok"
+    "name": "Commander Ulthok,",
+    "role": "boss",
+    "zone": "Throne of Tides",
+    "encounter_key": "ulthok",
+    "encounter_name": "Commander Ulthok",
+    "defeat_npc_id": 40765
   },
   "40788": {
-    "n": "Mindbender Ghur'sha",
-    "r": "add",
-    "z": "Throne of Tides",
-    "e": "ghursha",
-    "en": "Mindbender Ghur'sha"
+    "name": "Mindbender Ghur'sha",
+    "role": "add",
+    "zone": "Throne of Tides",
+    "encounter_key": "ghursha",
+    "encounter_name": "Mindbender Ghur'sha",
+    "defeat_npc_id": 40788
   },
   "40792": {
-    "n": "Neptulon",
-    "r": "boss",
-    "z": "Throne of Tides",
-    "e": "ozumat",
-    "en": "Ozumat"
+    "name": "Neptulon",
+    "role": "boss",
+    "zone": "Throne of Tides",
+    "encounter_key": "ozumat",
+    "encounter_name": "Ozumat",
+    "defeat_npc_id": 40792
   },
   "40825": {
-    "n": "Erunak Stonespeaker",
-    "r": "boss",
-    "z": "Throne of Tides",
-    "e": "ghursha",
-    "en": "Mindbender Ghur'sha"
+    "name": "Erunak Stonespeaker",
+    "role": "boss",
+    "zone": "Throne of Tides",
+    "encounter_key": "ghursha",
+    "encounter_name": "Mindbender Ghur'sha",
+    "defeat_npc_id": 40788
   },
   "40953": {
-    "n": "Khaaphom",
-    "r": "trash",
-    "z": "Grim Batol",
-    "e": "grimbatoltrash",
-    "en": "Trash"
+    "name": "Khaaphom",
+    "role": "trash",
+    "zone": "Grim Batol",
+    "encounter_key": "grimbatoltrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "41096": {
-    "n": "Naz'jar Spiritmender",
-    "r": "trash",
-    "z": "Throne of Tides",
-    "e": "tottrash",
-    "en": "Trash"
+    "name": "Naz'jar Spiritmender",
+    "role": "trash",
+    "zone": "Throne of Tides",
+    "encounter_key": "tottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "41270": {
-    "n": "Onyxia",
-    "r": "boss",
-    "z": "Blackwing Descent",
-    "e": "nefarian",
-    "en": "Nefarian"
+    "name": "Onyxia",
+    "role": "boss",
+    "zone": "Blackwing Descent",
+    "encounter_key": "nefarian",
+    "encounter_name": "Nefarian",
+    "defeat_npc_id": 41376
   },
   "41376": {
-    "n": "Nef",
-    "r": "add",
-    "z": "Blackwing Descent",
-    "e": "nefarian",
-    "en": "Nefarian"
+    "name": "Nef",
+    "role": "add",
+    "zone": "Blackwing Descent",
+    "encounter_key": "nefarian",
+    "encounter_name": "Nefarian",
+    "defeat_npc_id": 41376
   },
   "41378": {
-    "n": "Maloriak",
-    "r": "boss",
-    "z": "Blackwing Descent",
-    "e": "maloriak",
-    "en": "Maloriak"
+    "name": "Maloriak",
+    "role": "boss",
+    "zone": "Blackwing Descent",
+    "encounter_key": "maloriak",
+    "encounter_name": "Maloriak",
+    "defeat_npc_id": 41378
   },
   "41442": {
-    "n": "Atramedes",
-    "r": "boss",
-    "z": "Blackwing Descent",
-    "e": "atramedes",
-    "en": "Atramedes"
+    "name": "Atramedes",
+    "role": "boss",
+    "zone": "Blackwing Descent",
+    "encounter_key": "atramedes",
+    "encounter_name": "Atramedes",
+    "defeat_npc_id": 41442
   },
   "41570": {
-    "n": "Magmaw",
-    "r": "boss",
-    "z": "Blackwing Descent",
-    "e": "magmaw",
-    "en": "Magmaw"
+    "name": "Magmaw",
+    "role": "boss",
+    "zone": "Blackwing Descent",
+    "encounter_key": "magmaw",
+    "encounter_name": "Magmaw",
+    "defeat_npc_id": 41570
   },
   "42166": {
-    "n": "Arcanotron",
-    "r": "boss",
-    "z": "Blackwing Descent",
-    "e": "omnitron",
-    "en": "Omnotron Defense System"
+    "name": "Arcanotron",
+    "role": "boss",
+    "zone": "Blackwing Descent",
+    "encounter_key": "omnitron",
+    "encounter_name": "Omnotron Defense System",
+    "defeat_npc_id": 42166
   },
   "42178": {
-    "n": "Magmatron",
-    "r": "add",
-    "z": "Blackwing Descent",
-    "e": "omnitron",
-    "en": "Omnotron Defense System"
+    "name": "Magmatron",
+    "role": "add",
+    "zone": "Blackwing Descent",
+    "encounter_key": "omnitron",
+    "encounter_name": "Omnotron Defense System",
+    "defeat_npc_id": 42166
   },
   "42179": {
-    "n": "Electron",
-    "r": "add",
-    "z": "Blackwing Descent",
-    "e": "omnitron",
-    "en": "Omnotron Defense System"
+    "name": "Electron",
+    "role": "add",
+    "zone": "Blackwing Descent",
+    "encounter_key": "omnitron",
+    "encounter_name": "Omnotron Defense System",
+    "defeat_npc_id": 42166
   },
   "42180": {
-    "n": "Toxitron",
-    "r": "add",
-    "z": "Blackwing Descent",
-    "e": "omnitron",
-    "en": "Omnotron Defense System"
+    "name": "Toxitron",
+    "role": "add",
+    "zone": "Blackwing Descent",
+    "encounter_key": "omnitron",
+    "encounter_name": "Omnotron Defense System",
+    "defeat_npc_id": 42166
   },
   "42188": {
-    "n": "Ozruk",
-    "r": "boss",
-    "z": "The Stonecore",
-    "e": "ozruk",
-    "en": "Ozruk"
+    "name": "Ozruk",
+    "role": "boss",
+    "zone": "The Stonecore",
+    "encounter_key": "ozruk",
+    "encounter_name": "Ozruk",
+    "defeat_npc_id": 42188
   },
   "42333": {
-    "n": "High Priestess Azil",
-    "r": "boss",
-    "z": "The Stonecore",
-    "e": "azil",
-    "en": "High Priestess Azil"
+    "name": "High Priestess Azil",
+    "role": "boss",
+    "zone": "The Stonecore",
+    "encounter_key": "azil",
+    "encounter_name": "High Priestess Azil",
+    "defeat_npc_id": 42333
   },
   "42362": {
-    "n": "Drakonid Drudge",
-    "r": "trash",
-    "z": "Blackwing Descent",
-    "e": "bwdtrash",
-    "en": "Trash"
+    "name": "Drakonid Drudge",
+    "role": "trash",
+    "zone": "Blackwing Descent",
+    "encounter_key": "bwdtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42649": {
-    "n": "Drakonid Chainwielder",
-    "r": "trash",
-    "z": "Blackwing Descent",
-    "e": "bwdtrash",
-    "en": "Trash"
+    "name": "Drakonid Chainwielder",
+    "role": "trash",
+    "zone": "Blackwing Descent",
+    "encounter_key": "bwdtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42691": {
-    "n": "Stonecore Rift Conjurer",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Stonecore Rift Conjurer",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42696": {
-    "n": "Stonecore Warbringer",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Stonecore Warbringer",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42767": {
-    "n": "Ivoroc",
-    "r": "trash",
-    "z": "Blackwing Descent",
-    "e": "bwdtrash",
-    "en": "Trash"
+    "name": "Ivoroc",
+    "role": "trash",
+    "zone": "Blackwing Descent",
+    "encounter_key": "bwdtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42768": {
-    "n": "Maimgor",
-    "r": "trash",
-    "z": "Blackwing Descent",
-    "e": "bwdtrash",
-    "en": "Trash"
+    "name": "Maimgor",
+    "role": "trash",
+    "zone": "Blackwing Descent",
+    "encounter_key": "bwdtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42789": {
-    "n": "Stonecore Magmalord",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Stonecore Magmalord",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42800": {
-    "n": "Golem Sentry",
-    "r": "trash",
-    "z": "Blackwing Descent",
-    "e": "bwdtrash",
-    "en": "Trash"
+    "name": "Golem Sentry",
+    "role": "trash",
+    "zone": "Blackwing Descent",
+    "encounter_key": "bwdtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42808": {
-    "n": "Stonecore Flayer",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Stonecore Flayer",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "42810": {
-    "n": "Crystalspawn Giant",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Crystalspawn Giant",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "43214": {
-    "n": "Slabhide",
-    "r": "boss",
-    "z": "The Stonecore",
-    "e": "slabhide",
-    "en": "Slabhide"
+    "name": "Slabhide",
+    "role": "boss",
+    "zone": "The Stonecore",
+    "encounter_key": "slabhide",
+    "encounter_name": "Slabhide",
+    "defeat_npc_id": 43214
   },
   "43296": {
-    "n": "Chimaeron",
-    "r": "boss",
-    "z": "Blackwing Descent",
-    "e": "chimaeron",
-    "en": "Chimaeron"
+    "name": "Chimaeron",
+    "role": "boss",
+    "zone": "Blackwing Descent",
+    "encounter_key": "chimaeron",
+    "encounter_name": "Chimaeron",
+    "defeat_npc_id": 43296
   },
   "43324": {
-    "n": "Cho'gall",
-    "r": "boss",
-    "z": "The Bastion of Twilight",
-    "e": "chogall",
-    "en": "Cho'gall"
+    "name": "Cho'gall",
+    "role": "boss",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "chogall",
+    "encounter_name": "Cho'gall",
+    "defeat_npc_id": 43324
   },
   "43391": {
-    "n": "Millhouse Manastorm",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Millhouse Manastorm",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "43430": {
-    "n": "Stonecore Berserker",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Stonecore Berserker",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "43438": {
-    "n": "Corborus",
-    "r": "boss",
-    "z": "The Stonecore",
-    "e": "corborus",
-    "en": "Corborus"
+    "name": "Corborus",
+    "role": "boss",
+    "zone": "The Stonecore",
+    "encounter_key": "corborus",
+    "encounter_name": "Corborus",
+    "defeat_npc_id": 43438
   },
   "43537": {
-    "n": "Stonecore Earthshaper",
-    "r": "trash",
-    "z": "The Stonecore",
-    "e": "stonecoretrash",
-    "en": "Trash"
+    "name": "Stonecore Earthshaper",
+    "role": "trash",
+    "zone": "The Stonecore",
+    "encounter_key": "stonecoretrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "43612": {
-    "n": "High Prophet Barim",
-    "r": "boss",
-    "z": "Lost City of the Tol'vir",
-    "e": "barim",
-    "en": "High Prophet Barim"
+    "name": "High Prophet Barim",
+    "role": "boss",
+    "zone": "Lost City of the Tol'vir",
+    "encounter_key": "barim",
+    "encounter_name": "High Prophet Barim",
+    "defeat_npc_id": 43612
   },
   "43614": {
-    "n": "Lockmaw",
-    "r": "boss",
-    "z": "Lost City of the Tol'vir",
-    "e": "lockmaw",
-    "en": "Lockmaw"
+    "name": "Lockmaw",
+    "role": "boss",
+    "zone": "Lost City of the Tol'vir",
+    "encounter_key": "lockmaw",
+    "encounter_name": "Lockmaw",
+    "defeat_npc_id": 43614
   },
   "43686": {
-    "n": "Ignacious",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "ascendcouncil",
-    "en": "Ascendant Council"
+    "name": "Ignacious",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "ascendcouncil",
+    "encounter_name": "Ascendant Council",
+    "defeat_npc_id": 43735
   },
   "43687": {
-    "n": "Feludius",
-    "r": "boss",
-    "z": "The Bastion of Twilight",
-    "e": "ascendcouncil",
-    "en": "Ascendant Council"
+    "name": "Feludius",
+    "role": "boss",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "ascendcouncil",
+    "encounter_name": "Ascendant Council",
+    "defeat_npc_id": 43735
   },
   "43688": {
-    "n": "Arion",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "ascendcouncil",
-    "en": "Ascendant Council"
+    "name": "Arion",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "ascendcouncil",
+    "encounter_name": "Ascendant Council",
+    "defeat_npc_id": 43735
   },
   "43689": {
-    "n": "Terrastra",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "ascendcouncil",
-    "en": "Ascendant Council"
+    "name": "Terrastra",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "ascendcouncil",
+    "encounter_name": "Ascendant Council",
+    "defeat_npc_id": 43735
   },
   "43778": {
-    "n": "Foe Reaper 5000",
-    "r": "boss",
-    "z": "The Deadmines",
-    "e": "foereaper",
-    "en": "Foe Reaper 5000"
+    "name": "Foe Reaper 5000",
+    "role": "boss",
+    "zone": "The Deadmines",
+    "encounter_key": "foereaper",
+    "encounter_name": "Foe Reaper 5000",
+    "defeat_npc_id": 43778
   },
   "43873": {
-    "n": "Altairus",
-    "r": "boss",
-    "z": "The Vortex Pinnacle",
-    "e": "altairus",
-    "en": "Altairus"
+    "name": "Altairus",
+    "role": "boss",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "altairus",
+    "encounter_name": "Altairus",
+    "defeat_npc_id": 43873
   },
   "43875": {
-    "n": "Asaad, Caliph of Zephyrs",
-    "r": "boss",
-    "z": "The Vortex Pinnacle",
-    "e": "asaad",
-    "en": "Asaad"
+    "name": "Asaad, Caliph of Zephyrs",
+    "role": "boss",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "asaad",
+    "encounter_name": "Asaad",
+    "defeat_npc_id": 43875
   },
   "43878": {
-    "n": "Grand Vizier Ertan",
-    "r": "boss",
-    "z": "The Vortex Pinnacle",
-    "e": "ertan",
-    "en": "Grand Vizier Ertan"
+    "name": "Grand Vizier Ertan",
+    "role": "boss",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "ertan",
+    "encounter_name": "Grand Vizier Ertan",
+    "defeat_npc_id": 43878
   },
   "44577": {
-    "n": "General Husam",
-    "r": "boss",
-    "z": "Lost City of the Tol'vir",
-    "e": "husam",
-    "en": "General Husam"
+    "name": "General Husam",
+    "role": "boss",
+    "zone": "Lost City of the Tol'vir",
+    "encounter_key": "husam",
+    "encounter_name": "General Husam",
+    "defeat_npc_id": 44577
   },
   "44600": {
-    "n": "Halfus Wyrmbreaker",
-    "r": "boss",
-    "z": "The Bastion of Twilight",
-    "e": "halfus",
-    "en": "Halfus Wyrmbreaker"
+    "name": "Halfus Wyrmbreaker",
+    "role": "boss",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "halfus",
+    "encounter_name": "Halfus Wyrmbreaker",
+    "defeat_npc_id": 44600
   },
   "44645": {
-    "n": "Nether Scion",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "halfus",
-    "en": "Halfus Wyrmbreaker"
+    "name": "Nether Scion",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "halfus",
+    "encounter_name": "Halfus Wyrmbreaker",
+    "defeat_npc_id": 44600
   },
   "44650": {
-    "n": "Storm Rider",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "halfus",
-    "en": "Halfus Wyrmbreaker"
+    "name": "Storm Rider",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "halfus",
+    "encounter_name": "Halfus Wyrmbreaker",
+    "defeat_npc_id": 44600
   },
   "44652": {
-    "n": "Slate Dragon",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "halfus",
-    "en": "Halfus Wyrmbreaker"
+    "name": "Slate Dragon",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "halfus",
+    "encounter_name": "Halfus Wyrmbreaker",
+    "defeat_npc_id": 44600
   },
   "44797": {
-    "n": "Time Warden",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "halfus",
-    "en": "Halfus Wyrmbreaker"
+    "name": "Time Warden",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "halfus",
+    "encounter_name": "Halfus Wyrmbreaker",
+    "defeat_npc_id": 44600
   },
   "44819": {
-    "n": "Siamat",
-    "r": "boss",
-    "z": "Lost City of the Tol'vir",
-    "e": "siamat",
-    "en": "Siamat"
+    "name": "Siamat",
+    "role": "boss",
+    "zone": "Lost City of the Tol'vir",
+    "encounter_key": "siamat",
+    "encounter_name": "Siamat",
+    "defeat_npc_id": 44819
   },
   "45122": {
-    "n": "Oathsworn Captain",
-    "r": "trash",
-    "z": "Lost City of the Tol'vir",
-    "e": "lostcitytrash",
-    "en": "Trash"
+    "name": "Oathsworn Captain",
+    "role": "trash",
+    "zone": "Lost City of the Tol'vir",
+    "encounter_key": "lostcitytrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45213": {
-    "n": "Sinestra",
-    "r": "boss",
-    "z": "The Bastion of Twilight",
-    "e": "sinestra",
-    "en": "Lady Sinestra"
+    "name": "Sinestra",
+    "role": "boss",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "sinestra",
+    "encounter_name": "Lady Sinestra",
+    "defeat_npc_id": 45213
   },
   "45261": {
-    "n": "Twlight Shadow Knight",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twlight Shadow Knight",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45264": {
-    "n": "Twilight Crossfire",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Crossfire",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45265": {
-    "n": "Twilight Soul Blade",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Soul Blade",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45266": {
-    "n": "Twilight Dark Mender",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Dark Mender",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45687": {
-    "n": "Twilight-Shifter",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight-Shifter",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45699": {
-    "n": "Twilight Shadow Mender",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Shadow Mender",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45700": {
-    "n": "Twilight Portal Shaper",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Portal Shaper",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45703": {
-    "n": "Faceless Minion",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Faceless Minion",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45870": {
-    "n": "Anshal",
-    "r": "add",
-    "z": "Throne of the Four Winds",
-    "e": "windconclave",
-    "en": "The Conclave of Wind"
+    "name": "Anshal",
+    "role": "add",
+    "zone": "Throne of the Four Winds",
+    "encounter_key": "windconclave",
+    "encounter_name": "The Conclave of Wind",
+    "defeat_npc_id": 45871
   },
   "45871": {
-    "n": "Nezir",
-    "r": "boss",
-    "z": "Throne of the Four Winds",
-    "e": "windconclave",
-    "en": "The Conclave of Wind"
+    "name": "Nezir",
+    "role": "boss",
+    "zone": "Throne of the Four Winds",
+    "encounter_key": "windconclave",
+    "encounter_name": "The Conclave of Wind",
+    "defeat_npc_id": 45871
   },
   "45872": {
-    "n": "Rohash",
-    "r": "add",
-    "z": "Throne of the Four Winds",
-    "e": "windconclave",
-    "en": "The Conclave of Wind"
+    "name": "Rohash",
+    "role": "add",
+    "zone": "Throne of the Four Winds",
+    "encounter_key": "windconclave",
+    "encounter_name": "The Conclave of Wind",
+    "defeat_npc_id": 45871
   },
   "45924": {
-    "n": "Turbulent Squall",
-    "r": "trash",
-    "z": "The Vortex Pinnacle",
-    "e": "vortexpinnacletrash",
-    "en": "Trash"
+    "name": "Turbulent Squall",
+    "role": "trash",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "vortexpinnacletrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45926": {
-    "n": "Servant of Asaad",
-    "r": "trash",
-    "z": "The Vortex Pinnacle",
-    "e": "vortexpinnacletrash",
-    "en": "Trash"
+    "name": "Servant of Asaad",
+    "role": "trash",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "vortexpinnacletrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45928": {
-    "n": "Executor of the Caliph",
-    "r": "trash",
-    "z": "The Vortex Pinnacle",
-    "e": "vortexpinnacletrash",
-    "en": "Trash"
+    "name": "Executor of the Caliph",
+    "role": "trash",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "vortexpinnacletrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45930": {
-    "n": "Minister of Air",
-    "r": "trash",
-    "z": "The Vortex Pinnacle",
-    "e": "vortexpinnacletrash",
-    "en": "Trash"
+    "name": "Minister of Air",
+    "role": "trash",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "vortexpinnacletrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45935": {
-    "n": "Temple Adept",
-    "r": "trash",
-    "z": "The Vortex Pinnacle",
-    "e": "vortexpinnacletrash",
-    "en": "Trash"
+    "name": "Temple Adept",
+    "role": "trash",
+    "zone": "The Vortex Pinnacle",
+    "encounter_key": "vortexpinnacletrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "45992": {
-    "n": "Valiona",
-    "r": "boss",
-    "z": "The Bastion of Twilight",
-    "e": "valther",
-    "en": "Valiona & Theralion"
+    "name": "Valiona",
+    "role": "boss",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "valther",
+    "encounter_name": "Valiona & Theralion",
+    "defeat_npc_id": 45993
   },
   "45993": {
-    "n": "Theralion",
-    "r": "add",
-    "z": "The Bastion of Twilight",
-    "e": "valther",
-    "en": "Valiona & Theralion"
+    "name": "Theralion",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "valther",
+    "encounter_name": "Valiona & Theralion",
+    "defeat_npc_id": 45993
   },
   "46753": {
-    "n": "Al'Akir",
-    "r": "boss",
-    "z": "Throne of the Four Winds",
-    "e": "alakir",
-    "en": "Al'Akir"
+    "name": "Al'Akir",
+    "role": "boss",
+    "zone": "Throne of the Four Winds",
+    "encounter_key": "alakir",
+    "encounter_name": "Al'Akir",
+    "defeat_npc_id": 46753
   },
   "46962": {
-    "n": "Baron Ashbury",
-    "r": "boss",
-    "z": "Shadowfang Keep",
-    "e": "baronashbury",
-    "en": "Baron Ashbury"
+    "name": "Baron Ashbury",
+    "role": "boss",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "baronashbury",
+    "encounter_name": "Baron Ashbury",
+    "defeat_npc_id": 46962
   },
   "46963": {
-    "n": "Lord Walden",
-    "r": "boss",
-    "z": "Shadowfang Keep",
-    "e": "lordwalden",
-    "en": "Lord Walden"
+    "name": "Lord Walden",
+    "role": "boss",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "lordwalden",
+    "encounter_name": "Lord Walden",
+    "defeat_npc_id": 46963
   },
   "46964": {
-    "n": "Lord Godfrey",
-    "r": "boss",
-    "z": "Shadowfang Keep",
-    "e": "lordgodfrey",
-    "en": "Lord Godfrey"
+    "name": "Lord Godfrey",
+    "role": "boss",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "lordgodfrey",
+    "encounter_name": "Lord Godfrey",
+    "defeat_npc_id": 46964
   },
   "47081": {
-    "n": "Elemental Firelord",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Elemental Firelord",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47086": {
-    "n": "Crimsonborne Firestarter",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Crimsonborne Firestarter",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47087": {
-    "n": "Azureborne Destroyer",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Azureborne Destroyer",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47120": {
-    "n": "Argaloth",
-    "r": "boss",
-    "z": "Baradin Hold",
-    "e": "argaloth",
-    "en": "Argaloth"
+    "name": "Argaloth",
+    "role": "boss",
+    "zone": "Baradin Hold",
+    "encounter_key": "argaloth",
+    "encounter_name": "Argaloth",
+    "defeat_npc_id": 47120
   },
   "47135": {
-    "n": "Fetid Ghoul",
-    "r": "trash",
-    "z": "Shadowfang Keep",
-    "e": "sfktrash",
-    "en": "Trash"
+    "name": "Fetid Ghoul",
+    "role": "trash",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "sfktrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47140": {
-    "n": "Sorcerous Skeleton",
-    "r": "trash",
-    "z": "Shadowfang Keep",
-    "e": "sfktrash",
-    "en": "Trash"
+    "name": "Sorcerous Skeleton",
+    "role": "trash",
+    "zone": "Shadowfang Keep",
+    "encounter_key": "sfktrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47150": {
-    "n": "Earth Ravager",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Earth Ravager",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47151": {
-    "n": "Wind Breaker",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Wind Breaker",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47152": {
-    "n": "Twilight Elementalist",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Elementalist",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47161": {
-    "n": "Twilight Brute",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Twilight Brute",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "47162": {
-    "n": "Glubtok",
-    "r": "boss",
-    "z": "The Deadmines",
-    "e": "glubtok",
-    "en": "Glubtok"
+    "name": "Glubtok",
+    "role": "boss",
+    "zone": "The Deadmines",
+    "encounter_key": "glubtok",
+    "encounter_name": "Glubtok",
+    "defeat_npc_id": 47162
   },
   "47296": {
-    "n": "Helix Gearbreaker",
-    "r": "add",
-    "z": "The Deadmines",
-    "e": "helix",
-    "en": "Helix Gearbreaker"
+    "name": "Helix Gearbreaker",
+    "role": "add",
+    "zone": "The Deadmines",
+    "encounter_key": "helix",
+    "encounter_name": "Helix Gearbreaker",
+    "defeat_npc_id": 47296
   },
   "47297": {
-    "n": "Lumbering Oaf",
-    "r": "boss",
-    "z": "The Deadmines",
-    "e": "helix",
-    "en": "Helix Gearbreaker"
+    "name": "Lumbering Oaf",
+    "role": "boss",
+    "zone": "The Deadmines",
+    "encounter_key": "helix",
+    "encounter_name": "Helix Gearbreaker",
+    "defeat_npc_id": 47296
   },
   "47626": {
-    "n": "Admiral Ripsnarl",
-    "r": "boss",
-    "z": "The Deadmines",
-    "e": "ripsnarl",
-    "en": "Admiral Ripsnarl"
+    "name": "Admiral Ripsnarl",
+    "role": "boss",
+    "zone": "The Deadmines",
+    "encounter_key": "ripsnarl",
+    "encounter_name": "Admiral Ripsnarl",
+    "defeat_npc_id": 47626
   },
   "47739": {
-    "n": "\"Captain\" Cookie",
-    "r": "boss",
-    "z": "The Deadmines",
-    "e": "cookie",
-    "en": "cookie"
+    "name": "\"Captain\" Cookie",
+    "role": "boss",
+    "zone": "The Deadmines",
+    "encounter_key": "cookie",
+    "encounter_name": "cookie",
+    "defeat_npc_id": 47739
   },
   "48139": {
-    "n": "Temple Swiftstalker",
-    "r": "trash",
-    "z": "Halls of Origination",
-    "e": "hootrash",
-    "en": "Trash"
+    "name": "Temple Swiftstalker",
+    "role": "trash",
+    "zone": "Halls of Origination",
+    "encounter_key": "hootrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48140": {
-    "n": "Temple Runecaster",
-    "r": "trash",
-    "z": "Halls of Origination",
-    "e": "hootrash",
-    "en": "Trash"
+    "name": "Temple Runecaster",
+    "role": "trash",
+    "zone": "Halls of Origination",
+    "encounter_key": "hootrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48141": {
-    "n": "Temple Shadowlancer",
-    "r": "trash",
-    "z": "Halls of Origination",
-    "e": "hootrash",
-    "en": "Trash"
+    "name": "Temple Shadowlancer",
+    "role": "trash",
+    "zone": "Halls of Origination",
+    "encounter_key": "hootrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48143": {
-    "n": "Temple Fireshaper",
-    "r": "trash",
-    "z": "Halls of Origination",
-    "e": "hootrash",
-    "en": "Trash"
+    "name": "Temple Fireshaper",
+    "role": "trash",
+    "zone": "Halls of Origination",
+    "encounter_key": "hootrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48418": {
-    "n": "Defias Envoker",
-    "r": "trash",
-    "z": "The Deadmines",
-    "e": "deadminestrash",
-    "en": "Trash"
+    "name": "Defias Envoker",
+    "role": "trash",
+    "zone": "The Deadmines",
+    "encounter_key": "deadminestrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48419": {
-    "n": "Defias Miner",
-    "r": "trash",
-    "z": "The Deadmines",
-    "e": "deadminestrash",
-    "en": "Trash"
+    "name": "Defias Miner",
+    "role": "trash",
+    "zone": "The Deadmines",
+    "encounter_key": "deadminestrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48421": {
-    "n": "Defias Overseer",
-    "r": "trash",
-    "z": "The Deadmines",
-    "e": "deadminestrash",
-    "en": "Trash"
+    "name": "Defias Overseer",
+    "role": "trash",
+    "zone": "The Deadmines",
+    "encounter_key": "deadminestrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48521": {
-    "n": "Defias Squallshaper",
-    "r": "trash",
-    "z": "The Deadmines",
-    "e": "deadminestrash",
-    "en": "Trash"
+    "name": "Defias Squallshaper",
+    "role": "trash",
+    "zone": "The Deadmines",
+    "encounter_key": "deadminestrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "48522": {
-    "n": "Defias Pirate",
-    "r": "trash",
-    "z": "The Deadmines",
-    "e": "deadminestrash",
-    "en": "Trash"
+    "name": "Defias Pirate",
+    "role": "trash",
+    "zone": "The Deadmines",
+    "encounter_key": "deadminestrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "49045": {
-    "n": "Augh",
-    "r": "boss",
-    "z": "Lost City of the Tol'vir",
-    "e": "augh",
-    "en": "Augh"
+    "name": "Augh",
+    "role": "boss",
+    "zone": "Lost City of the Tol'vir",
+    "encounter_key": "augh",
+    "encounter_name": "Augh",
+    "defeat_npc_id": 49045
   },
   "49541": {
-    "n": "Vanessa Van Cleef",
-    "r": "boss",
-    "z": "The Deadmines",
-    "e": "vanessa",
-    "en": "Vanessa VanCleef"
+    "name": "Vanessa Van Cleef",
+    "role": "boss",
+    "zone": "The Deadmines",
+    "encounter_key": "vanessa",
+    "encounter_name": "Vanessa VanCleef",
+    "defeat_npc_id": 49541
   },
   "49817": {
-    "n": "Bound Inferno",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Bound Inferno",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "49821": {
-    "n": "Bound Zephyr",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Bound Zephyr",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "49825": {
-    "n": "Bound Deluge",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Bound Deluge",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "49826": {
-    "n": "Bound Rumbler",
-    "r": "trash",
-    "z": "The Bastion of Twilight",
-    "e": "bottrash",
-    "en": "Trash"
+    "name": "Bound Rumbler",
+    "role": "trash",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "bottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52053": {
-    "n": "Zanzil",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "zanzil",
-    "en": "Zanzil"
+    "name": "Zanzil",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zanzil",
+    "encounter_name": "Zanzil",
+    "defeat_npc_id": 52053
   },
   "52059": {
-    "n": "High Priestess Kilnara",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "kilnara",
-    "en": "High Priestess Kilnara"
+    "name": "High Priestess Kilnara",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "kilnara",
+    "encounter_name": "High Priestess Kilnara",
+    "defeat_npc_id": 52059
   },
   "52076": {
-    "n": "Gurubashi Cauldron-Mixer",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Gurubashi Cauldron-Mixer",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52148": {
-    "n": "Jin'do the Godbreaker",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "jindo",
-    "en": "Jin'do the Godbreaker"
+    "name": "Jin'do the Godbreaker",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "jindo",
+    "encounter_name": "Jin'do the Godbreaker",
+    "defeat_npc_id": 52148
   },
   "52151": {
-    "n": "Bloodlord Mandokir",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "mandokir",
-    "en": "Bloodlord Mandokir"
+    "name": "Bloodlord Mandokir",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "mandokir",
+    "encounter_name": "Bloodlord Mandokir",
+    "defeat_npc_id": 52151
   },
   "52155": {
-    "n": "High Priest Venoxis",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "venoxis",
-    "en": "High Priest Venoxis"
+    "name": "High Priest Venoxis",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "venoxis",
+    "encounter_name": "High Priest Venoxis",
+    "defeat_npc_id": 52155
   },
   "52258": {
-    "n": "Gri'lek",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "grilek",
-    "en": "Gri'lek"
+    "name": "Gri'lek",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "grilek",
+    "encounter_name": "Gri'lek",
+    "defeat_npc_id": 52258
   },
   "52269": {
-    "n": "Renataki",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "renataki",
-    "en": "Renataki"
+    "name": "Renataki",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "renataki",
+    "encounter_name": "Renataki",
+    "defeat_npc_id": 52269
   },
   "52271": {
-    "n": "Hazza'rah",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "hazzarah",
-    "en": "Hazza'rah"
+    "name": "Hazza'rah",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "hazzarah",
+    "encounter_name": "Hazza'rah",
+    "defeat_npc_id": 52271
   },
   "52286": {
-    "n": "Wushoolay",
-    "r": "boss",
-    "z": "Zul'Gurub",
-    "e": "wushoolay",
-    "en": "Wushoolay"
+    "name": "Wushoolay",
+    "role": "boss",
+    "zone": "Zul'Gurub",
+    "encounter_key": "wushoolay",
+    "encounter_name": "Wushoolay",
+    "defeat_npc_id": 52286
   },
   "52311": {
-    "n": "Venomguard Destoyer",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Venomguard Destoyer",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52325": {
-    "n": "Gurubashi Blood Drinker",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Gurubashi Blood Drinker",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52339": {
-    "n": "Lesser Priest of Bethekk",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Lesser Priest of Bethekk",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52363": {
-    "n": "Occu'thar",
-    "r": "boss",
-    "z": "Baradin Hold",
-    "e": "occuthar",
-    "en": "Occu'thar"
+    "name": "Occu'thar",
+    "role": "boss",
+    "zone": "Baradin Hold",
+    "encounter_key": "occuthar",
+    "encounter_name": "Occu'thar",
+    "defeat_npc_id": 52363
   },
   "52381": {
-    "n": "Venomacer T'Kulu",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Venomacer T'Kulu",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52409": {
-    "n": "NPC_52409",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Ragnaros",
-    "en": "Ragnaros"
+    "name": "NPC_52409",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Ragnaros",
+    "encounter_name": "Ragnaros",
+    "defeat_npc_id": 52409
   },
   "52498": {
-    "n": "Beth'tilac",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Beth'tilac",
-    "en": "Beth'tilac"
+    "name": "Beth'tilac",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Beth'tilac",
+    "encounter_name": "Beth'tilac",
+    "defeat_npc_id": 52498
   },
   "52530": {
-    "n": "Alysrazor",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Alysrazor",
-    "en": "Alysrazor"
+    "name": "Alysrazor",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Alysrazor",
+    "encounter_name": "Alysrazor",
+    "defeat_npc_id": 52530
   },
   "52558": {
-    "n": "Lord Rhyolith",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Rhyolith",
-    "en": "Lord Rhyolith"
+    "name": "Lord Rhyolith",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Rhyolith",
+    "encounter_name": "Lord Rhyolith",
+    "defeat_npc_id": 52558
   },
   "52571": {
-    "n": "Majordomo Fandral Staghelm",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Staghelm",
-    "en": "Majordomo Staghelm"
+    "name": "Majordomo Fandral Staghelm",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Staghelm",
+    "encounter_name": "Majordomo Staghelm",
+    "defeat_npc_id": 52571
   },
   "52577": {
-    "n": "Left",
-    "r": "add",
-    "z": "Firelands",
-    "e": "Rhyolith",
-    "en": "Lord Rhyolith"
+    "name": "Left",
+    "role": "add",
+    "zone": "Firelands",
+    "encounter_key": "Rhyolith",
+    "encounter_name": "Lord Rhyolith",
+    "defeat_npc_id": 52558
   },
   "52606": {
-    "n": "Gurubashi Warmonger",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Gurubashi Warmonger",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52956": {
-    "n": "Zandalari Juggernaut (2)",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Zandalari Juggernaut (2)",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52958": {
-    "n": "Zandalari Hierophant",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Zandalari Hierophant",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52962": {
-    "n": "Zandalari Archon",
-    "r": "trash",
-    "z": "Zul'Aman",
-    "e": "zulamantrash",
-    "en": "Trash"
+    "name": "Zandalari Archon",
+    "role": "trash",
+    "zone": "Zul'Aman",
+    "encounter_key": "zulamantrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52968": {
-    "n": "Zandalari Archon",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Zandalari Archon",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "52974": {
-    "n": "Zandalari Juggernaut",
-    "r": "trash",
-    "z": "Zul'Gurub",
-    "e": "zulgurubtrash",
-    "en": "Trash"
+    "name": "Zandalari Juggernaut",
+    "role": "trash",
+    "zone": "Zul'Gurub",
+    "encounter_key": "zulgurubtrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53087": {
-    "n": "Right",
-    "r": "add",
-    "z": "Firelands",
-    "e": "Rhyolith",
-    "en": "Lord Rhyolith"
+    "name": "Right",
+    "role": "add",
+    "zone": "Firelands",
+    "encounter_key": "Rhyolith",
+    "encounter_name": "Lord Rhyolith",
+    "defeat_npc_id": 52558
   },
   "53094": {
-    "n": "Patriarch Fire Turtle",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Patriarch Fire Turtle",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53095": {
-    "n": "Matriarch Fire Turtle",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Matriarch Fire Turtle",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53096": {
-    "n": "Fire Turtle Hatchling",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Fire Turtle Hatchling",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53119": {
-    "n": "Flamewaker Forward Guard",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Flamewaker Forward Guard",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53120": {
-    "n": "Flamewaker Pathfinder",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Flamewaker Pathfinder",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53121": {
-    "n": "Flamewaker Cauterizer",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Flamewaker Cauterizer",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53494": {
-    "n": "Baleroc",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Baleroc",
-    "en": "Baleroc"
+    "name": "Baleroc",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Baleroc",
+    "encounter_name": "Baleroc",
+    "defeat_npc_id": 53494
   },
   "53575": {
-    "n": "Lava Wielder",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Lava Wielder",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53616": {
-    "n": "Kar the Everburning",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Kar the Everburning",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53619": {
-    "n": "Druid of the Flame",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Druid of the Flame",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53691": {
-    "n": "Shannox",
-    "r": "boss",
-    "z": "Firelands",
-    "e": "Shannox",
-    "en": "Shannox"
+    "name": "Shannox",
+    "role": "boss",
+    "zone": "Firelands",
+    "encounter_key": "Shannox",
+    "encounter_name": "Shannox",
+    "defeat_npc_id": 53691
   },
   "53791": {
-    "n": "Blazing Monstrosity",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Blazing Monstrosity",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53793": {
-    "n": "Harbinger of Flame",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Harbinger of Flame",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53795": {
-    "n": "Egg Pile",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Egg Pile",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "53879": {
-    "n": "Deathwing",
-    "r": "boss",
-    "z": "Dragon Soul",
-    "e": "spineofdeathwing",
-    "en": "Spine of Deathwing"
+    "name": "Deathwing",
+    "role": "boss",
+    "zone": "Dragon Soul",
+    "encounter_key": "spineofdeathwing",
+    "encounter_name": "Spine of Deathwing",
+    "defeat_npc_id": 53879
   },
   "54015": {
-    "n": "Staghelm (to trigger first encounter)",
-    "r": "add",
-    "z": "Firelands",
-    "e": "Alysrazor",
-    "en": "Alysrazor"
+    "name": "Staghelm (to trigger first encounter)",
+    "role": "add",
+    "zone": "Firelands",
+    "encounter_key": "Alysrazor",
+    "encounter_name": "Alysrazor",
+    "defeat_npc_id": 52530
   },
   "54123": {
-    "n": "Echo of Sylvanas",
-    "r": "boss",
-    "z": "End Time",
-    "e": "echosylvanas",
-    "en": "Echo of Sylvanas"
+    "name": "Echo of Sylvanas",
+    "role": "boss",
+    "zone": "End Time",
+    "encounter_key": "echosylvanas",
+    "encounter_name": "Echo of Sylvanas",
+    "defeat_npc_id": 54123
   },
   "54143": {
-    "n": "Molten Flamefather",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Molten Flamefather",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54161": {
-    "n": "Flame Archon",
-    "r": "trash",
-    "z": "Firelands",
-    "e": "firelandstrash",
-    "en": "Trash"
+    "name": "Flame Archon",
+    "role": "trash",
+    "zone": "Firelands",
+    "encounter_key": "firelandstrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54431": {
-    "n": "Echo of Baine",
-    "r": "boss",
-    "z": "End Time",
-    "e": "echobaine",
-    "en": "Echo of Baine"
+    "name": "Echo of Baine",
+    "role": "boss",
+    "zone": "End Time",
+    "encounter_key": "echobaine",
+    "encounter_name": "Echo of Baine",
+    "defeat_npc_id": 54431
   },
   "54432": {
-    "n": "Murozond",
-    "r": "boss",
-    "z": "End Time",
-    "e": "murozond",
-    "en": "Murozond"
+    "name": "Murozond",
+    "role": "boss",
+    "zone": "End Time",
+    "encounter_key": "murozond",
+    "encounter_name": "Murozond",
+    "defeat_npc_id": 54432
   },
   "54445": {
-    "n": "Echo of Jaina",
-    "r": "boss",
-    "z": "End Time",
-    "e": "echojaina",
-    "en": "Echo of Jaina"
+    "name": "Echo of Jaina",
+    "role": "boss",
+    "zone": "End Time",
+    "encounter_key": "echojaina",
+    "encounter_name": "Echo of Jaina",
+    "defeat_npc_id": 54445
   },
   "54543": {
-    "n": "Time-Twisted Drake",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Drake",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54552": {
-    "n": "Time-Twisted Breaker",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Breaker",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54553": {
-    "n": "Time-Twisted Seer",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Seer",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54590": {
-    "n": "Arcurion",
-    "r": "boss",
-    "z": "Hour of Twilight",
-    "e": "arcurion",
-    "en": "Arcurion"
+    "name": "Arcurion",
+    "role": "boss",
+    "zone": "Hour of Twilight",
+    "encounter_key": "arcurion",
+    "encounter_name": "Arcurion",
+    "defeat_npc_id": 54590
   },
   "54612": {
-    "n": "Eternal Champion",
-    "r": "trash",
-    "z": "Well of Eternity",
-    "e": "wellofeternitytrash",
-    "en": "Trash"
+    "name": "Eternal Champion",
+    "role": "trash",
+    "zone": "Well of Eternity",
+    "encounter_key": "wellofeternitytrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54632": {
-    "n": "Faceless Brute",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Faceless Brute",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54633": {
-    "n": "Faceless Shadow Weaver",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Faceless Shadow Weaver",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54686": {
-    "n": "Shadow Borer",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Shadow Borer",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54687": {
-    "n": "Time-Twisted Footman",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Footman",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54690": {
-    "n": "Time-Twisted Priest",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Priest",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54691": {
-    "n": "Time-Twisted Sorceress",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Sorceress",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54693": {
-    "n": "Time-Twisted Rifleman",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Time-Twisted Rifleman",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54853": {
-    "n": "Queen Azshara",
-    "r": "boss",
-    "z": "Well of Eternity",
-    "e": "queenazshara",
-    "en": "Queen Azshara"
+    "name": "Queen Azshara",
+    "role": "boss",
+    "zone": "Well of Eternity",
+    "encounter_key": "queenazshara",
+    "encounter_name": "Queen Azshara",
+    "defeat_npc_id": 54853
   },
   "54920": {
-    "n": "Infinite Suppressor",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Infinite Suppressor",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54923": {
-    "n": "Infinite Warden",
-    "r": "trash",
-    "z": "End Time",
-    "e": "ettrash",
-    "en": "Trash"
+    "name": "Infinite Warden",
+    "role": "trash",
+    "zone": "End Time",
+    "encounter_key": "ettrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "54938": {
-    "n": "Archbishop Benedictus",
-    "r": "boss",
-    "z": "Hour of Twilight",
-    "e": "archbishopbenedictus",
-    "en": "Archbishop Benedictus"
+    "name": "Archbishop Benedictus",
+    "role": "boss",
+    "zone": "Hour of Twilight",
+    "encounter_key": "archbishopbenedictus",
+    "encounter_name": "Archbishop Benedictus",
+    "defeat_npc_id": 54938
   },
   "54968": {
-    "n": "Asira Dawnslayer",
-    "r": "boss",
-    "z": "Hour of Twilight",
-    "e": "asiradownslayer",
-    "en": "Mark fo Silence mode"
+    "name": "Asira Dawnslayer",
+    "role": "boss",
+    "zone": "Hour of Twilight",
+    "encounter_key": "asiradownslayer",
+    "encounter_name": "Mark fo Silence mode",
+    "defeat_npc_id": 54968
   },
   "54969": {
-    "n": "Mannoroth",
-    "r": "boss",
-    "z": "Well of Eternity",
-    "e": "mannorothvarothen",
-    "en": "Mannoroth and Varo'then"
+    "name": "Mannoroth",
+    "role": "boss",
+    "zone": "Well of Eternity",
+    "encounter_key": "mannorothvarothen",
+    "encounter_name": "Mannoroth and Varo'then",
+    "defeat_npc_id": 0
   },
   "55085": {
-    "n": "Peroth'arn",
-    "r": "boss",
-    "z": "Well of Eternity",
-    "e": "perotharn",
-    "en": "Peroth'arn"
+    "name": "Peroth'arn",
+    "role": "boss",
+    "zone": "Well of Eternity",
+    "encounter_key": "perotharn",
+    "encounter_name": "Peroth'arn",
+    "defeat_npc_id": 55085
   },
   "55107": {
-    "n": "Twilight Ranger",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Twilight Ranger",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55109": {
-    "n": "Twilight Shadow-Walker",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Twilight Shadow-Walker",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55111": {
-    "n": "Twilight Thug",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Twilight Thug",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55112": {
-    "n": "Twilight Bruiser",
-    "r": "trash",
-    "z": "Hour of Twilight",
-    "e": "hottrash",
-    "en": "Trash"
+    "name": "Twilight Bruiser",
+    "role": "trash",
+    "zone": "Hour of Twilight",
+    "encounter_key": "hottrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55265": {
-    "n": "Morchok",
-    "r": "boss",
-    "z": "Dragon Soul",
-    "e": "morchok",
-    "en": "Morchok"
+    "name": "Morchok",
+    "role": "boss",
+    "zone": "Dragon Soul",
+    "encounter_key": "morchok",
+    "encounter_name": "Morchok",
+    "defeat_npc_id": 55265
   },
   "55308": {
-    "n": "Warlord Zon'ozz",
-    "r": "boss",
-    "z": "Dragon Soul",
-    "e": "zonozz",
-    "en": "Warlord Zon'ozz"
+    "name": "Warlord Zon'ozz",
+    "role": "boss",
+    "zone": "Dragon Soul",
+    "encounter_key": "zonozz",
+    "encounter_name": "Warlord Zon'ozz",
+    "defeat_npc_id": 55308
   },
   "55312": {
-    "n": "Yor'sahj",
-    "r": "boss",
-    "z": "Dragon Soul",
-    "e": "yorsahj",
-    "en": "Yor'sahj the Unsleeping"
+    "name": "Yor'sahj",
+    "role": "boss",
+    "zone": "Dragon Soul",
+    "encounter_key": "yorsahj",
+    "encounter_name": "Yor'sahj the Unsleeping",
+    "defeat_npc_id": 55312
   },
   "55419": {
-    "n": "Captain Varo'then",
-    "r": "add",
-    "z": "Well of Eternity",
-    "e": "mannorothvarothen",
-    "en": "Mannoroth and Varo'then"
+    "name": "Captain Varo'then",
+    "role": "add",
+    "zone": "Well of Eternity",
+    "encounter_key": "mannorothvarothen",
+    "encounter_name": "Mannoroth and Varo'then",
+    "defeat_npc_id": 0
   },
   "55453": {
-    "n": "Shadowbat",
-    "r": "trash",
-    "z": "Well of Eternity",
-    "e": "wellofeternitytrash",
-    "en": "Trash"
+    "name": "Shadowbat",
+    "role": "trash",
+    "zone": "Well of Eternity",
+    "encounter_key": "wellofeternitytrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55503": {
-    "n": "Legion Demon",
-    "r": "trash",
-    "z": "Well of Eternity",
-    "e": "wellofeternitytrash",
-    "en": "Trash"
+    "name": "Legion Demon",
+    "role": "trash",
+    "zone": "Well of Eternity",
+    "encounter_key": "wellofeternitytrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55654": {
-    "n": "Corrupted Arcanist",
-    "r": "trash",
-    "z": "Well of Eternity",
-    "e": "wellofeternitytrash",
-    "en": "Trash"
+    "name": "Corrupted Arcanist",
+    "role": "trash",
+    "zone": "Well of Eternity",
+    "encounter_key": "wellofeternitytrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55656": {
-    "n": "Dreadlord Defender",
-    "r": "trash",
-    "z": "Well of Eternity",
-    "e": "wellofeternitytrash",
-    "en": "Trash"
+    "name": "Dreadlord Defender",
+    "role": "trash",
+    "zone": "Well of Eternity",
+    "encounter_key": "wellofeternitytrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "55689": {
-    "n": "Hagara",
-    "r": "boss",
-    "z": "Dragon Soul",
-    "e": "hagara",
-    "en": "Hagara the Stormbinder"
+    "name": "Hagara",
+    "role": "boss",
+    "zone": "Dragon Soul",
+    "encounter_key": "hagara",
+    "encounter_name": "Hagara the Stormbinder",
+    "defeat_npc_id": 55689
   },
   "55869": {
-    "n": "Alizabal",
-    "r": "boss",
-    "z": "Baradin Hold",
-    "e": "Alizabal",
-    "en": "Alizabal"
+    "name": "Alizabal",
+    "role": "boss",
+    "zone": "Baradin Hold",
+    "encounter_key": "Alizabal",
+    "encounter_name": "Alizabal",
+    "defeat_npc_id": 55869
   },
   "57158": {
-    "n": "Earthen Destroyer",
-    "r": "trash",
-    "z": "Dragon Soul",
-    "e": "dragonsoultrash",
-    "en": "Trash"
+    "name": "Earthen Destroyer",
+    "role": "trash",
+    "zone": "Dragon Soul",
+    "encounter_key": "dragonsoultrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   },
   "57160": {
-    "n": "Ancient Water Lord",
-    "r": "trash",
-    "z": "Dragon Soul",
-    "e": "dragonsoultrash",
-    "en": "Trash"
+    "name": "Ancient Water Lord",
+    "role": "trash",
+    "zone": "Dragon Soul",
+    "encounter_key": "dragonsoultrash",
+    "encounter_name": "Trash",
+    "defeat_npc_id": 0
   }
 }
