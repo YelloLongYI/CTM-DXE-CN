@@ -6,6 +6,7 @@ import logging
 import os
 import traceback
 from pathlib import Path
+from datetime import datetime, timezone, timedelta
 
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QSplitter,
@@ -13,7 +14,7 @@ from PySide6.QtWidgets import (
     QFileDialog, QStatusBar, QGroupBox, QTextEdit, QMessageBox,
     QSlider, QApplication, QFrame,
     QTableWidget, QTableWidgetItem, QHeaderView, QScrollArea, QAbstractItemView,
-    QMenu,
+    QMenu, QInputDialog,
 )
 from PySide6.QtCore import Qt, QThread, Signal
 from PySide6.QtGui import QFont, QColor
@@ -22,6 +23,8 @@ from models import Encounter, NPCUnit, SpellEvent, ParseResult
 from parser import parse_log
 from dxe_export import export_lua, export_json
 from ui.timeline import TimelineView
+
+CN_TZ = timezone(timedelta(hours=8))
 
 log = logging.getLogger("combatview.ui")
 
@@ -173,30 +176,43 @@ class MainWindow(QMainWindow):
         center = QWidget()
         center_layout = QVBoxLayout(center)
         center_layout.setContentsMargins(0, 0, 0, 0)
-        self._enc_label = QLabel("⏱ 选择一场战斗")
+        self._enc_label = QLabel("⏱ 选择一场战斗  (右键事件行 → 设为战斗开始时间)")
         self._enc_label.setFont(QFont("Consolas", 12))
         center_layout.addWidget(self._enc_label)
 
+        self._btn_set_start = QPushButton("⏰ 手动设置开始时间")
+        self._btn_set_start.setMaximumWidth(160)
+        self._btn_set_start.clicked.connect(self._on_set_start)
+        center_layout.addWidget(self._btn_set_start)
+
+        self._btn_reset_start = QPushButton("↩ 重置")
+        self._btn_reset_start.setEnabled(False)
+        self._btn_reset_start.setMaximumWidth(80)
+        self._btn_reset_start.clicked.connect(self._on_reset_start)
+        center_layout.addWidget(self._btn_reset_start)
+
         self._table = QTableWidget()
-        self._table.setColumnCount(5)
-        self._table.setHorizontalHeaderLabels(["时间", "事件", "NPC", "法术", "目标"])
+        self._table.setColumnCount(6)
+        self._table.setHorizontalHeaderLabels(["绝对时间", "相对时间", "事件", "NPC", "法术", "目标"])
         self._table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self._table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self._table.setAlternatingRowColors(True)
         self._table.setSortingEnabled(False)
         self._table.horizontalHeader().setStretchLastSection(True)
         self._table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
-        self._table.setColumnWidth(0, 100)
+        self._table.setColumnWidth(0, 170)
         self._table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Fixed)
-        self._table.setColumnWidth(1, 200)
+        self._table.setColumnWidth(1, 90)
         self._table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Fixed)
-        self._table.setColumnWidth(2, 180)
+        self._table.setColumnWidth(2, 200)
         self._table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Fixed)
         self._table.setColumnWidth(3, 180)
         self._table.verticalHeader().setVisible(False)
         self._table.itemClicked.connect(self._on_table_clicked)
         self._table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self._table.customContextMenuRequested.connect(self._on_table_context_menu)
+        self._table.horizontalHeader().setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self._table.horizontalHeader().customContextMenuRequested.connect(self._on_header_context_menu)
         center_layout.addWidget(self._table)
         splitter.addWidget(center)
 
@@ -341,10 +357,16 @@ class MainWindow(QMainWindow):
             return
         self._active_enc_index = row
         enc = self._result.encounters[row]
+        dur_str = f"{enc.duration:.1f}s" if enc.duration else "?"
+        start_str = ""
+        if enc.start_abs > 0:
+            dt = datetime.fromtimestamp(enc.start_abs / 1000, tz=CN_TZ)
+            start_str = dt.strftime("  %m/%d %H:%M:%S")
         self._enc_label.setText(
-            f"⏱ {enc.name}  ({enc.duration:.1f}s)"
+            f"⏱ {enc.name}  ({dur_str}){start_str}"
             if enc.duration else f"⏱ {enc.name}"
         )
+        self._btn_reset_start.setEnabled(hasattr(enc, "_original_start_abs"))
         self._current_enc = enc
         self._build_npc_checkboxes(enc)
         self._build_event_type_checkboxes(enc)
@@ -473,33 +495,36 @@ class MainWindow(QMainWindow):
 
         self._table.setRowCount(len(events))
         for row, ev in enumerate(events):
-            # time
+            # absolute time
+            abs_ts = datetime.fromtimestamp(ev.abs_time / 1000, tz=CN_TZ)
+            a = self._table_item(abs_ts.strftime("%m/%d %H:%M:%S.%f")[:-3])
+            self._table.setItem(row, 0, a)
+            # relative time
             t = self._table_item(self._fmt_time(ev.rel_time))
             t.setData(Qt.ItemDataRole.UserRole, ev)
-            self._table.setItem(row, 0, t)
+            self._table.setItem(row, 1, t)
             # event type
             et = self._table_item(ev.event_type)
-            self._table.setItem(row, 1, et)
-            # NPC name + role
+            self._table.setItem(row, 2, et)
+            # NPC name
             npc = enc.npcs.get(ev.src_npc_id)
             npc_name = npc.name if npc else ev.src_name
-            npc_role = npc.role if npc else "?"
             n = self._table_item(npc_name)
-            self._table.setItem(row, 2, n)
+            self._table.setItem(row, 3, n)
             # spell
             spell_text = ev.spell_name or ev.event_type
             if ev.spell_id:
                 spell_text += f" ({ev.spell_id})"
             s = self._table_item(spell_text)
-            self._table.setItem(row, 3, s)
+            self._table.setItem(row, 4, s)
             # target
             d = self._table_item(ev.dst_name or "—")
-            self._table.setItem(row, 4, d)
+            self._table.setItem(row, 5, d)
 
     def _on_table_clicked(self, item: QTableWidgetItem) -> None:
         # find the time column item for this row
         row = item.row()
-        time_item = self._table.item(row, 0)
+        time_item = self._table.item(row, 1)  # relative time column
         if time_item is None:
             return
         ev = time_item.data(Qt.ItemDataRole.UserRole)
@@ -516,10 +541,28 @@ class MainWindow(QMainWindow):
         row = item.row()
         col = item.column()
         menu = QMenu(self)
+
+        time_item = self._table.item(row, 1)  # relative time column
+        if time_item:
+            ev = time_item.data(Qt.ItemDataRole.UserRole)
+            if ev and self._result and self._active_enc_index >= 0:
+                act_start = menu.addAction("⏱ 设为战斗开始时间 (T=0)")
+                action = menu.exec(self._table.viewport().mapToGlobal(pos))
+                if action == act_start:
+                    enc = self._result.encounters[self._active_enc_index]
+                    enc.shift_start(ev.abs_time)
+                    self._btn_reset_start.setEnabled(True)
+                    self._on_encounter_selected(self._active_enc_index)
+                    self._status.showMessage(
+                        f"已设为战斗开始 — {ev.spell_name or ev.event_type} @ {self._fmt_time(ev.rel_time)}",
+                        3000
+                    )
+                    return
+
         action = None
 
-        if col == 1:
-            evt_item = self._table.item(row, 1)
+        if col == 2:
+            evt_item = self._table.item(row, 2)
             if evt_item:
                 et = evt_item.text()
                 act_only = menu.addAction(f"只看「{et}」")
@@ -535,8 +578,8 @@ class MainWindow(QMainWindow):
                         self._evt_checkboxes[et].setChecked(False)
             return
 
-        elif col == 3:
-            spell_item = self._table.item(row, 3)
+        elif col == 4:
+            spell_item = self._table.item(row, 4)
             if spell_item:
                 text = spell_item.text()
                 # strip "(ID)" suffix for matching
@@ -553,6 +596,18 @@ class MainWindow(QMainWindow):
                     if spell_name in self._spell_checkboxes:
                         self._spell_checkboxes[spell_name].setChecked(False)
             return
+
+    def _on_header_context_menu(self, pos) -> None:
+        hdr = self._table.horizontalHeader()
+        col = hdr.logicalIndexAt(pos)
+        menu = QMenu(self)
+        for c in range(self._table.columnCount()):
+            title = self._table.horizontalHeaderItem(c).text() if self._table.horizontalHeaderItem(c) else f"列{c}"
+            act = menu.addAction(title)
+            act.setCheckable(True)
+            act.setChecked(not self._table.isColumnHidden(c))
+            act.toggled.connect(lambda checked, ci=c: self._table.setColumnHidden(ci, not checked))
+        menu.exec(hdr.mapToGlobal(pos))
 
     def _show_event_detail(self, npc: NPCUnit | None, ev: SpellEvent) -> None:
         lines = []
@@ -633,6 +688,55 @@ class MainWindow(QMainWindow):
                 f.write(content)
             self._status.showMessage(f"已导出: {path}")
 
+    def _on_set_start(self) -> None:
+        if not self._result or self._active_enc_index < 0:
+            QMessageBox.information(self, "提示", "请先选择一场战斗")
+            return
+        enc = self._result.encounters[self._active_enc_index]
+        current_cn = datetime.fromtimestamp(enc.start_abs / 1000.0, tz=CN_TZ)
+        current_str = current_cn.strftime("%m/%d/%Y %H:%M:%S.%f")
+        text, ok = QInputDialog.getText(
+            self, "手动设置开始时间",
+            "输入新的战斗开始时间（UTC+8）\n格式: MM/DD/YYYY HH:MM:SS.ffffff\n\n当前: " + current_str,
+            text=current_str
+        )
+        if not ok or not text.strip():
+            return
+        text = text.strip()
+        new_start = None
+        for fmt in ("%m/%d/%Y %H:%M:%S.%f", "%m/%d/%Y %H:%M:%S"):
+            try:
+                working = text
+                if fmt.endswith(".%f"):
+                    parts = working.rsplit(".", 1)
+                    if len(parts) == 2:
+                        frac = parts[1].rstrip()[:6]
+                        working = f"{parts[0]}.{frac:<06}"
+                new_dt = datetime.strptime(working, fmt)
+                new_dt = new_dt.replace(tzinfo=CN_TZ)
+                new_start = new_dt.timestamp() * 1000.0
+                break
+            except ValueError:
+                continue
+        if new_start is None:
+            QMessageBox.warning(self, "格式错误",
+                                f"无法解析时间:\n{text}\n\n请使用格式: MM/DD/YYYY HH:MM:SS.ffffff (UTC+8)\n例如: {current_str}")
+            return
+        enc.shift_start(new_start)
+        self._btn_reset_start.setEnabled(True)
+        self._on_encounter_selected(self._active_enc_index)
+        new_cn = datetime.fromtimestamp(new_start / 1000.0, tz=CN_TZ)
+        self._status.showMessage(f"已设置开始时间: {new_cn.strftime('%m/%d %H:%M:%S.%f')[:-3]} UTC+8", 5000)
+
+    def _on_reset_start(self) -> None:
+        if not self._result or self._active_enc_index < 0:
+            return
+        enc = self._result.encounters[self._active_enc_index]
+        enc.reset_start()
+        self._btn_reset_start.setEnabled(False)
+        self._on_encounter_selected(self._active_enc_index)
+        self._status.showMessage("已重置为自动检测的开始时间", 3000)
+
     def _on_export_json(self) -> None:
         if not self._result or self._active_enc_index < 0:
             return
@@ -698,9 +802,12 @@ class MainWindow(QMainWindow):
 
     @staticmethod
     def _fmt_time(t: float) -> str:
-        m = int(t // 60)
-        s = t % 60
-        return f"{m}:{s:04.1f}"
+        neg = t < 0
+        t_abs = abs(t)
+        m = int(t_abs // 60)
+        s = t_abs % 60
+        prefix = "-" if neg else ""
+        return f"{prefix}{m}:{s:04.1f}"
 
     @staticmethod
     def _table_item(text: str) -> QTableWidgetItem:

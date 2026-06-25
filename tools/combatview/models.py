@@ -51,6 +51,25 @@ class Encounter:
     def add_npcs(self) -> list[NPCUnit]:
         return [n for n in self.npcs.values() if n.role == "add"]
 
+    def shift_start(self, new_start_abs: float) -> None:
+        if not hasattr(self, "_original_start_abs"):
+            self._original_start_abs = self.start_abs
+            self._original_duration = self.duration
+        self.start_abs = new_start_abs
+        for ev in self.events:
+            ev.rel_time = (ev.abs_time - self.start_abs) / 1000.0
+        all_times = [ev.rel_time for ev in self.events]
+        self.duration = max(all_times) - min(all_times) if all_times else 0.0
+
+    def reset_start(self) -> None:
+        if hasattr(self, "_original_start_abs"):
+            self.start_abs = self._original_start_abs
+            self.duration = self._original_duration
+            for ev in self.events:
+                ev.rel_time = (ev.abs_time - self.start_abs) / 1000.0
+            delattr(self, "_original_start_abs")
+            delattr(self, "_original_duration")
+
 
 @dataclass
 class ParseResult:
