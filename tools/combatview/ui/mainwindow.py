@@ -440,7 +440,7 @@ class MainWindow(QMainWindow):
 
         spells: dict[str, int] = {}
         for ev in enc.events:
-            if ev.src_npc_id and ev.spell_name:
+            if ev.src_npc_id and ev.src_npc_id < 1_000_000_000 and ev.spell_name:
                 spells[ev.spell_name] = spells.get(ev.spell_name, 0) + 1
         for name, count in sorted(spells.items(), key=lambda x: -x[1]):
             cb = QCheckBox(f"{name} ({count})")
