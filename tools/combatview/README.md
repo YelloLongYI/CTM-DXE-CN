@@ -119,7 +119,7 @@ NPC 分类数据库，从 DXE 全部 `Encounters.lua` 的 `triggers.scan` 提取
 }
 ```
 
-`hidden_event_types` 中的事件类型加载后默认不显示。在左侧勾选/取消后自动写回。
+`hidden_event_types` 中的事件类型默认不显示。**只读**，需手动编辑此文件来修改。运行时的勾选/取消不写回。
 
 ### `~/.combatview_npc.json`
 

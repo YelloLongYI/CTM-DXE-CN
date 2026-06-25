@@ -283,16 +283,6 @@ class MainWindow(QMainWindow):
         except Exception:
             self._config = {}
 
-    def _save_config(self) -> None:
-        path = Path(__file__).resolve().parent.parent / "config.json"
-        try:
-            hidden = sorted(et for et, cb in self._evt_checkboxes.items() if not cb.isChecked())
-            self._config["hidden_event_types"] = hidden
-            with open(path, "w", encoding="utf-8") as f:
-                json.dump(self._config, f, indent=2, ensure_ascii=False)
-        except Exception:
-            pass
-
     # ---- Slots ----
 
     def _on_open(self) -> None:
@@ -423,9 +413,10 @@ class MainWindow(QMainWindow):
         hidden = set(self._config.get("hidden_event_types", []))
         for et, count in sorted(types.items()):
             cb = QCheckBox(f"{et} ({count})")
+            cb.blockSignals(True)
             cb.setChecked(et not in hidden)
+            cb.blockSignals(False)
             cb.stateChanged.connect(self._rebuild_table)
-            cb.stateChanged.connect(self._save_config)
             self._evt_inner_layout.addWidget(cb)
             self._evt_checkboxes[et] = cb
         self._evt_inner_layout.addStretch()
