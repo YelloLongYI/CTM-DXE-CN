@@ -179,6 +179,7 @@ if L then
 
 -- Chat triggers
 local chat_bastion = AL:NewLocale("DXE Chat Bastion", "zhCN")
+-- chat_bastion["I will engulf the hallway"] = TODO
 chat_bastion["^Enough of this foolishness"] = "^停止你的愚行"
 chat_bastion["^BEHOLD YOUR DOOM"] = "^面对你的末日"
 chat_bastion["^Enough!"] = "^够了"

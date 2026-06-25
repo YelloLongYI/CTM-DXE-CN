@@ -12,13 +12,19 @@ DXE:RegisterRealmPatch(realm, "halfus", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        scorchingbreathcd = {11, 23, 21, loop = false, type = "series"},
+        whelpsreleased = "no",
+        furiouscount = 0,
+        novacast = 0.25,
+    },
     alerts = {
         -- Shadow Nova
         novacd = {
             varname = format(L.alert["%s CD"],SN[38627]),
             text = format(L.alert["Next %s"],SN[38627]),
             time = 12,
-            time2 = 11,
+            time2 = 8,
             time3 = "<novadelayed>",
             icon = ST[38627],
         },
@@ -51,16 +57,11 @@ DXE:RegisterRealmPatch(realm, "halfus", {
         },
         scorchingbreathcd = {
             varname = format(L.alert["%s CD"], SN[83707]),
-            type = "dropdown",
             text = format(L.alert["%s CD"], SN[83707]),
-            time = "<scorchingbreathcd>",
+            time = 6,
+            time2 = 20,
             flashtime = 15,
-            color1 = "RED",
-            color2 = "ORANGE",
             icon = ST[83707],
-            throttle = 2,
-            behavior = "overwrite",
-            sticky = true,
         },
         -- Furious Roar
         furiouscd = {
@@ -79,12 +80,8 @@ DXE:RegisterRealmPatch(realm, "halfus", {
         -- Bind Will
         bindwarn = {
             varname = format(L.alert["%s Warning"],SN[83432]),
-            type = "simple",
             text = "<bindtext>",
             time = 1,
-            color1 = "ORANGE",
-            color2 = "RED",
-            sound = "MINORWARNING",
             icon = "<bindicon>",
             tag = "#4#",
         },
@@ -164,7 +161,8 @@ DXE:RegisterRealmPatch(realm, "halfus", {
             execute = {
                 {
                     "quash","scorchingbreathcd",
-                    "schedulealert",{"scorchingbreathcd",2},
+                    -- "schedulealert",{"scorchingbreathcd",2},
+                    "alert", {"scorchingbreathcd", time = 2},
                     "schedulealert",{"scorchingbreathdurwarn",2}
                 },
             },
@@ -345,26 +343,16 @@ DXE:RegisterRealmPatch(realm, "valther", {
         },
         -- Dazzling Destruction
         dazzlewarn = {
-            varname = format(L.alert["%s Casting"],SN[86408]),
-            type = "simple",
-            text = format(L.alert["Theralion: %s"],SN[86408]),
+            varname = format(L.alert["%s Casting"],SN[86406]),
+            text = format(L.alert["Theralion: %s"],SN[86406]),
             time = 4,
-            flashtime = 4,
-            color1 = "RED",
-            sound = "BEWARE",
-            icon = ST[86408],
-            throttle = 1,
+            icon = ST[86406],
         },
         dazzlecd = {
-            varname = format(L.alert["%s CD"],SN[86408]),
-            type = "dropdown",
-            text = format(L.alert["Next %s"],SN[86408]),
+            varname = format(L.alert["%s CD"],SN[86406]),
+            text = format(L.alert["Next %s"],SN[86406]),
             time = "<dazzlecd>",
-            flashtime = 5,
-            color1 = "PINK",
-            color2 = "MAGENTA",
-            sound = "MINORWARNING",
-            icon = ST[86408],
+            icon = ST[86406],
         },
         ----------------------
         -- Valiona Airborne --
@@ -498,7 +486,7 @@ DXE:RegisterRealmPatch(realm, "valther", {
         {                                             
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = 86408,
+            spellname = {86408, 86406},
             execute = {
                 {
                     "expect",{"<dazzlingwarned>","==","no"},
@@ -582,7 +570,6 @@ DXE:RegisterRealmPatch(realm, "valther", {
                     "raidicon","blackoutmark",
                     "quash","blackoutcd",
                     "alert","blackoutcd",
-                    "radar","blackoutradar",
                 },
                 {
                     "expect",{"#4#","==","&playerguid&"},
@@ -663,7 +650,7 @@ DXE:RegisterRealmPatch(realm, "valther", {
             event = "YELL",
             execute = {
                 {
-                    "expect",{"#1#","find",L.chat_bastion["I will engulf the hallway"]},
+                    "expect",{"#1#","find","I will engulf the hallway"},
                     "alert","breathwarn",
                     "set",{
                         firstblastcast = "no",
