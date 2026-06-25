@@ -120,9 +120,13 @@ class CataOriginalParser(BaseParser):
                 if eid > 0 and matched_key:
                     enc_id_to_key[eid] = matched_key
                 if matched_key:
-                    closed_keys.discard(matched_key)
-                    if matched_key not in key_enc:
-                        _get_or_create(matched_key, self._parse_encounter_time(line, current_year))
+                    if matched_key in key_enc:
+                        key_enc[matched_key]._named = True
+                    else:
+                        closed_keys.discard(matched_key)
+                        enc = _get_or_create(matched_key, abs_t)
+                        if enc:
+                            enc._named = True
                 continue
 
             if "ENCOUNTER_END" in line[:50]:
@@ -150,11 +154,18 @@ class CataOriginalParser(BaseParser):
                         break
 
             if ev.src_npc_id:
+                if ekey in key_enc:
+                    enc = key_enc[ekey]
+                    last = getattr(enc, "_last_npc", 0.0)
+                    if not getattr(enc, "_named", False) and last > 0 and ev.abs_time - last > self.SILENCE_TIMEOUT_MS:
+                        _close(ekey, last, False)
+                        closed_keys.discard(ekey)
                 enc = _get_or_create(ekey, ev.abs_time)
                 if enc is None:
                     continue
                 ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
                 self._add_npc_event(enc, ev, ev.src_npc_id, ev.src_name)
+                enc._last_npc = ev.abs_time
             elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "SPELL_CREATE"):
                 if ekey in key_enc:
                     enc = key_enc[ekey]

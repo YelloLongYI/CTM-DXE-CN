@@ -2,7 +2,7 @@
   {
     "name": "Halfus Wyrmbreaker",
     "duration": 155,
-    "event_count": 5154
+    "event_count": 5987
   },
   {
     "name": "Valiona & Theralion",
@@ -16,7 +16,12 @@
   },
   {
     "name": "Ascendant Council",
-    "duration": 491,
-    "event_count": 7838
+    "duration": 92,
+    "event_count": 2779
+  },
+  {
+    "name": "Ascendant Council",
+    "duration": 246,
+    "event_count": 5059
   }
 ]

@@ -46,7 +46,7 @@ class CataClassicParser(BaseParser):
         """Detect Cata Classic by BUILD_VERSION mention or year in date."""
         return bool(re.search(r'BUILD_VERSION,4\.4', first_line))
 
-    SILENCE_TIMEOUT_MS = 120_000  # 120s no NPC events → auto-close
+    SILENCE_TIMEOUT_MS = 60_000  # 120s no NPC events → auto-close
 
     def parse(self, text: str, npc_db: dict | None = None) -> ParseResult:
         t0 = time.perf_counter()
@@ -125,9 +125,13 @@ class CataClassicParser(BaseParser):
                 if eid > 0 and matched_key:
                     enc_id_to_key[eid] = matched_key
                 if matched_key:
-                    closed_keys.discard(matched_key)
-                    if matched_key not in key_enc:
-                        _get_or_create(matched_key, abs_t)
+                    if matched_key in key_enc:
+                        key_enc[matched_key]._named = True
+                    else:
+                        closed_keys.discard(matched_key)
+                        enc = _get_or_create(matched_key, abs_t)
+                        if enc:
+                            enc._named = True
                 continue
 
             # ---- ENCOUNTER_END ----
@@ -160,6 +164,14 @@ class CataClassicParser(BaseParser):
 
             # Add to encounter
             if ev.src_npc_id:
+                # Silence timeout for unnamed encounters: close as wipe
+                # but don't block re-entry (no closed_keys.add)
+                if ekey in key_enc:
+                    enc = key_enc[ekey]
+                    last = getattr(enc, "_last_npc", 0.0)
+                    if not getattr(enc, "_named", False) and last > 0 and ev.abs_time - last > self.SILENCE_TIMEOUT_MS:
+                        _close(ekey, last, False)
+                        closed_keys.discard(ekey)  # allow re-entry
                 enc = _get_or_create(ekey, ev.abs_time)
                 if enc is None:
                     continue
