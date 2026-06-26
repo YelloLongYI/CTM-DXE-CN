@@ -1473,56 +1473,78 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         adherenttime = {62, 91, loop = false, type = "series"},
         depravitycd = {19, 12, loop = false, type = "series"},
         crashcd = {12, 10, loop = false, type = "series"},
-        creationstime = {6, 40, loop = false, type = "series"},
-        conversiontime = 21,
+        creationstime = {5, 30, loop = false, type = "series"},
+        conversiontime = 20,
         adherenttext = "Corrupting Adherent",
         firstfury = "yes",
         phase = 1,
         conversionmax = 2,
         conversionunits = {type = "container", wipein = 3},
     },
-    alerts = {
-        -- Berserk
-        enragecd = {
-            varname = L.alert["Berserk CD"],
-            type = "dropdown",
-            text = L.alert["Berserk"],
-            time = 600,
-            flashtime = 10,
-            color1 = "RED",
-            icon = ST[12317],
-        },           
-        -- Phases
-        phasewarn = {
-            varname = format(L.alert["Phase Warning"]),
-            type = "simple",
-            text = format(L.alert["Phase %s"],"<phase>"),
-            time = 3,
-            flashtime = 3,
-            color1 = "TURQUOISE",
-            icon = ST[11242],
-            sound = "BEWARE",
+    onstart = {
+        {
+            "set",{phase = 1},
+            "alert","enragecd",
+            "alert", {"furycd", time = 2},
+            "expect",{"&difficulty&",">=","3"}, --10h&25h
+            "set",{
+                adherenttime = {64, 92 ,loop = false, type = "series"},
+                furycd = {63, 47, loop = false, type = "series"}
+            },
         },
+        {
+            "alert", {"furycd", time = 2},
+            "expect",{"&difficulty&","<","3"}, --10h&25h
+            "set",{
+                adherenttime = {64, 92 ,loop = false, type = "series"},
+                furycd = {37.5, 45, loop = false, type = "series"}
+            },
+        },
+        {
+            "expect",{"&difficulty&","==","2"},
+            "set",{conversionmax = 5},
+        },
+        {
+            "expect",{"&difficulty&","==","4"},
+            "set",{conversionmax = 5},
+            adherenttext = "Corrupting Adherents",
+        },
+        {
+            "alert",{"conversioncd",time = 2, text = 2},
+            "repeattimer",{"checkhp", 1},
+        },
+    },
+    grouping = {
+        {
+            general = true,
+            alerts = {"enragecd","phasewarn"},
+        },
+        {
+            name = format("|cffffd700%s|r","Cho'gall"),
+            icon = "Interface\\EncounterJournal\\UI-EJ-BOSS-Chogall",
+            sizing = {aspect = 2, w = 128, h = 64},
+            alerts = {"conversioncd","conversionwarn","fireaddwarn","blazewarnself","shadowaddwarn","furysoon","furycd","furywarn","adherentcd","adherentwarn","festerbloodcd","festerbloodwarn",
+                        "creationscd","creationswarn"}
+        },
+        {
+            name = format("|cffffd700%s|r","Corrupting Adherent"),
+            icon = "Interface\\ICONS\\Achievement_Boss_HeraldVolazj",
+            alerts = {"crashcd","crashwarn","crashclosewarn","crashselfwarn","crashdmg","depravitycd","depravitywarn"},
+        },
+    },
+    alerts = {       
         -- Fury of Cho'gall
         furycd = {
             varname = format(L.alert["%s CD"],SN[82524]),
-            type = "dropdown",
             text = format(L.alert["Next %s"], SN[82524]),
-            time = 47,
-            time2 = 63,
-            flashtime = 10,
-            color1 = "CYAN",
-            color2 = "TURQUOISE",
+            -- time = 47,
+            -- time2 = 63,
+            time = "<furycd>",
             icon = ST[82524],
-            sticky = true,
         },
         furywarn = {
             varname = format(L.alert["%s Warning"],SN[82524]),
-            type = "simple",
             text = format("%s!",SN[82524]),
-            time = 3,
-            color1 = "GOLD",
-            sound = "MINORWARNING",
             icon = ST[82524],
         },
         -----------------------
@@ -1551,39 +1573,23 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         -- Blaze
         blazewarnself = {
             varname = format(L.alert["%s on me Warning"],SN[81538]),
-            type = "simple",
             text = format("%s on %s - %s!",SN[81538],L.alert["YOU"],L.alert["MOVE AWAY"]),
-            time = 3,
-            flashtime = 3,
-            throttle = 3,
-            flashscreen = true,
-            color1 = "RED",
-            sound = "ALERT10",
             icon = ST[81538],
-            emphasizewarning = true,
         },
         -- Conversion
         conversioncd = {
             varname = format(L.alert["%s CD"],SN[91303]),
-            type = "dropdown",
             text = format(L.alert["%s CD"],SN[91303]),
             text2 = format(L.alert["Next %s"],SN[91303]),
             time = "<conversiontime>",
-            time2 = 10,
+            time2 = 11.3,
             time3 = 11,
-            flashtime = 5,
-            color1 = "YELLOW",
             icon = ST[91303],
             -- audiocd = true,
-            sticky = true,
         },
         conversionwarn = {
             varname = format(L.alert["%s Warning"],SN[91303]),
-            type = "simple",
             text = format(L.alert["%s on %s"],SN[91303],"&list|conversionunits&"),
-            time = 3,
-            color1 = "YELLOW",
-            sound = "ALERT2",
             icon = ST[91303],
         },
         -- Summon Corrupting Adherent
@@ -1594,31 +1600,25 @@ DXE:RegisterRealmPatch(realm, "chogall", {
             --time = "<adherenttime>",
             time = 92,
             time2 = 5.8,
-            flashtime = 5,
-            color1 = "CYAN",
-            color2 = "BLUE",
             icon = ST[81628],
-            sticky = true,
+            enabled = {
+            },
         },
         adherentwarn = {
             varname = format(L.alert["%s Warning"],SN[81628]),
-            type = "simple",
             text = format("New: %s","<adherenttext>"),
-            time = 3,
-            flashtime = 3,
-            color1 = "RED",
-            sound = "ALERT2",
             icon = ST[81628],
+            enabled = {
+            },
         },
         furysoon = {
             varname = format(L.alert["%s soon"],SN[82524]),
             type = "simple",
             text = format(L.alert["%s soon"],SN[82524]),
             time = 5,
-            flashtime = 5,
-            color1 = "CYAN",
-            sound = "ALERT3",
             icon = ST[82524],
+            enabled = {
+            },
         },
         -- Fester Blood
         festerbloodcd = {
@@ -1649,70 +1649,44 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         },
         crashwarn = {
             varname = format(L.alert["%s Warning"],SN[81689]),
-            type = "simple",
             text = format("%s on <%s>",SN[81689],"#5#"),
-            time = 4,
             icon = ST[81689],
         },
         crashselfwarn = {
             varname = format(L.alert["%s on me Warning"],SN[81689]),
-            type = "simple",
             text = format("%s on <%s>!",SN[81689],L.alert["YOU"]),
-            time = 4,
             icon = ST[81689],
         },
         crashclosewarn = {
             varname = format(L.alert["%s near me Warning"],SN[81689]),
-            type = "simple",
             text = format(L.alert["%s near %s - MOVE AWAY!"],SN[81689],L.alert["YOU"]),
-            time = 1,
-            color1 = "TURQUOISE",
-            sound = "ALERT10",
             icon = ST[81689],
         },
         -- Depravity
         depravitywarn = {
             varname = format(L.alert["%s Warning"],SN[81713]),
-            type = "centerpopup",
             warningtext = format("%s: %s - INTERRUPT!","Corrupting Adherent",SN[81713]),
             text = format("%s: %s","Corrupting Adherent",SN[81713]),
-            time = 1.5,
-            color1 = "GOLD",
-            -- sound = "ALERT10",
-            sound = "kickcast",
             icon = ST[81713],
-            tag = "#1#",
         },
         depravitycd = {
             varname = format(L.alert["%s CD"],SN[81713]),
-            type = "dropdown",
             text = format(L.alert["Next %s"],SN[81713]),
             time = "<depravitycd>",
-            flashtime = 3,
-            color1 = "PINK",
             icon = ST[81713],
-            tag = "#1#",
         },
         -----------------------
         ------- Phase 2 -------
         -----------------------
         creationscd = {
             varname = format(L.alert["%s CD"],SN[82414]),
-            type = "dropdown",
             text = format(L.alert["New %s"],SN[82414]),
             time = "<creationstime>",
-            flashtime = 5,
-            color1 = "PURPLE",
             icon = ST[82414],
         },
         creationswarn = {
             varname = format(L.alert["%s Warning"],SN[82414]),
-            type = "simple",
             text = format("New: %s",SN[82414]),
-            time = 3,
-            flashtime = 3,
-            color1 = "MAGENTA",
-            sound = "ALERT1",
             icon = ST[82414],
         },
         
@@ -1725,11 +1699,11 @@ DXE:RegisterRealmPatch(realm, "chogall", {
             spellname = 81628,
             execute = {
                 {
-                    "set",{
-                        conversiontime = 37,
-                        crashcd = {12, 10, loop = false, type = "series"},
-                        depravitycd = {9, 12, loop = false, type = "series"},
-                    },
+                    -- "set",{
+                    --     -- conversiontime = 37, -- TODO: need confirm
+                    --     crashcd = {12, 10, loop = false, type = "series"},
+                    --     depravitycd = {9, 12, loop = false, type = "series"},
+                    -- },
                     "quash","adherentcd",
                     "alert","adherentcd",
                     "alert","adherentwarn",
@@ -1831,9 +1805,17 @@ DXE:RegisterRealmPatch(realm, "chogall", {
                 {
                     "expect",{"<firstfury>","==","yes"},
                     "set",{firstfury = "no"},
+                    "set",{
+                        conversiontime = 35, -- TODO: need confirm
+                        crashcd = {12, 10, loop = false, type = "series"},
+                        depravitycd = {9, 12, loop = false, type = "series"},
+                    },
                     "alert",{"adherentcd", time = 2},
                     "quash","conversioncd",
-                    "alert",{"conversioncd",time = 2, text = 2},
+                    -- "alert",{"conversioncd",time = 2, text = 2}, -- TODO: need confirm
+                    "alert","conversioncd",
+                    "alert","depravitycd",
+                    "alert","crashcd",
                 },
             },
         },
@@ -1853,7 +1835,7 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         {
             type = "combatevent",
             eventtype = "SPELL_AURA_APPLIED",
-            spellname = 93367,
+            spellname = {93367, 91317},
             srcisplayertype = true,
             execute = {
                 {
