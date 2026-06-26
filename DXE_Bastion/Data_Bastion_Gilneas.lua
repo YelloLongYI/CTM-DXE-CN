@@ -31,36 +31,26 @@ DXE:RegisterRealmPatch(realm, "halfus", {
         novawarn = {
             varname = format(L.alert["%s Warning"],SN[38627]),
             text = format(L.alert["%s - INTERRUPT"],SN[38627]),
-            time = 1,
             icon = ST[38627],
         },
         novacast = {
             varname = format(L.alert["%s Cast"],SN[38627]),
-            type = "centerpopup",
             text = format(L.alert["%s"],SN[38627]),
             time = "<novacast>",
-            color1 = "MAGENTA",
-            sound = "None",
             icon = ST[38627],
         },
         -- Scorching Breath
         scorchingbreathdurwarn = {
             varname = format(L.alert["%s Duration"], SN[83707]),
-            type = "centerpopup",
             text = format(L.alert["%s"], SN[83707]),
             time = 8,
-            flashtime = 6,
-            color1 = "ORANGE",
             icon = ST[83707],
-            throttle = 6,   
-            behavior = "overwrite",
         },
         scorchingbreathcd = {
             varname = format(L.alert["%s CD"], SN[83707]),
             text = format(L.alert["%s CD"], SN[83707]),
             time = 6,
             time2 = 20,
-            flashtime = 15,
             icon = ST[83707],
         },
         -- Furious Roar
@@ -89,14 +79,9 @@ DXE:RegisterRealmPatch(realm, "halfus", {
         -- Paralysis
         paralysiswarn = {
             varname = format(L.alert["%s Duration"],SN[84030]),
-            type = "centerpopup",
             warningtext = format(L.alert["%s"],SN[84030]),
             text = format(L.alert["%s fades"],SN[84030]),
             time = 12,
-            flashtime = 5,
-            color1 = "MIDGREY",
-            color2 = "WHITE",
-            sound = "MINORWARNING",
             icon = ST[84030],
         },
     },
@@ -242,14 +227,6 @@ DXE:RegisterRealmPatch(realm, "valther", {
     userdata = {
         blackoutcd = {45.5, 45.5, 0, loop = false, type = "series"},
         dazzlecd = {80, 82.35, loop = false, type = "series"},
-        shifttext = "",
-        breathwarned = "no",
-        meteoritewarned = "no",
-        dazzlingwarned = "no",
-        castingblast = "no",
-        firstblastcast = "no",
-        engulfmax = 1,
-        engulfunits = {type = "container", wipein = 3},
     },
     raidicons = {
         blackoutmark = {
@@ -303,7 +280,6 @@ DXE:RegisterRealmPatch(realm, "valther", {
             time = "<blackoutcd>",
             time2 = 10.7,
             time3 = 9,
-            flashtime = 10,
             icon = ST[86788],
         },
         blackoutselfwarn = {
@@ -326,8 +302,6 @@ DXE:RegisterRealmPatch(realm, "valther", {
             text = format(L.alert["%s"],SN[86840]),
             time = 2.5,
             flashtime = 2.5,
-            color1 = "ORANGE",
-            sound = "BEWARE",
             icon = ST[86840],
         },
         flamecd = {
@@ -337,15 +311,12 @@ DXE:RegisterRealmPatch(realm, "valther", {
             time = 40,
             time2 = 25.75,
             flashtime = 5,
-            color1 = "MAGENTA",
             icon = ST[86840],
-            sticky = true,
         },
         -- Dazzling Destruction
         dazzlewarn = {
             varname = format(L.alert["%s Casting"],SN[86406]),
             text = format(L.alert["Theralion: %s"],SN[86406]),
-            time = 4,
             icon = ST[86406],
         },
         dazzlecd = {
@@ -364,17 +335,12 @@ DXE:RegisterRealmPatch(realm, "valther", {
             text = format(L.alert["%s CD"],SN[86059]),
             time = 108,
             flashtime = 0,
-            color1 = "PINK",
             icon = ST[85664],
-            audiocd = true,
-            sound = "Sound\\Creature\\Valiona\\VO_BT_Valiona_Event05.ogg",
         },
         breathwarn = {
             varname = format(L.alert["%s Warning"],SN[86059]),
-            type = "simple",
             text = format(L.alert["Valiona is preparing for %s"],SN[86059]),
             time = 5,
-            color1 = "PINK",
             icon = ST[85664],
         },
         -- Engulfing Magic
@@ -400,27 +366,15 @@ DXE:RegisterRealmPatch(realm, "valther", {
         -- Twilight Meteorite
         meteoriteselfwarn = {
             varname = format(L.alert["%s on me Warning"],SN[88518]),
-            type = "centerpopup",
             text = format(L.alert["%s on %s"],SN[88518],L.alert["YOU"]),
             time = 6,
-            flashtime = 6,
-            color1 = "PURPLE",
             icon = ST[88518],
-            sound = "ALERT10",
-            flashscreen = true,
-            emphasizewarning = true,
         },
         -- Fabulous Flames
         fabulousselfwarn = {
             varname = format(L.alert["%s on me Warning"],SN[86505]),
-            type = "simple",
             text = format(L.alert["%s on %s - GET AWAY!"],SN[86505],L.alert["YOU"]),
-            time = 1,
-            color1 = "PURPLE",
-            sound = "ALERT10",
             icon = ST[86505],
-            throttle = 2,
-            emphasizewarning = true,
         },
     },
     events = {
@@ -695,26 +649,41 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             texture = ST[92067],
         },
     },
-    alerts = {
-        -- Phase
-        phasewarn = {
-            varname = format(L.alert["Phase Warning"]),
-            type = "simple",
-            text = format(L.alert["Phase %s"],"<phase>"),
-            time = 3,
-            flashtime = 3,
-            color1 = "TURQUOISE",
-            icon = ST[11242],
-            sound = "MINORWARNING",
+    onstart = {
+        {
+            "expect",{"&difficulty&",">=","3"}, --10h&25h
+            "set",{
+                coretext = "",
+                overloadtext = "",
+                beacontext = "",
+            },
         },
+        {
+            "expect",{"&difficulty&","==","2"},
+            "set",{
+                rodmax = 3,
+                crushmax = 3,
+            },
+        },
+        {
+            "expect",{"&difficulty&","==","4"},
+            "set",{
+                rodmax = 3,
+                crushmax = 3,
+            },
+        },
+        {
+            "set",{phase = 1},
+            "alert",{"aegiscd",time = 2},
+            "alert",{"waterbombcd",time = 2, text = 2},
+        },
+    },
+    alerts = {
         -- Phase 3 transition
         phasetransition = {
             varname = format(L.alert["%s Transition Countdown"],"Phase 3"),
-            type = "centerpopup",
             text = format(L.alert["%s transition"],"Phase 3"),
             time = 14.8,
-            color1 = "TURQUOISE",
-            sound = "None",
             icon = ST[11242],
         },
         
@@ -724,72 +693,49 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Burning Blood
         bloodwarn = {
             varname = format(L.alert["%s Warning"],SN[82660]),
-            type = "centerpopup",
             text = "<bloodtext>",
             time = 30,
             flashtime = 30,
-            color1 = "ORANGE",
-            sound = "ALERT3",
             icon = ST[82660],
         },
         -- Heart of Ice
         icewarn = {
             varname = format(L.alert["%s Warning"],SN[82665]),
-            type = "centerpopup",
             text = "<icetext>",
             time = 30,
             flashtime = 30,
-            color1 = "BLUE",
-            sound = "ALERT3",
             icon = ST[82665],
         },
         -- Water Bomb
         waterbombcd = {
             varname = format(L.alert["%s CD"], SN[82699]),
-            type = "dropdown",
             text = format(L.alert["%s CD"], SN[82699]),
             text2 = format(L.alert["Next %s"], SN[82699]),
             time = 28,
-            time2 = 15,
+            time2 = 15.5,
             flashtime = 5,
-            color1 = "CYAN",
-            color2 = "LIGHTBLUE",
-            sound = "MINORWARNING",
             icon = ST[82699],
-            sticky = true,
         },
         waterbombwarn = {
             varname = format(L.alert["%s Warning"], SN[82699]),
-            type = "simple",
             text = format(L.alert["%s"], SN[82699]).."s",
-            time = 3,
-            color1 = "CYAN",
-            sound = "ALERT5",
             icon = ST[82699],        
         },
         -- Waterlogged
         waterlogged = {
             varname = format(L.alert["%s on me Warning"],SN[82762]),
-            type = "simple",
             text = format(L.alert["%s on %s"],SN[82762],L.alert["YOU"]),
             time = 5,
-            flashtime = 5,
-            color1 = "CYAN",
-            color2 = "GREEN",
-            sound = "ALERT2",
             icon = ST[82762],
-            throttle = 2,
         },
         -- Glaciate
         glaciatewarn = {
             varname = format(L.alert["%s Casting"],SN[82746]),
             text = format(L.alert["%s"],SN[82746]),
-            time = 3,
             icon = ST[82746],
         },
         glaciatecd = {
             varname = format(L.alert["%s CD"],SN[82746]),
-            type = "dropdown",
             text = format(L.alert["Next %s"],SN[82746]),
             time = 15,
             icon = ST[82746],
@@ -800,9 +746,6 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             type = "simple",
             text = format(L.alert["%s"],SN[82631]),
             time = 10,
-            flashtime = 10,
-            color1 = "GOLD",
-            sound = "BEWARE",
             icon = ST[82631],
         },
         aegiscd = {
@@ -811,23 +754,20 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             text = format(L.alert["Next %s"],SN[82631]),
             time = 60,
             time2 = 30,
-            flashtime = 5,
-            color1 = "RED",
-            color2 = "ORANGE",
             icon = ST[82631],
-            sticky = true,
         },
         aegisabsorb = {
             varname = format(L.alert["%s Absorbs"],SN[82631]),
             text = "",
             textformat = format("%s (%%s/%%s - %%d%%%%)","Shield"),
-            type = "absorb",
             time = 21.5,
-            color1 = "GOLD",
-            sound = "BEWARE",
             icon = ST[82631],
             npcid = 43686,
             values = {
+                -- [82631] = "<aegisamount>", --10n
+                -- [92513] = "<aegisamount>", --10h
+                -- [92512] = "<aegisamount>", --25n
+                -- [92514] = "<aegisamount>", --25h
                 [82631] = 500000, --10n
                 [92513] = 700000, --10h
                 [92512] = 1500000, --25n
@@ -836,21 +776,12 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         },
         risingflameskickwarn = {
             varname = format(L.alert["%s Interrupt Warning"],SN[82643]),
-            type = "simple",
             text = format(L.alert["%s: %s - INTERRUPT"],"Ignacious", SN[82643]),
-            time = 1,
-            color1 = "YELLOW",
-            sound = "ALERT10",
             icon = ST[82643],
         },      
         frostboltwarn = {
             varname = format(L.alert["%s Casting"],SN[82752]),
-            type = "centerpopup",
             text = format(L.alert["%s"],SN[82752]),
-            time = 3,
-            flashtime = 3,
-            color1 = "GREEN",
-            sound = "ALERT10",
             icon = ST[82752],
             enabled = {
                 Tank = true,
@@ -863,8 +794,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         hardencd = {
             varname = format(L.alert["%s CD"],SN[83718]),
             text = format(L.alert["%s CD"],SN[83718]),
-            time = 42,
-            time2 = 21,
+            time = 40,
+            time2 = 5,
             icon = ST[83718],
         },
         hardenkickwarn = {
@@ -875,80 +806,49 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Lightning Blast
         lightningkickwarn = {
             varname = format(L.alert["%s Interrupt Warning"],SN[83070]),
-            type = "simple",
             text = format(L.alert["%s: %s - INTERRUPT"],"Arion",SN[83070]),
             time = 2.5,
-            color1 = "CYAN",
-            color2 = "RED",
-            sound = "ALERT10",
             icon = ST[83070],
         },
         -- Lightning Rod
         rodwarn = {
             varname = format(L.alert["%s Warning"],SN[83099]),
-            type = "simple",
             text = format(L.alert["%s on %s"],SN[83099],"&list|rodunits&"),
-            time = 5,
-            color1 = "ORANGE",
             icon = ST[83099],
-            throttle = 2,
         },
         rodself = {
             varname = format(L.alert["%s Warning on me Warning"],SN[83099]),
-            type = "centerpopup",
             text = format(L.alert["%s on <%s>"],SN[83099],L.alert["YOU"]),
             time = 15,
             flashtime = 15,
-            color1 = "ORANGE",
-            sound = "RUNAWAY",
             icon = ST[83099],
-            flashscreen = true,
         },
         -- Quake
         quakecd = {
             varname = format(L.alert["%s CD"],SN[83565]),
-            type = "dropdown",
-            text = "Get Winds!",
-            time = 31, -- 65
-            time2 = 27, -- 30
+            time = 65, -- TODO Need confirm
+            time2 = 30,
             flashtime = 7.5,
-            audiocd = true,
-            color1 = "BROWN",
-            color2 = "RED",
             icon = ST[83565],
-            sticky = true,
         },
         getwindswarn = {
             varname = "Get Winds Warning",
-            type = "simple",
-            emphasizewarning = true,
             text = "Get Winds!",
             time = 5,
-            color1 = "GOLD",
-            sound = "ALERT10",
             icon = ST[8385],
         },
         -- Thundershock
         shockcd = {
             varname = format(L.alert["%s CD"],SN[83067]),
-            type = "dropdown",
             text = "Get Grounded",
-            time = 36,
+            time = 30,
             flashtime = 7.5,
-            audiocd = true,
-            color1 = "INDIGO",
-            color2 = "TURQUOISE",
             icon = ST[83067],
-            sticky = true,
         },
         getgroundedwarn = {
             varname = "Get Grounded Warning",
-            type = "simple",
-            emphasizewarning = true,
             text = "Get Grounded!",
             time = 5,
-            color1 = "GOLD",
-            sound = "ALERT10",
             icon = ST[1604],
         },
         -----------------------
@@ -957,10 +857,9 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Gravity Crush
         crushcd = {
             varname = format(L.alert["%s CD"],SN[84948]),
-            type = "dropdown",
             text = format(L.alert["%s CD"],SN[84948]),
-            time = 23,
-            time2 = 24,
+            time = 24,
+            time2 = 39,
             icon = ST[84948],
         },
         crushwarn = {
@@ -977,23 +876,16 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Lava Seed
         lavaseedcd = {
             varname = format(L.alert["%s CD"], SN[84913]),
-            type = "dropdown",
             text = format(L.alert["%s CD"], SN[84913]),
-            time = 23,
-            time2 = 16,
+            time = 22,
+            time2 = 31,
             flashtime = 5,
-            color1 = "RED",
-            sound = "ALERT4",
             icon = ST[84913],
-            sticky = true,
         },
         lavaseedwarn = {
             varname = format(L.alert["%s Warning"], SN[84913]),
-            type = "centerpopup",
             text = format(L.alert["%s"], SN[84913]).."!",
             time = 2,
-            color1 = "RED",
-            sound = "BEWARE",
             icon = ST[84913],
         },
         -------------------------------
@@ -1107,8 +999,24 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = 92512,
+            spellname = {92512, 82631},
             execute = {
+                -- {
+                --     "expect",{"&difficulty&","==","1"},
+                --     "set",{aegisamount = 500000},
+                -- },
+                -- {
+                --     "expect",{"&difficulty&","==","2"},
+                --     "set",{aegisamount = 1500000},
+                -- },
+                -- {
+                --     "expect",{"&difficulty&","==","3"},
+                --     "set",{aegisamount = 700000},
+                -- },
+                -- {
+                --     "expect",{"&difficulty&","==","4"},
+                --     "set",{aegisamount = 2000000},
+                -- },
                 {
                     "quash","aegiscd",
                     "alert","aegiswarn",
@@ -1121,7 +1029,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             type = "combatevent",
             eventtype = "SPELL_AURA_REMOVED",
-            spellname = 92512,
+            spellname = {92512, 82631},
             execute = {
                 {
                     "quash","aegiswarn",
@@ -1249,7 +1157,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = 92544,
+            spellname = {92544, 83565},
             execute = {
                 {
                     "quash","quakecd",
@@ -1309,7 +1217,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = 92469,
+            spellname = {92469, 83067},
             execute = {
                 {
                     "quash","shockcd",
