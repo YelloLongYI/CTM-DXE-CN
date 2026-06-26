@@ -751,6 +751,22 @@
     "encounter_name": "Ascendant Council",
     "defeat_npc_id": 43735
   },
+  "43691": {
+    "name": "Ascendant Council Controller",
+    "role": "add",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "ascendcouncil",
+    "encounter_name": "Ascendant Council",
+    "defeat_npc_id": 43735
+  },
+  "43735": {
+    "name": "源质畸体",
+    "role": "boss",
+    "zone": "The Bastion of Twilight",
+    "encounter_key": "ascendcouncil",
+    "encounter_name": "Ascendant Council",
+    "defeat_npc_id": 43735
+  },
   "43778": {
     "name": "Foe Reaper 5000",
     "role": "boss",

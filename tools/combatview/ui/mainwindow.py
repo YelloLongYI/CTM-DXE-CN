@@ -497,7 +497,7 @@ class MainWindow(QMainWindow):
         for row, ev in enumerate(events):
             # absolute time
             abs_ts = datetime.fromtimestamp(ev.abs_time / 1000, tz=CN_TZ)
-            a = self._table_item(abs_ts.strftime("%m/%d %H:%M:%S.%f")[:-3])
+            a = self._table_item(abs_ts.strftime("%m/%d %H:%M:%S.%f")[:-2])
             self._table.setItem(row, 0, a)
             # relative time
             t = self._table_item(self._fmt_time(ev.rel_time))
@@ -541,61 +541,73 @@ class MainWindow(QMainWindow):
         row = item.row()
         col = item.column()
         menu = QMenu(self)
+        action = None
 
-        time_item = self._table.item(row, 1)  # relative time column
+        # "Set as start time" — available on any column
+        time_item = self._table.item(row, 1)
         if time_item:
             ev = time_item.data(Qt.ItemDataRole.UserRole)
             if ev and self._result and self._active_enc_index >= 0:
                 act_start = menu.addAction("⏱ 设为战斗开始时间 (T=0)")
-                action = menu.exec(self._table.viewport().mapToGlobal(pos))
-                if action == act_start:
-                    enc = self._result.encounters[self._active_enc_index]
-                    enc.shift_start(ev.abs_time)
-                    self._btn_reset_start.setEnabled(True)
-                    self._on_encounter_selected(self._active_enc_index)
-                    self._status.showMessage(
-                        f"已设为战斗开始 — {ev.spell_name or ev.event_type} @ {self._fmt_time(ev.rel_time)}",
-                        3000
-                    )
-                    return
+                act_start.setData("__start__")
 
-        action = None
-
+        # Event type filter
         if col == 2:
             evt_item = self._table.item(row, 2)
             if evt_item:
                 et = evt_item.text()
-                act_only = menu.addAction(f"只看「{et}」")
-                act_hide = menu.addAction(f"不看「{et}」")
-                action = menu.exec(self._table.viewport().mapToGlobal(pos))
-                if action == act_only:
-                    for cb in self._evt_checkboxes.values():
-                        cb.setChecked(False)
-                    if et in self._evt_checkboxes:
-                        self._evt_checkboxes[et].setChecked(True)
-                elif action == act_hide:
-                    if et in self._evt_checkboxes:
-                        self._evt_checkboxes[et].setChecked(False)
-            return
+                menu.addSeparator()
+                act_only_evt = menu.addAction(f"只看「{et}」")
+                act_only_evt.setData(("evt_only", et))
+                act_hide_evt = menu.addAction(f"不看「{et}」")
+                act_hide_evt.setData(("evt_hide", et))
 
+        # Spell filter
         elif col == 4:
             spell_item = self._table.item(row, 4)
             if spell_item:
                 text = spell_item.text()
-                # strip "(ID)" suffix for matching
                 spell_name = text.rsplit(" (", 1)[0] if " (" in text else text
-                act_only = menu.addAction(f"只看「{spell_name}」")
-                act_hide = menu.addAction(f"不看「{spell_name}」")
-                action = menu.exec(self._table.viewport().mapToGlobal(pos))
-                if action == act_only:
-                    for cb in self._spell_checkboxes.values():
-                        cb.setChecked(False)
-                    if spell_name in self._spell_checkboxes:
-                        self._spell_checkboxes[spell_name].setChecked(True)
-                elif action == act_hide:
-                    if spell_name in self._spell_checkboxes:
-                        self._spell_checkboxes[spell_name].setChecked(False)
+                menu.addSeparator()
+                act_only_sp = menu.addAction(f"只看「{spell_name}」")
+                act_only_sp.setData(("sp_only", spell_name))
+                act_hide_sp = menu.addAction(f"不看「{spell_name}」")
+                act_hide_sp.setData(("sp_hide", spell_name))
+
+        action = menu.exec(self._table.viewport().mapToGlobal(pos))
+        if action is None:
             return
+
+        data = action.data()
+        if data == "__start__":
+            ev = self._table.item(row, 1).data(Qt.ItemDataRole.UserRole)
+            if ev and self._result and self._active_enc_index >= 0:
+                enc = self._result.encounters[self._active_enc_index]
+                enc.shift_start(ev.abs_time)
+                self._btn_reset_start.setEnabled(True)
+                self._on_encounter_selected(self._active_enc_index)
+                self._status.showMessage(
+                    f"已设为战斗开始 — {ev.spell_name or ev.event_type} @ {self._fmt_time(ev.rel_time)}",
+                    3000
+                )
+        elif isinstance(data, tuple):
+            cmd, val = data
+            if cmd == "evt_only":
+                for cb in self._evt_checkboxes.values():
+                    cb.setChecked(False)
+                if val in self._evt_checkboxes:
+                    self._evt_checkboxes[val].setChecked(True)
+            elif cmd == "evt_hide":
+                if val in self._evt_checkboxes:
+                    self._evt_checkboxes[val].setChecked(False)
+            elif cmd == "sp_only":
+                for cb in self._spell_checkboxes.values():
+                    cb.setChecked(False)
+                if val in self._spell_checkboxes:
+                    self._spell_checkboxes[val].setChecked(True)
+            elif cmd == "sp_hide":
+                if val in self._spell_checkboxes:
+                    self._spell_checkboxes[val].setChecked(False)
 
     def _on_header_context_menu(self, pos) -> None:
         hdr = self._table.horizontalHeader()
@@ -726,7 +738,7 @@ class MainWindow(QMainWindow):
         self._btn_reset_start.setEnabled(True)
         self._on_encounter_selected(self._active_enc_index)
         new_cn = datetime.fromtimestamp(new_start / 1000.0, tz=CN_TZ)
-        self._status.showMessage(f"已设置开始时间: {new_cn.strftime('%m/%d %H:%M:%S.%f')[:-3]} UTC+8", 5000)
+        self._status.showMessage(f"已设置开始时间: {new_cn.strftime('%m/%d %H:%M:%S.%f')[:-2]} UTC+8", 5000)
 
     def _on_reset_start(self) -> None:
         if not self._result or self._active_enc_index < 0:
