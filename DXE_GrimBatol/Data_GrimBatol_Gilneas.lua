@@ -2,6 +2,12 @@
 local L, SN, ST, TI = DXE.L, DXE.SN, DXE.ST, DXE.TI
 local realm = "Gilneas"
 
+if DXE.db.profile.Globals.Realm == realm and L.chat_bastion then
+    for k in pairs(L.chat_bastion) do
+        L.chat_bastion[k] = k
+    end
+end
+
 DXE:RegisterRealmPatch(realm, "umbriss", {
     windows = {
         proxwindow = false,
@@ -105,7 +111,7 @@ DXE:RegisterRealmPatch(realm, "umbriss", {
             execute = {
                 -- Blitz
                 {
-                    "expect",{"#1#","find",L.chat_grimbatol["sets his eyes on"]},
+                    "expect",{"#1#","find","sets his eyes on"},
                     "set",{blitzonplayer = "no"},
                     "invoke",{
                         {
@@ -128,7 +134,7 @@ DXE:RegisterRealmPatch(realm, "umbriss", {
             execute = {
                 -- New Trogg Wave
                 {
-                    "expect",{"#1#","find",L.chat_grimbatol["^Attack you"]},
+                    "expect",{"#1#","find","^Attack you"},
                     "quash","troggscd",
                     "alert","troggscd",
                     "alert","troggwarn",
@@ -446,7 +452,7 @@ DXE:RegisterRealmPatch(realm, "drahga", {
             execute = {
                 -- Phase 2 trigger
                 {
-                    "expect",{"#1#","find",L.chat_grimbatol["^Dragon"]},
+                    "expect",{"#1#","find","^Dragon"},
                     "quash","spiritcd",
                     "alert","valionaincomming",
                     "scheduletimer",{"phase2start",18},
@@ -455,7 +461,7 @@ DXE:RegisterRealmPatch(realm, "drahga", {
                 },
                 -- Phase 3 trigger
                 {
-                    "expect",{"#1#","find",L.chat_grimbatol["^I will not die"]},
+                    "expect",{"#1#","find","^I will not die"},
                     "set",{phase = 3},
                     "alert","phasewarn",
                     "tracing",{40319},
