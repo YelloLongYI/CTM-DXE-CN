@@ -2,12 +2,6 @@
 local L, SN, ST, TI = DXE.L, DXE.SN, DXE.ST, DXE.TI
 local realm = "Gilneas"
 
-if DXE.db.profile.Globals.Realm == realm and L.chat_bastion then
-    for k in pairs(L.chat_bastion) do
-        L.chat_bastion[k] = k
-    end
-end
-
 DXE:RegisterRealmPatch(realm, "umbriss", {
     windows = {
         proxwindow = false,
