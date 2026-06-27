@@ -48,7 +48,8 @@ class CataClassicParser(BaseParser):
 
     SILENCE_TIMEOUT_MS = 60_000  # 120s no NPC events → auto-close
 
-    def parse(self, text: str, npc_db: dict | None = None) -> ParseResult:
+    def parse(self, text: str, npc_db: dict | None = None,
+              non_combat_spell_ids: set[str] | None = None) -> ParseResult:
         t0 = time.perf_counter()
         lines = text.split("\n")
         if lines and lines[0].startswith("\ufeff"):
@@ -90,6 +91,7 @@ class CataClassicParser(BaseParser):
             if enc:
                 enc.end_abs = end_abs
                 enc.success = success
+                enc.end_line = line_num
                 closed_keys.add(key)
 
         def _get_or_create(key: str, abs_t: float) -> Encounter | None:
@@ -103,8 +105,9 @@ class CataClassicParser(BaseParser):
                     start_abs=abs_t, end_abs=0.0,
                 )
                 enc._key = key
-                encounters.append(enc)
+                enc.start_line = line_num
                 key_enc[key] = enc
+                encounters.append(enc)
             return key_enc[key]
 
         for line in lines:
@@ -125,13 +128,15 @@ class CataClassicParser(BaseParser):
                 if eid > 0 and matched_key:
                     enc_id_to_key[eid] = matched_key
                 if matched_key:
-                    if matched_key in key_enc:
-                        key_enc[matched_key]._named = True
-                    else:
+                    if matched_key not in key_enc:
                         closed_keys.discard(matched_key)
                         enc = _get_or_create(matched_key, abs_t)
                         if enc:
                             enc._named = True
+                    else:
+                        enc = key_enc[matched_key]
+                        enc._named = True
+                        enc.start_line = line_num
                 continue
 
             # ---- ENCOUNTER_END ----
@@ -163,21 +168,28 @@ class CataClassicParser(BaseParser):
                         break
 
             # Add to encounter
+            # Skip non-combat spells (player casts that don't start combat)
+            if non_combat_spell_ids and ev.spell_id and ev.spell_id in non_combat_spell_ids:
+                continue
+
             if ev.src_npc_id:
-                # Silence timeout for unnamed encounters: close as wipe
-                # but don't block re-entry (no closed_keys.add)
                 if ekey in key_enc:
                     enc = key_enc[ekey]
                     last = getattr(enc, "_last_npc", 0.0)
                     if not getattr(enc, "_named", False) and last > 0 and ev.abs_time - last > self.SILENCE_TIMEOUT_MS:
                         _close(ekey, last, False)
-                        closed_keys.discard(ekey)  # allow re-entry
+                        closed_keys.discard(ekey)
                 enc = _get_or_create(ekey, ev.abs_time)
                 if enc is None:
                     continue
                 ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
                 self._add_npc_event(enc, ev, ev.src_npc_id, ev.src_name)
                 enc._last_npc = ev.abs_time
+            elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "SPELL_CREATE"):
+                if ekey in key_enc:
+                    enc = key_enc[ekey]
+                    ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
+                    self._add_npc_event(enc, ev, ev.dst_npc_id, ev.dst_name)
             elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "SPELL_CREATE"):
                 if ekey in key_enc:
                     enc = key_enc[ekey]

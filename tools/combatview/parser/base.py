@@ -9,7 +9,8 @@ class BaseParser(ABC):
     format_name: str = "unknown"
 
     @abstractmethod
-    def parse(self, text: str, npc_db: dict | None = None) -> ParseResult:
+    def parse(self, text: str, npc_db: dict | None = None,
+              non_combat_spell_ids: set[str] | None = None) -> ParseResult:
         ...
 
     @abstractmethod

@@ -2,26 +2,36 @@
   {
     "name": "Halfus Wyrmbreaker",
     "duration": 155,
-    "event_count": 5987
+    "event_count": 5987,
+    "start_line": 16,
+    "end_line": 19745
   },
   {
     "name": "Valiona & Theralion",
     "duration": 294,
-    "event_count": 4623
+    "event_count": 4623,
+    "start_line": 21468,
+    "end_line": 36974
   },
   {
     "name": "Valiona & Theralion",
     "duration": 289,
-    "event_count": 7969
+    "event_count": 7969,
+    "start_line": 37689,
+    "end_line": 64296
   },
   {
     "name": "Ascendant Council",
     "duration": 92,
-    "event_count": 2779
+    "event_count": 2779,
+    "start_line": 64452,
+    "end_line": 72912
   },
   {
     "name": "Ascendant Council",
     "duration": 246,
-    "event_count": 7047
+    "event_count": 7047,
+    "start_line": 89228,
+    "end_line": 96414
   }
 ]

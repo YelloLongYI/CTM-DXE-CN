@@ -51,6 +51,8 @@ def run(log_path: Path) -> list[dict]:
             "name": enc.name,
             "duration": int(round(enc.duration)),
             "event_count": len(enc.events),
+            "start_line": enc.start_line,
+            "end_line": enc.end_line,
         }
         for enc in result.encounters
     ]

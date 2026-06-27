@@ -1,5 +1,9 @@
 {
   "hidden_event_types": [
     "SPELL_ABSORBED"
+  ],
+  "non_combat_spell_ids": [
+    1130,
+    73981
   ]
 }

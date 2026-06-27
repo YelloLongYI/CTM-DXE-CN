@@ -40,6 +40,8 @@ class Encounter:
     end_abs: float               # UTC milliseconds
     duration: float = 0.0        # seconds
     success: bool = False
+    start_line: int = 0           # log line number of first NPC event or START
+    end_line: int = 0             # log line number of close event
     npcs: dict[int, NPCUnit] = field(default_factory=dict)
     events: list[SpellEvent] = field(default_factory=list)
 

@@ -21,13 +21,14 @@ def detect_format(first_line: str) -> BaseParser | None:
     return None
 
 
-def parse_log(text: str, npc_db: dict | None = None) -> ParseResult | None:
+def parse_log(text: str, npc_db: dict | None = None,
+              non_combat_spell_ids: set[str] | None = None) -> ParseResult | None:
     """Parse WoWCombatLog.txt content. Auto-detects format.
 
     Args:
         text: raw log content
         npc_db: NPC classification database (npc_db.json).
-                Used to build encounter groups for multi-phase fights.
+        non_combat_spell_ids: spell IDs that don't trigger combat start.
     """
     if not text.strip():
         return None
@@ -37,4 +38,4 @@ def parse_log(text: str, npc_db: dict | None = None) -> ParseResult | None:
     parser = detect_format(first)
     if parser is None:
         return None
-    return parser.parse(text, npc_db)
+    return parser.parse(text, npc_db, non_combat_spell_ids)

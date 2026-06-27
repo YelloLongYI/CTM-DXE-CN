@@ -53,7 +53,8 @@ class CataOriginalParser(BaseParser):
 
     SILENCE_TIMEOUT_MS = 60_000
 
-    def parse(self, text: str, npc_db: dict | None = None) -> ParseResult:
+    def parse(self, text: str, npc_db: dict | None = None,
+              non_combat_spell_ids: set[str] | None = None) -> ParseResult:
         t0 = time.perf_counter()
         lines = text.split("\n")
         if lines and lines[0].startswith("\ufeff"):
@@ -91,6 +92,7 @@ class CataOriginalParser(BaseParser):
             if enc:
                 enc.end_abs = end_abs
                 enc.success = success
+                enc.end_line = line_num
                 closed_keys.add(key)
 
         def _get_or_create(key: str, abs_t: float) -> Encounter | None:
@@ -104,6 +106,7 @@ class CataOriginalParser(BaseParser):
                     start_abs=abs_t, end_abs=0.0,
                 )
                 enc._key = key
+                enc.start_line = line_num
                 encounters.append(enc)
                 key_enc[key] = enc
             return key_enc[key]
@@ -120,13 +123,15 @@ class CataOriginalParser(BaseParser):
                 if eid > 0 and matched_key:
                     enc_id_to_key[eid] = matched_key
                 if matched_key:
-                    if matched_key in key_enc:
-                        key_enc[matched_key]._named = True
-                    else:
+                    if matched_key not in key_enc:
                         closed_keys.discard(matched_key)
                         enc = _get_or_create(matched_key, abs_t)
                         if enc:
                             enc._named = True
+                    else:
+                        enc = key_enc[matched_key]
+                        enc._named = True
+                        enc.start_line = line_num
                 continue
 
             if "ENCOUNTER_END" in line[:50]:
@@ -153,6 +158,9 @@ class CataOriginalParser(BaseParser):
                         _close(grp_key, ev.abs_time, True)
                         break
 
+            if non_combat_spell_ids and ev.spell_id and ev.spell_id in non_combat_spell_ids:
+                continue
+
             if ev.src_npc_id:
                 if ekey in key_enc:
                     enc = key_enc[ekey]
@@ -166,6 +174,11 @@ class CataOriginalParser(BaseParser):
                 ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
                 self._add_npc_event(enc, ev, ev.src_npc_id, ev.src_name)
                 enc._last_npc = ev.abs_time
+            elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "SPELL_CREATE"):
+                if ekey in key_enc:
+                    enc = key_enc[ekey]
+                    ev.rel_time = (ev.abs_time - enc.start_abs) / 1000.0
+                    self._add_npc_event(enc, ev, ev.dst_npc_id, ev.dst_name)
             elif ev.dst_npc_id and ev.event_type in ("SPELL_SUMMON", "SPELL_CREATE"):
                 if ekey in key_enc:
                     enc = key_enc[ekey]

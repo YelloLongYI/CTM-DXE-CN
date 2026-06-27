@@ -33,14 +33,15 @@ class ParseWorker(QThread):
     finished = Signal(object)
     error = Signal(str)
 
-    def __init__(self, text: str, npc_db: dict):
+    def __init__(self, text: str, npc_db: dict, non_combat_ids: set[str] | None = None):
         super().__init__()
         self._text = text
         self._npc_db = npc_db
+        self._non_combat_ids = non_combat_ids
 
     def run(self) -> None:
         try:
-            result = parse_log(self._text, self._npc_db)
+            result = parse_log(self._text, self._npc_db, self._non_combat_ids)
             self.finished.emit(result)
         except Exception as e:
             log.error("ParseWorker failed: %s", e, exc_info=True)
@@ -782,7 +783,8 @@ class MainWindow(QMainWindow):
             return
         if text.startswith("\ufeff"):
             text = text[1:]
-        self._worker = ParseWorker(text, self._npc_db)
+        non_combat = set(str(sid) for sid in self._config.get("non_combat_spell_ids", []))
+        self._worker = ParseWorker(text, self._npc_db, non_combat)
         self._worker.finished.connect(self._on_parse_done)
         self._worker.error.connect(self._on_parse_error)
         self._worker.start()
