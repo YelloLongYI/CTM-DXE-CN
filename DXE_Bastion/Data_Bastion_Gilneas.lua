@@ -439,7 +439,8 @@ DXE:RegisterRealmPatch(realm, "valther", {
         -- Dazzling Destruction
         {                                             
             type = "combatevent",
-            eventtype = "SPELL_CAST_START",
+            -- eventtype = "SPELL_CAST_START",
+            eventtype = "SPELL_CAST_SUCCESS", --TODO: need confirm
             spellname = {86408, 86406},
             execute = {
                 {
@@ -1480,6 +1481,12 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         phase = 1,
         conversionmax = 2,
         conversionunits = {type = "container", wipein = 3},
+    },
+    triggers = {
+        scan = {
+            43324, -- Cho'gall
+        },
+        yell = "^Enough!",
     },
     onstart = {
         {

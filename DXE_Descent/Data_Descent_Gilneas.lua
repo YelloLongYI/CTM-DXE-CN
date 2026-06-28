@@ -328,35 +328,41 @@ DXE:RegisterRealmPatch(realm, "omnitron", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        -- Texts
+        activetext = "",
+        encasingtext = "",
+        conductortext = "",
+        infusiontext = "",
+        fixedtext = "",
+        
+        -- Timers
+        incinerationcd = {10,26,28.5,0, loop = true, type = "series"},
+        flamethrowercd = {20,40,0, loop = true, type = "series"},
+        generatorcd = {15,30,30,0, loop = true, type = "series"},
+        conductorcd = {11,25,25,25,0, loop = true, type = "series"},
+        poisonbombcd = {11,30,30,0, loop = true, type = "series"},  -- 15,30,30,0 
+        addscd = {21,45,0, loop = true, type = "series"},
+        
+        -- Durations
+        activetime = 45,
+        conductordur = 10,
+        
+        -- Switches
+        shadowconductorwarned = "no",
+        started = "no",
+    },
     alerts = {
-        -- Berserk
-        enragecd = {
-            varname = format(L.alert["Berserk CD"]),
-            type = "dropdown",
-            text = format(L.alert["Berserk"]),
-            time = 600,
-            flashtime = 30,
-            color1 = "RED",
-            icon = ST[26662],
-        },
         -- Golem Active
         activedur = {
             varname = format(L.alert["%s Duration"],SN[95016]),
-            type = "dropdown",
             text = format(L.alert["Next Golem Activates"]),
             time = "<activetime>",
-            flashtime = 5,
-            color1 = "INDIGO",
-            sound = "None",
             icon = ST[95016]
         },
         activewarn = {
             varname = format(L.alert["%s Warning"],SN[95016]),
-            type = "simple",
             text = "<activewarntext>",
-            time = 5,
-            color1 = "GOLD",
-            sound = "ALERT10",
             icon = ST[95016],
         },
         -----------------
@@ -378,10 +384,8 @@ DXE:RegisterRealmPatch(realm, "omnitron", {
         -- Flamethrower
         flamethrowercd = {
             varname = format(L.alert["%s CD"],SN[79504]),
-            type = "dropdown",
             text = format(L.alert["Next %s"],SN[79504]),
             time = "<flamethrowercd>",
-            flashtime = 5,
             icon = ST[79504]
         },
         flamethrowerdur = {
@@ -2534,7 +2538,8 @@ DXE:RegisterRealmPatch(realm, "nefarian", {
             -- Shadowblaze
         {
             type = "event",
-            event = "UNIT_SPELLCAST_SUCCEEDED",
+            -- event = "UNIT_SPELLCAST_SUCCEEDED",
+            event = "SPELL_CAST_SUCCESS", -- TODO: need confirm
             execute = {
                 {
                     "expect",{"#2#","==",SN[81031]},
