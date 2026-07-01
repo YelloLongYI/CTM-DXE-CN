@@ -6,6 +6,13 @@ DXE:RegisterRealmPatch(realm, "argaloth", {
     windows = {
         proxwindow = false,
     },
+    onstart = {
+        {
+            "alert","consumingcd",
+            "alert","enragecd",
+            "alert", "meteorcd",
+        }
+    },
     alerts = {
         meteorcd = {
             varname = format(L.alert["%s CD"],SN[45150]),
