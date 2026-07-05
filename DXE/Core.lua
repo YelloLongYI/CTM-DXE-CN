@@ -629,6 +629,14 @@ addon.Compat = setmetatable({
             PlaySoundFile(path, channel)
         end
     end,
+
+    ApplyGradient = function(texture, orientation, minR, minG, minB, maxR, maxG, maxB)
+        if IS_CLASSIC then
+            texture:SetGradient(orientation, CreateColor(minR, minG, minB, 1), CreateColor(maxR, maxG, maxB, 1))
+        else
+            texture:SetGradient(orientation, minR, minG, minB, maxR, maxG, maxB)
+        end
+    end,
 }, {
     __index = _G,
 })

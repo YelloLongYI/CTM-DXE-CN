@@ -121,7 +121,7 @@ local function OnEnter(self)
         self.gradient:SetAlpha(1)
         local r,g,b,a = unpack(pfl.Windows.TitleBarColor)
         self.gradient:SetTexture(r,g,b,a)
-        self.gradient:SetGradient("HORIZONTAL",r,g,b,0,0,0)
+        DXE.Compat.ApplyGradient(self.gradient, "HORIZONTAL",r,g,b,0,0,0)
     end
 end
 
@@ -135,7 +135,7 @@ local function OnLeave(self)
         self.titlebar:SetAlpha(1)
         self.gradient:SetAlpha(1)
         window.gradient:SetTexture(r,g,b,a)
-        window.gradient:SetGradient("HORIZONTAL",r,g,b,0,0,0)
+        DXE.Compat.ApplyGradient(window.gradient, "HORIZONTAL",r,g,b,0,0,0)
         self.titletext:SetAlpha(1)
         self.close:SetAlpha(1)
         
@@ -157,7 +157,7 @@ local function OnLeave(self)
             end
             self.gradient:SetAlpha(1)
             self.gradient:SetTexture(r,g,b,a)
-            self.gradient:SetGradient("HORIZONTAL",r,g,b,0,0,0)
+            DXE.Compat.ApplyGradient(self.gradient, "HORIZONTAL",r,g,b,0,0,0)
         else
             self.gradient:SetAlpha(0)
         end
@@ -289,7 +289,7 @@ local function ShowAnchors()
     local r,g,b,a = unpack(pfl.Windows.TitleBarColor)
     window.gradient:SetAlpha(1)
     window.gradient:SetTexture(r,g,b,a)
-    window.gradient:SetGradient("HORIZONTAL",r,g,b,0,0,0)
+    DXE.Compat.ApplyGradient(window.gradient, "HORIZONTAL",r,g,b,0,0,0)
     window.titlebar:SetAlpha(1)
     window.titlebar:EnableMouse(true)
     window.close:SetAlpha(1)

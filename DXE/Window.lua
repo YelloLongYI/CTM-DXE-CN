@@ -16,7 +16,7 @@ local pfl
 local function SkinWindow(window)
 	local r,g,b,a = unpack(pfl.Windows.TitleBarColor)
 	window.gradient:SetTexture(r,g,b,a)
-	window.gradient:SetGradient("HORIZONTAL",r,g,b,0,0,0)
+	DXE.Compat.ApplyGradient(window.gradient,"HORIZONTAL",r,g,b,0,0,0)
 end
 
 function addon:UpdateWindowSettings()

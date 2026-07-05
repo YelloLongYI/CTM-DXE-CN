@@ -1,7 +1,7 @@
 # DXE 双客户端兼容适配 — 施工进度
 
 > 开始日期：2026-05-24  
-> 最后更新：2026-06-02
+> 最后更新：2026-07-06
 
 ---
 
@@ -59,6 +59,8 @@
 | 5.7 | SN/ST/EJSN/EJST 去 geterrorhandler | `DXE/Core.lua` | ✅ |
 | 5.8 | OnEnable 守卫 | `DXE/Alerts/Alerts.lua` | ✅ |
 | 5.9 | Options BarTest 守卫 | `DXE_Options/Options.lua` | ✅ |
+| 5.10 | 战斗 NID → Compat.GetNPCIDFromGUID | `DXE/Core.lua` | ✅ |
+| 5.11 | Texture:SetGradient → ApplyGradient | `DXE/Core.lua` + 4 Window 文件 | ✅ |
 
 ---
 
@@ -95,9 +97,9 @@
 | 阶段二 | 7 | 7 | 100% |
 | 阶段三 | 2 | 2 | 100% |
 | 阶段四 | 2 | 2 | 100% |
-| 阶段五 | 9 | 9 | 100% |
+| 阶段五 | 11 | 11 | 100% |
 | 阶段六 | 5 | 5 | 100% |
-| **合计** | **27** | **27** | **100%** |
+| **合计** | **29** | **29** | **100%** |
 
 ---
 
@@ -110,8 +112,9 @@
 | `DXE/Alerts/Alerts.lua` | ✏️ | CreateFrame + OnEnable 守卫 |
 | `DXE/Pane.lua` | ✏️ | CreateFrame/UIDropDown 替换 |
 | `DXE/Window.lua` | ✏️ | CreateFrame/UIDropDown 替换 |
-| `DXE/Windows/Proximity.lua` | ✏️ | CreateFrame 替换 |
-| `DXE/Windows/AlternatePower.lua` | ✏️ | CreateFrame 替换 |
+| `DXE/Windows/Proximity.lua` | ✏️ | CreateFrame + SetGradient 替换 |
+| `DXE/Windows/AlternatePower.lua` | ✏️ | CreateFrame + SetGradient 替换 |
+| `DXE/Windows/Radar.lua` | ✏️ | SetGradient 替换 |
 | `DXE/Windows/Version_Check.lua` | ✏️ | CreateFrame/UIDropDown 替换 |
 | `DXE_DragonSoul/Encounters.lua` | ✏️ | 单位/团队/通信 API 替换 |
 | `DXE_EndTime/Encounters.lua` | ✏️ | 地图/单位 API 替换 |
