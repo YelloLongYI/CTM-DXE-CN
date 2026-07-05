@@ -3957,17 +3957,7 @@ end
 ---------------------------------------------
 
 local weare42 = tonumber((select(4, GetBuildInfo()))) > 40100
-local _dbgCount = 0
 function addon:COMBAT_LOG_EVENT_UNFILTERED(_, _,eventtype, _, ...)
-    if IS_CLASSIC then
-        if _dbgCount < 3 then
-            print("CLEU eventtype:", eventtype)
-            _dbgCount = _dbgCount + 1
-        end
-        if eventtype == "UNIT_DIED" or eventtype == "PARTY_KILL" then
-            print("CLEU DIED:", eventtype, select(5, ...), select(6, ...))
-        end
-    end
     if eventtype ~= "UNIT_DIED" and eventtype ~= "PARTY_KILL" then return end
     if addon:IsTempRegistered() then
         addon:ProcessTempHW(select(5,...))
