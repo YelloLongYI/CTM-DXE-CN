@@ -333,7 +333,7 @@ DXE:RegisterRealmPatch(realm, "valther", {
             varname = format(L.alert["%s CD"],SN[86059]),
             type = "dropdown",
             text = format(L.alert["%s CD"],SN[86059]),
-            time = 108,
+            time = 129,
             flashtime = 0,
             icon = ST[85664],
         },
@@ -605,7 +605,7 @@ DXE:RegisterRealmPatch(realm, "valther", {
             event = "YELL",
             execute = {
                 {
-                    "expect",{"#1#","find","I will engulf the hallway"},
+                    "expect",{"#1#","find","I will engulf the Hallway"},
                     "alert","breathwarn",
                     "set",{
                         firstblastcast = "no",
