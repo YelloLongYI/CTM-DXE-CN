@@ -15,6 +15,8 @@ local debugDefaults = {
     TriggerDefeat = false,
     UNIT_NAME_UPDATE = false,
     INSTANCE_ENCOUNTER_ENGAGE_UNIT = true,
+    ENCOUNTER_START = true,
+    ENCOUNTER_END = true,
 }
 --@end-debug@]===]
 
@@ -2309,6 +2311,16 @@ function addon:StopEncounter()
     wipeDelayed = false
 end
 
+function addon:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
+    self:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
+end
+
+function addon:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
+    if self:IsRunning() then
+        self:StopEncounter()
+    end
+end
+
 do
     local function iter(t,i)
         local k,v = next(t,i)
@@ -3965,14 +3977,14 @@ end
 ---------------------------------------------
 
 local weare42 = tonumber((select(4, GetBuildInfo()))) > 40100
-function addon:COMBAT_LOG_EVENT_UNFILTERED(_, _,eventtype, _, ...)
+function addon:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
+    local eventtype = select(3, ...)
     if eventtype ~= "UNIT_DIED" and eventtype ~= "PARTY_KILL" then return end
     if addon:IsTempRegistered() then
         addon:ProcessTempHW(select(5,...))
     end
 
-    local dstGUID,destName
-    if weare42 then dstGUID,destName = select(5, ...) else dstGUID,destName = select(4, ...) end     
+    local dstGUID,dstName = select(9, ...), select(10, ...)
     
     local npcid = addon.Compat.GetNPCIDFromGUID(dstGUID)
 

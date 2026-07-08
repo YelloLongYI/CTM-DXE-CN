@@ -112,3 +112,51 @@ local IS_CLASSIC = select(4, GetBuildInfo()) >= 40400
 3. 编写 `Compat.lua`
 4. 逐步替换核心代码中的裸 API 调用
 5. 在 4.3 和 4.4.2 上分别测试
+
+## 九、ENCOUNTER 生命周期事件适配
+
+### 9.1 背景
+
+4.3 上 BOSS 战开始/结束检测依赖 `INSTANCE_ENCOUNTER_ENGAGE_UNIT` 事件轮询 Boss 头像框（`boss1`~`boss4`）。4.4.2 怀旧服上 Boss 头像框在灭团后可能不自动消失，导致 DXE 误判为战斗仍在继续，计时不停。
+
+### 9.2 解决方案：ENCOUNTER_START / ENCOUNTER_END
+
+WotLK+ 客户端提供了 `ENCOUNTER_START` 和 `ENCOUNTER_END` 事件。在 Core.lua 中注册这两个事件，形成多层兜底：
+
+```
+Boss 死亡 / 灭团
+    ├── ① ENCOUNTER_END（新增，最快）
+    ├── ② Boss 头像框消失（4.3 主力，4.4.2 不可靠）
+    ├── ③ UNIT_DIED → ConfirmWipe → ScanForWipe（全队死亡/脱战）
+    └── ④ BOSS 灭团喊话 onactivate.wipe.yell（补丁可配）
+
+Boss 战斗开始
+    ├── ① ENCOUNTER_START（新增，强制重扫头像框）
+    └── ② INSTANCE_ENCOUNTER_ENGAGE_UNIT（原有机制）
+```
+
+### 9.3 代码改动
+
+```lua
+-- Core.lua 事件注册
+ENCOUNTER_START = true,
+ENCOUNTER_END = true,
+
+-- Core.lua handler
+function addon:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
+    self:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
+end
+
+function addon:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
+    if self:IsRunning() then
+        self:StopEncounter()
+    end
+end
+```
+
+### 9.4 注意事项
+
+1. `encounterID` 是 WoW Encounter Journal 的唯一编号，全版本一致
+2. `ENCOUNTER_START` 当前仅触发头像框重扫，后续可演进为 `encounterID → key` 直接映射
+3. `ENCOUNTER_END` 在 4.3 上无害（`IsRunning()` 检查保证不重复停止）
+4. 灭团中假死/消失脱战者，`ScanForWipe` 通过 `UnitAffectingCombat` 正确判断
