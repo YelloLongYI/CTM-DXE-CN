@@ -9,6 +9,7 @@ do
     local data = {
         version = 7,
         key = "halfus",
+        encounterID = 1030,
         zone = L.zone["The Bastion of Twilight"],
         category = L.zone["The Bastion of Twilight"],
         name = L.npc_bastion["Halfus Wyrmbreaker"],
@@ -384,6 +385,7 @@ do
     local data = {
         version = 18,
         key = "valther",
+        encounterID = 1032,
         zone = L.zone["The Bastion of Twilight"],
         category = L.zone["The Bastion of Twilight"],
         name = L.npc_bastion["Valiona & Theralion"],
@@ -1032,6 +1034,7 @@ do
     local data = {
         version = 18,
         key = "ascendcouncil",
+        encounterID = 1028,
         zone = L.zone["The Bastion of Twilight"],
         category = L.zone["The Bastion of Twilight"],
         name = L.npc_bastion["Ascendant Council"],
@@ -2253,6 +2256,7 @@ do
     local data = {
         version = 13,
         key = "chogall",
+        encounterID = 1029,
         zone = L.zone["The Bastion of Twilight"],
         category = L.zone["The Bastion of Twilight"],
         name = L.npc_bastion["Cho'gall"],
@@ -2948,6 +2952,7 @@ do
     local data = {
         version = 3,
         key = "sinestra",
+        encounterID = 1083,
         zone = L.zone["The Bastion of Twilight"],
         category = L.zone["The Bastion of Twilight"],
         name = L.npc_bastion["Lady Sinestra"],

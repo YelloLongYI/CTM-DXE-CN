@@ -1585,6 +1585,13 @@ function addon:RegisterEncounter(data)
     end
     --addon:RegisterEncounterToGroup(data)
     if self.EDB_original[key] then self.EDB_original[key].order = data.order end
+    if data.encounterID then
+        self.encounterIDMap = self.encounterIDMap or {}
+        self.encounterIDMap[data.encounterID] = key
+        if data.encounterID == 1083 then
+            self.encounterIDMap[1082] = key
+        end
+    end
     EDB[key] = data
 end
 
@@ -2312,7 +2319,13 @@ function addon:StopEncounter()
 end
 
 function addon:ENCOUNTER_START(_, encounterID, encounterName, difficultyID, groupSize)
-    self:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
+    local key = self.encounterIDMap and self.encounterIDMap[encounterID]
+    if key and not self:IsRunning() then
+        self:SetActiveEncounter(key)
+        self:StartEncounter(true)
+    else
+        self:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
+    end
 end
 
 function addon:ENCOUNTER_END(_, encounterID, encounterName, difficultyID, groupSize, success)
