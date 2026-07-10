@@ -12,6 +12,17 @@ DXE:RegisterRealmPatch(realm, "magmaw", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        -- Timers
+        manglecd = {89.9,95, loop = false, type = "series"},  -- 90,115,115
+        slumpcd = {102,96, loop = false, type = "series"},
+        constructcd = {25,31.5, loop = false, type = "series"}, --heroic only
+        pillarcd = {33, 37, 0, loop = true, type = "series"},
+            
+        -- Switches
+        parasitefailed = "no",
+        lavaspewthrottle = "no",
+    },
     alerts = {
         -- Berserk
         enragecd = {
@@ -2360,14 +2371,11 @@ DXE:RegisterRealmPatch(realm, "nefarian", {
         -- Shadowblaze Spark
         blazecd = {
             varname = format(L.alert["%s CD"],SN[81031]),
-            type = "dropdown",
             text = format(L.alert["Next %s"],SN[81031]),
             time = "<blazecd>",
             time2 = 29,
             time3 = "<blazecorrectedcd>",
             flashtime = 5,
-            color1 = "YELLOW",
-            color2 = "GOLD",
             icon = ST[81031],
             sound = "ALERT8",
             sticky = true,
