@@ -2545,13 +2545,11 @@ DXE:RegisterRealmPatch(realm, "nefarian", {
         },
             -- Shadowblaze
         {
-            type = "event",
-            -- event = "UNIT_SPELLCAST_SUCCEEDED",
-            event = "SPELL_CAST_SUCCESS", -- TODO: need confirm
+            type = "combatevent",
+            eventtype = "SPELL_CAST_SUCCESS",
+            spellname = 81031,
             execute = {
                 {
-                    "expect",{"#2#","==",SN[81031]},
-                    "expect",{"#1#","find","boss"},
                     "invoke",{
                         {
                             "expect",{"<bonewarriors>","==","0"},
