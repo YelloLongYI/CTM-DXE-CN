@@ -566,7 +566,7 @@ DXE:RegisterRealmPatch(realm, "alakir", {
             text2 = format("Next %s",SN[87770]),
             time = "<windburstcd>",
             time2 = 25,
-            time3 = 21.8, -- APOLLO P3
+            time3 = 20, -- Gilneas
             time4 = 18.8, -- JRG P3
             flashtime = 5,
             color1 = "PEACH",
@@ -802,6 +802,28 @@ DXE:RegisterRealmPatch(realm, "alakir", {
                     "set",{windburstcd = 20},
                     "alert",{"windburstcd",time = 2, text = 2},
                 },        
+            },
+        },
+        -- TODO: Need confirm, if correct, then delete "-- Phase 3 Trigger" block
+        {
+            type = "event",
+            event = "YELL",
+            execute = {
+                {
+                    "expect",{"#1#","find","^Enough"},
+                    "set", {phase = "3"},
+        
+                    "quash", "stormlingcd",
+                    "quash","raincd",
+                    
+                    "alert","phasewarn",
+                    "alert",{"cloudcd",time = 2},
+                    "scheduletimer",{"clouds","<cloudtime2>"},
+                    "alert",{"rodcd", time = 2},
+        
+                    "set",{windburstcd = 20},
+                    "alert",{"windburstcd",time = 2, text = 2},
+                },
             },
         },
         -- Wind Burst (Phase 3)

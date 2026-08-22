@@ -1492,20 +1492,23 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         {
             "set",{phase = 1},
             "alert","enragecd",
-            "alert", {"furycd", time = 2},
+            -- "alert", {"furycd", time = 2},
             "expect",{"&difficulty&",">=","3"}, --10h&25h
             "set",{
                 adherenttime = {64, 92 ,loop = false, type = "series"},
-                furycd = {63, 47, loop = false, type = "series"}
+                furycd = {59, 45, loop = false, type = "series"}
             },
+            "alert", "furycd",
         },
         {
-            "alert", {"furycd", time = 2},
+            -- "alert", {"furycd", time = 2},
             "expect",{"&difficulty&","<","3"}, --10h&25h
             "set",{
                 adherenttime = {64, 92 ,loop = false, type = "series"},
-                furycd = {37.5, 45, loop = false, type = "series"}
+                furycd = {37.5, 45, loop = false, type = "series"} -- maybe?
+                furycd = {18.5, 45, loop = false, type = "series"} -- maybe?
             },
+            "alert", "furycd",
         },
         {
             "expect",{"&difficulty&","==","2"},
