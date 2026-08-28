@@ -2295,6 +2295,67 @@ DXE:RegisterRealmPatch(realm, "nefarian", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        -- Timers
+        phase2timer = 180, -- 25n
+        nefarianlanding = 31,
+        blazecd = 30,
+        
+        -- Switches
+        prototypestraced = "no",
+        cindersticky = "true",
+        
+        -- Counters
+        phase = "0",
+        addsdead = 0,
+        bonewarriors = 0,
+        
+        -- Lists
+        cinderunits = {type = "container", wipein = 3},
+        dominionunits = {type = "container", wipein = 3},
+        prototypesunits = {type = "container", wipein = 10},
+        
+    },
+    onstart = {
+        {
+            "alert","nefarianlands",
+            "alert","enragecd",
+            "expect",{"&difficulty&",">=","3"},
+            "alert",{"dominioncd",time = 2},
+        },
+        {
+            "expect",{"&difficulty&","==","1"}, -- 10n
+            "set",{
+                blastnovacd = 11.5,
+                blastnovacd2 = 14,
+            },
+        },
+        {
+            "expect",{"&difficulty&","==","2"}, -- 25n
+            "set",{
+                blastnovacd = 7,
+                blastnovacd2 = 14,
+            },
+        },
+        {
+            "expect",{"&difficulty&","==","3"}, -- 10h
+            "set",{
+                cindermax = 1,
+                dominionmax = 2,
+                blastnovacd = 13.5,
+                blastnovacd2 = 13.5,
+            },                
+        },
+        {
+            "expect",{"&difficulty&","==","4"}, -- 25h
+            "set",{
+                cindermax = 3,
+                dominionmax = 5,
+                blastnovacd = 6.5,
+                blastnovacd2 = 13.5,
+            },
+        },
+    },
     alerts = {
         -- Berserk
         enragecd = {
@@ -2515,7 +2576,11 @@ DXE:RegisterRealmPatch(realm, "nefarian", {
                             "quash","phase2timer",
                             "cancelalert","phase3warn",
                             "alert","phase3warn",
-                            "alert",{"blazecd",time = 2},
+                            "set",{
+                                blazecd = {35, 30, 25, 20, 15, 10, 7, loop = false, type = "series"},
+                            },
+                            -- "alert",{"blazecd",time = 2},
+                            "alert", "blazecd",
                             "set",{
                                 cindersticky = "false",
                                 cindercd = "&timeleft|cindercd&",
@@ -2567,8 +2632,8 @@ DXE:RegisterRealmPatch(realm, "nefarian", {
                     "alert","blazewarn",
                     "quash","blazecd",
                     "alert","blazecd",
-                    "expect",{"<blazecd>",">","15"},
-                    "set",{blazecd = "DECR|5"},
+                    -- "expect",{"<blazecd>",">","15"},
+                    -- "set",{blazecd = "DECR|5"},
                 },
             },
         },
