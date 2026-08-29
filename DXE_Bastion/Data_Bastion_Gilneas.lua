@@ -1504,6 +1504,18 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         },
         yell = "^Enough!",
     },
+    userdata = {
+        adherenttime = {62, 91, loop = false, type = "series"},
+        depravitycd = {19, 12, loop = false, type = "series"},
+        crashcd = {12, 10, loop = false, type = "series"},
+        creationstime = {6, 30, loop = false, type = "series"},
+        conversiontime = 21,
+        adherenttext = "Corrupting Adherent",
+        firstfury = "yes",
+        phase = 1,
+        conversionmax = 2,
+        conversionunits = {type = "container", wipein = 3},
+    },
     onstart = {
         {
             "set",{phase = 1},
