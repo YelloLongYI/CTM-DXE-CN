@@ -780,6 +780,19 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             text = format(L.alert["%s: %s - INTERRUPT"],"Ignacious", SN[82643]),
             icon = ST[82643],
         },      
+        frostboltcd = {
+            varname = format(L.alert["%s CD"],SN[82752]),
+            text = format(L.alert["Next %s"],SN[82752]),
+            time = 8.5,
+            time2 = 12,
+            flashtime = 3,
+            color1 = "GREEN",
+            color2 = "GREEN",
+            icon = ST[82752],
+            enabled = {
+                Tank = true,
+            },
+        }, 
         frostboltwarn = {
             varname = format(L.alert["%s Casting"],SN[82752]),
             text = format(L.alert["%s"],SN[82752]),
@@ -1118,7 +1131,9 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             spellname = 82752,
             execute = {
                 {
-                    "alert","frostboltwarn"
+                    "alert","frostboltwarn",
+                    "quash", "frostboltcd",
+                    "alert", {"frostboltcd", time = 2}
                 },
             },
         },
@@ -1134,6 +1149,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
                     "quash","aegiscd",
                     "quash","glaciatecd",
                     "quash","waterbombcd",
+                    "quash","frostboltcd",
                     "alert",{"quakecd",time = 2},
                     "alert",{"hardencd",time = 2},
                     "schedulealert",{"getwindswarn",15}
@@ -1496,19 +1512,19 @@ DXE:RegisterRealmPatch(realm, "chogall", {
             "expect",{"&difficulty&",">=","3"}, --10h&25h
             "set",{
                 adherenttime = {64, 92 ,loop = false, type = "series"},
-                furycd = {59, 45, loop = false, type = "series"}
+                furycd = {34, 45, loop = false, type = "series"}
             },
-            "alert", "furycd",
+            "alert", "furycd"
         },
         {
             -- "alert", {"furycd", time = 2},
             "expect",{"&difficulty&","<","3"}, --10h&25h
             "set",{
                 adherenttime = {64, 92 ,loop = false, type = "series"},
-                furycd = {37.5, 45, loop = false, type = "series"} -- maybe?
-                furycd = {18.5, 45, loop = false, type = "series"} -- maybe?
+                furycd = {37.5, 45, loop = false, type = "series"}, -- maybe?
+                -- furycd = {18.5, 45, loop = false, type = "series"} -- maybe?
             },
-            "alert", "furycd",
+            "alert", "furycd"
         },
         {
             "expect",{"&difficulty&","==","2"},
@@ -1569,6 +1585,10 @@ DXE:RegisterRealmPatch(realm, "chogall", {
             time10h = 10,
             time25h = 20.5,
             icon = ST[81194],
+            enabled = {
+                Heal = true,
+                Tank = true,
+            },
         },
         -- Empowered Shadows
         shadowaddwarn = {
@@ -1845,7 +1865,7 @@ DXE:RegisterRealmPatch(realm, "chogall", {
         {
             type = "combatevent",
             eventtype = "SPELL_AURA_APPLIED",
-            spellname = {93367, 91317},
+            spellname = {93367, 91317, 91331}, -- Gilneas should be 91331
             srcisplayertype = true,
             execute = {
                 {

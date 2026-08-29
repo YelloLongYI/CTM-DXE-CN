@@ -1318,7 +1318,7 @@ do
             {
                 phase = 1,
                 alerts = {"bloodwarn","aegiscd","aegiswarn","aegisabsorb","risingflameskickwarn", -- Ignacious
-                          "icewarn","waterbombcd","waterbombwarn","waterlogged","glaciatecd","glaciatewarn", "frostboltwarn", -- Feludius
+                          "icewarn","waterbombcd","waterbombwarn","waterlogged","glaciatecd","glaciatewarn","frostboltcd", "frostboltwarn", -- Feludius
                           "corewarn","coreselfwarn", -- Terrastra
                           "overloadwarn","overloadselfwarn"} -- Arion
             },
@@ -1489,7 +1489,22 @@ do
                 color1 = "YELLOW",
                 sound = "ALERT10",
                 icon = ST[82643],
-            },      
+            },    
+            frostboltcd = {
+                varname = format(L.alert["%s CD"],SN[82752]),
+                type = "dropdown",
+                text = format(L.alert["Next %s"],SN[82752]),
+                time = 8.5,
+                time2 = 12,
+                flashtime = 3,
+                color1 = "GREEN",
+                color2 = "GREEN",
+                icon = ST[82752],
+                sticky = true,
+                enabled = {
+                    Tank = true,
+                },
+            },    
             frostboltwarn = {
                 varname = format(L.alert["%s Casting"],SN[82752]),
                 type = "centerpopup",
@@ -1896,7 +1911,9 @@ do
                 spellname = 82752,
                 execute = {
                     {
-                        "alert","frostboltwarn"
+                        "alert","frostboltwarn",
+                        "quash", "frostboltcd",
+                        "alert", {"frostboltcd", time = 2}
                     },
                 },
             },
@@ -1912,6 +1929,7 @@ do
                         "quash","aegiscd",
                         "quash","glaciatecd",
                         "quash","waterbombcd",
+                        "quash", "frostboltcd",
                         "alert",{"quakecd",time = 2},
                         "alert",{"hardencd",time = 2},
                         "schedulealert",{"getwindswarn",15}
