@@ -840,7 +840,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         -- Quake
         quakecd = {
             varname = format(L.alert["%s CD"],SN[83565]),
-            time = 65, -- TODO Need confirm
+            -- time = 65, -- TODO Need confirm v1
+            time = 20, -- TODO Need confirm v2
             time2 = 30,
             flashtime = 7.5,
             icon = ST[83565],
