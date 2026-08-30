@@ -9,7 +9,7 @@ import re
 import time
 from datetime import datetime
 
-from parser.base import BaseParser
+from parser.base import BaseParser, split_csv
 from models import SpellEvent, NPCUnit, Encounter, ParseResult
 
 
@@ -145,7 +145,7 @@ class CataClassicParser(BaseParser):
                 matched_key = enc_id_to_key.get(eid)
                 if matched_key:
                     _close(matched_key, self._parse_encounter_time(line),
-                           self._extract_int_field(line, 4) == 1)
+                           self._extract_int_field(line, 5) == 1)
                 continue
 
             # ---- combat event ----
@@ -173,6 +173,13 @@ class CataClassicParser(BaseParser):
                 continue
 
             if ev.src_npc_id:
+                # A boss's aura expiring on a player (e.g. a debuff wearing off)
+                # is not evidence the boss is being fought; don't open a new
+                # encounter from it. Still record it once the fight is active.
+                if (ev.event_type == "SPELL_AURA_REMOVED"
+                        and ev.dst_npc_id >= 1_000_000_000
+                        and ekey not in key_enc):
+                    continue
                 if ekey in key_enc:
                     enc = key_enc[ekey]
                     last = getattr(enc, "_last_npc", 0.0)
@@ -223,7 +230,7 @@ class CataClassicParser(BaseParser):
         m = self.LINE_RE.match(line)
         if not m:
             return None
-        parts: list[str] = m.group(9).split(",")
+        parts: list[str] = split_csv(m.group(9))
         if len(parts) < 8:
             return None
         event_type = m.group(8)
@@ -304,7 +311,10 @@ class CataClassicParser(BaseParser):
     def _is_player_pet(flag_str: str) -> bool:
         if not flag_str:
             return False
-        flags = int(flag_str, 0) if flag_str else 0
+        try:
+            flags = int(flag_str, 0)
+        except (ValueError, TypeError):
+            return False
         # Pet bits: 0x100 (pet), 0x400 (guardian), 0x800 (possess)
         # Player type: 0x511, 0x512
         # Totems/ghouls/army: these have player sub-type bits set
@@ -344,7 +354,7 @@ class CataClassicParser(BaseParser):
 
     @staticmethod
     def _extract_int_field(line: str, index: int) -> int:
-        parts = line.split(",")
+        parts = split_csv(line)
         try:
             return int(parts[index], 0) if len(parts) > index else 0
         except (ValueError, IndexError):

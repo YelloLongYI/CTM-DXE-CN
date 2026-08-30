@@ -9,7 +9,7 @@ import re
 import time
 from datetime import datetime
 
-from parser.base import BaseParser
+from parser.base import BaseParser, split_csv
 from models import SpellEvent, NPCUnit, Encounter, ParseResult
 
 
@@ -139,7 +139,7 @@ class CataOriginalParser(BaseParser):
                 matched_key = enc_id_to_key.get(eid)
                 if matched_key:
                     _close(matched_key, self._parse_encounter_time(line, current_year),
-                           self._extract_int_field(line, 4) == 1)
+                           self._extract_int_field(line, 5) == 1)
                 continue
 
             ev = self._parse_line(line, current_year)
@@ -162,6 +162,10 @@ class CataOriginalParser(BaseParser):
                 continue
 
             if ev.src_npc_id:
+                if (ev.event_type == "SPELL_AURA_REMOVED"
+                        and ev.dst_npc_id >= 1_000_000_000
+                        and ekey not in key_enc):
+                    continue
                 if ekey in key_enc:
                     enc = key_enc[ekey]
                     last = getattr(enc, "_last_npc", 0.0)
@@ -210,7 +214,7 @@ class CataOriginalParser(BaseParser):
         m = self.LINE_RE.match(line)
         if not m:
             return None
-        parts: list[str] = m.group(8).split(",")
+        parts: list[str] = split_csv(m.group(8))
         if len(parts) < 6:
             return None
         event_type = m.group(7)
@@ -293,7 +297,10 @@ class CataOriginalParser(BaseParser):
     def _is_player_pet(flag_str: str) -> bool:
         if not flag_str:
             return False
-        flags = int(flag_str, 0)
+        try:
+            flags = int(flag_str, 0)
+        except (ValueError, TypeError):
+            return False
         player_type = flags & 0xFF00
         if player_type in (0x0500, 0x1100, 0x2100, 0x4100):
             return True
@@ -325,7 +332,7 @@ class CataOriginalParser(BaseParser):
 
     @staticmethod
     def _extract_int_field(line: str, index: int) -> int:
-        parts = line.split(",")
+        parts = split_csv(line)
         try:
             return int(parts[index], 0) if len(parts) > index else 0
         except (ValueError, IndexError):

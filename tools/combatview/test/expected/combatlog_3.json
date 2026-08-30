@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Nefarian",
+    "duration": 313,
+    "event_count": 6536,
+    "start_line": 849,
+    "end_line": 28111
+  },
+  {
+    "name": "Nefarian",
+    "duration": 245,
+    "event_count": 4789,
+    "start_line": 29023,
+    "end_line": 51402
+  },
+  {
+    "name": "Nefarian",
+    "duration": 4,
+    "event_count": 3,
+    "start_line": 51437,
+    "end_line": 51457
+  },
+  {
+    "name": "Nefarian",
+    "duration": 104,
+    "event_count": 2672,
+    "start_line": 52050,
+    "end_line": 62831
+  },
+  {
+    "name": "Nefarian",
+    "duration": 56,
+    "event_count": 2079,
+    "start_line": 63839,
+    "end_line": 70658
+  },
+  {
+    "name": "Nefarian",
+    "duration": 152,
+    "event_count": 2840,
+    "start_line": 71305,
+    "end_line": 85197
+  },
+  {
+    "name": "Nefarian",
+    "duration": 74,
+    "event_count": 2531,
+    "start_line": 85855,
+    "end_line": 94272
+  },
+  {
+    "name": "Nefarian",
+    "duration": 576,
+    "event_count": 11940,
+    "start_line": 95430,
+    "end_line": 146064
+  }
+]
