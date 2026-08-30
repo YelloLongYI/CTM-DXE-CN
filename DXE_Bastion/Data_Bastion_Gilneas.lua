@@ -676,7 +676,15 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             "set",{phase = 1},
             "alert",{"aegiscd",time = 2},
-            "alert",{"waterbombcd",time = 2, text = 2},
+            "alert",{"glaciatecd", time = 2}, -- need confirm
+
+            "set",{
+                waterbombcd = {16, 61, 29 ,loop = false, type = "series"},
+            },
+            "alert", "waterbombcd"  -- need confirm
+
+            -- "alert",{"waterbombcd",time = 2, text = 2},
+            
         },
     },
     alerts = {
@@ -712,8 +720,9 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"], SN[82699]),
             text = format(L.alert["%s CD"], SN[82699]),
             text2 = format(L.alert["Next %s"], SN[82699]),
-            time = 28,
-            time2 = 15.5,
+            -- time = 28,
+            -- time2 = 15.5,
+            time = "<waterbombcd>", -- Comment out time, time2, use this new series, need confirm
             flashtime = 5,
             icon = ST[82699],
         },
@@ -738,7 +747,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         glaciatecd = {
             varname = format(L.alert["%s CD"],SN[82746]),
             text = format(L.alert["Next %s"],SN[82746]),
-            time = 15,
+            time = 30.5,
+            time2 = 31,
             icon = ST[82746],
         },
         -- Aegis of Flame
@@ -753,8 +763,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"],SN[82631]),
             type = "dropdown",
             text = format(L.alert["Next %s"],SN[82631]),
-            time = 60,
-            time2 = 30,
+            time = 64,
+            time2 = 30.5,
             icon = ST[82631],
         },
         aegisabsorb = {
@@ -874,7 +884,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"],SN[84948]),
             text = format(L.alert["%s CD"],SN[84948]),
             time = 24,
-            time2 = 39,
+            -- time2 = 39,
+            time2 = 25, -- need confirm
             icon = ST[84948],
         },
         crushwarn = {
@@ -893,7 +904,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             varname = format(L.alert["%s CD"], SN[84913]),
             text = format(L.alert["%s CD"], SN[84913]),
             time = 22,
-            time2 = 31,
+            -- time2 = 31,
+            time2 = 17, -- need confirm
             flashtime = 5,
             icon = ST[84913],
         },
@@ -1063,7 +1075,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
                     "alert","waterbombwarn",
                     "quash","waterbombcd",
                     "alert","waterbombcd",
-                    "alert","glaciatecd",
+                    -- "alert","glaciatecd",    -- need confirm
                 },
             },
         },
@@ -1121,7 +1133,8 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             execute = {
                 {
                     "quash","glaciatecd",
-                    "alert","glaciatewarn"
+                    "alert","glaciatewarn",
+                    "alert","glaciatecd"
                 },
             },
         },
@@ -1248,7 +1261,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
         {
             type = "combatevent",
             eventtype = "SPELL_CAST_START",
-            spellname = 83087,
+            spellname = {83087, 83070}, -- need confirm, 83070 should be right
             execute = {
                 {
                     "schedulealert",{"lightningkickwarn", 1.5},
@@ -1264,6 +1277,7 @@ DXE:RegisterRealmPatch(realm, "ascendcouncil", {
             execute = {
                 {
                     "expect",{"<phase>","<","3"},
+                    -- "expect",{"#4#","==","&playerguid&"},   -- need confirm
                     "quashall",true,
                     "set",{phase = 3},
                     "alert","phasetransition",
@@ -1981,13 +1995,32 @@ DXE:RegisterRealmPatch(realm, "sinestra", {
     windows = {
         proxwindow = false,
     },
+    userdata = {
+        slicercd = {31,28, loop = false, type = "series"},
+        slicerdelay = {31,28, loop = false, type = "series"}, -- Need confirm
+        wracktext = "",
+        phase = "",
+        eggstraced = "no",
+        eggsunits = {type = "container", wipein = 10},
+    },
+    onstart = {
+        {
+            "alert",{"whelpscd",time = 2},
+            "alert",{"breathcd",time = 2},
+            "alert","slicercd",
+            "scheduletimer",{"slicer","<slicerdelay>"},
+            "alert",{"wrackcd",time = 2},
+            "set",{phase = "1"},
+        },
+    },
     alerts = {
         breathcd = {
             varname = format(L.alert["%s CD"],SN[90125]),
             type = "dropdown",
             text = format(L.alert["%s CD"],SN[90125]),
-            time = 21,
-            flashtime = 10,
+            time = 24,
+            time2 = 22,
+            flashtime = 5,
             icon = ST[90125],
         },
         breathwarn = {
@@ -2013,7 +2046,8 @@ DXE:RegisterRealmPatch(realm, "sinestra", {
         wrackcd = {
             varname = format(L.alert["%s CD"],SN[89421]),
             text = format(L.alert["Next %s"],SN[89421]),
-            time = 70,
+            -- time = 70,
+            time = 62, -- need comfirm
             time2 = 15,
             icon = ST[89421],
         },
@@ -2050,7 +2084,8 @@ DXE:RegisterRealmPatch(realm, "sinestra", {
             type = "dropdown",
             text = format(L.alert["New Twilight Whelps"]),
             time = 50,
-            time2= 16,
+            time2 = 17,
+            time3 = 16,
             flashtime = 5,
             color1 = "PURPLE",
             sound = "MINORWARNING",
@@ -2179,6 +2214,7 @@ DXE:RegisterRealmPatch(realm, "sinestra", {
                     "alert","slicercd",
                     "scheduletimer",{"slicer","<slicerdelay>"},
                     "alert","breathcd",
+                    "alert",{"whelpscd", time = 3},
                     "alert","essencecountdown",
                 },
             },
